@@ -1,8 +1,8 @@
 {
-  "name": "placeholder-repo-name",
+  "name": "s-update-manager",
   "version": "0.0.0-development",
   "version-SNP": "1.0.3",
-  "description": "A template for creating npm packages using TypeScript",
+  "description": "s-update-manager is an npm package for updating a template dependent project",
   "main": "./lib/index.js",
   "files": [
     "lib/**/*",
@@ -42,13 +42,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/PLACEHOLDER_GITHUB_USER/PLACEHOLDER_REPO_NAME.git"
+    "url": "https://github.com/SebastianWesolowski/s-update-manager.git"
   },
   "license": "MIT",
   "author": {
-    "name": "PLACEHOLDER_FULL_NAME",
-    "email": "PLACEHOLDER_GITHUB_USER@users.noreply.github.com",
-    "url": "https://github.com/PLACEHOLDER_GITHUB_USER"
+    "name": "Sebastian Wesolowski",
+    "email": "SebastianWesolowski@users.noreply.github.com",
+    "url": "https://github.com/SebastianWesolowski"
   },
   "engines": {
     "node": ">=20.11.0"
@@ -65,9 +65,9 @@
     "codecov"
   ],
   "bugs": {
-    "url": "https://github.com/PLACEHOLDER_GITHUB_USER/PLACEHOLDER_REPO_NAME/issues"
+    "url": "https://github.com/SebastianWesolowski/s-update-manager/issues"
   },
-  "homepage": "https://github.com/PLACEHOLDER_GITHUB_USER/PLACEHOLDER_REPO_NAME#readme",
+  "homepage": "https://github.com/SebastianWesolowski/s-update-manager#readme",
   "devDependencies": {
     "@ryansonshine/commitizen": "^4.2.8",
     "@semantic-release/changelog": "^6.0.3",
