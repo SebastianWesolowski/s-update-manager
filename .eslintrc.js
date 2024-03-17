@@ -13,8 +13,6 @@ module.exports = {
   ],
   extends: [
     'prettier',
-    'react-app',
-    'react-app/jest',
     'plugin:node/recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:storybook/recommended',
