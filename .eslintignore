@@ -5,8 +5,9 @@ lib/*
 *.scss
 .storybook/**
 dist/*
+tools/*
+snp/*
 .husky
-.stylelintrc.js
 package.json
 tsconfig.json
 prettier.config.js

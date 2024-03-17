@@ -1,0 +1,5 @@
+{
+"babel": false,
+"typescript": true,
+"runMode": true
+}

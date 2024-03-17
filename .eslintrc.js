@@ -18,7 +18,6 @@ module.exports = {
     'plugin:node/recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:storybook/recommended',
-    'plugin:tailwindcss/recommended',
   ],
   rules: {
     'node/no-missing-import': 'off',
@@ -49,7 +48,6 @@ module.exports = {
         ignoreDeclarationSort: true,
       },
     ],
-    'tailwindcss/classnames-order': 'off',
     'import/order': [
       1,
       {

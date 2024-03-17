@@ -1,18 +1,22 @@
 {
-  "name": "placeholder-repo-name",
+  "name": "s-update-manager",
   "version": "0.0.0-development",
   "version-SNP": "1.0.3",
-  "description": "A template for creating npm packages using TypeScript",
+  "description": "s-update-manager is an npm package for updating a template dependent project",
   "main": "./lib/index.js",
+  "bin": {
+    "s-init": "./lib/src/init.js"
+  },
   "files": [
     "lib/**/*",
     "CHANGELOG.md"
   ],
   "scripts": {
-    "build": "run-s build:clean && tsc --project tsconfig.build.json",
+    "start:dev": "nodemon --watch 'snp/**' --ext 'ts,json' --ignore 'snp/test/**' --exec 'ts-node src/index.ts'",
+    "build": "run-s build:clean && tsc",
     "build:clean": "rm -rf ./lib/",
-    "build:prod": "run-s build && cpy 'src/index.json' 'lib' --parents",
-    "build:package": "[ -d ./dist ] || mkdir ./dist && npm pack --pack-destination ./dist &&  tar -xvzf \"$(ls -t ./dist/*.tgz | head -n 1)\" -C ./dist/",
+    "build:prod": "run-s build:clean && tsc --project tsconfig.build.json && cpy 'src/index.json' 'lib' --parents",
+    "build:package": "[ -d ./dist ] || mkdir ./dist && run-s build:prod && npm pack --pack-destination ./dist &&  tar -xvzf \"$(ls -t ./dist/*.tgz | head -n 1)\" -C ./dist/",
     "eslint:check": "eslint --no-error-on-unmatched-pattern './src/**/*.+(js|jsx|ts|tsx)'",
     "eslint:fix": "eslint --no-error-on-unmatched-pattern './src/**/*.+(js|jsx|ts|tsx)' --fix",
     "husky:commit-msg": "commitlint --edit $GIT_PARAMS",
@@ -20,18 +24,14 @@
     "husky:pre-push": "run-s lint:check test:check build:prod",
     "husky:prepare-commit-msg": "exec < /dev/tty && node_modules/.bin/git-cz --hook || true",
     "lint": "run-s lint:fix lint:check",
-    "lint:check": "run-s prettier:check eslint:check style:check typescript:check",
-    "lint:fix": "run-s prettier:fix eslint:fix style:fix",
+    "lint:check": "run-s prettier:check eslint:check typescript:check",
+    "lint:fix": "run-s prettier:fix eslint:fix",
     "prettier:check": "prettier --check '**/*.{js,jsx,ts,tsx,json}'",
     "prettier:fix": "prettier --write '**/*.{js,jsx,ts,tsx,json}'",
     "staged:lint:check": "eslint",
     "staged:lint:fix": "eslint --fix",
     "staged:prettier:check": "prettier --check",
     "staged:prettier:fix": "prettier --write",
-    "staged:style:check": "stylelint --allow-empty-input",
-    "staged:style:fix": "stylelint --fix",
-    "style:check": "stylelint './src/**/*.+(css|scss|sass)'",
-    "style:fix": "stylelint './src/**/*.+(css|scss|sass)' --fix",
     "test:check": "jest --coverage",
     "test:watch": "jest --watch",
     "typescript:check": "tsc --noEmit",
@@ -42,13 +42,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/PLACEHOLDER_GITHUB_USER/PLACEHOLDER_REPO_NAME.git"
+    "url": "https://github.com/SebastianWesolowski/s-update-manager.git"
   },
   "license": "MIT",
   "author": {
-    "name": "PLACEHOLDER_FULL_NAME",
-    "email": "PLACEHOLDER_GITHUB_USER@users.noreply.github.com",
-    "url": "https://github.com/PLACEHOLDER_GITHUB_USER"
+    "name": "Sebastian Wesolowski",
+    "email": "SebastianWesolowski@users.noreply.github.com",
+    "url": "https://github.com/SebastianWesolowski"
   },
   "engines": {
     "node": ">=20.11.0"
@@ -65,9 +65,9 @@
     "codecov"
   ],
   "bugs": {
-    "url": "https://github.com/PLACEHOLDER_GITHUB_USER/PLACEHOLDER_REPO_NAME/issues"
+    "url": "https://github.com/SebastianWesolowski/s-update-manager/issues"
   },
-  "homepage": "https://github.com/PLACEHOLDER_GITHUB_USER/PLACEHOLDER_REPO_NAME#readme",
+  "homepage": "https://github.com/SebastianWesolowski/s-update-manager#readme",
   "devDependencies": {
     "@ryansonshine/commitizen": "^4.2.8",
     "@semantic-release/changelog": "^6.0.3",
@@ -91,7 +91,6 @@
     "eslint-plugin-prettier": "^3.4.0",
     "eslint-plugin-react": "7.33.2",
     "eslint-plugin-storybook": "^0.6.11",
-    "eslint-plugin-tailwindcss": "^3.12.1",
     "git-cz": "^4.9.0",
     "husky": "^6.0.0",
     "jest": "^27.2.0",
@@ -99,23 +98,11 @@
     "lint-staged": "^13.2.1",
     "npm-run-all": "^4.1.5",
     "prettier": "^3.2.5",
-    "prettier-plugin-tailwindcss": "^0.4.0",
     "react": "^18",
     "react-dom": "^18",
     "s-prettier": "^1.1.0",
     "sass": "^1.69.3",
     "semantic-release": "^21.0.1",
-    "style-loader": "^3.3.3",
-    "stylelint": "^15.10.3",
-    "stylelint-config-rational-order-fix": "^0.1.9",
-    "stylelint-config-standard": "^34.0.0",
-    "stylelint-config-standard-scss": "^11.0.0",
-    "stylelint-config-tailwindcss": "^0.0.7",
-    "stylelint-no-unresolved-module": "^2.2.1",
-    "stylelint-no-unsupported-browser-features": "^7.0.0",
-    "stylelint-order": "^6.0.3",
-    "stylelint-scss": "^5.2.1",
-    "tailwindcss": "^3.3.3",
     "ts-jest": "28.0.8",
     "ts-node": "^10.2.1",
     "typescript": "5.2.2"
