@@ -2,7 +2,7 @@
 const fs = require('fs');
 
 module.exports = {
-  plugins: ['@typescript-eslint', 'node', 'prettier'],
+  plugins: ['@typescript-eslint', 'node', 'prettier', 'import'],
   "overrides": [
     {
       "files": ["**/*.json"],
@@ -47,7 +47,7 @@ module.exports = {
       },
     ],
     'import/order': [
-      1,
+      'warn',
       {
         groups: ['external', 'builtin', 'internal', 'sibling', 'parent', 'index'],
         pathGroups: [
