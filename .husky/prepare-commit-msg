@@ -1,0 +1,8 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+echo \[🐶 Husky] Running prepare-commit-msg hook...\
+
+yarn husky:prepare-commit-msg 
+
+echo \[🐶 Husky] Done ✅ prepare-commit-msg hook...\

@@ -1,0 +1,15 @@
+src/types/global.d.ts
+node_modules
+distTS
+lib/*
+*.scss
+.storybook/**
+dist/*
+.husky
+.stylelintrc.js
+package.json
+tsconfig.json
+prettier.config.js
+.eslintrc.js
+.replacerc.js
+clean-package.config.json
