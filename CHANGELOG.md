@@ -1,3 +1,10 @@
+## [1.0.0-dev.2](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.1...v1.0.0-dev.2) (2024-03-17)
+
+
+### Bug Fixes
+
+* 🐛 update s-init script path ([b702e30](https://github.com/SebastianWesolowski/s-update-manager/commit/b702e30220ed7739ea0539b6270ceb15f3f44151))
+
 ## 1.0.0-dev.1 (2024-03-17)
 
 
