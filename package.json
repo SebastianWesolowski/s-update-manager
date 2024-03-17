@@ -15,7 +15,7 @@
     "start:dev": "nodemon --watch 'snp/**' --ext 'ts,json' --ignore 'snp/test/**' --exec 'ts-node src/index.ts'",
     "build": "run-s build:clean && tsc",
     "build:clean": "rm -rf ./lib/",
-    "build:prod": "run-s build:clean && tsc --project tsconfig.build.json && cpy 'src/index.json' 'lib' --parents",
+    "build:prod": "run-s build:clean && tsc --project tsconfig.build.json",
     "build:package": "[ -d ./dist ] || mkdir ./dist && run-s build:prod && npm pack --pack-destination ./dist &&  tar -xvzf \"$(ls -t ./dist/*.tgz | head -n 1)\" -C ./dist/",
     "eslint:check": "eslint --no-error-on-unmatched-pattern './src/**/*.+(js|jsx|ts|tsx)'",
     "eslint:fix": "eslint --no-error-on-unmatched-pattern './src/**/*.+(js|jsx|ts|tsx)' --fix",
