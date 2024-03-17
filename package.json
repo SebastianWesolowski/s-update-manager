@@ -5,7 +5,7 @@
   "description": "s-update-manager is an npm package for updating a template dependent project",
   "main": "./lib/index.js",
   "bin": {
-    "s-init": "./lib/src/init.js"
+    "s-init": "./lib/init.js"
   },
   "files": [
     "lib/**/*",
