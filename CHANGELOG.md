@@ -1,3 +1,10 @@
+## [1.0.0-dev.3](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.2...v1.0.0-dev.3) (2024-03-18)
+
+
+### Features
+
+* ✨ add rollup config ([1ace0b7](https://github.com/SebastianWesolowski/s-update-manager/commit/1ace0b7419b97c7c5663b4be9d3398d868b71e83))
+
 ## [1.0.0-dev.2](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.1...v1.0.0-dev.2) (2024-03-17)
 
 
