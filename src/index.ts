@@ -1,9 +1,11 @@
+import dotenv from 'dotenv';
 import fs from 'fs';
 import * as path from 'path';
 import { createFile } from '@/util/createFile';
 import { isFolderExist } from '@/util/isFolderExist';
 import { wgetAsync } from '@/util/wget';
 
+dotenv.config();
 const rootCatalog = path.join('./snp/test');
 
 const configTemplate = ['README.md', '.github/PULL_REQUEST_TEMPLATE.md'];
@@ -96,7 +98,7 @@ export const upgrade = async ({ files, rootCatalog }: { files: string[] | string
 
 init({ files: configTemplate[0], rootCatalog }).then((r) => console.log('init'));
 // upgrade({ files: configTemplate[0], rootCatalog: rootCatalog + '/snp/test' });
-
+console.log('11s');
 // try {
 //    createFile({filePath: './snp/test/readme.md', content: 'lorem ipsum dolor'}).then(r =>);
 //   // Handle the result here
