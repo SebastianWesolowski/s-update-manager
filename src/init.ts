@@ -44,7 +44,13 @@ const config: Config = {
 export type availableTemplate = 'node' | string;
 
 type initConfig = { rootCatalog: string; template: availableTemplate; sUpdaterVersion: string };
-type downloadRemoteConfig = { filePath: string; template: availableTemplate | string; sUpdaterVersion: string };
+type downloadRemoteConfig = { rootCatalog: string; template: availableTemplate | string; sUpdaterVersion: string };
+type buildConfig = {
+  rootCatalog: string;
+  template: availableTemplate | string;
+  sUpdaterVersion: string;
+  fileMap: { fileMap: string[]; files: Record<string, string[]> };
+};
 
 export const init = async (args: string[]): Promise<initConfig> => {
   const [argRootCatalog, argTemplate] = args;
@@ -70,15 +76,35 @@ export const createConfigFile = async (config: initConfig): Promise<downloadRemo
     content: JSON.stringify({ sUpdaterVersion, template }),
   });
 
-  return { filePath, template, sUpdaterVersion };
+  return { rootCatalog, template, sUpdaterVersion };
 };
 
-export const downloadRemoteConfig = async (config: downloadRemoteConfig) => {
-  await downloadConfig(config.template);
+export const downloadRemoteConfig = async (config: downloadRemoteConfig): Promise<buildConfig> => {
+  const fileMap = await downloadConfig(config.template, config.rootCatalog);
 
-  //ENDWORK HERE
-  // stowrozny fn do pobierania congigu z repo trzeba przetestoać i przygotować szablon na zdalnyum repo
-  return;
+  const organizeFileMap = (fileMap: string[]) => {
+    const files = {};
+
+    fileMap.forEach((file) => {
+      const fileName = file.substring(0, file.lastIndexOf('-'));
+
+      if (!files[fileName]) {
+        files[fileName] = [];
+      }
+      files[fileName].push(file);
+    });
+
+    return { fileMap, files };
+  };
+  return { ...config, fileMap: organizeFileMap(fileMap) };
+};
+export const buildConfig = async (config: buildConfig): Promise<any> => {
+  console.log(config);
+
+  const buildFile = ({ fileMap, content, path }) => {
+    console.log('b');
+  };
+  //END WORK HERE
 };
 
 let args = process.argv.slice(2);
@@ -89,4 +115,9 @@ if (Boolean(process.env.SDEBUG)) {
 init(args)
   .then((config) => createConfigFile(config))
   .then((config) => downloadRemoteConfig(config))
-  .then((args) => console.log('zbudowanie plików na podstawie configu'));
+  .then((config) => buildConfig(config));
+
+// fileMap: {
+//   fileMap: [ 'README.md-default.md', 'README.md-instructions.md', 'ab.js-default.md' ],
+//       files: { 'README.md': [ 'README.md-default.md', 'README.md-instructions.md' ],  'ab.js': [ 'ab.js-default.md'] }
+// }
