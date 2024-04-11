@@ -13,7 +13,9 @@
   ],
   "scripts": {
     "prestart:dev": "tsc -p tsconfig.json --watch",
-    "start:dev": "yarn nodemon",
+    "nodemon": "nodemon",
+    "start": "run-s nodemon",
+    "start:dev": "run-s nodemon",
     "build": "run-s build:clean && npx rollup -c rollup.config.mjs",
     "build:clean": "rm -rf ./lib/",
     "build:prod": "run-s build:clean && npx rollup -c rollup.config.build.mjs",
