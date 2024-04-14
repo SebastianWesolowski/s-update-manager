@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 
+import dotenv from 'dotenv';
 import * as path from 'path';
 import { createFile } from '@/util/createFile';
 import { downloadConfig } from '@/util/downloadConfig';
 import { isFolderExist } from '@/util/isFolderExist';
 import { readPackageVersion } from '@/util/readVersionPackage';
-const dotenv = require('dotenv');
 
 dotenv.config();
 // const dir = path.dirname('./');
