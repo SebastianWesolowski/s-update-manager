@@ -1,3 +1,10 @@
+## [1.0.0-dev.7](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.6...v1.0.0-dev.7) (2024-04-14)
+
+
+### Features
+
+* ✨ change dot env import ([b8278ed](https://github.com/SebastianWesolowski/s-update-manager/commit/b8278ed83a64e5ac070c147930118b4611449990))
+
 ## [1.0.0-dev.6](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.5...v1.0.0-dev.6) (2024-04-14)
 
 
