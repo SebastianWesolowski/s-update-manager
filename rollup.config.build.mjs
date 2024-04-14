@@ -12,6 +12,7 @@ export default {
         format: 'esm',
         dir: 'lib',
         preserveModules: true,
+        chunkFileNames: '[name]-[hash].mjs', // Optional: Adjust chunk filenames if needed
     },
     plugins: [
         json(),

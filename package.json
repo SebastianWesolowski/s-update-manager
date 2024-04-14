@@ -71,6 +71,10 @@
     "url": "https://github.com/SebastianWesolowski/s-update-manager/issues"
   },
   "homepage": "https://github.com/SebastianWesolowski/s-update-manager#readme",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "dotenv-cli": "^7.3.0"
+  },
   "devDependencies": {
     "@ef-carbon/tspm": "^2.2.5",
     "@rollup/plugin-commonjs": "^25.0.7",
@@ -90,8 +94,6 @@
     "conventional-changelog-conventionalcommits": "^5.0.0",
     "cpy-cli": "^5.0.0",
     "cross-env": "^7.0.3",
-    "dotenv": "^16.4.5",
-    "dotenv-cli": "^7.3.0",
     "eslint": "8.50.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-import": "^2.27.5",
