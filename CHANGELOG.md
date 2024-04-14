@@ -1,3 +1,10 @@
+## [1.0.0-dev.9](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.8...v1.0.0-dev.9) (2024-04-14)
+
+
+### Features
+
+* ✨ s-init change to mjs ([ca78aad](https://github.com/SebastianWesolowski/s-update-manager/commit/ca78aad109b9d9487c393351ebfaa68e0d6b6bf3))
+
 ## [1.0.0-dev.8](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.7...v1.0.0-dev.8) (2024-04-14)
 
 
