@@ -1,3 +1,12 @@
+## [1.0.0-dev.4](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.3...v1.0.0-dev.4) (2024-04-14)
+
+
+### Features
+
+* ✨ add nodemon and remote config downloader ([341d3fd](https://github.com/SebastianWesolowski/s-update-manager/commit/341d3fd2bfb20e35b6d81bc983d1d2fca99c768c))
+* ✨ remote config downloade ([f8004aa](https://github.com/SebastianWesolowski/s-update-manager/commit/f8004aad8b124239f3e31dd0e05b1c8cc4bf090c))
+* ✨ rollup porcess ([a550b93](https://github.com/SebastianWesolowski/s-update-manager/commit/a550b9333003953d47a60acb93cb6fde6020349b))
+
 ## [1.0.0-dev.3](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.2...v1.0.0-dev.3) (2024-03-18)
 
 
