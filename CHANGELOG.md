@@ -1,3 +1,10 @@
+## [1.0.0-dev.10](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.9...v1.0.0-dev.10) (2024-04-14)
+
+
+### Features
+
+* ✨ change wget to import ([47d1254](https://github.com/SebastianWesolowski/s-update-manager/commit/47d1254c9365399310b612adbc2cc5a555313f0b))
+
 ## [1.0.0-dev.9](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.8...v1.0.0-dev.9) (2024-04-14)
 
 
