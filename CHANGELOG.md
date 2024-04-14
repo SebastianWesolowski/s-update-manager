@@ -1,3 +1,10 @@
+## [1.0.0-dev.6](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.5...v1.0.0-dev.6) (2024-04-14)
+
+
+### Features
+
+* ✨ dotenv as dependency ([2d643b0](https://github.com/SebastianWesolowski/s-update-manager/commit/2d643b0ceb8277a7939ea315ba0deb4a68ea77ec))
+
 ## [1.0.0-dev.5](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.4...v1.0.0-dev.5) (2024-04-14)
 
 
