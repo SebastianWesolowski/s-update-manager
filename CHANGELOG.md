@@ -1,3 +1,10 @@
+## [1.0.0-dev.8](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.7...v1.0.0-dev.8) (2024-04-14)
+
+
+### Features
+
+* ✨ add production module type ([35af1f1](https://github.com/SebastianWesolowski/s-update-manager/commit/35af1f1e1eb349a5e2849e980d12ba5537aab7de))
+
 ## [1.0.0-dev.7](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.6...v1.0.0-dev.7) (2024-04-14)
 
 
