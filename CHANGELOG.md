@@ -4,6 +4,14 @@
 ### Features
 
 * ✨ add production module type ([35af1f1](https://github.com/SebastianWesolowski/s-update-manager/commit/35af1f1e1eb349a5e2849e980d12ba5537aab7de))
+* ✨ new npm script add-module-type.js ([f7bba81](https://github.com/SebastianWesolowski/s-update-manager/commit/f7bba81d6cdda3e59f8fb6f9cca81520d839fdf5))
+
+## [1.0.0-dev.8](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.7...v1.0.0-dev.8) (2024-04-14)
+
+
+### Features
+
+* ✨ add production module type ([35af1f1](https://github.com/SebastianWesolowski/s-update-manager/commit/35af1f1e1eb349a5e2849e980d12ba5537aab7de))
 
 ## [1.0.0-dev.7](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.6...v1.0.0-dev.7) (2024-04-14)
 
