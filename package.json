@@ -3,9 +3,9 @@
   "version": "1.0.0-dev.8",
   "version-SNP": "1.0.3",
   "description": "s-update-manager is an npm package for updating a template dependent project",
-  "main": "./lib/src/index.js",
+  "main": "./lib/src/index.mjs",
   "bin": {
-    "s-init": "./lib/src/init.js"
+    "s-init": "./lib/src/init.mjs"
   },
   "files": [
     "lib/**/*",
