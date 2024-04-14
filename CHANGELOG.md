@@ -1,3 +1,10 @@
+## [1.0.0-dev.5](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.4...v1.0.0-dev.5) (2024-04-14)
+
+
+### Features
+
+* ✨ change rollup process ([ac3ceff](https://github.com/SebastianWesolowski/s-update-manager/commit/ac3ceff56419e4b054d52be09ad3622a9bc9bce1))
+
 ## [1.0.0-dev.4](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.3...v1.0.0-dev.4) (2024-04-14)
 
 
