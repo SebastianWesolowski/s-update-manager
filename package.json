@@ -13,9 +13,8 @@
   ],
   "scripts": {
     "prestart:dev": "tsc -p tsconfig.json --watch",
-    "nodemon": "nodemon",
-    "start": "run-s nodemon",
-    "start:dev": "run-s nodemon",
+    "start": "SDEBUG=true && tsx watch ./src/init.ts",
+    "start:dev": "SDEBUG=true && tsx watch ./src/init.ts",
     "build": "run-s build:clean && npx rollup -c rollup.config.mjs",
     "build:clean": "rm -rf ./lib/",
     "build:prod": "run-s build:clean && npx rollup -c rollup.config.build.mjs",
@@ -122,6 +121,7 @@
     "ts-node": "^10.9.2",
     "ts-node-dev": "^2.0.0",
     "tsconfig-paths": "^4.2.0",
+    "tsx": "^4.7.2",
     "typescript": "5.2.2"
   },
   "config": {
