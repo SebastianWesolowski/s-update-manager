@@ -1,3 +1,10 @@
+## [1.0.0-dev.11](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.10...v1.0.0-dev.11) (2024-04-15)
+
+
+### Features
+
+* ✨ improve development expirience workflow ([45f065d](https://github.com/SebastianWesolowski/s-update-manager/commit/45f065d01ebfdb938f426b00198c111e6fc72e4b))
+
 ## [1.0.0-dev.10](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.9...v1.0.0-dev.10) (2024-04-14)
 
 
