@@ -98,7 +98,7 @@ export const downloadRemoteConfig = async (config: downloadRemoteConfig): Promis
   return { ...config, fileMap: organizeFileMap(fileMap) };
 };
 export const buildConfig = async (config: buildConfig): Promise<any> => {
-  console.log(config);
+  // console.log(config);
 
   const buildFile = ({ fileMap, content, path }) => {
     console.log('b');
@@ -114,7 +114,8 @@ if (Boolean(process.env.SDEBUG)) {
 init(args)
   .then((config) => createConfigFile(config))
   .then((config) => downloadRemoteConfig(config))
-  .then((config) => buildConfig(config));
+  .then((config) => buildConfig(config))
+  .then((config) => console.log('remove temporary'));
 
 // fileMap: {
 //   fileMap: [ 'README.md-default.md', 'README.md-instructions.md', 'ab.js-default.md' ],

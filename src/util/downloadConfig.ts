@@ -33,7 +33,6 @@ export async function downloadConfig(template: availableTemplate, filePath: stri
 
       for (const fileName of JSON.parse(content).fileMap) {
         await wgetAsync(formatterRepositoryFileNameUrl({ fileName })).then(async (contentFile) => {
-          console.log(filePath);
           await createFile({
             filePath: `${filePath}/${fileName}`,
             content: contentFile,
