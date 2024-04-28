@@ -3,7 +3,11 @@ import { availableTemplate } from '@/init';
 import { createFile } from '@/util/createFile';
 import { wgetAsync } from '@/util/wget';
 
-export async function downloadConfig(template: availableTemplate, filePath: string): Promise<string[]> {
+export async function downloadConfig(
+  template: availableTemplate,
+  filePath: string,
+  temporaryFolder: string
+): Promise<string[]> {
   const REPOSITORY_MAP_FILE_NAME = 'repositoryMap.json';
   // TODO parametryzacaj tego url
   const repositoryUrl = `https://raw.githubusercontent.com/SebastianWesolowski/testTemplate/main/template/${template}`;
@@ -24,15 +28,15 @@ export async function downloadConfig(template: availableTemplate, filePath: stri
 
   try {
     const repositoryMapFileUrl = formatterRepositoryFileNameUrl({ fileName: REPOSITORY_MAP_FILE_NAME });
-
-    return await wgetAsync(repositoryMapFileUrl).then(async (content) => {
+    console.log(repositoryMapFileUrl);
+    return await wgetAsync(repositoryMapFileUrl, temporaryFolder).then(async (content) => {
       await createFile({
         filePath: `${filePath}/${REPOSITORY_MAP_FILE_NAME}`,
         content,
       });
 
       for (const fileName of JSON.parse(content).fileMap) {
-        await wgetAsync(formatterRepositoryFileNameUrl({ fileName })).then(async (contentFile) => {
+        await wgetAsync(formatterRepositoryFileNameUrl({ fileName }), temporaryFolder).then(async (contentFile) => {
           await createFile({
             filePath: `${filePath}/${fileName}`,
             content: contentFile,

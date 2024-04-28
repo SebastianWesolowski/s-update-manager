@@ -1,8 +1,8 @@
-import fs from 'fs';
+import { redFile } from '@/util/readFile';
 
 export async function readPackageVersion(filePath: string): Promise<string> {
   try {
-    const data = await fs.promises.readFile(filePath, 'utf8');
+    const data = await redFile(filePath);
     const packageJson = JSON.parse(data);
 
     return packageJson.version;

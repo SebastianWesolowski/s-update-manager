@@ -1,13 +1,15 @@
 #!/usr/bin/env node
 
 import * as path from 'path';
+import { createCatalog } from '@/util/createCatalog';
 import { createFile } from '@/util/createFile';
 import { downloadConfig } from '@/util/downloadConfig';
 import { isFolderExist } from '@/util/isFolderExist';
+import { redFile } from '@/util/readFile';
 import { readPackageVersion } from '@/util/readVersionPackage';
 
 // const dir = path.dirname('./');
-// const rootCatalog = path.join('./.snp');
+// const snpCatalog = path.join('./.snp');
 
 // const configTemplate = ['README.md', '.github/PULL_REQUEST_TEMPLATE.md'];
 
@@ -42,31 +44,42 @@ const config: Config = {
 
 export type availableTemplate = 'node' | string;
 
-type initConfig = { rootCatalog: string; template: availableTemplate; sUpdaterVersion: string };
-type downloadRemoteConfig = { rootCatalog: string; template: availableTemplate | string; sUpdaterVersion: string };
+type initConfig = {
+  snpCatalog: string;
+  template: availableTemplate | string;
+  sUpdaterVersion: string;
+  projectCatalog: string;
+  temporaryFolder: string;
+};
+
 type buildConfig = {
-  rootCatalog: string;
+  projectCatalog: string;
+  snpCatalog: string;
   template: availableTemplate | string;
   sUpdaterVersion: string;
   fileMap: { fileMap: string[]; files: Record<string, string[]> };
 };
 
 export const init = async (args: string[]): Promise<initConfig> => {
-  const [argRootCatalog, argTemplate] = args;
+  const [argSnpCatalog, argTemplate, argProjectCatalog] = args;
   const version = await readPackageVersion('./package.json');
-  const rootCatalog = argRootCatalog ? argRootCatalog : './snp';
+  const projectCatalog = argProjectCatalog ? argProjectCatalog : './';
+  const snpCatalog = argSnpCatalog ? `${projectCatalog}/${argSnpCatalog}` : `${projectCatalog}/./snp`;
   const template = argTemplate ? argTemplate : 'node';
+  const temporaryFolder = `${projectCatalog}/temporary/`;
 
-  return { rootCatalog, template, sUpdaterVersion: version };
+  return await createCatalog(temporaryFolder).then(() => {
+    return { snpCatalog, template, sUpdaterVersion: version, projectCatalog, temporaryFolder };
+  });
 };
 
-export const createConfigFile = async (config: initConfig): Promise<downloadRemoteConfig> => {
-  const { rootCatalog, template, sUpdaterVersion } = config;
+export const createConfigFile = async (config: initConfig): Promise<initConfig> => {
+  const { snpCatalog, template, sUpdaterVersion } = config;
 
-  const filePath = `${rootCatalog}/snp.config.json`;
+  const filePath = `${snpCatalog}/snp.config.json`;
 
   await isFolderExist({
-    folderPath: rootCatalog,
+    folderPath: snpCatalog,
     createFolder: true,
   });
 
@@ -75,11 +88,11 @@ export const createConfigFile = async (config: initConfig): Promise<downloadRemo
     content: JSON.stringify({ sUpdaterVersion, template }),
   });
 
-  return { rootCatalog, template, sUpdaterVersion };
+  return config;
 };
 
-export const downloadRemoteConfig = async (config: downloadRemoteConfig): Promise<buildConfig> => {
-  const fileMap = await downloadConfig(config.template, config.rootCatalog);
+export const downloadRemoteConfig = async (config: initConfig): Promise<buildConfig> => {
+  const fileMap = await downloadConfig(config.template, config.snpCatalog, config.temporaryFolder);
 
   const organizeFileMap = (fileMap: string[]) => {
     const files = {};
@@ -90,7 +103,7 @@ export const downloadRemoteConfig = async (config: downloadRemoteConfig): Promis
       if (!files[fileName]) {
         files[fileName] = [];
       }
-      files[fileName].push(file);
+      files[fileName].push(`${config.snpCatalog}/${file}`);
     });
 
     return { fileMap, files };
@@ -100,24 +113,46 @@ export const downloadRemoteConfig = async (config: downloadRemoteConfig): Promis
 export const buildConfig = async (config: buildConfig): Promise<any> => {
   // console.log(config);
 
-  const buildFile = ({ fileMap, content, path }) => {
-    console.log('b');
+  const buildFile = async ({
+    fileMap,
+  }: {
+    fileMap: {
+      fileMap: string[];
+      files: Record<string, string[]>;
+    };
+  }) => {
+    const files = fileMap.files;
+    console.log({ files });
+    const contentFile = Object.keys(files);
+
+    for (const fileName of contentFile) {
+      const defaultFile = files[fileName].find((element) => element.includes('-default.md')) || '';
+      const contentFile = await redFile(defaultFile);
+      await createFile({
+        filePath: `${config.projectCatalog}/${fileName}`,
+        content: contentFile,
+      });
+    }
   };
-  //END WORK HERE
+
+  buildFile(config);
 };
 
-let args = process.argv.slice(2);
+export const cleanUp = async (config: buildConfig): Promise<any> => {
+  console.log(config);
+  // ENDWORK HERE - CLEAN UP TEMP FILE/**/
+};
+
+let args = process.argv.slice(3);
 
 if (Boolean(process.env.SDEBUG)) {
-  args = [path.join('./.snp'), 'node'];
+  // argSnpCatalog - snp catalog
+  // argTemplate - template remote github
+  // argProjectCatalog - project catalog
+  args = [path.join('./.snp'), 'node', './test/fakeProjectRootfolder'];
 }
 init(args)
   .then((config) => createConfigFile(config))
   .then((config) => downloadRemoteConfig(config))
   .then((config) => buildConfig(config))
-  .then((config) => console.log('remove temporary'));
-
-// fileMap: {
-//   fileMap: [ 'README.md-default.md', 'README.md-instructions.md', 'ab.js-default.md' ],
-//       files: { 'README.md': [ 'README.md-default.md', 'README.md-instructions.md' ],  'ab.js': [ 'ab.js-default.md'] }
-// }
+  .then((config) => cleanUp(config));
