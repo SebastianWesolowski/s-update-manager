@@ -56,10 +56,12 @@ export const init = async (args: string[]): Promise<initConfig> => {
   console.log({ args });
   const [argSnpCatalog, argTemplate, argProjectCatalog] = args;
   const version = await readPackageVersion('./package.json');
-  const projectCatalog = argProjectCatalog ? argProjectCatalog : '.';
-  const snpCatalog = argSnpCatalog ? path.join(projectCatalog, argSnpCatalog) : path.join(projectCatalog, '.snp');
+  const projectCatalog = argProjectCatalog ? argProjectCatalog : './';
+  const snpCatalog = argSnpCatalog
+    ? path.join(projectCatalog, argSnpCatalog)
+    : path.join(projectCatalog, '.snp') + path.sep;
   const template = argTemplate ? argTemplate : 'node';
-  const temporaryFolder = path.join(projectCatalog, 'temporary');
+  const temporaryFolder = path.join(snpCatalog, './temporary') + path.sep;
 
   return await createCatalog(temporaryFolder).then(() => {
     console.log({ snpCatalog, template, sUpdaterVersion: version, projectCatalog, temporaryFolder });
@@ -70,7 +72,7 @@ export const init = async (args: string[]): Promise<initConfig> => {
 export const createConfigFile = async (config: initConfig): Promise<initConfig> => {
   const { snpCatalog, template, sUpdaterVersion } = config;
 
-  const filePath = `${snpCatalog}/snp.config.json`;
+  const filePath = path.join(snpCatalog, 'snp.config.json');
 
   await isFolderExist({
     folderPath: snpCatalog,
@@ -120,7 +122,7 @@ export const buildConfig = async (config: buildConfig): Promise<buildConfig> => 
       const defaultFile = files[fileName].find((element) => element.includes('-default.md')) || '';
       const contentFile = await redFile(defaultFile);
       await createFile({
-        filePath: `${config.projectCatalog}/${fileName}`,
+        filePath: path.join(config.projectCatalog, fileName),
         content: contentFile,
       });
     }
