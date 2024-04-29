@@ -3,15 +3,11 @@
 import * as path from 'path';
 import { createCatalog } from '@/util/createCatalog';
 import { createFile } from '@/util/createFile';
+import { deleteCatalog } from '@/util/deleteCatalog';
 import { downloadConfig } from '@/util/downloadConfig';
 import { isFolderExist } from '@/util/isFolderExist';
 import { redFile } from '@/util/readFile';
 import { readPackageVersion } from '@/util/readVersionPackage';
-
-// const dir = path.dirname('./');
-// const snpCatalog = path.join('./.snp');
-
-// const configTemplate = ['README.md', '.github/PULL_REQUEST_TEMPLATE.md'];
 
 type PackageConfig = {
   instructions: string;
@@ -52,23 +48,21 @@ type initConfig = {
   temporaryFolder: string;
 };
 
-type buildConfig = {
-  projectCatalog: string;
-  snpCatalog: string;
-  template: availableTemplate | string;
-  sUpdaterVersion: string;
+type buildConfig = initConfig & {
   fileMap: { fileMap: string[]; files: Record<string, string[]> };
 };
 
 export const init = async (args: string[]): Promise<initConfig> => {
+  console.log({ args });
   const [argSnpCatalog, argTemplate, argProjectCatalog] = args;
   const version = await readPackageVersion('./package.json');
   const projectCatalog = argProjectCatalog ? argProjectCatalog : './';
-  const snpCatalog = argSnpCatalog ? `${projectCatalog}/${argSnpCatalog}` : `${projectCatalog}/./snp`;
+  const snpCatalog = argSnpCatalog ? `${projectCatalog}/${argSnpCatalog}` : `${projectCatalog}./snp`;
   const template = argTemplate ? argTemplate : 'node';
-  const temporaryFolder = `${projectCatalog}/temporary/`;
+  const temporaryFolder = `${projectCatalog}temporary/`;
 
   return await createCatalog(temporaryFolder).then(() => {
+    console.log({ snpCatalog, template, sUpdaterVersion: version, projectCatalog, temporaryFolder });
     return { snpCatalog, template, sUpdaterVersion: version, projectCatalog, temporaryFolder };
   });
 };
@@ -110,9 +104,7 @@ export const downloadRemoteConfig = async (config: initConfig): Promise<buildCon
   };
   return { ...config, fileMap: organizeFileMap(fileMap) };
 };
-export const buildConfig = async (config: buildConfig): Promise<any> => {
-  // console.log(config);
-
+export const buildConfig = async (config: buildConfig): Promise<buildConfig> => {
   const buildFile = async ({
     fileMap,
   }: {
@@ -122,7 +114,6 @@ export const buildConfig = async (config: buildConfig): Promise<any> => {
     };
   }) => {
     const files = fileMap.files;
-    console.log({ files });
     const contentFile = Object.keys(files);
 
     for (const fileName of contentFile) {
@@ -135,21 +126,23 @@ export const buildConfig = async (config: buildConfig): Promise<any> => {
     }
   };
 
-  buildFile(config);
+  await buildFile(config);
+  return config;
 };
 
 export const cleanUp = async (config: buildConfig): Promise<any> => {
-  console.log(config);
-  // ENDWORK HERE - CLEAN UP TEMP FILE/**/
+  console.log({ endConfig: config });
+  deleteCatalog(config.temporaryFolder);
 };
 
 let args = process.argv.slice(3);
 
-if (Boolean(process.env.SDEBUG)) {
+if (String(process.env.SDEBUG) === 'true') {
   // argSnpCatalog - snp catalog
   // argTemplate - template remote github
   // argProjectCatalog - project catalog
   args = [path.join('./.snp'), 'node', './test/fakeProjectRootfolder'];
+  console.log({ args });
 }
 init(args)
   .then((config) => createConfigFile(config))
