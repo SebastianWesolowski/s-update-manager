@@ -1,3 +1,15 @@
+## [1.0.0-dev.12](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.11...v1.0.0-dev.12) (2024-04-28)
+
+
+### Features
+
+* ✨ build config from remote map ([f58c099](https://github.com/SebastianWesolowski/s-update-manager/commit/f58c0990c2192431340dc72731a9267d84107e21))
+
+
+### Bug Fixes
+
+* 🐛 create aditional file in root folder ([df4c45f](https://github.com/SebastianWesolowski/s-update-manager/commit/df4c45f16597dfb178753ed3638fb2b21e93a427))
+
 ## [1.0.0-dev.11](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.10...v1.0.0-dev.11) (2024-04-15)
 
 
