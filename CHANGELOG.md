@@ -1,3 +1,10 @@
+## [1.0.0-dev.13](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.12...v1.0.0-dev.13) (2024-04-29)
+
+
+### Features
+
+* ✨ cleanup temporary files ([d1a704f](https://github.com/SebastianWesolowski/s-update-manager/commit/d1a704f2e5e8346ee38ef34120bc69dfba5efae3))
+
 ## [1.0.0-dev.12](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.11...v1.0.0-dev.12) (2024-04-28)
 
 
