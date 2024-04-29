@@ -1,3 +1,10 @@
+## [1.0.0-dev.14](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.13...v1.0.0-dev.14) (2024-04-29)
+
+
+### Bug Fixes
+
+* 🐛 paths in config ([5f6171d](https://github.com/SebastianWesolowski/s-update-manager/commit/5f6171d9603196d6af1ae6567496f271ad8d231b))
+
 ## [1.0.0-dev.13](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.12...v1.0.0-dev.13) (2024-04-29)
 
 
