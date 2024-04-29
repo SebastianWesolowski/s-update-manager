@@ -1,3 +1,4 @@
+import path from 'path';
 import { format } from 'url';
 import { availableTemplate } from '@/init';
 import { createFile } from '@/util/createFile';
@@ -28,17 +29,16 @@ export async function downloadConfig(
 
   try {
     const repositoryMapFileUrl = formatterRepositoryFileNameUrl({ fileName: REPOSITORY_MAP_FILE_NAME });
-    console.log(repositoryMapFileUrl);
     return await wgetAsync(repositoryMapFileUrl, temporaryFolder).then(async (content) => {
       await createFile({
-        filePath: `${filePath}/${REPOSITORY_MAP_FILE_NAME}`,
+        filePath: path.join(filePath, REPOSITORY_MAP_FILE_NAME),
         content,
       });
 
       for (const fileName of JSON.parse(content).fileMap) {
         await wgetAsync(formatterRepositoryFileNameUrl({ fileName }), temporaryFolder).then(async (contentFile) => {
           await createFile({
-            filePath: `${filePath}/${fileName}`,
+            filePath: path.join(filePath, fileName),
             content: contentFile,
           });
         });
