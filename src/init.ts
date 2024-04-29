@@ -56,10 +56,10 @@ export const init = async (args: string[]): Promise<initConfig> => {
   console.log({ args });
   const [argSnpCatalog, argTemplate, argProjectCatalog] = args;
   const version = await readPackageVersion('./package.json');
-  const projectCatalog = argProjectCatalog ? argProjectCatalog : './';
-  const snpCatalog = argSnpCatalog ? `${projectCatalog}/${argSnpCatalog}` : `${projectCatalog}./snp`;
+  const projectCatalog = argProjectCatalog ? argProjectCatalog : '.';
+  const snpCatalog = argSnpCatalog ? `${projectCatalog}/${argSnpCatalog}` : `${projectCatalog}/.snp`;
   const template = argTemplate ? argTemplate : 'node';
-  const temporaryFolder = `${projectCatalog}temporary/`;
+  const temporaryFolder = `${projectCatalog}/temporary/`;
 
   return await createCatalog(temporaryFolder).then(() => {
     console.log({ snpCatalog, template, sUpdaterVersion: version, projectCatalog, temporaryFolder });
