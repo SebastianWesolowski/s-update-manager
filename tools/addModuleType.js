@@ -5,4 +5,4 @@ const packageJson = fs.readJsonSync(packageJsonPath);
 packageJson.type = 'module';
 fs.writeJsonSync(packageJsonPath, packageJson, { spaces: 2 });
 
-console.log('Pole "type" zostało dodane do pliku package.json.');
+console.log('The "type" field has been added to the package.json file.');
