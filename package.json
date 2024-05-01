@@ -74,8 +74,10 @@
   },
   "homepage": "https://github.com/SebastianWesolowski/s-update-manager#readme",
   "dependencies": {
+    "deepmerge": "^4.3.1",
     "dotenv": "^16.4.5",
     "dotenv-cli": "^7.3.0",
+    "minimist": "^1.2.8",
     "node-wget": "^0.4.3"
   },
   "devDependencies": {
@@ -98,7 +100,6 @@
     "conventional-changelog-conventionalcommits": "^5.0.0",
     "cpy-cli": "^5.0.0",
     "cross-env": "^7.0.3",
-    "deepmerge": "^4.3.1",
     "eslint": "8.50.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-import": "^2.27.5",

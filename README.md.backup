@@ -19,7 +19,7 @@
 
 <br/>
 
-s-update-manager is a npm package for updating a template dependent project
+s-update-manager is an npm package for updating a template dependent project
 
 ## Install
 
@@ -29,21 +29,7 @@ npm install s-update-manager
 
 ## Usage
 
-use s-init script in your package json file
-```bash
-"init": "s-init --snpConfig ./.snp --template node --project ./ --remoteRepository https://raw.githubusercontent.com/SebastianWesolowski/testTemplate/main/template/"
-```
-
-use CLI parameters:
-
-`snpConfig: './.snp'`
-`template: 'node'`
-`project: './tes/fakeProjectRootfolder'`
-`remoteRepository: 'https://raw.githubusercontent.com/SebastianWesolowski/testTemplate/main/template/'`
-`debug: true`
-
-You can see example project in `test/realProject/`
-
+in progress ...
 
 ## Badges
 [![Downloads][downloads-img]][downloads-url]

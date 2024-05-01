@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "s-init -a ./.snp node ./"
+    "test": "s-init -a ./.snp node ./",
+    "init": "s-init --snpConfig ./.snp --template node --project ./ --remoteRepository https://raw.githubusercontent.com/SebastianWesolowski/testTemplate/main/template/"
   },
   "author": "",
   "license": "ISC",
