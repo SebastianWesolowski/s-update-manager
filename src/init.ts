@@ -8,6 +8,7 @@ import { downloadConfig } from '@/util/downloadConfig';
 import { isFolderExist } from '@/util/isFolderExist';
 import { redFile } from '@/util/readFile';
 import { readPackageVersion } from '@/util/readVersionPackage';
+import { updateJson } from '@/util/updateJson';
 
 type PackageConfig = {
   instructions: string;
@@ -46,41 +47,43 @@ type initConfig = {
   sUpdaterVersion: string;
   projectCatalog: string;
   temporaryFolder: string;
+  snpConfigFile: string;
 };
 
 type buildConfig = initConfig & {
   fileMap: { fileMap: string[]; files: Record<string, string[]> };
+  templateVersion: string;
 };
 
 export const init = async (args: string[]): Promise<initConfig> => {
   console.log({ args });
   const [argSnpCatalog, argTemplate, argProjectCatalog] = args;
   const version = await readPackageVersion('./package.json');
-  const projectCatalog = argProjectCatalog ? argProjectCatalog : './';
+  const projectCatalog = argProjectCatalog ? path.join(argProjectCatalog) + path.sep : path.join('./');
   const snpCatalog = argSnpCatalog
-    ? path.join(projectCatalog, argSnpCatalog)
+    ? path.join(projectCatalog, argSnpCatalog) + path.sep
     : path.join(projectCatalog, '.snp') + path.sep;
   const template = argTemplate ? argTemplate : 'node';
   const temporaryFolder = path.join(snpCatalog, './temporary') + path.sep;
+  const snpConfigFile = 'snp.config.json';
 
   return await createCatalog(temporaryFolder).then(() => {
     console.log({ snpCatalog, template, sUpdaterVersion: version, projectCatalog, temporaryFolder });
-    return { snpCatalog, template, sUpdaterVersion: version, projectCatalog, temporaryFolder };
+    return { snpCatalog, template, sUpdaterVersion: version, projectCatalog, temporaryFolder, snpConfigFile };
   });
 };
 
 export const createConfigFile = async (config: initConfig): Promise<initConfig> => {
   const { snpCatalog, template, sUpdaterVersion } = config;
 
-  const filePath = path.join(snpCatalog, 'snp.config.json');
-
+  config.snpConfigFile = path.join(snpCatalog, 'snp.config.json');
   await isFolderExist({
     folderPath: snpCatalog,
     createFolder: true,
   });
 
   await createFile({
-    filePath,
+    filePath: config.snpConfigFile,
     content: JSON.stringify({ sUpdaterVersion, template }),
   });
 
@@ -88,7 +91,7 @@ export const createConfigFile = async (config: initConfig): Promise<initConfig> 
 };
 
 export const downloadRemoteConfig = async (config: initConfig): Promise<buildConfig> => {
-  const fileMap = await downloadConfig(config.template, config.snpCatalog, config.temporaryFolder);
+  const { fileMap, templateVersion } = await downloadConfig(config.template, config.snpCatalog, config.temporaryFolder);
 
   const organizeFileMap = (fileMap: string[]) => {
     const files = {};
@@ -104,9 +107,11 @@ export const downloadRemoteConfig = async (config: initConfig): Promise<buildCon
 
     return { fileMap, files };
   };
-  return { ...config, fileMap: organizeFileMap(fileMap) };
+  return { ...config, templateVersion, fileMap: organizeFileMap(fileMap) };
 };
 export const buildConfig = async (config: buildConfig): Promise<buildConfig> => {
+  const { fileMap, ...newConfigContent } = { ...config };
+  await updateJson({ filePath: config.snpConfigFile, newContent: { ...newConfigContent } });
   const buildFile = async ({
     fileMap,
   }: {
@@ -127,7 +132,6 @@ export const buildConfig = async (config: buildConfig): Promise<buildConfig> => 
       });
     }
   };
-
   await buildFile(config);
   return config;
 };

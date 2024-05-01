@@ -8,11 +8,10 @@ export async function downloadConfig(
   template: availableTemplate,
   filePath: string,
   temporaryFolder: string
-): Promise<string[]> {
+): Promise<{ fileMap: string[]; templateVersion: string }> {
   const REPOSITORY_MAP_FILE_NAME = 'repositoryMap.json';
   // TODO parametryzacaj tego url
   const repositoryUrl = `https://raw.githubusercontent.com/SebastianWesolowski/testTemplate/main/template/${template}`;
-
   const formatterRepositoryFileNameUrl = ({
     repository,
     fileName,
@@ -30,6 +29,7 @@ export async function downloadConfig(
   try {
     const repositoryMapFileUrl = formatterRepositoryFileNameUrl({ fileName: REPOSITORY_MAP_FILE_NAME });
     return await wgetAsync(repositoryMapFileUrl, temporaryFolder).then(async (content) => {
+      console.log({ content, repositoryMapFileUrl });
       await createFile({
         filePath: path.join(filePath, REPOSITORY_MAP_FILE_NAME),
         content,
@@ -43,8 +43,7 @@ export async function downloadConfig(
           });
         });
       }
-
-      return JSON.parse(content).fileMap;
+      return { fileMap: JSON.parse(content).fileMap, templateVersion: JSON.parse(content).templateVersion };
     });
   } catch (err) {
     console.error('Błąd podczas pobierania configu z githuba', err);
