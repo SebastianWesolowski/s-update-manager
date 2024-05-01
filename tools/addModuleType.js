@@ -1,4 +1,4 @@
-import fs from 'fs-extra';
+const fs = require('fs-extra');
 
 const packageJsonPath = './dist/package/package.json';
 const packageJson = fs.readJsonSync(packageJsonPath);

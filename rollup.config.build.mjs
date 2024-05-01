@@ -6,20 +6,9 @@ import json from "@rollup/plugin-json";
 import babel from "@rollup/plugin-babel";
 
 const files = glob.sync('src/**/*.ts', { nodir: true });
-console.log(files)
 
 export default {
-    input: [
-        'src/init.ts',
-        'src/index.ts',
-        'src/util/wget.ts',
-        'src/util/toCreateFile.ts',
-        'src/util/readVersionPackage.ts',
-        'src/util/isFolderExist.ts',
-        'src/util/isFileExists.ts',
-        'src/util/downloadConfig.ts',
-        'src/util/createFile.ts'
-    ]    ,
+    input: files,
     output: {
         format: 'esm',
         dir: 'lib',
