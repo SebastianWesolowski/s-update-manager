@@ -14,6 +14,7 @@ interface CreateFileParams {
     overwriteFile?: boolean;
     backupFile?: boolean;
   };
+  isDebug?: boolean;
 }
 
 export async function createFile({
@@ -22,6 +23,7 @@ export async function createFile({
   folderPath,
   content,
   options = { createFolder: true, overwriteFile: true, backupFile: true },
+  isDebug = false,
 }: CreateFileParams): Promise<string> {
   if (!filePath && (!folderPath || !fileName)) {
     throw new Error("Either 'filePath' or both 'folderPath' and 'fileName' are required.");
@@ -40,7 +42,7 @@ export async function createFile({
       createFolder: options?.createFolder || true,
     });
 
-    if (await isFileExists(filePath)) {
+    if ((await isFileExists(filePath)) && isDebug) {
       console.warn('File already exists: ' + filePath);
     }
 

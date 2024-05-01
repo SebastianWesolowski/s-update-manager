@@ -21,7 +21,6 @@
     "scripts.staged:lint:fix",
     "scripts.staged:prettier:check",
     "scripts.staged:prettier:fix",
-
     "scripts.test:check",
     "scripts.test:watch",
     "scripts.typescript:check",

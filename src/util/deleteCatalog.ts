@@ -1,11 +1,13 @@
 import fs from 'fs';
 
-export async function deleteCatalog(filePath: string) {
+export async function deleteCatalog(filePath: string, isDebug?: boolean) {
   try {
     await fs.promises.rm(filePath, { recursive: true, force: true });
-    console.log('Katalog został usunięty:', filePath);
+    if (isDebug) {
+      console.log('The catalogue has been removed:', filePath);
+    }
   } catch (error) {
-    console.error('Błąd podczas usuwania katalogu:', error);
+    console.error('Error when deleting a directory:', error);
     throw error;
   }
 }

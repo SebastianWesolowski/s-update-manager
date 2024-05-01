@@ -1,17 +1,14 @@
 import path from 'path';
 import { format } from 'url';
-import { availableTemplate } from '@/init';
+import { initConfig } from '@/init';
 import { createFile } from '@/util/createFile';
+import { debugFunction } from '@/util/debugFunction';
 import { wgetAsync } from '@/util/wget';
 
-export async function downloadConfig(
-  template: availableTemplate,
-  filePath: string,
-  temporaryFolder: string
-): Promise<{ fileMap: string[]; templateVersion: string }> {
+export async function downloadConfig(config: initConfig): Promise<{ fileMap: string[]; templateVersion: string }> {
+  const { template, temporaryFolder, isDebug, snpCatalog, remoteRepository } = config;
   const REPOSITORY_MAP_FILE_NAME = 'repositoryMap.json';
-  // TODO parametryzacaj tego url
-  const repositoryUrl = `https://raw.githubusercontent.com/SebastianWesolowski/testTemplate/main/template/${template}`;
+  const repositoryUrl = `${remoteRepository}${template}`;
   const formatterRepositoryFileNameUrl = ({
     repository,
     fileName,
@@ -29,16 +26,16 @@ export async function downloadConfig(
   try {
     const repositoryMapFileUrl = formatterRepositoryFileNameUrl({ fileName: REPOSITORY_MAP_FILE_NAME });
     return await wgetAsync(repositoryMapFileUrl, temporaryFolder).then(async (content) => {
-      console.log({ content, repositoryMapFileUrl });
+      debugFunction(isDebug, { content, repositoryMapFileUrl, REPOSITORY_MAP_FILE_NAME }, 'download from remote repo');
       await createFile({
-        filePath: path.join(filePath, REPOSITORY_MAP_FILE_NAME),
+        filePath: path.join(snpCatalog, REPOSITORY_MAP_FILE_NAME),
         content,
       });
 
       for (const fileName of JSON.parse(content).fileMap) {
         await wgetAsync(formatterRepositoryFileNameUrl({ fileName }), temporaryFolder).then(async (contentFile) => {
           await createFile({
-            filePath: path.join(filePath, fileName),
+            filePath: path.join(snpCatalog, fileName),
             content: contentFile,
           });
         });
@@ -46,7 +43,7 @@ export async function downloadConfig(
       return { fileMap: JSON.parse(content).fileMap, templateVersion: JSON.parse(content).templateVersion };
     });
   } catch (err) {
-    console.error('Błąd podczas pobierania configu z githuba', err);
-    throw err; // Przekaż błąd dalej, aby był obsłużony przez wywołującą funkcję
+    console.error('Error while downloading config from github', err);
+    throw err;
   }
 }

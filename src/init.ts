@@ -1,8 +1,10 @@
 #!/usr/bin/env node
 
+import minimist from 'minimist';
 import * as path from 'path';
 import { createCatalog } from '@/util/createCatalog';
 import { createFile } from '@/util/createFile';
+import { debugFunction } from '@/util/debugFunction';
 import { deleteCatalog } from '@/util/deleteCatalog';
 import { downloadConfig } from '@/util/downloadConfig';
 import { isFolderExist } from '@/util/isFolderExist';
@@ -41,23 +43,31 @@ const config: Config = {
 
 export type availableTemplate = 'node' | string;
 
-type initConfig = {
+export type initConfig = {
   snpCatalog: string;
   template: availableTemplate | string;
   sUpdaterVersion: string;
   projectCatalog: string;
   temporaryFolder: string;
   snpConfigFile: string;
+  remoteRepository: string;
+  isDebug: boolean;
 };
 
-type buildConfig = initConfig & {
+export type buildConfig = initConfig & {
   fileMap: { fileMap: string[]; files: Record<string, string[]> };
   templateVersion: string;
 };
 
-export const init = async (args: string[]): Promise<initConfig> => {
-  console.log({ args });
-  const [argSnpCatalog, argTemplate, argProjectCatalog] = args;
+export const init = async (args: Args): Promise<initConfig> => {
+  const argSnpCatalog: string = args.snpConfig || args._[0];
+  const argTemplate: string = args.template || args._[1];
+  const argProjectCatalog: string = args.project || args._[2];
+  const argRemoteRepository: string = args.remoteRepository || args._[3];
+  const isDebug: boolean = args.debug || false;
+  debugFunction(isDebug, '=== Start SNP INIT ===');
+  debugFunction(isDebug, { args });
+
   const version = await readPackageVersion('./package.json');
   const projectCatalog = argProjectCatalog ? path.join(argProjectCatalog) + path.sep : path.join('./');
   const snpCatalog = argSnpCatalog
@@ -66,14 +76,26 @@ export const init = async (args: string[]): Promise<initConfig> => {
   const template = argTemplate ? argTemplate : 'node';
   const temporaryFolder = path.join(snpCatalog, './temporary') + path.sep;
   const snpConfigFile = 'snp.config.json';
+  const remoteRepository = argRemoteRepository
+    ? argRemoteRepository
+    : 'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/main/template/';
 
   return await createCatalog(temporaryFolder).then(() => {
-    console.log({ snpCatalog, template, sUpdaterVersion: version, projectCatalog, temporaryFolder });
-    return { snpCatalog, template, sUpdaterVersion: version, projectCatalog, temporaryFolder, snpConfigFile };
+    return {
+      isDebug,
+      projectCatalog,
+      remoteRepository,
+      sUpdaterVersion: version,
+      snpCatalog,
+      snpConfigFile,
+      template,
+      temporaryFolder,
+    };
   });
 };
 
 export const createConfigFile = async (config: initConfig): Promise<initConfig> => {
+  debugFunction(config.isDebug, { config });
   const { snpCatalog, template, sUpdaterVersion } = config;
 
   config.snpConfigFile = path.join(snpCatalog, 'snp.config.json');
@@ -85,14 +107,18 @@ export const createConfigFile = async (config: initConfig): Promise<initConfig> 
   await createFile({
     filePath: config.snpConfigFile,
     content: JSON.stringify({ sUpdaterVersion, template }),
+    isDebug: config.isDebug,
   });
+
+  debugFunction(config.isDebug, { sUpdaterVersion, template }, 'created snp config file');
 
   return config;
 };
 
 export const downloadRemoteConfig = async (config: initConfig): Promise<buildConfig> => {
-  const { fileMap, templateVersion } = await downloadConfig(config.template, config.snpCatalog, config.temporaryFolder);
+  const { fileMap, templateVersion } = await downloadConfig(config);
 
+  debugFunction(config.isDebug, { fileMap, templateVersion }, 'download form remote repo');
   const organizeFileMap = (fileMap: string[]) => {
     const files = {};
 
@@ -129,6 +155,7 @@ export const buildConfig = async (config: buildConfig): Promise<buildConfig> => 
       await createFile({
         filePath: path.join(config.projectCatalog, fileName),
         content: contentFile,
+        isDebug: config.isDebug,
       });
     }
   };
@@ -137,19 +164,35 @@ export const buildConfig = async (config: buildConfig): Promise<buildConfig> => 
 };
 
 export const cleanUp = async (config: buildConfig): Promise<any> => {
-  console.log({ endConfig: config });
-  deleteCatalog(config.temporaryFolder);
+  debugFunction(config.isDebug, { config }, 'final config');
+  await deleteCatalog(config.temporaryFolder, config.isDebug);
+
+  debugFunction(config.isDebug, '=== final SNP INIT ===');
 };
 
-let args = process.argv.slice(3);
+interface Args {
+  snpConfig?: string;
+  template?: string;
+  project?: string;
+  debug?: boolean;
+  remoteRepository?: string;
+  _: string[];
+}
 
-if (String(process.env.SDEBUG) === 'true') {
-  // argSnpCatalog - snp catalog
-  // argTemplate - template remote github
-  // argProjectCatalog - project catalog
-  args = [path.join('./.snp'), 'node', './test/fakeProjectRootfolder'];
+let args: Args = minimist(process.argv.slice(2));
+
+if (process.env.SDEBUG === 'true') {
+  args = {
+    _: [],
+    snpConfig: './.snp',
+    template: 'node',
+    project: './test/fakeProjectRootfolder',
+    remoteRepository: 'https://raw.githubusercontent.com/SebastianWesolowski/testTemplate/main/template/',
+    debug: true,
+  };
   console.log({ args });
 }
+
 init(args)
   .then((config) => createConfigFile(config))
   .then((config) => downloadRemoteConfig(config))
