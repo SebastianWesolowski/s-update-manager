@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "s-init -a ./.snp node ./",
-    "init": "s-init --snpConfig ./.snp --template node --project ./ --remoteRepository https://raw.githubusercontent.com/SebastianWesolowski/testTemplate/main/template/"
+    "s-init": "s-init -debug"
   },
   "author": "",
   "license": "ISC",
