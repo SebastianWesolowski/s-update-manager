@@ -1,3 +1,11 @@
+## [1.0.0-dev.16](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.15...v1.0.0-dev.16) (2024-05-01)
+
+
+### Features
+
+* ✨ expand local config ([906274e](https://github.com/SebastianWesolowski/s-update-manager/commit/906274edacbda58aa6a4a111489f9aabc44a394b))
+* ✨ test on local realProject ([ac844c7](https://github.com/SebastianWesolowski/s-update-manager/commit/ac844c7267ba749cd072709dd8b138517c072445))
+
 ## [1.0.0-dev.15](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.14...v1.0.0-dev.15) (2024-04-29)
 
 
