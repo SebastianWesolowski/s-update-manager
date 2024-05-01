@@ -1,0 +1,14 @@
+{
+  "name": "real-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "s-init -a ./.snp node ./"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "s-update-manager": "../../dist/s-update-manager-1.0.0-dev.15.tgz"
+  }
+}
