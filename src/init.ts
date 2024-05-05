@@ -128,7 +128,7 @@ export const downloadRemoteConfig = async (config: initConfig): Promise<buildCon
       if (!files[fileName]) {
         files[fileName] = [];
       }
-      files[fileName].push(`${config.snpCatalog}/${file}`);
+      files[fileName].push(path.join(config.snpCatalog, file));
     });
 
     return { fileMap, files };
@@ -151,10 +151,23 @@ export const buildConfig = async (config: buildConfig): Promise<buildConfig> => 
 
     for (const fileName of contentFile) {
       const defaultFile = files[fileName].find((element) => element.includes('-default.md')) || '';
+      const customFile = defaultFile.replace('-default.md', '-custom.md');
+      const extendFile = defaultFile.replace('-default.md', '-extend.md');
       const contentFile = await redFile(defaultFile);
       await createFile({
         filePath: path.join(config.projectCatalog, fileName),
         content: contentFile,
+        isDebug: config.isDebug,
+      });
+
+      await createFile({
+        filePath: customFile,
+        content: '',
+        isDebug: config.isDebug,
+      });
+      await createFile({
+        filePath: extendFile,
+        content: '',
         isDebug: config.isDebug,
       });
     }
