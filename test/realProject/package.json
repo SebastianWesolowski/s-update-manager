@@ -4,12 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "s-init -a ./.snp node ./",
-    "s-init": "s-init -debug"
+    "test": "s-init --debug --snpConfig='./.snp' --projec='./' --remoteRepository='https://raw.githubusercontent.com/SebastianWesolowski/testTemplate/main/template/'"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "s-update-manager": "../../dist/s-update-manager-1.0.0-dev.15.tgz"
+    "s-update-manager": "../../dist/s-update-manager-1.0.0-dev.16.tgz"
   }
 }
