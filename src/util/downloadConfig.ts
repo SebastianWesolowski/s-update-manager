@@ -1,11 +1,13 @@
 import path from 'path';
 import { format } from 'url';
-import { initConfig } from '@/init';
+import { defaultConfigType } from '@/feature/defaultConfig';
 import { createFile } from '@/util/createFile';
 import { debugFunction } from '@/util/debugFunction';
 import { wgetAsync } from '@/util/wget';
 
-export async function downloadConfig(config: initConfig): Promise<{ fileMap: string[]; templateVersion: string }> {
+export async function downloadConfig(
+  config: defaultConfigType
+): Promise<{ fileMap: string[]; templateVersion: string }> {
   const { template, temporaryFolder, isDebug, snpCatalog, remoteRepository } = config;
   const REPOSITORY_MAP_FILE_NAME = 'repositoryMap.json';
   const repositoryUrl = `${remoteRepository}${template}`;
