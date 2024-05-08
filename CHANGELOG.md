@@ -1,3 +1,10 @@
+## [1.0.0-dev.17](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.16...v1.0.0-dev.17) (2024-05-08)
+
+
+### Features
+
+* ✨ add custom and extend filed as a file ([ea04b86](https://github.com/SebastianWesolowski/s-update-manager/commit/ea04b86ff332ca90999ba784be1c241ff5818d13))
+
 ## [1.0.0-dev.16](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.15...v1.0.0-dev.16) (2024-05-01)
 
 
