@@ -1,3 +1,10 @@
+## [1.0.0-dev.18](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.17...v1.0.0-dev.18) (2024-05-16)
+
+
+### Features
+
+* ✨ build from snp files ([90145c7](https://github.com/SebastianWesolowski/s-update-manager/commit/90145c7bf819d94d83312711eb4c0d722c8f471a))
+
 ## [1.0.0-dev.17](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.16...v1.0.0-dev.17) (2024-05-08)
 
 
