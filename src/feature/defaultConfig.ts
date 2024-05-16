@@ -1,58 +1,162 @@
 import path from 'path';
 import { Args, setArgs } from '@/feature/args';
-import { debugFunction } from '@/util/debugFunction';
-import { redFile } from '@/util/readFile';
+import { readFile } from '@/util/readFile';
 import { readPackageVersion } from '@/util/readVersionPackage';
 
 export type availableTemplate = 'node' | string;
 
-export type defaultConfigType = {
-  snpCatalog: string;
+export interface StableConfig {
   template: availableTemplate | string;
-  sUpdaterVersion: string;
   projectCatalog: string;
-  temporaryFolder: string;
+  REPOSITORY_MAP_FILE_NAME: string;
   snpConfigFileName: string;
-  snpConfigFile: string;
   remoteRepository: string;
   isDebug: boolean;
+}
+export interface GeneratedConfig {
+  snpCatalog: string;
+  sUpdaterVersion?: string;
+  templateVersion?: string;
+  temporaryFolder: string;
+  snpConfigFile: string;
+}
+
+export interface ConfigType extends StableConfig, GeneratedConfig, BuildConfig {
+  _: any[];
+}
+type PartialConfig = {
+  [K in keyof ConfigType]?: any;
 };
 
-export const defaultConfig = async (args: Args): Promise<defaultConfigType> => {
-  const argsObject = setArgs(args);
-  const projectCatalog = argsObject.project ? path.join(argsObject.project) + path.sep : path.join('./');
-  const snpCatalog = argsObject.snpConfig
-    ? path.join(projectCatalog, argsObject.snpConfig) + path.sep
-    : path.join(projectCatalog, '.snp') + path.sep;
-  const snpConfigFileName = 'snp.config.json';
-  const snpConfigFile = path.join(snpCatalog, snpConfigFileName);
+export type BuildConfig = {
+  fileMap?: { map: string[]; files: Record<string, string[]> };
+  templateVersion?: string;
+};
 
-  const snpLocalConfigData: defaultConfigType = JSON.parse(await redFile(path.join(snpConfigFile)));
+const defaultConfig: ConfigType = {
+  snpCatalog: './.snp',
+  template: 'node',
+  sUpdaterVersion: undefined,
+  templateVersion: undefined,
+  fileMap: undefined,
+  REPOSITORY_MAP_FILE_NAME: 'repositoryMap.json',
+  projectCatalog: './',
+  temporaryFolder: './.snp/temporary/',
+  snpConfigFileName: 'snp.config.json',
+  snpConfigFile: './.snp/snp.config.json',
+  remoteRepository: 'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/dev/template/', // TODO Change to main branch before release 1.00
+  // remoteRepository: 'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/main/template/',
+  isDebug: false,
+  _: [],
+};
+export const createPath = function (parts: string[] | string, isFolder = false) {
+  let joinedPath: string | string[];
+  let includeRoot = false;
+  const rootRegex = /^\.\/.*$/;
+  if (typeof parts === 'string') {
+    joinedPath = parts;
 
-  if (snpLocalConfigData) {
-    console.log(`use config from local config file ${snpConfigFile}`);
-    debugFunction(argsObject.debug || false, snpLocalConfigData, 'local config file');
-    return snpLocalConfigData;
+    if (rootRegex.test(parts)) {
+      includeRoot = true;
+    }
+  } else {
+    if (rootRegex.test(parts.join(''))) {
+      includeRoot = true;
+    }
+
+    joinedPath = path.join(...parts);
   }
 
-  const isDebug = argsObject.debug || false;
-  const version = await readPackageVersion('./package.json');
-  const template = argsObject.template ? argsObject.template : 'node';
-  const temporaryFolder = path.join(snpCatalog, './temporary') + path.sep;
+  if (isFolder) {
+    joinedPath = path.normalize(joinedPath + path.sep);
+  }
 
-  const remoteRepository = argsObject.remoteRepository
-    ? argsObject.remoteRepository
-    : 'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/main/template/';
+  if (includeRoot && joinedPath !== './') {
+    joinedPath = './' + path.normalize(joinedPath);
+  }
 
-  return {
-    isDebug,
-    projectCatalog,
-    remoteRepository,
-    sUpdaterVersion: version,
-    snpCatalog,
-    snpConfigFileName,
-    snpConfigFile,
-    template,
-    temporaryFolder,
+  return joinedPath;
+};
+
+const regenerateConfig = async (config: ConfigType) => {
+  const regeneratedConfig = { ...config };
+
+  if (regeneratedConfig.projectCatalog) {
+    regeneratedConfig.snpCatalog = createPath([regeneratedConfig.projectCatalog, '.snp/'], true);
+    regeneratedConfig.temporaryFolder = createPath([regeneratedConfig.snpCatalog, 'temporary/'], true);
+    regeneratedConfig.sUpdaterVersion = await readPackageVersion(
+      createPath([regeneratedConfig.projectCatalog, 'package.json'])
+    );
+    if (regeneratedConfig.snpConfigFileName) {
+      regeneratedConfig.snpConfigFile = createPath([regeneratedConfig.snpCatalog, regeneratedConfig.snpConfigFileName]);
+    }
+  }
+
+  return regeneratedConfig;
+};
+
+const updateConfig = async (config: ConfigType, keyToUpdate: PartialConfig) => {
+  const keyName = Object.keys(keyToUpdate)[0];
+  const folderKey = ['snpCatalog', 'projectCatalog', 'temporaryFolder'];
+  const fileKey = ['snpConfigFileName', 'snpConfigFile'];
+  const isFolder = folderKey.includes(keyName);
+  const isFile = fileKey.includes(keyName);
+  let value = keyToUpdate[keyName];
+
+  if (isFolder || isFile) {
+    value = createPath(value, isFolder);
+  }
+
+  const valueToUpdate = { [keyName]: value };
+
+  const updatedConfig = { ...config, ...valueToUpdate };
+
+  return await regenerateConfig(updatedConfig);
+};
+
+export const getConfig = async (args: Args): Promise<ConfigType> => {
+  let config = { ...defaultConfig };
+  let localConfigFile = {
+    snpCatalog: undefined,
+    template: undefined,
+    projectCatalog: undefined,
+    snpConfigFileName: undefined,
+    snpConfigFile: undefined,
+    remoteRepository: undefined,
+    isDebug: undefined,
+    _: undefined,
   };
+
+  const argsObject = setArgs(args);
+
+  config = await updateConfig(config, { isDebug: argsObject.isDebug || config.isDebug });
+  config = await updateConfig(config, { projectCatalog: argsObject.projectCatalog || config.projectCatalog });
+  config = await updateConfig(config, { snpCatalog: argsObject.snpCatalog || config.snpCatalog });
+  config = await updateConfig(config, { snpConfigFile: argsObject.snpConfigFile || config.snpConfigFile });
+  config = await updateConfig(config, { snpConfigFileName: argsObject.snpConfigFileName || config.snpConfigFileName });
+
+  const dataLocalConfigFile: string | ConfigType | object = await readFile(config.snpConfigFile);
+
+  if (dataLocalConfigFile !== '' && typeof dataLocalConfigFile === 'object') {
+    localConfigFile = dataLocalConfigFile;
+  }
+
+  config = await updateConfig(config, { isDebug: argsObject.isDebug || localConfigFile.isDebug || config.isDebug });
+  config = await updateConfig(config, {
+    projectCatalog: argsObject.projectCatalog || localConfigFile.projectCatalog || config.projectCatalog,
+  });
+  config = await updateConfig(config, {
+    snpCatalog: argsObject.snpCatalog || localConfigFile.snpCatalog || config.snpCatalog,
+  });
+  config = await updateConfig(config, {
+    snpConfigFile: argsObject.snpConfigFile || localConfigFile.snpConfigFile || config.snpConfigFile,
+  });
+  config = await updateConfig(config, {
+    snpConfigFileName: argsObject.snpConfigFileName || localConfigFile.snpConfigFileName || config.snpConfigFileName,
+  });
+  config = await updateConfig(config, {
+    remoteRepository: argsObject.remoteRepository || localConfigFile.remoteRepository || config.remoteRepository,
+  });
+  config = await updateConfig(config, { template: argsObject.template || localConfigFile.template || config.template });
+  return regenerateConfig(config);
 };
