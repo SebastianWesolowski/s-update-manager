@@ -1,13 +1,14 @@
-import { redFile } from '@/util/readFile';
+import { readFile } from '@/util/readFile';
 
 export async function readPackageVersion(filePath: string): Promise<string> {
   try {
-    const data = await redFile(filePath);
+    const data = await readFile(filePath);
     const packageJson = JSON.parse(data);
-
-    return packageJson.version;
+    const devDependencies = packageJson?.devDependencies?.['s-update-manager'];
+    const dependencies = packageJson?.dependencies?.['s-update-manager'];
+    const version = packageJson?.version;
+    return String(devDependencies || dependencies || version || 'last');
   } catch (err) {
-    console.error('Błąd podczas odczytu pliku package.json', err);
-    throw err; // Przekaż błąd dalej, aby był obsłużony przez wywołującą funkcję
+    return '';
   }
 }
