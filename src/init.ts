@@ -9,6 +9,7 @@ import { debugFunction } from '@/util/debugFunction';
 import { deleteCatalog } from '@/util/deleteCatalog';
 import { downloadConfig } from '@/util/downloadConfig';
 import { isFolderExist } from '@/util/isFolderExist';
+import { parseJSON } from '@/util/parseJSON';
 import { readFile } from '@/util/readFile';
 import { updateJson } from '@/util/updateJson';
 //
@@ -79,38 +80,61 @@ export const downloadRemoteConfig = async (config: ConfigType): Promise<ConfigTy
   return { ...config, templateVersion, fileMap };
 };
 export const buildConfig = async (config: ConfigType): Promise<ConfigType> => {
-  await updateJson({ filePath: config.snpConfigFile, newContent: { ...config } });
+  const newConfig: ConfigType = await readFile(config.snpConfigFile).then(async (bufferData) =>
+    parseJSON(bufferData.toString())
+  );
+  newConfig.fileMap = config.fileMap;
+
+  if (newConfig?.fileMap) {
+    newConfig.fileMap.snpFiles = {};
+  }
+
   const buildFile = async (config: ConfigType) => {
     const files = config?.fileMap?.files;
 
     if (files) {
-      const contentFile = Object.keys(files);
-      for (const fileName of contentFile) {
-        const defaultFile = files[fileName].find((element) => element.includes('-default.md')) || '';
-        const customFile = defaultFile.replace('-default.md', '-custom.md');
-        const extendFile = defaultFile.replace('-default.md', '-extend.md');
-        const contentFile = await readFile(defaultFile);
+      const arrayFileNames = Object.keys(files);
+      for (const fileName of arrayFileNames) {
+        const defaultFilePath = files[fileName].find((element) => element.includes('-default.md')) || '';
+        const instructionsFilePath = files[fileName].find((element) => element.includes('-instructions.md')) || '';
+        const customFilePath = defaultFilePath.replace('-default.md', '-custom.md');
+        const extendFilePath = defaultFilePath.replace('-default.md', '-extend.md');
+
+        const contentDefaultFile = await readFile(defaultFilePath);
         await createFile({
           filePath: createPath([config.projectCatalog, fileName]),
-          content: contentFile,
+          content: contentDefaultFile,
           isDebug: config.isDebug,
         });
 
         await createFile({
-          filePath: customFile,
+          filePath: customFilePath,
           content: '',
           isDebug: config.isDebug,
         });
-        await updateJson({ filePath: config.snpConfigFile, newContent: { file: { customFile: customFile } } });
 
         await createFile({
-          filePath: extendFile,
+          filePath: extendFilePath,
           content: '',
           isDebug: config.isDebug,
         });
-        await updateJson({ filePath: config.snpConfigFile, newContent: { file: { extendFile: extendFile } } });
+
+        if (newConfig?.fileMap && newConfig.fileMap.snpFiles) {
+          newConfig.fileMap.snpFiles[fileName] = {
+            defaultFile: defaultFilePath,
+            instructionsFile: instructionsFilePath,
+            customFile: customFilePath,
+            extendFile: extendFilePath,
+          };
+        }
       }
     }
+
+    await updateJson({
+      filePath: config.snpConfigFile,
+      newContent: newConfig,
+      replace: true,
+    });
   };
   await buildFile(config);
   return config;

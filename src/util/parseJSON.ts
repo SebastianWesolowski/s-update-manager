@@ -1,4 +1,4 @@
-export function parseJSON(data: string, isDebug = false): object {
+export function parseJSON(data: string, isDebug = false): any {
   try {
     if (data === '') {
       return {};
