@@ -1,5 +1,6 @@
 import path from 'path';
 import { Args, setArgs } from '@/feature/args';
+import { parseJSON } from '@/util/parseJSON';
 import { readFile } from '@/util/readFile';
 import { readPackageVersion } from '@/util/readVersionPackage';
 
@@ -29,7 +30,7 @@ type PartialConfig = {
 };
 
 export type BuildConfig = {
-  fileMap?: { map: string[]; files: Record<string, string[]> };
+  fileMap?: { map: string[]; files: Record<string, string[]> | []; snpFiles?: object };
   templateVersion?: string;
 };
 
@@ -49,6 +50,10 @@ const defaultConfig: ConfigType = {
   isDebug: false,
   _: [],
 };
+
+type OptionalKeys<T> = { [K in keyof T]?: T[K] };
+type LocalConfigType = OptionalKeys<ConfigType>;
+
 export const createPath = function (parts: string[] | string, isFolder = false) {
   let joinedPath: string | string[];
   let includeRoot = false;
@@ -116,16 +121,7 @@ const updateConfig = async (config: ConfigType, keyToUpdate: PartialConfig) => {
 
 export const getConfig = async (args: Args): Promise<ConfigType> => {
   let config = { ...defaultConfig };
-  let localConfigFile = {
-    snpCatalog: undefined,
-    template: undefined,
-    projectCatalog: undefined,
-    snpConfigFileName: undefined,
-    snpConfigFile: undefined,
-    remoteRepository: undefined,
-    isDebug: undefined,
-    _: undefined,
-  };
+  let localConfigFile: LocalConfigType = {};
 
   const argsObject = setArgs(args);
 
@@ -135,10 +131,11 @@ export const getConfig = async (args: Args): Promise<ConfigType> => {
   config = await updateConfig(config, { snpConfigFile: argsObject.snpConfigFile || config.snpConfigFile });
   config = await updateConfig(config, { snpConfigFileName: argsObject.snpConfigFileName || config.snpConfigFileName });
 
-  const dataLocalConfigFile: string | ConfigType | object = await readFile(config.snpConfigFile);
+  const dataLocalConfigFile: string | ConfigType | object = parseJSON(await readFile(config.snpConfigFile));
 
   if (dataLocalConfigFile !== '' && typeof dataLocalConfigFile === 'object') {
     localConfigFile = dataLocalConfigFile;
+    config = { ...config, ...localConfigFile };
   }
 
   config = await updateConfig(config, { isDebug: argsObject.isDebug || localConfigFile.isDebug || config.isDebug });

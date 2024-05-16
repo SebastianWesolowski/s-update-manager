@@ -3,6 +3,7 @@ import { format } from 'url';
 import { BuildConfig, ConfigType, createPath } from '@/feature/defaultConfig';
 import { createFile } from '@/util/createFile';
 import { debugFunction } from '@/util/debugFunction';
+import { parseJSON } from '@/util/parseJSON';
 import { wgetAsync } from '@/util/wget';
 
 export async function downloadConfig(config: ConfigType): Promise<BuildConfig> {
@@ -34,7 +35,7 @@ export async function downloadConfig(config: ConfigType): Promise<BuildConfig> {
         content,
       });
 
-      for (const fileName of JSON.parse(content).fileMap) {
+      for (const fileName of parseJSON(content).fileMap) {
         await wgetAsync(formatterRepositoryFileNameUrl({ repository: repositoryUrl, fileName }), temporaryFolder).then(
           async (contentFile) => {
             await createFile({
@@ -59,10 +60,9 @@ export async function downloadConfig(config: ConfigType): Promise<BuildConfig> {
         return { map, files };
       };
 
-      console.log(JSON.parse(content).fileMap);
       return {
-        fileMap: organizeFileMap(JSON.parse(content).fileMap),
-        templateVersion: JSON.parse(content).templateVersion,
+        fileMap: organizeFileMap(parseJSON(content).fileMap),
+        templateVersion: parseJSON(content).templateVersion,
       };
     });
   } catch (err) {
