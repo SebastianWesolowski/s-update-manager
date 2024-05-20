@@ -4,11 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "s-init --debug --snpConfig='./.snp' --projec='./' --remoteRepository='https://raw.githubusercontent.com/SebastianWesolowski/testTemplate/main/template/'"
+    "test:build:testTemplate": "s-build --isDebug='true' --snpCatalog='./.snp' --projectCatalog='./' --remoteRepository='https://raw.githubusercontent.com/SebastianWesolowski/testTemplate/master/template/'",
+    "test:testTemplate": "s-init --isDebug='true' --snpCatalog='./.snp' --projectCatalog='./' --remoteRepository='https://raw.githubusercontent.com/SebastianWesolowski/testTemplate/master/template/'",
+    "test": "s-init --isDebug='true' --snpCatalog='./.snp' --projectCatalog='./' --remoteRepository='https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/dev/template/'",
+    "//": "//TODO change before to master release"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "s-update-manager": "../../dist/s-update-manager-1.0.0-dev.16.tgz"
+    "s-update-manager": "../../dist/s-update-manager-1.0.0-dev.17.tgz"
   }
 }
