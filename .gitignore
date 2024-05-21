@@ -63,7 +63,7 @@ web_modules/
 .node_repl_history
 
 # Output of 'npm pack'
-*.tgz
+
 
 # Yarn Integrity file
 .yarn-integrity
@@ -82,10 +82,11 @@ web_modules/
 # Next.js build output
 .next
 out
-
+*.tgz
 # Nuxt.js build / generate output
 .nuxt
 dist
+!dist/s-update-manager-*.tgz
 
 # Gatsby files
 .cache/
