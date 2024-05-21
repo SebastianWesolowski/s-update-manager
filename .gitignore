@@ -126,6 +126,7 @@ test/**/*
 !test/realProject/*
 !test/realProject/**
 !test/realProject/**/*
+!test/fakeProjectRootfolder/package.json
 
 # Compiled code
 lib/
