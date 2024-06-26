@@ -1,6 +1,5 @@
 import { ConfigType } from '@/feature/defaultConfig';
-import { FileMapConfig } from '@/feature/updateFileMapConfig';
-import { parseJSON } from '@/util/parseJSON';
+import { getFilePathsFromConfig } from '@/feature/getFilePathsFromConfig';
 import { readFile } from '@/util/readFile';
 
 export const getContentToBuild = async ({
@@ -10,12 +9,10 @@ export const getContentToBuild = async ({
   config: ConfigType;
   filePath: string;
 }): Promise<string | null> => {
-  const snpFileMapContent: FileMapConfig = await readFile(config.snpFileMapConfig).then(async (bufferData) =>
-    parseJSON(bufferData.toString())
-  );
+  const fileSet = await getFilePathsFromConfig({ config });
 
-  if (snpFileMapContent.snpFileMap) {
-    const contentFile = snpFileMapContent.snpFileMap[filePath];
+  if (fileSet) {
+    const contentFile = fileSet[filePath];
 
     if (contentFile['customFile']) {
       return await readFile(contentFile['customFile']);
