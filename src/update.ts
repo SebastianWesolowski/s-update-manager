@@ -9,6 +9,7 @@ import { updateFromRemote } from '@/feature/updateFromRemote';
 import { createCatalog } from '@/util/createCatalog';
 import { debugFunction } from '@/util/debugFunction';
 import { deletePath } from '@/util/deletePath';
+import { parseJSON } from '@/util/parseJSON';
 import { readFile } from '@/util/readFile';
 import { updateJson } from '@/util/updateJson';
 
@@ -41,7 +42,17 @@ export const cleanUpBeforeUpdate = async (config: ConfigType): Promise<ConfigTyp
       await deletePath(createPath([config.projectCatalog, fileName]), config.isDebug);
     }
   }
-  await deletePath(config.REPOSITORY_MAP_FILE_NAME, config.isDebug);
+  await readFile(createPath([config.projectCatalog, config.REPOSITORY_MAP_FILE_NAME]))
+    .then(async (bufferData) => {
+      const fileMap: { fileMap: string[]; templateVersion: string } = parseJSON(bufferData.toString()).fileMap;
+
+      for (const file in fileMap) {
+        await deletePath(createPath([config.projectCatalog, file]), config.isDebug);
+      }
+    })
+    .then(async () => {
+      await deletePath(createPath([config.projectCatalog, config.REPOSITORY_MAP_FILE_NAME]), config.isDebug);
+    });
 
   const newConfig = { ...config };
 

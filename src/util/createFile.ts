@@ -25,6 +25,7 @@ export async function createFile({
   options = { createFolder: true, overwriteFile: true, backupFile: true },
   isDebug = false,
 }: CreateFileParams): Promise<string> {
+  // TODO if content is object auto convert to buffer ?
   if (!filePath && (!folderPath || !fileName)) {
     throw new Error("Either 'filePath' or both 'folderPath' and 'fileName' are required.");
   }

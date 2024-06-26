@@ -9,6 +9,7 @@ export type availableTemplate = 'node' | string;
 export interface StableConfig {
   template: availableTemplate | string;
   projectCatalog: string;
+  availableSNPSuffix: ['-instructions.md', '-custom.md', '-extend.md', '-default.md'];
   REPOSITORY_MAP_FILE_NAME: string;
   snpConfigFileName: string;
   remoteRepository: string;
@@ -20,27 +21,24 @@ export interface GeneratedConfig {
   templateVersion?: string;
   temporaryFolder: string;
   snpConfigFile: string;
+  snpFileMapConfig: string;
 }
 
-export interface ConfigType extends StableConfig, GeneratedConfig, BuildConfig {
+export interface ConfigType extends StableConfig, GeneratedConfig {
   _: any[];
 }
 type PartialConfig = {
   [K in keyof ConfigType]?: any;
 };
 
-export type BuildConfig = {
-  fileMap?: { map: string[]; files: Record<string, string[]> | []; snpFiles?: object };
-  templateVersion?: string;
-};
-
 const defaultConfig: ConfigType = {
   snpCatalog: './.snp',
   template: 'node',
   sUpdaterVersion: undefined,
+  availableSNPSuffix: ['-instructions.md', '-custom.md', '-extend.md', '-default.md'],
   templateVersion: undefined,
-  fileMap: undefined,
   REPOSITORY_MAP_FILE_NAME: 'repositoryMap.json',
+  snpFileMapConfig: './.snp/repositoryMap.json',
   projectCatalog: './',
   temporaryFolder: './.snp/temporary/',
   snpConfigFileName: 'snp.config.json',
@@ -92,6 +90,10 @@ const regenerateConfig = async (config: ConfigType) => {
     regeneratedConfig.sUpdaterVersion = await readPackageVersion(
       createPath([regeneratedConfig.projectCatalog, 'package.json'])
     );
+    regeneratedConfig.snpFileMapConfig = createPath([
+      regeneratedConfig.snpCatalog,
+      regeneratedConfig.REPOSITORY_MAP_FILE_NAME,
+    ]);
     if (regeneratedConfig.snpConfigFileName) {
       regeneratedConfig.snpConfigFile = createPath([regeneratedConfig.snpCatalog, regeneratedConfig.snpConfigFileName]);
     }
