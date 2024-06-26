@@ -5,10 +5,12 @@ import { Args } from '@/feature/args';
 import { buildFromConfig } from '@/feature/buildFromConfig';
 import { cleanUp } from '@/feature/cleanUp';
 import { ConfigType, getConfig } from '@/feature/defaultConfig';
+import { prepareExtraFileFromConfig } from '@/feature/prepareExtraFileFromConfig';
 import { updateFromRemote } from '@/feature/updateFromRemote';
 import { createCatalog } from '@/util/createCatalog';
 import { createFile } from '@/util/createFile';
 import { debugFunction } from '@/util/debugFunction';
+import { isFileExists } from '@/util/isFileExists';
 import { isFolderExist } from '@/util/isFolderExist';
 //
 // type PackageConfig = {
@@ -43,9 +45,12 @@ import { isFolderExist } from '@/util/isFolderExist';
 export const init = async (args: Args): Promise<ConfigType> => {
   const config = await getConfig(args);
 
-  if (config.fileMap) {
-    throw new Error('Config file exists, use build script or update');
+  if ((await isFileExists(config.snpFileMapConfig)) && (await isFileExists(config.snpConfigFile))) {
+    if (process.env.SDEBUG !== 'true') {
+      throw new Error('Config file exists, use build script or update');
+    }
   }
+
   debugFunction(config.isDebug, '=== Start SNP INIT ===', '[INIT]');
 
   return await createCatalog(config.temporaryFolder).then(() => {
@@ -91,6 +96,10 @@ init(args)
   .then((config) => {
     finalConfig = config;
     return buildFromConfig(config);
+  })
+  .then((config) => {
+    finalConfig = config;
+    return prepareExtraFileFromConfig(config);
   })
   .then((config) => {
     finalConfig = config;

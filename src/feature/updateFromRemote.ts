@@ -1,11 +1,12 @@
-import { BuildConfig, ConfigType } from '@/feature/defaultConfig';
+import { ConfigType } from '@/feature/defaultConfig';
+import { FileMapConfig } from '@/feature/updateFileMapConfig';
 import { debugFunction } from '@/util/debugFunction';
 import { downloadConfig } from '@/util/downloadConfig';
 
 export const updateFromRemote = async (config: ConfigType): Promise<ConfigType> => {
-  const { fileMap, templateVersion }: BuildConfig = await downloadConfig(config);
+  const fileMapConfig: FileMapConfig = await downloadConfig(config);
 
-  debugFunction(config.isDebug, { fileMap, templateVersion }, '[INIT] download form remote repo');
+  debugFunction(config.isDebug, { fileMapConfig }, '[INIT] download form remote repo');
 
-  return { ...config, templateVersion, fileMap };
+  return { ...config, templateVersion: fileMapConfig.templateVersion };
 };
