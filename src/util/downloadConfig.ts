@@ -1,100 +1,61 @@
-import { format } from 'url';
-import { ConfigType, createPath } from '@/feature/defaultConfig';
+import { ConfigType } from '@/feature/defaultConfig';
 import { FileMapConfig } from '@/feature/updateFileMapConfig';
+import { createCatalog } from '@/util/createCatalog';
 import { createFile } from '@/util/createFile';
-import { debugFunction } from '@/util/debugFunction';
-import { getRealFileName } from '@/util/getRealFileName';
+import { formatterRepositoryFileNameUrl } from '@/util/formatterRepositoryFileNameUrl';
+import { isFileExists } from '@/util/isFileExists';
 import { objectToBuffer } from '@/util/objectToBuffer';
 import { parseJSON } from '@/util/parseJSON';
+import { readFile } from '@/util/readFile';
 import { wgetAsync } from '@/util/wget';
 
-export async function downloadConfig(config: ConfigType): Promise<FileMapConfig> {
-  const {
-    template,
-    temporaryFolder,
-    isDebug,
-    snpCatalog,
-    remoteRepository,
-    REPOSITORY_MAP_FILE_NAME,
-    snpFileMapConfig,
-  } = config;
-  const repositoryUrl = `${remoteRepository}${template}`;
-  const formatterRepositoryFileNameUrl = ({
-    repository,
-    fileName,
-  }: {
-    repository: string;
-    fileName: string;
-  }): string => {
-    const urlObj = new URL(repository);
-
-    urlObj.pathname = `${urlObj.pathname}/${fileName}`;
-
-    return format(urlObj);
-  };
+export async function downloadConfig(config: ConfigType): Promise<ConfigType> {
+  const snpFileMapConfig: FileMapConfig = await readFile(config.snpFileMapConfig).then(async (bufferData) =>
+    parseJSON(bufferData.toString())
+  );
 
   try {
     const repositoryMapFileUrl = formatterRepositoryFileNameUrl({
-      repository: repositoryUrl,
-      fileName: REPOSITORY_MAP_FILE_NAME,
+      repositoryUrl: config.repositoryUrl,
+      fileName: config.REPOSITORY_MAP_FILE_NAME,
     });
-    return await wgetAsync(repositoryMapFileUrl, temporaryFolder).then(async (snpFileMapConfigContent) => {
-      debugFunction(
-        isDebug,
-        { snpFileMapConfigContent, repositoryMapFileUrl, REPOSITORY_MAP_FILE_NAME },
-        'download from remote repo'
-      );
 
-      for (const fileName of parseJSON(snpFileMapConfigContent).fileMap) {
-        await wgetAsync(formatterRepositoryFileNameUrl({ repository: repositoryUrl, fileName }), temporaryFolder).then(
-          async (contentFile) => {
-            await createFile({
-              filePath: createPath([snpCatalog, fileName]),
-              content: contentFile,
-            });
-          }
-        );
-      }
+    if (!(await isFileExists(config.temporaryFolder))) {
+      await createCatalog(config.temporaryFolder);
+    }
 
-      const realFileName = getRealFileName({ config, contentToCheck: parseJSON(snpFileMapConfigContent).fileMap });
+    return await wgetAsync(repositoryMapFileUrl, config.temporaryFolder)
+      .then(async (snpFileMapConfigContent) => {
+        let currentConfig = {};
+        const downloadContent: FileMapConfig = parseJSON(snpFileMapConfigContent);
 
-      const updatedContent: FileMapConfig = parseJSON(snpFileMapConfigContent);
-      if (!updatedContent.snpFileMap) {
-        updatedContent.snpFileMap = {};
-      }
+        currentConfig = {
+          ...snpFileMapConfig,
+          ...downloadContent,
+        };
 
-      realFileName.forEach((file) => {
-        if (updatedContent.snpFileMap) {
-          updatedContent.snpFileMap[file] = {
-            defaultFile: updatedContent.fileMap.includes(file + '-default.md')
-              ? createPath([snpCatalog, `${file}-default.md`])
-              : '',
-            instructionsFile: updatedContent.fileMap.includes(file + '-instructions.md')
-              ? createPath([snpCatalog, `${file}-instructions.md`])
-              : '',
-            customFile: updatedContent.fileMap.includes(file + '-custom.md')
-              ? createPath([snpCatalog, `${file}-custom.md`])
-              : '',
-            extendFile: updatedContent.fileMap.includes(file + '-extend.md')
-              ? createPath([snpCatalog, `${file}-extend.md`])
-              : '',
-          };
+        const combinedConfig = currentConfig as FileMapConfig;
 
-          for (const key in updatedContent.snpFileMap[file]) {
-            if (updatedContent.snpFileMap[file][key] === '') {
-              delete updatedContent.snpFileMap[file][key];
-            }
-          }
+        if (!combinedConfig.createdFileMap) {
+          combinedConfig.createdFileMap = [];
         }
-      });
 
-      await createFile({
-        filePath: snpFileMapConfig,
-        content: objectToBuffer(updatedContent),
-      });
+        if (!combinedConfig.snpFileMap) {
+          combinedConfig.snpFileMap = {};
+        }
 
-      return updatedContent;
-    });
+        await createFile({
+          filePath: config.snpFileMapConfig,
+          content: objectToBuffer(combinedConfig),
+          options: {
+            overwriteFile: true,
+          },
+        });
+        return combinedConfig;
+      })
+      .then((combinedConfig) => {
+        return { ...config, templateVersion: combinedConfig.templateVersion };
+      });
   } catch (err) {
     console.error('Error while downloading config from github', err);
     throw err;

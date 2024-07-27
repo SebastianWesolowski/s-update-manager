@@ -1,4 +1,5 @@
 import path from 'path';
+import { format } from 'url';
 import { Args, setArgs } from '@/feature/args';
 import { parseJSON } from '@/util/parseJSON';
 import { readFile } from '@/util/readFile';
@@ -6,10 +7,14 @@ import { readPackageVersion } from '@/util/readVersionPackage';
 
 export type availableTemplate = 'node' | string;
 
+export type SNPKeySuffixTypes = AvailableSNPKeySuffixTypes & '_';
+export type AvailableSNPKeySuffixTypes = 'defaultFile' | 'instructionsFile' | 'customFile' | 'extendFile';
+export type AvailableSNPSuffixTypes = '-default.md' | '-instructions.md' | '-custom.md' | '-extend.md';
 export interface StableConfig {
   template: availableTemplate | string;
   projectCatalog: string;
-  availableSNPSuffix: ['-instructions.md', '-custom.md', '-extend.md', '-default.md'];
+  availableSNPSuffix: AvailableSNPSuffixTypes[];
+  availableSNPKeySuffix: AvailableSNPKeySuffixTypes[];
   REPOSITORY_MAP_FILE_NAME: string;
   snpConfigFileName: string;
   remoteRepository: string;
@@ -22,6 +27,7 @@ export interface GeneratedConfig {
   temporaryFolder: string;
   snpConfigFile: string;
   snpFileMapConfig: string;
+  repositoryUrl: string;
 }
 
 export interface ConfigType extends StableConfig, GeneratedConfig {
@@ -35,9 +41,10 @@ const defaultConfig: ConfigType = {
   snpCatalog: './.snp',
   template: 'node',
   sUpdaterVersion: undefined,
-  availableSNPSuffix: ['-instructions.md', '-custom.md', '-extend.md', '-default.md'],
+  availableSNPSuffix: ['-default.md', '-instructions.md', '-custom.md', '-extend.md'],
+  availableSNPKeySuffix: ['defaultFile', 'instructionsFile', 'customFile', 'extendFile'],
   templateVersion: undefined,
-  REPOSITORY_MAP_FILE_NAME: 'repositoryMap.json',
+  REPOSITORY_MAP_FILE_NAME: 'repositoryMap.json', // TODO zmienic nazwę na snpFileMapConfig
   snpFileMapConfig: './.snp/repositoryMap.json',
   projectCatalog: './',
   temporaryFolder: './.snp/temporary/',
@@ -45,6 +52,7 @@ const defaultConfig: ConfigType = {
   snpConfigFile: './.snp/snp.config.json',
   remoteRepository: 'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/dev/template/', // TODO Change to main branch before release 1.00
   // remoteRepository: 'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/main/template/',
+  repositoryUrl: 'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/dev/template/node',
   isDebug: false,
   _: [],
 };
@@ -96,6 +104,10 @@ const regenerateConfig = async (config: ConfigType) => {
     ]);
     if (regeneratedConfig.snpConfigFileName) {
       regeneratedConfig.snpConfigFile = createPath([regeneratedConfig.snpCatalog, regeneratedConfig.snpConfigFileName]);
+    }
+
+    if (regeneratedConfig.remoteRepository && regeneratedConfig.template) {
+      regeneratedConfig.repositoryUrl = format(`${regeneratedConfig.remoteRepository}${regeneratedConfig.template}`);
     }
   }
 

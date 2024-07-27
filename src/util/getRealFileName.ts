@@ -1,3 +1,4 @@
+import path from 'path';
 import { ConfigType } from '@/feature/defaultConfig';
 
 export const getRealFileName = ({
@@ -11,7 +12,7 @@ export const getRealFileName = ({
     config.availableSNPSuffix.forEach((phrase) => {
       fileName = fileName.split(phrase).join('');
     });
-    return fileName;
+    return path.basename(fileName);
   });
 
   return [...new Set(realFileName)];
