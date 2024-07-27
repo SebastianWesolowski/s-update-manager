@@ -49,7 +49,7 @@ export const prepareExtraFileFromConfig = async (config: ConfigType): Promise<Co
           isDebug: config.isDebug,
         }).then(async () => {
           if (snpFileMapConfig.snpFileMap) {
-            snpFileMapConfig.snpFileMap[keyFileName][key] = filePath;
+            // await updateDetailsFileMapConfig({ config, operation: 'createFile', value: filePath, snpFileMapConfig });
           }
         });
       }
