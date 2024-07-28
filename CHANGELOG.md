@@ -1,3 +1,15 @@
+## [1.0.0-dev.20](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.19...v1.0.0-dev.20) (2024-07-28)
+
+
+### Features
+
+* ✨ getFilePaths form config ([3f98c5f](https://github.com/SebastianWesolowski/s-update-manager/commit/3f98c5ff4f438e7a6c100aee899e05611b5ddf5f))
+
+
+### Bug Fixes
+
+* 🐛 cleanup tree ([50c033e](https://github.com/SebastianWesolowski/s-update-manager/commit/50c033ed4336ebafe3ed982c8745dcb3e1651e2a))
+
 ## [1.0.0-dev.19](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.18...v1.0.0-dev.19) (2024-05-21)
 
 
