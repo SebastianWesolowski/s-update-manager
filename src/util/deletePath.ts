@@ -9,11 +9,13 @@ export async function deletePath(targetPath: string, isDebug?: boolean) {
       if (isDebug) {
         console.log('The directory has been removed:', targetPath);
       }
+      return;
     } else if (stats.isFile()) {
       await fs.promises.unlink(targetPath);
       if (isDebug) {
         console.log('The file has been removed:', targetPath);
       }
+      return;
     } else {
       throw new Error(`Unsupported file type at path: ${targetPath}`);
     }

@@ -27,52 +27,12 @@ export const cleanUpFileTree = async (config: ConfigType): Promise<ConfigType> =
       });
 
       const realFiles = Array.from(realFilesMap.keys());
-      let temporarySnpFileMap = snpFileMapConfig.snpFileMap;
+      const temporarySnpFileMap = snpFileMapConfig.snpFileMap;
 
       realFiles.forEach((file) => {
         delete temporarySnpFileMap[file];
       });
 
-      temporarySnpFileMap = {
-        'package.json': {
-          customFile: {
-            SNPKeySuffix: 'customFile',
-            isCreated: true,
-            path: './test/fakeProjectRootfolder/.snp/README.md-custom.md',
-            realFileName: 'README.md',
-            realPath: './test/fakeProjectRootfolder/README.md',
-            templateVersion: '1.0.0',
-            SNPSuffixFileName: 'README.md-custom.md',
-          },
-          extendFile: {
-            SNPKeySuffix: 'extendFile',
-            isCreated: true,
-            path: './test/fakeProjectRootfolder/.snp/README.md-extend.md',
-            realFileName: 'README.md',
-            realPath: './test/fakeProjectRootfolder/README.md',
-            templateVersion: '1.0.0',
-            SNPSuffixFileName: 'README.md-extend.md',
-          },
-          defaultFile: {
-            SNPKeySuffix: 'defaultFile',
-            isCreated: true,
-            path: './test/fakeProjectRootfolder/.snp/package.json-default.md',
-            realFileName: 'package.json',
-            realPath: './test/fakeProjectRootfolder/package.json',
-            templateVersion: '1.0.0',
-            SNPSuffixFileName: 'package.json-default.md',
-          },
-          instructionsFile: {
-            SNPKeySuffix: 'instructionsFile',
-            isCreated: true,
-            path: './test/fakeProjectRootfolder/.snp/package.json-instructions.md',
-            realFileName: 'package.json',
-            realPath: './test/fakeProjectRootfolder/package.json',
-            templateVersion: '1.0.0',
-            SNPSuffixFileName: 'package.json-instructions.md',
-          },
-        },
-      };
       const fileToClean: snpFile[] = [];
 
       for (const realNameFile in temporarySnpFileMap) {
@@ -80,17 +40,20 @@ export const cleanUpFileTree = async (config: ConfigType): Promise<ConfigType> =
           fileToClean.push(temporarySnpFileMap[realNameFile][SNPKeySuffix]);
         }
       }
-
-      for (const snpFile of fileToClean) {
-        await deletePath(createPath(snpFile.path), config.isDebug).then(async () => {
-          snpFileMapConfig = await updateDetailsFileMapConfig2({
-            snpFileMapConfig,
-            config,
-            operation: 'deleteFile',
-            SNPKeySuffix: snpFile.SNPKeySuffix as AvailableSNPKeySuffixTypes | '_',
-            realFileName: snpFile.realFileName,
+      if (fileToClean.length > 0) {
+        for (const snpFile of fileToClean) {
+          await deletePath(createPath(snpFile.path), config.isDebug).then(async () => {
+            snpFileMapConfig = await updateDetailsFileMapConfig2({
+              snpFileMapConfig,
+              config,
+              operation: 'deleteFile',
+              SNPKeySuffix: snpFile.SNPKeySuffix as AvailableSNPKeySuffixTypes | '_',
+              realFileName: snpFile.realFileName,
+            });
           });
-        });
+        }
+      } else {
+        console.log('żaden plik nie został wyczyszczony');
       }
     }
 
