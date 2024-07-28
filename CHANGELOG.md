@@ -1,3 +1,10 @@
+## [1.0.0-dev.19](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.18...v1.0.0-dev.19) (2024-05-21)
+
+
+### Features
+
+* ✨ update script ([d517e7f](https://github.com/SebastianWesolowski/s-update-manager/commit/d517e7ff59b57860f4adb92726ca7206288e1b2e))
+
 ## [1.0.0-dev.18](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.17...v1.0.0-dev.18) (2024-05-16)
 
 
