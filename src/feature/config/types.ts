@@ -1,3 +1,9 @@
+export interface ConfigTemplateType {
+  projectCatalog: string;
+  isDebug: boolean;
+  _: any[];
+}
+
 export interface GeneratedConfig {
   snpCatalog: string;
   sUpdaterVersion?: string;

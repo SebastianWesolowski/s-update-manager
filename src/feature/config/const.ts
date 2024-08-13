@@ -19,3 +19,9 @@ export const defaultConfig: ConfigType = {
   isDebug: false,
   _: [],
 };
+
+export const defaultTemplateConfig: ConfigTemplateType = {
+  projectCatalog: './',
+  isDebug: false,
+  _: [],
+};

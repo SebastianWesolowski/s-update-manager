@@ -6,7 +6,8 @@
   "bin": {
     "s-init": "./lib/src/init.mjs",
     "s-build": "./lib/src/build.mjs",
-    "s-update": "./lib/src/update.mjs"
+    "s-update": "./lib/src/update.mjs",
+    "s-prepare-template": "./lib/src/prepare-template.mjs"
   },
   "files": [
     "lib/**/*",
