@@ -1,5 +1,5 @@
 import path from 'path';
-import { ConfigType } from '@/feature/defaultConfig';
+import { ConfigType } from '@/feature/config/types';
 
 export const getRealFileName = ({
   config,

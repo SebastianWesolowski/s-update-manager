@@ -1,4 +1,4 @@
-import { ConfigType } from '@/feature/defaultConfig';
+import { ConfigType } from '@/feature/config/types';
 import { FileMapConfig } from '@/feature/updateFileMapConfig';
 import { createCatalog } from '@/util/createCatalog';
 import { createFile } from '@/util/createFile';

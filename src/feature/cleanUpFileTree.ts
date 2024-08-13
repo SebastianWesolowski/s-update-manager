@@ -1,5 +1,6 @@
-import { AvailableSNPKeySuffixTypes, ConfigType, createPath } from '@/feature/defaultConfig';
+import { AvailableSNPKeySuffixTypes, ConfigType } from '@/feature/config/types';
 import { FileMapConfig, snpFile, updateDetailsFileMapConfig2 } from '@/feature/updateFileMapConfig';
+import { createPath } from '@/util/createPath';
 import { deletePath } from '@/util/deletePath';
 import { getRealFileName } from '@/util/getRealFileName';
 import { parseJSON } from '@/util/parseJSON';

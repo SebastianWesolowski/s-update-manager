@@ -1,12 +1,13 @@
 #!/usr/bin/env node
 
 import minimist from 'minimist';
-import { Args } from '@/feature/args';
+import { Args } from '@/feature/args/args';
 import { buildFromConfig } from '@/feature/buildFromConfig';
 import { cleanUp } from '@/feature/cleanUp';
 import { cleanUpBeforeUpdate } from '@/feature/cleanUpBeforeUpdate';
 import { cleanUpFileTree } from '@/feature/cleanUpFileTree';
-import { ConfigType, getConfig } from '@/feature/defaultConfig';
+import { getConfig } from '@/feature/config/defaultConfig';
+import { ConfigType } from '@/feature/config/types';
 import { createCatalog } from '@/util/createCatalog';
 import { debugFunction } from '@/util/debugFunction';
 import { downloadConfig } from '@/util/downloadConfig';

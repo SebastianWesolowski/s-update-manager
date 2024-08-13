@@ -1,4 +1,4 @@
-import { AvailableSNPKeySuffixTypes, AvailableSNPSuffixTypes } from '@/feature/defaultConfig';
+import { AvailableSNPKeySuffixTypes, AvailableSNPSuffixTypes } from '@/feature/config/types';
 
 export const formatSnp = (
   input: string,

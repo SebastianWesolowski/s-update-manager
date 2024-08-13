@@ -19,7 +19,7 @@ export const setArgs = (args: Args): Args => {
       snpCatalog: './test/fakeProjectRootfolder/.snp',
       template: 'node',
     };
-    console.log({ args });
+    console.log({ setArgs: args });
   }
 
   const argSnpCatalog: string | undefined = args.snpCatalog || args._[0];
