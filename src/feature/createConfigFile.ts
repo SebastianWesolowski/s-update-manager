@@ -1,4 +1,4 @@
-import { ConfigType } from '@/feature/defaultConfig';
+import { ConfigType } from '@/feature/config/types';
 import { createFile } from '@/util/createFile';
 import { debugFunction } from '@/util/debugFunction';
 import { isFolderExist } from '@/util/isFolderExist';

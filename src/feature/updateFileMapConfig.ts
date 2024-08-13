@@ -1,8 +1,5 @@
-import path from 'path';
-import { AvailableSNPKeySuffixTypes, ConfigType, createPath } from '@/feature/defaultConfig';
-import { formatSnp } from '@/feature/formatSnp';
+import { AvailableSNPKeySuffixTypes, ConfigType } from '@/feature/config/types';
 import { debugFunction } from '@/util/debugFunction';
-import { getRealFileName } from '@/util/getRealFileName';
 import { isFileExists } from '@/util/isFileExists';
 import { parseJSON } from '@/util/parseJSON';
 import { readFile } from '@/util/readFile';
@@ -215,80 +212,4 @@ export const updateDetailsFileMapConfig2 = async ({
   }
 
   return (await updateFileMapConfig(config, newFileMapConfig, details.options.replaceFile)) || defaultConfig;
-};
-
-export const updateDetailsFileMapConfig = async ({
-  config,
-  operation,
-  value,
-  snpFileMapConfig,
-}: {
-  config: ConfigType;
-  operation: 'deleteFile' | 'createFile' | 'createSuffixFile';
-  realFileName;
-  value: string | snpFile;
-  snpFileMapConfig?: FileMapConfig;
-}) => {
-  let newFileMapConfig = snpFileMapConfig;
-
-  if (!newFileMapConfig) {
-    newFileMapConfig = await readFile(config.snpFileMapConfig).then(async (bufferData) => {
-      return parseJSON(bufferData.toString());
-    });
-  }
-
-  if (newFileMapConfig === undefined) {
-    return null;
-  }
-
-  const detailsFile = {
-    realFileName: '',
-    realFileNameFullPath: '',
-    snpName: '',
-    keySnpSuffix: '',
-    snpFullPath: '',
-  };
-
-  if (typeof value === 'object') {
-    detailsFile.realFileName = value.realFileName;
-    detailsFile.realFileNameFullPath = value.realPath;
-    detailsFile.snpName = value.SNPSuffixFileName;
-    detailsFile.snpFullPath = value.path;
-  } else if (value.includes('.snp/')) {
-    detailsFile.snpFullPath = value;
-    detailsFile.snpName = path.basename(detailsFile.snpFullPath);
-  } else {
-    detailsFile.snpName = value;
-    detailsFile.snpFullPath = createPath([config.snpCatalog, value]);
-  }
-
-  detailsFile.keySnpSuffix = formatSnp(detailsFile.snpName, 'key') || '';
-  if (!detailsFile.realFileName) {
-    detailsFile.realFileName = getRealFileName({ config, contentToCheck: [detailsFile.snpFullPath] })[0];
-  }
-  if (!detailsFile.realFileNameFullPath) {
-    detailsFile.realFileNameFullPath = createPath([config.projectCatalog, detailsFile.realFileName]);
-  }
-
-  if (operation === 'createSuffixFile' && newFileMapConfig.snpFileMap) {
-  }
-
-  if (operation === 'createFile' && newFileMapConfig.snpFileMap) {
-    newFileMapConfig.snpFileMap[detailsFile.realFileName][detailsFile.keySnpSuffix].isCreated = true;
-    newFileMapConfig.createdFileMap.push(detailsFile.keySnpSuffix);
-  }
-
-  if (operation === 'deleteFile' && newFileMapConfig.snpFileMap) {
-    newFileMapConfig.fileMap = newFileMapConfig.fileMap.filter((file) => file !== detailsFile.snpName);
-
-    const snpFileMapEntry = newFileMapConfig.snpFileMap[detailsFile.realFileName];
-    if (snpFileMapEntry) {
-      delete snpFileMapEntry[detailsFile.keySnpSuffix];
-
-      if (Object.keys(snpFileMapEntry).length === 0) {
-        delete newFileMapConfig.snpFileMap[detailsFile.realFileName];
-      }
-    }
-  }
-  return await updateFileMapConfig(config, newFileMapConfig, true);
 };

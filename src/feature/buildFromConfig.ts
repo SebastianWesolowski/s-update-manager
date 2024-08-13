@@ -1,4 +1,4 @@
-import { ConfigType, createPath, SNPKeySuffixTypes } from '@/feature/defaultConfig';
+import { ConfigType, SNPKeySuffixTypes } from '@/feature/config/types';
 import { getContentToBuild, getRemoteContentToBuild } from '@/feature/getContnetToBuild';
 import {
   FileMapConfig,
@@ -7,6 +7,7 @@ import {
   updateDetailsFileMapConfig2,
 } from '@/feature/updateFileMapConfig';
 import { createFile } from '@/util/createFile';
+import { createPath } from '@/util/createPath';
 import { parseJSON } from '@/util/parseJSON';
 import { readFile } from '@/util/readFile';
 

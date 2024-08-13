@@ -1,11 +1,12 @@
 #!/usr/bin/env node
 
 import minimist from 'minimist';
-import { Args } from '@/feature/args';
+import { Args } from '@/feature/args/args';
 import { buildFromConfig } from '@/feature/buildFromConfig';
 import { cleanUp } from '@/feature/cleanUp';
+import { getConfig } from '@/feature/config/defaultConfig';
+import { ConfigType } from '@/feature/config/types';
 import { createConfigFile } from '@/feature/createConfigFile';
-import { ConfigType, getConfig } from '@/feature/defaultConfig';
 import { debugFunction } from '@/util/debugFunction';
 import { downloadConfig } from '@/util/downloadConfig';
 import { isFileExists } from '@/util/isFileExists';

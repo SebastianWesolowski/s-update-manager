@@ -1,4 +1,4 @@
-import { ConfigType } from '@/feature/defaultConfig';
+import { ConfigType } from '@/feature/config/types';
 import { deletePath } from '@/util/deletePath';
 
 export const cleanUp = async (config: ConfigType): Promise<ConfigType> => {

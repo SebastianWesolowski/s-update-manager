@@ -1,4 +1,4 @@
-import { AvailableSNPKeySuffixTypes, ConfigType } from '@/feature/defaultConfig';
+import { AvailableSNPKeySuffixTypes, ConfigType } from '@/feature/config/types';
 import { snpFile } from '@/feature/updateFileMapConfig';
 import { formatterRepositoryFileNameUrl } from '@/util/formatterRepositoryFileNameUrl';
 import { readFile } from '@/util/readFile';

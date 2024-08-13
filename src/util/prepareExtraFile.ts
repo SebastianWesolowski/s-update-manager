@@ -1,6 +1,7 @@
-import { AvailableSNPSuffixTypes, ConfigType, createPath } from '@/feature/defaultConfig';
+import { AvailableSNPSuffixTypes, ConfigType } from '@/feature/config/types';
 import { formatSnp } from '@/feature/formatSnp';
 import { FileMapConfig, updateDetailsFileMapConfig2 } from '@/feature/updateFileMapConfig';
+import { createPath } from '@/util/createPath';
 import { parseJSON } from '@/util/parseJSON';
 import { readFile } from '@/util/readFile';
 

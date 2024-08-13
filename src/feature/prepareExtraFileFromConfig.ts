@@ -1,6 +1,7 @@
-import { ConfigType, createPath } from '@/feature/defaultConfig';
+import { ConfigType } from '@/feature/config/types';
 import { FileMapConfig } from '@/feature/updateFileMapConfig';
 import { createFile } from '@/util/createFile';
+import { createPath } from '@/util/createPath';
 import { isEmptyObject } from '@/util/isEmptyObject';
 import { parseJSON } from '@/util/parseJSON';
 import { readFile } from '@/util/readFile';
