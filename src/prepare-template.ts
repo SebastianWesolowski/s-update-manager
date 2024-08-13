@@ -5,6 +5,7 @@ import { ArgsTemplate } from '@/feature/args/argsTemplate';
 import { getTemplateConfig } from '@/feature/config/defaultTemplateConfig';
 import { ConfigTemplateType } from '@/feature/config/types';
 import { bumpVersion } from '@/feature/prepareTemplate/bumpVersion';
+import { scanProjectFolder } from '@/feature/prepareTemplate/scanProjectFolder';
 import { createFile } from '@/util/createFile';
 import { debugFunction } from '@/util/debugFunction';
 import { isFileExists } from '@/util/isFileExists';
@@ -42,21 +43,16 @@ prepareTemplate(args)
     finalConfig = config;
     return bumpVersion(config);
   })
+  .then((config) => {
+    finalConfig = config;
+    return scanProjectFolder(config);
+  })
+  .then(({ config, fileList }) => {
+    finalConfig = config;
+    console.log(fileList);
+    // return scanProjectFolder(config);
+  })
 
-  // 1. **Check if `repositoryMap.json` exists:**
-  // - If the file **does not exist**, proceed to step 2.
-  // - If the file **exists**, proceed to step 3.
-  //
-  // 2. **Create `repositoryMap.json` file:**
-  // - Set the file version to `1.0.0`.
-  //
-  // 3. **If `repositoryMap.json` already exists:**
-  // - Bump the version in the file according to `semver` (e.g., `1.0.0` → `1.0.1`).
-  //
-  // 4. **Scan all files in the project:**
-  // - Identify files that should be added to `repositoryMap.json`.
-  // - Add the paths of these files to an array.
-  //
   // 5. **For each file added to the array:**
   // - Create basic files with instructions and default values:
   //     - **Instructions**: Create template instructions that are appropriate for the file.
