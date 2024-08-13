@@ -1,5 +1,8 @@
 export interface ConfigTemplateType {
   projectCatalog: string;
+  repositoryMapFileName: string;
+  repositoryMapFilePath: string;
+  bumpVersion: boolean;
   isDebug: boolean;
   _: any[];
 }
