@@ -48,3 +48,4 @@ prettier.config.js
 .replacerc.js
 tools/*
 snp/*
+template/*
