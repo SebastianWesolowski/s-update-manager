@@ -128,6 +128,11 @@ test/**/*
 !test/realProject/**
 !test/realProject/**/*
 !test/fakeProjectRootfolder/package.json
+!template/create-react-app-main/templateCatalog
+!template/create-react-app-main/templateCatalog/*
+!template/create-react-app-main/templateCatalog/**
+!template/create-react-app-main/templateCatalog/**/*
+!template/create-react-app-main/repositoryMap.json
 
 # Compiled code
 lib/
