@@ -1,65 +1,40 @@
-import * as fs from 'fs/promises';
-import * as path from 'path';
-
-interface FilterOptions {
-  includeExtensions?: string[]; // Rozszerzenia plików do uwzględnienia
-  excludeExtensions?: string[]; // Rozszerzenia plików do odrzucenia
-  ignorePaths?: string[]; // Ścieżki do ignorowania
-}
-
-interface ScanOptions {
-  includeHiddenFiles?: boolean;
-}
-
-type FilePathArray = string[];
+import { promises as fs } from 'fs';
+import { join } from 'path';
 
 /**
- * Asynchronicznie skanuje katalog i zwraca tablicę ścieżek do wszystkich plików.
+ * Recursively scans a directory and returns an array of file paths.
  *
- * @param dir - Ścieżka do katalogu, który ma być przeskanowany.
- * @param options - Opcjonalne parametry skanowania.
- * @param filterFn - Funkcja filtrująca, która ma być zastosowana do ścieżek plików.
- * @returns Promise z tablicą ścieżek do przefiltrowanych plików.
+ * @param {string} dirPath - The path of the directory to scan.
+ * @param {string[]} [excludedPaths=[]] - An optional array of file or directory paths to exclude from the scan.
+ * @returns {Promise<string[]>} - A promise that resolves to an array of file paths.
  */
-export async function scanDirectory(
-  dir: string,
-  options: ScanOptions = {},
-  filterFn: (filePath: string) => boolean = () => true // Domyślnie brak filtrowania
-): Promise<FilePathArray> {
-  const { includeHiddenFiles = false } = options;
-  let fileList: FilePathArray = [];
+export async function scanDirectory(dirPath: string, excludedPaths: string[] = []): Promise<string[]> {
+  const filePaths: string[] = [];
 
-  try {
-    // Sprawdź, czy katalog istnieje
-    try {
-      await fs.access(dir);
-    } catch {
-      throw new Error(`Directory does not exist: ${dir}`);
-    }
+  async function scan(currentPath: string): Promise<void> {
+    const items = await fs.readdir(currentPath, { withFileTypes: true });
 
-    // Odczytaj zawartość katalogu
-    const files = await fs.readdir(dir);
+    for (const item of items) {
+      const itemPath = join(currentPath, item.name);
 
-    for (const file of files) {
-      if (!includeHiddenFiles && file.startsWith('.')) {
+      // Check if the current path is in the excluded paths
+      if (excludedPaths.some((excludedPath) => itemPath.startsWith(excludedPath))) {
         continue;
       }
 
-      const fullPath = path.join(dir, file);
-      const stat = await fs.stat(fullPath);
-
-      if (stat.isDirectory()) {
-        // Rekurencyjnie skanuj katalog
-        fileList = fileList.concat(await scanDirectory(fullPath, options, filterFn));
-      } else if (stat.isFile() && filterFn(fullPath)) {
-        // Dodaj ścieżkę do pliku, jeśli pasuje do filtru
-        fileList.push(fullPath);
+      if (item.isDirectory()) {
+        await scan(itemPath);
+      } else if (item.isFile()) {
+        filePaths.push(itemPath);
       }
     }
-  } catch (error) {
-    console.error(`Error scanning directory: ${dir}`, error);
-    throw error;
   }
 
-  return fileList;
+  try {
+    await scan(dirPath);
+    return filePaths;
+  } catch (error) {
+    console.error('Error scanning directory:', error);
+    throw error;
+  }
 }

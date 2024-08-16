@@ -5,7 +5,7 @@ import { createPath } from '@/util/createPath';
 import { isEmptyObject } from '@/util/isEmptyObject';
 import { parseJSON } from '@/util/parseJSON';
 import { readFile } from '@/util/readFile';
-
+// TODO Remove it unused
 const validateSuffixes = (suffixes: string[]): void => {
   const pattern = /^-.*\.md$/;
   const invalidSuffixes: string[] = [];

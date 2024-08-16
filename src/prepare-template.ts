@@ -5,6 +5,7 @@ import { ArgsTemplate } from '@/feature/args/argsTemplate';
 import { getTemplateConfig } from '@/feature/config/defaultTemplateConfig';
 import { ConfigTemplateType } from '@/feature/config/types';
 import { bumpVersion } from '@/feature/prepareTemplate/bumpVersion';
+import { prepareTemplateFile } from '@/feature/prepareTemplate/prepareTemplateFile';
 import { scanProjectFolder } from '@/feature/prepareTemplate/scanProjectFolder';
 import { createFile } from '@/util/createFile';
 import { debugFunction } from '@/util/debugFunction';
@@ -25,6 +26,9 @@ export const prepareTemplate = async (args: ArgsTemplate): Promise<ConfigTemplat
       filePath: config.repositoryMapFilePath,
       content: JSON.stringify(defaultValue),
       isDebug: config.isDebug,
+      options: {
+        overwriteFile: true,
+      },
     });
     config.bumpVersion = false;
   }
@@ -49,7 +53,7 @@ prepareTemplate(args)
   })
   .then(({ config, fileList }) => {
     finalConfig = config;
-    console.log(fileList);
+    return prepareTemplateFile({ config, fileList });
     // return scanProjectFolder(config);
   })
 

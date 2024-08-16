@@ -25,6 +25,9 @@ export const bumpVersion = async (config: ConfigTemplateType): Promise<ConfigTem
       filePath: config.repositoryMapFilePath,
       content: JSON.stringify(snpFileMapConfig),
       isDebug: config.isDebug,
+      options: {
+        overwriteFile: true,
+      },
     });
   }
 
