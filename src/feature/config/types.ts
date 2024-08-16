@@ -1,5 +1,7 @@
 export interface ConfigTemplateType {
   projectCatalog: string;
+  templateCatalogName: string;
+  templateCatalogPath: string;
   repositoryMapFileName: string;
   repositoryMapFilePath: string;
   bumpVersion: boolean;

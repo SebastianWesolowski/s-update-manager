@@ -13,6 +13,13 @@ const regenerateConfig = (config: ConfigTemplateType): ConfigTemplateType => {
     ]);
   }
 
+  if (regeneratedConfig.templateCatalogName) {
+    regeneratedConfig.templateCatalogPath = createPath([
+      regeneratedConfig.projectCatalog,
+      regeneratedConfig.templateCatalogName,
+    ]);
+  }
+
   return regeneratedConfig;
 };
 

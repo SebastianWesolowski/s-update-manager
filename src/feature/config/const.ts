@@ -22,6 +22,8 @@ export const defaultConfig: ConfigType = {
 
 export const defaultTemplateConfig: ConfigTemplateType = {
   projectCatalog: './',
+  templateCatalogName: 'templateCatalog',
+  templateCatalogPath: './templateCatalog',
   repositoryMapFileName: 'repositoryMap.json',
   repositoryMapFilePath: './repositoryMap.json',
   bumpVersion: true,
