@@ -2,7 +2,7 @@ export const generateObjectFromKeys = <T = Record<string, any>>(keysArray: strin
   const result: any = {};
 
   // Przejdź przez każdy element tablicy i dodaj go jako klucz do obiektu
-  keysArray.forEach((key, index) => {
+  keysArray.forEach((key) => {
     result[key] = {}; // Możesz zmodyfikować przypisanie wartości według potrzeb
   });
 
