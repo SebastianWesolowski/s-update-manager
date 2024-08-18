@@ -1,4 +1,3 @@
-import fs from 'fs';
 import { basename, dirname, join } from 'path';
 import { isFileExists } from './isFileExists';
 import { isFolderExist } from './isFolderExist';
@@ -53,33 +52,5 @@ export async function createFile({
   } catch (error) {
     console.error(error);
     return '';
-  }
-}
-
-async function handleCallback(err: NodeJS.ErrnoException | null): Promise<boolean> {
-  if (err) {
-    console.log(`error: ${err.message}`);
-    return false;
-  }
-
-  return true;
-}
-
-async function writeNewFile(filePath: string, content: string | Buffer): Promise<string> {
-  try {
-    await fs.promises.writeFile(filePath, content);
-    return filePath;
-  } catch (error) {
-    throw error;
-  }
-}
-
-async function toCreateFolder(folderPath: string): Promise<boolean> {
-  try {
-    await fs.promises.mkdir(folderPath, { recursive: true });
-    return true;
-  } catch (error) {
-    console.error(error);
-    return false;
   }
 }
