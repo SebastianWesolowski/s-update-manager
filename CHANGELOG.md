@@ -1,3 +1,11 @@
+## [1.0.0-dev.22](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.21...v1.0.0-dev.22) (2024-08-18)
+
+
+### Features
+
+* ✨ prepareTemplateFile ([74b24d9](https://github.com/SebastianWesolowski/s-update-manager/commit/74b24d9ce7dbb12f8b105d2f32dc8833557c8f28))
+* ✨ updateTemplateConfig ([462845b](https://github.com/SebastianWesolowski/s-update-manager/commit/462845b66541b46385353943391561bd552d0dd9))
+
 ## [1.0.0-dev.21](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.20...v1.0.0-dev.21) (2024-08-13)
 
 

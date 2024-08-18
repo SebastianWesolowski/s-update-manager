@@ -1,6 +1,6 @@
 {
   "name": "s-update-manager",
-  "version": "1.0.0-dev.21",
+  "version": "1.0.0-dev.22",
   "version-SNP": "1.0.3",
   "description": "s-update-manager is an npm package for updating a template dependent project",
   "bin": {
