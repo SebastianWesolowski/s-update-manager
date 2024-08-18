@@ -22,6 +22,7 @@ export interface FileMapConfig {
   templateVersion: string;
   createdFileMap: string[];
   fileMap: string[];
+  // templateFileList: string[];
   snpFileMap?: Record<string, snpArrayPathFileSet> | Record<string, NonNullable<unknown>>;
 }
 

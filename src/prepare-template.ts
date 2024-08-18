@@ -5,6 +5,7 @@ import { ArgsTemplate } from '@/feature/args/argsTemplate';
 import { getTemplateConfig } from '@/feature/config/defaultTemplateConfig';
 import { ConfigTemplateType, RepositoryMapFileConfigType } from '@/feature/config/types';
 import { bumpVersion } from '@/feature/prepareTemplate/bumpVersion';
+import { cleanUpTemplate } from '@/feature/prepareTemplate/cleanUpTemplate';
 import { prepareTemplateFile } from '@/feature/prepareTemplate/prepareTemplateFile';
 import { scanProjectFolder } from '@/feature/prepareTemplate/scanProjectFolder';
 import { updateTemplateConfig } from '@/feature/prepareTemplate/updateTemplateConfig';
@@ -15,6 +16,7 @@ import { isFileExists } from '@/util/isFileExists';
 export const defaultRepositoryMapFileConfig: RepositoryMapFileConfigType = {
   templateVersion: '1.0.0',
   fileMap: [],
+  templateFileList: [],
 };
 export const prepareTemplate = async (args: ArgsTemplate): Promise<ConfigTemplateType> => {
   const config: ConfigTemplateType = await getTemplateConfig(args);
@@ -49,15 +51,19 @@ prepareTemplate(args)
   })
   .then((config) => {
     finalConfig = config;
+    return cleanUpTemplate(config);
+  })
+  .then((config) => {
+    finalConfig = config;
     return scanProjectFolder(config);
   })
   .then(({ config, fileList }) => {
     finalConfig = config;
     return prepareTemplateFile({ config, fileList });
   })
-  .then(({ config, templateFileList }) => {
+  .then(({ config, templateFileList, fileList }) => {
     finalConfig = config;
-    return updateTemplateConfig({ config, templateFileList });
+    return updateTemplateConfig({ config, fileList, templateFileList });
   })
   //coś linkin się popsuly w repomap.json jest przyklad
   .finally(() => {

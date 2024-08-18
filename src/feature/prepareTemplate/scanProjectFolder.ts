@@ -9,7 +9,7 @@ export const scanProjectFolder = async (
   debugFunction(config.isDebug, { config }, '[PrepareTemplate] Scan project folder');
 
   const excludePaths = [
-    createPath([config.projectCatalog, '.DS_Store']),
+    createPath([config.projectCatalog, '.DS_Store']).replace('./', ''),
     createPath([config.projectCatalog, config.repositoryMapFileName]).replace('./', ''),
     createPath([config.projectCatalog, config.templateCatalogName]).replace('./', ''),
   ];

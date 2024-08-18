@@ -1,4 +1,3 @@
-import { FileMapConfig } from '@/feature/updateFileMapConfig';
 import { debugFunction } from '@/util/debugFunction';
 import { isFileExists } from '@/util/isFileExists';
 import { parseJSON } from '@/util/parseJSON';
@@ -17,11 +16,11 @@ export const updateJsonFile = async ({
   } & Record<string, any>;
   newContent: object;
   replaceFile?: boolean;
-}): Promise<FileMapConfig | null> => {
+}): Promise<object | null> => {
   if (await isFileExists(filePath)) {
     return await updateJson({ filePath: filePath, newContent, replace: replaceFile }).then(() => {
       if (replaceFile) {
-        return newContent as FileMapConfig;
+        return newContent;
       }
       return readFile(filePath).then(async (bufferData) => {
         return parseJSON(bufferData.toString());
