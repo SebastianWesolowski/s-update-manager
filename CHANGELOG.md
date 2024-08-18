@@ -1,3 +1,12 @@
+## [1.0.0-dev.21](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.20...v1.0.0-dev.21) (2024-08-13)
+
+
+### Features
+
+* ✨ bump tempate map ([0da2567](https://github.com/SebastianWesolowski/s-update-manager/commit/0da256794905e976c67c07b66cc326d542198c2d))
+* ✨ prepare template ([31c774b](https://github.com/SebastianWesolowski/s-update-manager/commit/31c774b9ed8a1c7d678894268da26d3e559cd505))
+* ✨ scanProjectFolder ([e435307](https://github.com/SebastianWesolowski/s-update-manager/commit/e4353078d0fb739ae249ec261f5d4c3a50a90fb3))
+
 ## [1.0.0-dev.20](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.19...v1.0.0-dev.20) (2024-07-28)
 
 
