@@ -9,21 +9,21 @@ import { readFile } from '@/util/readFile';
 
 export const bumpVersion = async (config: ConfigTemplateType): Promise<ConfigTemplateType> => {
   debugFunction(config.isDebug, { config }, '[PrepareTemplate] Bump Version');
-  const snpFileMapConfig: FileMapConfig = await readFile(config.repositoryMapFilePath).then(async (bufferData) =>
+  const repositoryMapFileConfig: FileMapConfig = await readFile(config.repositoryMapFilePath).then(async (bufferData) =>
     parseJSON(bufferData.toString())
   );
-  const currentVersion = snpFileMapConfig.templateVersion;
+  const currentVersion = repositoryMapFileConfig.templateVersion;
   if (!config.bumpVersion) {
     debugFunction(config.isDebug, { config }, `[PrepareTemplate] stay with current version, ${currentVersion}`);
     return config;
   }
 
   if (await isFileExists(config.repositoryMapFilePath)) {
-    snpFileMapConfig.templateVersion = semver.inc(currentVersion, 'patch') || '1.0.0';
+    repositoryMapFileConfig.templateVersion = semver.inc(currentVersion, 'patch') || '1.0.0';
 
     await createFile({
       filePath: config.repositoryMapFilePath,
-      content: JSON.stringify(snpFileMapConfig),
+      content: JSON.stringify(repositoryMapFileConfig),
       isDebug: config.isDebug,
       options: {
         overwriteFile: true,

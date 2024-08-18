@@ -1,0 +1,1 @@
+{"templateVersion":"1.0.1","fileMap":["./template/create-react-app-main/.DS_Store","./template/create-react-app-main/repositoryMap.json"]}

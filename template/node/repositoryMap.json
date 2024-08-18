@@ -1,4 +1,1 @@
-{
-  "templateVersion": "1.0.13",
-  "fileMap": ["README.md-default.md", "README.md-instructions.md", ".husky/post-merge-default.md"]
-}
+{"templateVersion":"1.0.4","fileMap":["./template/node/.DS_Store","./template/node/.husky/post-merge-default.md"]}

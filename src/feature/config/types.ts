@@ -49,3 +49,8 @@ export interface ConfigType extends StableConfig, GeneratedConfig {
 export type PartialConfig<T> = {
   [K in keyof T]?: any;
 };
+
+export interface RepositoryMapFileConfigType {
+  templateVersion: string;
+  fileMap: string[];
+}

@@ -3,28 +3,28 @@
 import minimist from 'minimist';
 import { ArgsTemplate } from '@/feature/args/argsTemplate';
 import { getTemplateConfig } from '@/feature/config/defaultTemplateConfig';
-import { ConfigTemplateType } from '@/feature/config/types';
+import { ConfigTemplateType, RepositoryMapFileConfigType } from '@/feature/config/types';
 import { bumpVersion } from '@/feature/prepareTemplate/bumpVersion';
 import { prepareTemplateFile } from '@/feature/prepareTemplate/prepareTemplateFile';
 import { scanProjectFolder } from '@/feature/prepareTemplate/scanProjectFolder';
+import { updateTemplateConfig } from '@/feature/prepareTemplate/updateTemplateConfig';
 import { createFile } from '@/util/createFile';
 import { debugFunction } from '@/util/debugFunction';
 import { isFileExists } from '@/util/isFileExists';
 
+export const defaultRepositoryMapFileConfig: RepositoryMapFileConfigType = {
+  templateVersion: '1.0.0',
+  fileMap: [],
+};
 export const prepareTemplate = async (args: ArgsTemplate): Promise<ConfigTemplateType> => {
   const config: ConfigTemplateType = await getTemplateConfig(args);
 
   debugFunction(config.isDebug, '=== Start prepare template ===', '[PrepareTemplate]');
 
   if (!(await isFileExists(config.repositoryMapFilePath)) || process.env.SDEBUG !== 'true') {
-    const defaultValue = {
-      templateVersion: '1.0.0',
-      fileMap: [],
-    };
-
     await createFile({
       filePath: config.repositoryMapFilePath,
-      content: JSON.stringify(defaultValue),
+      content: JSON.stringify(defaultRepositoryMapFileConfig),
       isDebug: config.isDebug,
       options: {
         overwriteFile: true,
@@ -54,26 +54,12 @@ prepareTemplate(args)
   .then(({ config, fileList }) => {
     finalConfig = config;
     return prepareTemplateFile({ config, fileList });
-    // return scanProjectFolder(config);
   })
-
-  // 5. **For each file added to the array:**
-  // - Create basic files with instructions and default values:
-  //     - **Instructions**: Create template instructions that are appropriate for the file.
-  // - **Default Values**: Define default configuration values.
-  //
-  // 6. **Generate content for each file:**
-  // - Ensure each file contains appropriate content based on its type or purpose.
-  // - Save the changes to the respective files.
-  //
-  // 7. **Test the final result:**
-  // - Ensure `repositoryMap.json` contains the updated information.
-  // - Verify that all files were correctly generated and contain the expected content.
-  //
-  // 8. **Finalize and commit changes to version control:**
-  // - Review the changes and ensure all steps were completed correctly.
-  // - Commit the files with an appropriate commit message describing the changes made.
-
+  .then(({ config, templateFileList }) => {
+    finalConfig = config;
+    return updateTemplateConfig({ config, templateFileList });
+  })
+  //coś linkin się popsuly w repomap.json jest przyklad
   .finally(() => {
     debugFunction(finalConfig?.isDebug, { finalConfig }, '[PrepareTemplate] final config');
     debugFunction(finalConfig?.isDebug, '=== Final prepare template ===', '[PrepareTemplate]');
