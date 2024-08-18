@@ -53,4 +53,5 @@ export type PartialConfig<T> = {
 export interface RepositoryMapFileConfigType {
   templateVersion: string;
   fileMap: string[];
+  templateFileList: string[];
 }

@@ -19,7 +19,7 @@ export const prepareTemplateFile = async ({
   for (const filePath of fileList) {
     const fileName = path.basename(filePath) + '-default.md';
     const fileDir = path.dirname(filePath);
-    const templateFilePath = createPath([config.projectCatalog, filePath]);
+    const templateFilePath = createPath([config.templateCatalogPath, filePath]);
     templateFileList.push(templateFilePath);
     const content = await readFile(templateFilePath);
 
