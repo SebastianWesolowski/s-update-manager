@@ -10,12 +10,18 @@ export const prepareTemplateFile = async ({
 }: {
   config: ConfigTemplateType;
   fileList: string[] | [];
-}): Promise<ConfigTemplateType> => {
+}): Promise<{
+  config: ConfigTemplateType;
+  fileList: string[] | [];
+  templateFileList: string[] | [];
+}> => {
+  const templateFileList: string[] = [];
   for (const filePath of fileList) {
     const fileName = path.basename(filePath) + '-default.md';
     const fileDir = path.dirname(filePath);
-
-    const content = await readFile(createPath([config.projectCatalog, filePath]) || '');
+    const templateFilePath = createPath([config.projectCatalog, filePath]);
+    templateFileList.push(templateFilePath);
+    const content = await readFile(templateFilePath);
 
     await createFile({
       filePath: createPath([config.templateCatalogPath, fileDir, fileName]),
@@ -24,10 +30,8 @@ export const prepareTemplateFile = async ({
       options: {
         overwriteFile: true,
       },
-    }).then(async () => {
-      console.log('');
     });
   }
 
-  return config;
+  return { config, templateFileList, fileList };
 };

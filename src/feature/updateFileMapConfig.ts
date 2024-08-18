@@ -1,9 +1,7 @@
 import { AvailableSNPKeySuffixTypes, ConfigType } from '@/feature/config/types';
-import { debugFunction } from '@/util/debugFunction';
-import { isFileExists } from '@/util/isFileExists';
 import { parseJSON } from '@/util/parseJSON';
 import { readFile } from '@/util/readFile';
-import { updateJson } from '@/util/updateJson';
+import { updateJsonFile } from '@/util/updateJsonFile';
 
 export interface snpFile {
   SNPSuffixFileName: string;
@@ -26,30 +24,6 @@ export interface FileMapConfig {
   fileMap: string[];
   snpFileMap?: Record<string, snpArrayPathFileSet> | Record<string, NonNullable<unknown>>;
 }
-
-export const updateFileMapConfig = async (
-  config: ConfigType,
-  newContent: object,
-  replaceFile = false
-): Promise<FileMapConfig | null> => {
-  if (await isFileExists(config.snpFileMapConfig)) {
-    return await updateJson({ filePath: config.snpFileMapConfig, newContent, replace: replaceFile }).then(() => {
-      if (replaceFile) {
-        return newContent as FileMapConfig;
-      }
-      return readFile(config.snpFileMapConfig).then(async (bufferData) => {
-        return parseJSON(bufferData.toString());
-      });
-    });
-  } else {
-    debugFunction(
-      config?.isDebug,
-      `file snpFileMapConfig is not exist ${config.snpFileMapConfig}`,
-      '[updateFileMapConfig]'
-    );
-    return null;
-  }
-};
 
 export const updateDetailsFileMapConfig2 = async ({
   realFileName,
@@ -211,5 +185,12 @@ export const updateDetailsFileMapConfig2 = async ({
     newFileMapConfig.snpFileMap[details.realFileName][details.SNPKeySuffix].isCreated = true;
   }
 
-  return (await updateFileMapConfig(config, newFileMapConfig, details.options.replaceFile)) || defaultConfig;
+  return (
+    ((await updateJsonFile({
+      filePath: config.snpFileMapConfig,
+      config,
+      newContent: newFileMapConfig,
+      replaceFile: details.options.replaceFile,
+    })) as FileMapConfig) || defaultConfig
+  );
 };
