@@ -1,5 +1,5 @@
+import { defaultRepositoryMapFileConfig } from '../config/const';
 import { ConfigTemplateType, RepositoryMapFileConfigType } from '@/feature/config/types';
-import { defaultRepositoryMapFileConfig } from '@/prepare-template';
 import { debugFunction } from '@/util/debugFunction';
 import { parseJSON } from '@/util/parseJSON';
 import { readFile } from '@/util/readFile';

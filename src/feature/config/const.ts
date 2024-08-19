@@ -1,4 +1,4 @@
-import { ConfigTemplateType, ConfigType } from '@/feature/config/types';
+import { ConfigTemplateType, ConfigType, RepositoryMapFileConfigType } from '@/feature/config/types';
 
 export const defaultConfig: ConfigType = {
   snpCatalog: './.snp',
@@ -29,4 +29,10 @@ export const defaultTemplateConfig: ConfigTemplateType = {
   bumpVersion: true,
   isDebug: false,
   _: [],
+};
+
+export const defaultRepositoryMapFileConfig: RepositoryMapFileConfigType = {
+  templateVersion: '1.0.0',
+  fileMap: [],
+  templateFileList: [],
 };

@@ -2,11 +2,13 @@ import { AvailableSNPKeySuffixTypes, ConfigType } from '@/feature/config/types';
 import { formatSnp } from '@/feature/formatSnp';
 import { FileMapConfig, updateDetailsFileMapConfig2 } from '@/feature/updateFileMapConfig';
 import { createPath } from '@/util/createPath';
+import { debugFunction } from '@/util/debugFunction';
 import { getRealFileName } from '@/util/getRealFileName';
 import { parseJSON } from '@/util/parseJSON';
 import { readFile } from '@/util/readFile';
 
 export async function prepareBaseSnpFileMap(config: ConfigType): Promise<ConfigType> {
+  debugFunction(config.isDebug, 'start', '[INIT] prepareBaseSnpFileMap');
   let snpFileMapConfig: FileMapConfig = await readFile(config.snpFileMapConfig).then(async (bufferData) =>
     parseJSON(bufferData.toString())
   );
@@ -57,6 +59,7 @@ export async function prepareBaseSnpFileMap(config: ConfigType): Promise<ConfigT
       }
     }
 
+    debugFunction(config.isDebug, config, '[INIT] prepareBaseSnpFileMap');
     return config;
   } catch (err) {
     console.error('Error while downloading config from github', err);

@@ -8,10 +8,13 @@ import {
 } from '@/feature/updateFileMapConfig';
 import { createFile } from '@/util/createFile';
 import { createPath } from '@/util/createPath';
+import { debugFunction } from '@/util/debugFunction';
 import { parseJSON } from '@/util/parseJSON';
 import { readFile } from '@/util/readFile';
 
 export const buildFromConfig = async (config: ConfigType): Promise<ConfigType> => {
+  debugFunction(config.isDebug, 'start', '[INIT] buildFromConfig');
+
   const snpFileMapConfig: FileMapConfig = await readFile(config.snpFileMapConfig).then(async (bufferData) =>
     parseJSON(bufferData.toString())
   );
@@ -81,5 +84,6 @@ export const buildFromConfig = async (config: ConfigType): Promise<ConfigType> =
     }
   }
 
+  debugFunction(config.isDebug, { snpFileMapConfig }, '[INIT] buildFromConfig');
   return config;
 };

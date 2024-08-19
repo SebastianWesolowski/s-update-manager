@@ -2,8 +2,9 @@
 
 import minimist from 'minimist';
 import { ArgsTemplate } from '@/feature/args/argsTemplate';
+import { defaultRepositoryMapFileConfig } from '@/feature/config/const';
 import { getTemplateConfig } from '@/feature/config/defaultTemplateConfig';
-import { ConfigTemplateType, RepositoryMapFileConfigType } from '@/feature/config/types';
+import { ConfigTemplateType } from '@/feature/config/types';
 import { bumpVersion } from '@/feature/prepareTemplate/bumpVersion';
 import { cleanUpTemplate } from '@/feature/prepareTemplate/cleanUpTemplate';
 import { prepareTemplateFile } from '@/feature/prepareTemplate/prepareTemplateFile';
@@ -13,11 +14,6 @@ import { createFile } from '@/util/createFile';
 import { debugFunction } from '@/util/debugFunction';
 import { isFileExists } from '@/util/isFileExists';
 
-export const defaultRepositoryMapFileConfig: RepositoryMapFileConfigType = {
-  templateVersion: '1.0.0',
-  fileMap: [],
-  templateFileList: [],
-};
 export const prepareTemplate = async (args: ArgsTemplate): Promise<ConfigTemplateType> => {
   const config: ConfigTemplateType = await getTemplateConfig(args);
 
@@ -65,7 +61,6 @@ prepareTemplate(args)
     finalConfig = config;
     return updateTemplateConfig({ config, fileList, templateFileList });
   })
-  //coś linkin się popsuly w repomap.json jest przyklad
   .finally(() => {
     debugFunction(finalConfig?.isDebug, { finalConfig }, '[PrepareTemplate] final config');
     debugFunction(finalConfig?.isDebug, '=== Final prepare template ===', '[PrepareTemplate]');
