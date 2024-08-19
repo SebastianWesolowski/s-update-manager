@@ -32,6 +32,10 @@ let finalConfig = {
   isDebug: false,
 };
 
+// odzielny arg dla template jest mylący
+// foramtowanie ma problemy coś źle jest używany  / w laczeniu url i template
+// cookie: can't load punycode; won't use punycode for domain normalization
+
 init(args)
   .then((config) => {
     finalConfig = config;

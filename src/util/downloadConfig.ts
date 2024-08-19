@@ -2,6 +2,7 @@ import { ConfigType } from '@/feature/config/types';
 import { FileMapConfig } from '@/feature/updateFileMapConfig';
 import { createCatalog } from '@/util/createCatalog';
 import { createFile } from '@/util/createFile';
+import { debugFunction } from '@/util/debugFunction';
 import { formatterRepositoryFileNameUrl } from '@/util/formatterRepositoryFileNameUrl';
 import { isFileExists } from '@/util/isFileExists';
 import { objectToBuffer } from '@/util/objectToBuffer';
@@ -10,6 +11,7 @@ import { readFile } from '@/util/readFile';
 import { wgetAsync } from '@/util/wget';
 
 export async function downloadConfig(config: ConfigType): Promise<ConfigType> {
+  debugFunction(config.isDebug, '=== SNP INIT ===', '[INIT] downloadConfig');
   const snpFileMapConfig: FileMapConfig = await readFile(config.snpFileMapConfig).then(async (bufferData) =>
     parseJSON(bufferData.toString())
   );
@@ -54,6 +56,11 @@ export async function downloadConfig(config: ConfigType): Promise<ConfigType> {
         return combinedConfig;
       })
       .then((combinedConfig) => {
+        debugFunction(
+          config.isDebug,
+          { ...config, templateVersion: combinedConfig.templateVersion },
+          '[INIT] downloadConfig - end'
+        );
         return { ...config, templateVersion: combinedConfig.templateVersion };
       });
   } catch (err) {
