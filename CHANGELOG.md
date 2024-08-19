@@ -1,3 +1,15 @@
+## [1.0.0-dev.23](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.22...v1.0.0-dev.23) (2024-08-19)
+
+
+### Features
+
+* ✨ formater for configs ([d7ccf0b](https://github.com/SebastianWesolowski/s-update-manager/commit/d7ccf0bab6971645891a4e772aa12cc520caceb5))
+
+
+### Bug Fixes
+
+* 🐛 adjust to templateFileList array in config ([944d63e](https://github.com/SebastianWesolowski/s-update-manager/commit/944d63e3ed6b2e6451ae3345c7a65cf84e24a00b))
+
 ## [1.0.0-dev.22](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.21...v1.0.0-dev.22) (2024-08-18)
 
 
