@@ -1,4 +1,3 @@
-import { defaultRepositoryMapFileConfig } from '../config/const';
 import { ConfigTemplateType, RepositoryMapFileConfigType } from '@/feature/config/types';
 import { debugFunction } from '@/util/debugFunction';
 import { parseJSON } from '@/util/parseJSON';
@@ -13,7 +12,7 @@ export const updateTemplateConfig = async ({
   config: ConfigTemplateType;
   fileList: string[] | [];
   templateFileList: string[] | [];
-}): Promise<RepositoryMapFileConfigType> => {
+}): Promise<{ config: ConfigTemplateType }> => {
   debugFunction(config.isDebug, { config }, '[PrepareTemplate] updateTemplateConfig');
   const repositoryMapFileConfig: RepositoryMapFileConfigType = await readFile(config.repositoryMapFilePath).then(
     async (bufferData) => parseJSON(bufferData.toString())
@@ -23,12 +22,13 @@ export const updateTemplateConfig = async ({
   newContent.fileMap = fileList;
   newContent.templateFileList = templateFileList;
 
-  return (
-    ((await updateJsonFile({
-      filePath: config.repositoryMapFilePath,
-      config,
-      newContent,
-      replaceFile,
-    })) as RepositoryMapFileConfigType) || defaultRepositoryMapFileConfig
-  );
+  await updateJsonFile({
+    filePath: config.repositoryMapFilePath,
+    config,
+    newContent,
+    replaceFile,
+  });
+
+  debugFunction(config.isDebug, { config, fileList, templateFileList }, '[PrepareTemplate] END updateTemplateConfig');
+  return { config };
 };

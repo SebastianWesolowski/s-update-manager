@@ -31,5 +31,6 @@ export const bumpVersion = async (config: ConfigTemplateType): Promise<ConfigTem
     });
   }
 
+  debugFunction(config.isDebug, { config }, '[PrepareTemplate] END Bump Version');
   return config;
 };

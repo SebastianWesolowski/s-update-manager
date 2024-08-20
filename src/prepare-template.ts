@@ -12,6 +12,7 @@ import { scanProjectFolder } from '@/feature/prepareTemplate/scanProjectFolder';
 import { updateTemplateConfig } from '@/feature/prepareTemplate/updateTemplateConfig';
 import { createFile } from '@/util/createFile';
 import { debugFunction } from '@/util/debugFunction';
+import { formatJsonWithPrettier } from '@/util/formatPrettier';
 import { isFileExists } from '@/util/isFileExists';
 
 export const prepareTemplate = async (args: ArgsTemplate): Promise<ConfigTemplateType> => {
@@ -60,6 +61,9 @@ prepareTemplate(args)
   .then(({ config, templateFileList, fileList }) => {
     finalConfig = config;
     return updateTemplateConfig({ config, fileList, templateFileList });
+  })
+  .then(async ({ config }) => {
+    await formatJsonWithPrettier(config.repositoryMapFilePath);
   })
   .finally(() => {
     debugFunction(finalConfig?.isDebug, { finalConfig }, '[PrepareTemplate] final config');
