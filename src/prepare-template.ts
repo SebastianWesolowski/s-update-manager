@@ -21,6 +21,8 @@ export const prepareTemplate = async (args: ArgsTemplate): Promise<ConfigTemplat
   debugFunction(config.isDebug, '=== Start prepare template ===', '[PrepareTemplate]');
 
   if (!(await isFileExists(config.repositoryMapFilePath)) || process.env.SDEBUG !== 'true') {
+    debugFunction(config.isDebug, `isFileExists ${config.repositoryMapFilePath}`, '[PrepareTemplate]');
+    debugFunction(config.isDebug, config, '[PrepareTemplate]');
     await createFile({
       filePath: config.repositoryMapFilePath,
       content: JSON.stringify(defaultRepositoryMapFileConfig),
@@ -31,7 +33,7 @@ export const prepareTemplate = async (args: ArgsTemplate): Promise<ConfigTemplat
     });
     config.bumpVersion = false;
   }
-
+  debugFunction(config.isDebug, config, '[PrepareTemplate] END init');
   return config;
 };
 
@@ -44,6 +46,9 @@ let finalConfig = {
 prepareTemplate(args)
   .then((config) => {
     finalConfig = config;
+    //TODO bum pozostal mimo istnienia pliuku
+    // File already exists: ./template/node/repositoryMap.json
+    // "bumpVersion": false,
     return bumpVersion(config);
   })
   .then((config) => {

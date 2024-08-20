@@ -14,7 +14,11 @@ export const bumpVersion = async (config: ConfigTemplateType): Promise<ConfigTem
   );
   const currentVersion = repositoryMapFileConfig.templateVersion;
   if (!config.bumpVersion) {
-    debugFunction(config.isDebug, { config }, `[PrepareTemplate] stay with current version, ${currentVersion}`);
+    debugFunction(
+      config.isDebug,
+      { config },
+      `[PrepareTemplate] END Bump Version - stay with current version, ${currentVersion}`
+    );
     return config;
   }
 

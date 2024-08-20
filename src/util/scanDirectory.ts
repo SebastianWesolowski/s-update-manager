@@ -1,5 +1,5 @@
 import { promises as fs } from 'fs';
-import { join } from 'path';
+import { createPath } from '@/util/createPath';
 
 /**
  * Recursively scans a directory and returns an array of file paths.
@@ -15,7 +15,7 @@ export async function scanDirectory(dirPath: string, excludedPaths: string[] = [
     const items = await fs.readdir(currentPath, { withFileTypes: true });
 
     for (const item of items) {
-      const itemPath = join(currentPath, item.name);
+      const itemPath = createPath([currentPath, item.name]);
 
       // Check if the current path is in the excluded paths
       if (excludedPaths.some((excludedPath) => itemPath.startsWith(excludedPath))) {
