@@ -1,1 +1,1 @@
-{"templateVersion":"1.0.58","templateFileList":[],"fileMap":[]}
+{"templateVersion":"1.0.2","fileMap":["/README.md","/tools/addDependency.js","/tools/addModuleType.js","/tools/upload.sh","/tsconfig.json"],"templateFileList":["./template/node/templateCatalog/README.md","./template/node/templateCatalog/tools/addDependency.js","./template/node/templateCatalog/tools/addModuleType.js","./template/node/templateCatalog/tools/upload.sh","./template/node/templateCatalog/tsconfig.json"]}

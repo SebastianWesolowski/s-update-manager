@@ -9,7 +9,7 @@ export const setArgsTemplate = (args: ArgsTemplate): ArgsTemplate => {
     args = {
       _: [],
       isDebug: 'true',
-      projectCatalog: './template/node/',
+      projectCatalog: './template/node',
     };
     console.log({ setArgsTemplate: args });
   }
