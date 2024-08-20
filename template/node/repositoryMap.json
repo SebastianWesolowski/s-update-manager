@@ -1,1 +1,9 @@
-{"templateVersion":"1.0.34","templateFileList":[],"fileMap":[]}
+{
+  "templateVersion": "1.0.58",
+  "templateFileList": [
+    "./template/node/templateCatalog/.husky/post-merge.md"
+  ],
+  "fileMap": [
+    ".husky/post-merge.md"
+  ]
+}

@@ -19,6 +19,7 @@ export const scanProjectFolder = async (
       const cleanupArray = fileList.map((file) => {
         return file.replace(config.projectCatalog.replace('./', ''), '');
       });
+      debugFunction(config.isDebug, { config, fileList, cleanupArray }, '[PrepareTemplate] Scan project folder');
       return { config, fileList: cleanupArray }; // Wyświetli przefiltrowane pliki
     })
     .catch((error) => {

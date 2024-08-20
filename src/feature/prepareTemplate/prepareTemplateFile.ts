@@ -2,6 +2,7 @@ import path from 'path';
 import { ConfigTemplateType } from '@/feature/config/types';
 import { createFile } from '@/util/createFile';
 import { createPath } from '@/util/createPath';
+import { debugFunction } from '@/util/debugFunction';
 import { readFile } from '@/util/readFile';
 
 export const prepareTemplateFile = async ({
@@ -15,6 +16,7 @@ export const prepareTemplateFile = async ({
   fileList: string[] | [];
   templateFileList: string[] | [];
 }> => {
+  debugFunction(config.isDebug, { config, fileList }, '[PrepareTemplate] prepareTemplateFile');
   const templateFileList: string[] = [];
   for (const filePath of fileList) {
     const fileName = path.basename(filePath) + '-default.md';
@@ -33,5 +35,6 @@ export const prepareTemplateFile = async ({
     });
   }
 
+  debugFunction(config.isDebug, { config, fileList, templateFileList }, '[PrepareTemplate] END prepareTemplateFile');
   return { config, templateFileList, fileList };
 };
