@@ -1,3 +1,10 @@
+## [1.0.0-dev.25](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.24...v1.0.0-dev.25) (2024-08-20)
+
+
+### Bug Fixes
+
+* 🐛 scan directory ([db68d53](https://github.com/SebastianWesolowski/s-update-manager/commit/db68d536aece347d0af453288a82c78671b3cc6c))
+
 ## [1.0.0-dev.24](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.23...v1.0.0-dev.24) (2024-08-20)
 
 
