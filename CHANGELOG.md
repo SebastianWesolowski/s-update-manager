@@ -1,3 +1,10 @@
+## [1.0.0-dev.24](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.23...v1.0.0-dev.24) (2024-08-20)
+
+
+### Features
+
+* ✨ debuger functions in process ([0b297d5](https://github.com/SebastianWesolowski/s-update-manager/commit/0b297d5603a41165ef1208e3a7014b622a1a790d))
+
 ## [1.0.0-dev.23](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.22...v1.0.0-dev.23) (2024-08-19)
 
 
