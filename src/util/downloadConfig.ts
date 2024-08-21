@@ -4,7 +4,7 @@ import { createCatalog } from '@/util/createCatalog';
 import { createFile } from '@/util/createFile';
 import { debugFunction } from '@/util/debugFunction';
 import { formatterRepositoryFileNameUrl } from '@/util/formatterRepositoryFileNameUrl';
-import { isFileExists } from '@/util/isFileExists';
+import { isFileOrFolderExists } from '@/util/isFileOrFolderExists';
 import { objectToBuffer } from '@/util/objectToBuffer';
 import { parseJSON } from '@/util/parseJSON';
 import { readFile } from '@/util/readFile';
@@ -21,8 +21,13 @@ export async function downloadConfig(config: ConfigType): Promise<ConfigType> {
       repositoryUrl: config.repositoryUrl,
       fileName: config.REPOSITORY_MAP_FILE_NAME,
     });
+    debugFunction(
+      config.isDebug,
+      { repositoryMapFileUrl, fileName: config.REPOSITORY_MAP_FILE_NAME, repositoryUrl: config.repositoryUrl },
+      '[INIT - downloadConfig]'
+    );
 
-    if (!(await isFileExists(config.temporaryFolder))) {
+    if (!(await isFileOrFolderExists(config.temporaryFolder))) {
       await createCatalog(config.temporaryFolder);
     }
 

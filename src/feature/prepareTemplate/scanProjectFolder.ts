@@ -5,13 +5,13 @@ import { scanDirectory } from '@/util/scanDirectory';
 
 export const scanProjectFolder = async (
   config: ConfigTemplateType
-): Promise<{ config: ConfigTemplateType; fileList: string[] | [] }> => {
+): Promise<{ config: ConfigTemplateType; templateFileList: string[] | [] }> => {
   debugFunction(config.isDebug, { config }, '[PrepareTemplate - scanProjectFolder START]');
 
   const excludePaths = [
-    createPath([config.projectCatalog, '.DS_Store']).replace('./', ''),
-    createPath([config.projectCatalog, config.repositoryMapFileName]).replace('./', ''),
-    createPath([config.projectCatalog, config.templateCatalogName]).replace('./', ''),
+    createPath([config.projectCatalog, '.DS_Store']),
+    createPath([config.projectCatalog, config.repositoryMapFileName]),
+    createPath([config.projectCatalog, config.templateCatalogName]),
   ];
 
   return scanDirectory(config.projectCatalog, excludePaths)
@@ -22,10 +22,10 @@ export const scanProjectFolder = async (
       });
       debugFunction(config.isDebug, { config, fileList, cleanupArray }, '[PrepareTemplate - scanDirectory - END]');
       debugFunction(config.isDebug, { config }, '[PrepareTemplate - scanProjectFolder END]');
-      return { config, fileList: cleanupArray }; // Wyświetli przefiltrowane pliki
+      return { config, templateFileList: cleanupArray }; // Wyświetli przefiltrowane pliki
     })
     .catch((error) => {
       console.error('An error occurred:', error);
-      return { config, fileList: [] }; // Wyświetli przefiltrowane plikireturn [];
+      return { config, templateFileList: [] }; // Wyświetli przefiltrowane plikireturn [];
     });
 };

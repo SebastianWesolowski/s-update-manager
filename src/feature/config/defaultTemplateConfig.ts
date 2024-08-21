@@ -6,17 +6,18 @@ import { createPath } from '@/util/createPath';
 const regenerateConfig = (config: ConfigTemplateType): ConfigTemplateType => {
   const regeneratedConfig = { ...config };
 
-  if (regeneratedConfig.projectCatalog) {
-    regeneratedConfig.repositoryMapFilePath = createPath([
-      regeneratedConfig.projectCatalog,
-      regeneratedConfig.repositoryMapFileName,
-    ]);
-  }
-
   if (regeneratedConfig.templateCatalogName) {
     regeneratedConfig.templateCatalogPath = createPath([
       regeneratedConfig.projectCatalog,
       regeneratedConfig.templateCatalogName,
+    ]);
+  }
+
+  if (regeneratedConfig.projectCatalog && regeneratedConfig.templateCatalogName) {
+    regeneratedConfig.repositoryMapFilePath = createPath([
+      regeneratedConfig.projectCatalog,
+      regeneratedConfig.templateCatalogName,
+      regeneratedConfig.repositoryMapFileName,
     ]);
   }
 

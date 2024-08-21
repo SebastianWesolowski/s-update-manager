@@ -35,4 +35,5 @@ export const defaultRepositoryMapFileConfig: RepositoryMapFileConfigType = {
   templateVersion: '1.0.0',
   fileMap: [],
   templateFileList: [],
+  rootPathFileList: [],
 };

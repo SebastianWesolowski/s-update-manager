@@ -1,5 +1,5 @@
 import fs from 'fs';
-import { isFileExists } from './isFileExists';
+import { isFileOrFolderExists } from './isFileOrFolderExists';
 
 /**
  * Creates a new file in the file system.
@@ -30,7 +30,7 @@ export async function toCreateFile({
   const { overwriteFile, backupFile } = options;
 
   try {
-    const fileExists = await isFileExists(filePath);
+    const fileExists = await isFileOrFolderExists(filePath);
 
     if (backupFile && fileExists) {
       const existingContent = await fs.promises.readFile(filePath, 'utf-8');
@@ -41,7 +41,7 @@ export async function toCreateFile({
       }
     }
 
-    if (((await isFileExists(filePath)) && overwriteFile) || !(await isFileExists(filePath))) {
+    if (((await isFileOrFolderExists(filePath)) && overwriteFile) || !(await isFileOrFolderExists(filePath))) {
       // If overwriteFile is true or backupFile is false, overwrite the file or create a new one
       await fs.promises.writeFile(filePath, content);
     }

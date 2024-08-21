@@ -3,7 +3,7 @@ import { ConfigTemplateType } from '@/feature/config/types';
 import { FileMapConfig } from '@/feature/updateFileMapConfig';
 import { createFile } from '@/util/createFile';
 import { debugFunction } from '@/util/debugFunction';
-import { isFileExists } from '@/util/isFileExists';
+import { isFileOrFolderExists } from '@/util/isFileOrFolderExists';
 import { parseJSON } from '@/util/parseJSON';
 import { readFile } from '@/util/readFile';
 
@@ -22,7 +22,7 @@ export const bumpVersion = async (config: ConfigTemplateType): Promise<ConfigTem
     return config;
   }
 
-  if (await isFileExists(config.repositoryMapFilePath)) {
+  if (await isFileOrFolderExists(config.repositoryMapFilePath)) {
     repositoryMapFileConfig.templateVersion = semver.inc(currentVersion, 'patch') || '1.0.0';
 
     await createFile({

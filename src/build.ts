@@ -7,12 +7,12 @@ import { buildFromConfig } from '@/feature/buildFromConfig';
 import { cleanUp } from '@/feature/cleanUp';
 import { ConfigType } from '@/feature/config/types';
 import { debugFunction } from '@/util/debugFunction';
-import { isFileExists } from '@/util/isFileExists';
+import { isFileOrFolderExists } from '@/util/isFileOrFolderExists';
 
 export const build = async (args: Args): Promise<ConfigType> => {
   const config = await getConfig(args);
 
-  if (!(await isFileExists(config.snpFileMapConfig)) && (await isFileExists(config.snpConfigFile))) {
+  if (!(await isFileOrFolderExists(config.snpFileMapConfig)) && (await isFileOrFolderExists(config.snpConfigFile))) {
     if (process.env.SDEBUG !== 'true') {
       throw new Error('Config files (snpFileMapConfig or snpConfigFile)  not exists, use init script');
     }

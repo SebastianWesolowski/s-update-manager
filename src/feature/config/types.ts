@@ -54,4 +54,5 @@ export interface RepositoryMapFileConfigType {
   templateVersion: string;
   fileMap: string[];
   templateFileList: string[];
+  rootPathFileList: string[];
 }
