@@ -1,48 +1,37 @@
 import { ConfigTemplateType, RepositoryMapFileConfigType } from '@/feature/config/types';
+import { clearDirectory } from '@/util/clearDirectory';
+import { createFile } from '@/util/createFile';
 import { debugFunction } from '@/util/debugFunction';
-import { deletePath } from '@/util/deletePath';
-import { isFileExists } from '@/util/isFileExists';
+import { isFileOrFolderExists } from '@/util/isFileOrFolderExists';
 import { parseJSON } from '@/util/parseJSON';
 import { readFile } from '@/util/readFile';
-import { updateJsonFile } from '@/util/updateJsonFile';
 
 export const cleanUpTemplate = async (config: ConfigTemplateType): Promise<ConfigTemplateType> => {
   debugFunction(config.isDebug, { config }, '[PrepareTemplate] cleanUpTemplate');
-  if (await isFileExists(config.repositoryMapFilePath)) {
-    debugFunction(
-      config.isDebug,
-      { repositoryMapFilePath: config.repositoryMapFilePath },
-      '[PrepareTemplate] repositoryMapFilePath is exist'
-    );
+  let repositoryMapFileConfig: null | RepositoryMapFileConfigType = null;
+  if (await isFileOrFolderExists(config.templateCatalogPath)) {
+    if (await isFileOrFolderExists(config.repositoryMapFilePath)) {
+      repositoryMapFileConfig = await readFile(config.repositoryMapFilePath).then(async (bufferData) =>
+        parseJSON(bufferData.toString())
+      );
+    }
 
-    const repositoryMapFileConfig: RepositoryMapFileConfigType = await readFile(config.repositoryMapFilePath).then(
-      async (bufferData) => parseJSON(bufferData.toString())
-    );
+    await clearDirectory(config.templateCatalogPath);
+
     const newContent = repositoryMapFileConfig;
-    const replaceFile = true;
-    newContent.fileMap = [];
-    newContent.templateFileList = [];
+    if (newContent !== null) {
+      newContent.fileMap = [];
+      newContent.templateFileList = [];
+      newContent.rootPathFileList = [];
 
-    await updateJsonFile({
-      filePath: config.repositoryMapFilePath,
-      config,
-      newContent,
-      replaceFile,
-    });
-  }
-
-  if (await isFileExists(config.templateCatalogPath)) {
-    debugFunction(
-      config.isDebug,
-      { templateCatalogPath: config.templateCatalogPath },
-      '[PrepareTemplate] templateCatalogPath is exist'
-    );
-    try {
-      await deletePath(config.templateCatalogPath, true);
-      return config;
-    } catch (error) {
-      console.error(`Error isnt exist: ${(error as Error).message}`);
-      return config;
+      await createFile({
+        filePath: config.repositoryMapFilePath,
+        content: JSON.stringify(newContent),
+        isDebug: config.isDebug,
+        options: {
+          overwriteFile: true,
+        },
+      });
     }
   }
 

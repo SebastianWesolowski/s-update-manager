@@ -1,5 +1,5 @@
 import { basename, dirname, join } from 'path';
-import { isFileExists } from './isFileExists';
+import { isFileOrFolderExists } from './isFileOrFolderExists';
 import { isFolderExist } from './isFolderExist';
 import { toCreateFile } from './toCreateFile';
 
@@ -42,7 +42,7 @@ export async function createFile({
       createFolder: options?.createFolder || true,
     });
 
-    if ((await isFileExists(filePath)) && isDebug) {
+    if ((await isFileOrFolderExists(filePath)) && isDebug) {
       console.warn('File already exists: ' + filePath);
     }
 

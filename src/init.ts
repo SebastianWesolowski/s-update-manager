@@ -9,14 +9,14 @@ import { ConfigType } from '@/feature/config/types';
 import { createConfigFile } from '@/feature/createConfigFile';
 import { debugFunction } from '@/util/debugFunction';
 import { downloadConfig } from '@/util/downloadConfig';
-import { isFileExists } from '@/util/isFileExists';
+import { isFileOrFolderExists } from '@/util/isFileOrFolderExists';
 import { prepareBaseSnpFileMap } from '@/util/prepareBaseFile';
 import { prepareExtraFile } from '@/util/prepareExtraFile';
 
 export const init = async (args: Args): Promise<ConfigType> => {
   const config = await getConfig(args);
 
-  if ((await isFileExists(config.snpFileMapConfig)) && (await isFileExists(config.snpConfigFile))) {
+  if ((await isFileOrFolderExists(config.snpFileMapConfig)) && (await isFileOrFolderExists(config.snpConfigFile))) {
     if (process.env.SDEBUG !== 'true') {
       throw new Error('Config file exists, use build script or update');
     }

@@ -1,5 +1,5 @@
 import { debugFunction } from '@/util/debugFunction';
-import { isFileExists } from '@/util/isFileExists';
+import { isFileOrFolderExists } from '@/util/isFileOrFolderExists';
 import { parseJSON } from '@/util/parseJSON';
 import { readFile } from '@/util/readFile';
 import { updateJson } from '@/util/updateJson';
@@ -17,7 +17,7 @@ export const updateJsonFile = async ({
   newContent: object;
   replaceFile?: boolean;
 }): Promise<object | null> => {
-  if (await isFileExists(filePath)) {
+  if (await isFileOrFolderExists(filePath)) {
     return await updateJson({ filePath: filePath, newContent, replace: replaceFile }).then(() => {
       if (replaceFile) {
         return newContent;

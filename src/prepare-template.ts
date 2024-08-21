@@ -7,21 +7,29 @@ import { getTemplateConfig } from '@/feature/config/defaultTemplateConfig';
 import { ConfigTemplateType } from '@/feature/config/types';
 import { bumpVersion } from '@/feature/prepareTemplate/bumpVersion';
 import { cleanUpTemplate } from '@/feature/prepareTemplate/cleanUpTemplate';
-import { prepareTemplateFile } from '@/feature/prepareTemplate/prepareTemplateFile';
+import { prepareFileList } from '@/feature/prepareTemplate/prepareFileList';
 import { scanProjectFolder } from '@/feature/prepareTemplate/scanProjectFolder';
 import { updateTemplateConfig } from '@/feature/prepareTemplate/updateTemplateConfig';
+import { createCatalog } from '@/util/createCatalog';
 import { createFile } from '@/util/createFile';
 import { debugFunction } from '@/util/debugFunction';
 import { formatJsonWithPrettier } from '@/util/formatPrettier';
-import { isFileExists } from '@/util/isFileExists';
+import { isFileOrFolderExists } from '@/util/isFileOrFolderExists';
 
 export const prepareTemplate = async (args: ArgsTemplate): Promise<ConfigTemplateType> => {
   const config: ConfigTemplateType = await getTemplateConfig(args);
 
   debugFunction(config.isDebug, '=== Start prepare template ===', '[PrepareTemplate]');
 
-  if (!(await isFileExists(config.repositoryMapFilePath)) || process.env.SDEBUG !== 'true') {
-    debugFunction(config.isDebug, `isFileExists ${config.repositoryMapFilePath}`, '[PrepareTemplate]');
+  if (!(await isFileOrFolderExists(config.templateCatalogPath)) || process.env.SDEBUG !== 'true') {
+    await createCatalog(config.templateCatalogPath);
+  }
+  if (
+    ((await isFileOrFolderExists(config.templateCatalogPath)) &&
+      !(await isFileOrFolderExists(config.repositoryMapFilePath))) ||
+    process.env.SDEBUG !== 'true'
+  ) {
+    debugFunction(config.isDebug, `isFileOrFolderExists ${config.repositoryMapFilePath}`, '[PrepareTemplate]');
     debugFunction(config.isDebug, config, '[PrepareTemplate]');
     await createFile({
       filePath: config.repositoryMapFilePath,
@@ -33,6 +41,7 @@ export const prepareTemplate = async (args: ArgsTemplate): Promise<ConfigTemplat
     });
     config.bumpVersion = false;
   }
+
   debugFunction(config.isDebug, config, '[PrepareTemplate] END init');
   return config;
 };
@@ -46,9 +55,6 @@ let finalConfig = {
 prepareTemplate(args)
   .then((config) => {
     finalConfig = config;
-    //TODO bum pozostal mimo istnienia pliuku
-    // File already exists: ./template/node/repositoryMap.json
-    // "bumpVersion": false,
     return bumpVersion(config);
   })
   .then((config) => {
@@ -59,13 +65,13 @@ prepareTemplate(args)
     finalConfig = config;
     return scanProjectFolder(config);
   })
-  .then(({ config, fileList }) => {
+  .then(({ config, templateFileList }) => {
     finalConfig = config;
-    return prepareTemplateFile({ config, fileList });
+    return prepareFileList({ config, templateFileList });
   })
-  .then(({ config, templateFileList, fileList }) => {
+  .then(({ config, templateFileList, fileList, rootPathFileList }) => {
     finalConfig = config;
-    return updateTemplateConfig({ config, fileList, templateFileList });
+    return updateTemplateConfig({ config, fileList, templateFileList, rootPathFileList });
   })
   .then(async ({ config }) => {
     await formatJsonWithPrettier(config.repositoryMapFilePath);
