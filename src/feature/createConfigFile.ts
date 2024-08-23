@@ -5,7 +5,7 @@ import { isFolderExist } from '@/util/isFolderExist';
 
 export const createConfigFile = async (config: ConfigType): Promise<ConfigType> => {
   debugFunction(config.isDebug, { config }, '[INIT] debugFunction');
-  const { snpCatalog, sUpdaterVersion, repositoryUrl } = config;
+  const { snpCatalog, sUpdaterVersion, remoteRepository } = config;
 
   await isFolderExist({
     folderPath: snpCatalog,
@@ -18,7 +18,7 @@ export const createConfigFile = async (config: ConfigType): Promise<ConfigType> 
     isDebug: config.isDebug,
   });
 
-  debugFunction(config.isDebug, { sUpdaterVersion, repositoryUrl }, '[INIT] created snp config file');
+  debugFunction(config.isDebug, { sUpdaterVersion, remoteRepository }, '[INIT] created snp config file');
 
   return config;
 };

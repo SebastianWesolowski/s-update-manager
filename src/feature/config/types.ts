@@ -16,7 +16,8 @@ export interface GeneratedConfig {
   temporaryFolder: string;
   snpConfigFile: string;
   snpFileMapConfig: string;
-  repositoryUrl: string;
+  remoteFileMapURL: string;
+  remoteRootRepositoryUrl: string;
 }
 export interface ConfigType extends StableConfig, GeneratedConfig {
   _: any[];
@@ -26,6 +27,7 @@ export type OptionalKeys<T> = { [K in keyof T]?: T[K] };
 export type LocalConfigType<T> = OptionalKeys<T>;
 
 export interface StableConfig {
+  templateCatalogName: string;
   projectCatalog: string;
   availableSNPSuffix: AvailableSNPSuffixTypes[];
   availableSNPKeySuffix: AvailableSNPKeySuffixTypes[];
