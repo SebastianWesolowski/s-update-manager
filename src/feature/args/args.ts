@@ -1,6 +1,5 @@
 export interface Args {
   snpCatalog?: string;
-  template?: string;
   projectCatalog?: string;
   snpConfigFileName?: string;
   snpConfigFile?: string;
@@ -17,13 +16,11 @@ export const setArgs = (args: Args): Args => {
       projectCatalog: './test/fakeProjectRootfolder',
       remoteRepository: 'https://raw.githubusercontent.com/SebastianWesolowski/testTemplate/main/template/',
       snpCatalog: './test/fakeProjectRootfolder/.snp',
-      template: 'node',
     };
     console.log({ setArgs: args });
   }
 
   const argSnpCatalog: string | undefined = args.snpCatalog || args._[0];
-  const argTemplate = args.template || args._[1];
   const argProjectCatalog = args.projectCatalog || args._[2];
   const argSnpConfigFileName = args.snpConfigFileName || args._[3];
   const argSnpConfigFile = args.snpConfigFile || args._[4];
@@ -32,7 +29,6 @@ export const setArgs = (args: Args): Args => {
 
   return {
     snpCatalog: argSnpCatalog,
-    template: argTemplate,
     projectCatalog: argProjectCatalog,
     snpConfigFileName: argSnpConfigFileName,
     snpConfigFile: argSnpConfigFile,

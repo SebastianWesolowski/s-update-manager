@@ -24,8 +24,8 @@ const regenerateConfig = async (config: ConfigType): Promise<ConfigType> => {
       regeneratedConfig.snpConfigFile = createPath([regeneratedConfig.snpCatalog, regeneratedConfig.snpConfigFileName]);
     }
 
-    if (regeneratedConfig.remoteRepository && regeneratedConfig.template) {
-      regeneratedConfig.repositoryUrl = format(`${regeneratedConfig.remoteRepository}${regeneratedConfig.template}`);
+    if (regeneratedConfig.remoteRepository) {
+      regeneratedConfig.repositoryUrl = format(`${regeneratedConfig.remoteRepository}`);
     }
   }
 
@@ -89,9 +89,6 @@ export const getConfig = async (args: Args): Promise<ConfigType> => {
   });
   config = await updateDefaultConfig(config, {
     remoteRepository: argsObject.remoteRepository || localConfigFile.remoteRepository || config.remoteRepository,
-  });
-  config = await updateDefaultConfig(config, {
-    template: argsObject.template || localConfigFile.template || config.template,
   });
   return regenerateConfig(config);
 };

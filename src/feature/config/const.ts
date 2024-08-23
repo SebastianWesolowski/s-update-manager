@@ -2,7 +2,6 @@ import { ConfigTemplateType, ConfigType, RepositoryMapFileConfigType } from '@/f
 
 export const defaultConfig: ConfigType = {
   snpCatalog: './.snp',
-  template: 'node',
   sUpdaterVersion: undefined,
   availableSNPSuffix: ['-default.md', '-instructions.md', '-custom.md', '-extend.md'],
   availableSNPKeySuffix: ['defaultFile', 'instructionsFile', 'customFile', 'extendFile'],
