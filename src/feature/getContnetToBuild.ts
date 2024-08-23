@@ -1,6 +1,6 @@
 import { AvailableSNPKeySuffixTypes, ConfigType } from '@/feature/config/types';
 import { snpFile } from '@/feature/updateFileMapConfig';
-import { formatterRepositoryFileNameUrl } from '@/util/formatterRepositoryFileNameUrl';
+import { buildURL } from '@/util/formatterRepositoryFileNameUrl';
 import { readFile } from '@/util/readFile';
 import { wgetAsync } from '@/util/wget';
 
@@ -12,11 +12,11 @@ export const getRemoteContentToBuild = async ({
   snpObject: snpFile;
 }): Promise<string | null | undefined> => {
   try {
-    const repositoryMapFileUrl = formatterRepositoryFileNameUrl({
-      repositoryUrl: config.repositoryUrl,
-      fileName: snpObject.SNPSuffixFileName,
+    const contentUrl = buildURL({
+      baseURL: config.remoteRootRepositoryUrl,
+      relativePaths: [snpObject.SNPSuffixFileName],
     });
-    return await wgetAsync(repositoryMapFileUrl, config.temporaryFolder).then(async (remoteContent) => {
+    return await wgetAsync(contentUrl, config.temporaryFolder).then(async (remoteContent) => {
       return remoteContent;
     });
   } catch (err) {
@@ -41,7 +41,7 @@ export const getContentToBuild = async (
         return await readFile(customFile?.path || '');
       }
     }
-    //END HERE dopisać pozostale mozliwości
+
     if (extendFile?.isCreated) {
       const contentExtendFile = await readFile(extendFile?.path || '');
       if (contentExtendFile.length) {

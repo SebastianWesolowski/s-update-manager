@@ -3,7 +3,6 @@ import { FileMapConfig } from '@/feature/updateFileMapConfig';
 import { createCatalog } from '@/util/createCatalog';
 import { createFile } from '@/util/createFile';
 import { debugFunction } from '@/util/debugFunction';
-import { formatterRepositoryFileNameUrl } from '@/util/formatterRepositoryFileNameUrl';
 import { isFileOrFolderExists } from '@/util/isFileOrFolderExists';
 import { objectToBuffer } from '@/util/objectToBuffer';
 import { parseJSON } from '@/util/parseJSON';
@@ -17,21 +16,22 @@ export async function downloadConfig(config: ConfigType): Promise<ConfigType> {
   );
 
   try {
-    const repositoryMapFileUrl = formatterRepositoryFileNameUrl({
-      repositoryUrl: config.repositoryUrl,
-      fileName: config.REPOSITORY_MAP_FILE_NAME,
-    });
     debugFunction(
       config.isDebug,
-      { repositoryMapFileUrl, fileName: config.REPOSITORY_MAP_FILE_NAME, repositoryUrl: config.repositoryUrl },
+      {
+        remoteRootRepositoryUrl: config.remoteRootRepositoryUrl,
+        remoteRepository: config.remoteRepository,
+        fileName: config.REPOSITORY_MAP_FILE_NAME,
+        remoteFileMapURL: config.remoteFileMapURL,
+      },
       '[INIT - downloadConfig]'
     );
 
     if (!(await isFileOrFolderExists(config.temporaryFolder))) {
       await createCatalog(config.temporaryFolder);
     }
-
-    return await wgetAsync(repositoryMapFileUrl, config.temporaryFolder)
+    // TODO config.temporaryFolder is nesesery
+    return await wgetAsync(config.remoteFileMapURL, config.temporaryFolder)
       .then(async (snpFileMapConfigContent) => {
         let currentConfig = {};
         const downloadContent: FileMapConfig = parseJSON(snpFileMapConfigContent);

@@ -1,8 +1,8 @@
-import { format } from 'url';
 import { Args, setArgs } from '@/feature/args/args';
 import { defaultConfig } from '@/feature/config/const';
 import { ConfigType, LocalConfigType, PartialConfig } from '@/feature/config/types';
 import { createPath } from '@/util/createPath';
+import { buildURL } from '@/util/formatterRepositoryFileNameUrl';
 import { parseJSON } from '@/util/parseJSON';
 import { readFile } from '@/util/readFile';
 import { readPackageVersion } from '@/util/readVersionPackage';
@@ -25,7 +25,62 @@ const regenerateConfig = async (config: ConfigType): Promise<ConfigType> => {
     }
 
     if (regeneratedConfig.remoteRepository) {
-      regeneratedConfig.repositoryUrl = format(`${regeneratedConfig.remoteRepository}`);
+      regeneratedConfig.remoteRepository = regeneratedConfig.remoteRepository.replace(/\/$/, '');
+    }
+
+    if (regeneratedConfig.remoteRepository && regeneratedConfig.REPOSITORY_MAP_FILE_NAME) {
+      let repositoryURL = regeneratedConfig.remoteRepository;
+      const fileName = regeneratedConfig.REPOSITORY_MAP_FILE_NAME;
+      const templateCatalogName = regeneratedConfig.templateCatalogName;
+
+      if (repositoryURL.endsWith(fileName)) {
+        repositoryURL = repositoryURL.replace(fileName, '');
+        repositoryURL = repositoryURL.replace(/\/$/, '');
+      }
+
+      if (repositoryURL.endsWith(templateCatalogName)) {
+        repositoryURL = repositoryURL.replace(templateCatalogName, '');
+        repositoryURL = repositoryURL.replace(/\/$/, '');
+      }
+
+      repositoryURL = buildURL({
+        baseURL: repositoryURL,
+        relativePaths: [],
+      });
+
+      if (repositoryURL.includes('github.com')) {
+        repositoryURL = repositoryURL.replace(/\/$/, '');
+        regeneratedConfig.remoteRootRepositoryUrl = repositoryURL
+          .replace('github.com', 'raw.githubusercontent.com')
+          .replace('/blob/', '/');
+      } else {
+        // Jeśli już jest to raw URL, pozostaw bez zmian
+        regeneratedConfig.remoteRootRepositoryUrl = repositoryURL.replace(/\/$/, '');
+      }
+    }
+
+    if (regeneratedConfig.remoteRepository && regeneratedConfig.REPOSITORY_MAP_FILE_NAME) {
+      let repositoryURL = regeneratedConfig.remoteRepository;
+      const fileName = regeneratedConfig.REPOSITORY_MAP_FILE_NAME;
+
+      // Sprawdzenie, czy URL zawiera nazwę pliku
+      if (!repositoryURL.endsWith(fileName)) {
+        // Dodanie nazwy pliku do URL, jeśli go brakuje
+        repositoryURL = buildURL({
+          baseURL: repositoryURL,
+          relativePaths: [fileName],
+        });
+      }
+
+      // Sprawdzenie, czy URL należy zmienić na format surowego URL-a GitHub
+      if (repositoryURL.includes('github.com')) {
+        regeneratedConfig.remoteFileMapURL = repositoryURL
+          .replace('github.com', 'raw.githubusercontent.com')
+          .replace('/blob/', '/');
+      } else {
+        // Jeśli już jest to raw URL, pozostaw bez zmian
+        regeneratedConfig.remoteFileMapURL = repositoryURL.replace(/\/$/, '');
+      }
     }
   }
 
@@ -90,5 +145,5 @@ export const getConfig = async (args: Args): Promise<ConfigType> => {
   config = await updateDefaultConfig(config, {
     remoteRepository: argsObject.remoteRepository || localConfigFile.remoteRepository || config.remoteRepository,
   });
-  return regenerateConfig(config);
+  return await regenerateConfig(config);
 };

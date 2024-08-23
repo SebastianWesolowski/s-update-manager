@@ -14,7 +14,10 @@ export const setArgs = (args: Args): Args => {
       _: [],
       isDebug: 'true',
       projectCatalog: './test/fakeProjectRootfolder',
-      remoteRepository: 'https://raw.githubusercontent.com/SebastianWesolowski/testTemplate/main/template/',
+      remoteRepository:
+        'https://github.com/SebastianWesolowski/testTemplate/blob/main/template/node/templateCatalog/repositoryMap.json/',
+      // remoteRepository: 'https://github.com/SebastianWesolowski/testTemplate/blob/main/template/node/templateCatalog',
+      // remoteRepository: 'https://raw.githubusercontent.com/SebastianWesolowski/testTemplate/main/template/',
       snpCatalog: './test/fakeProjectRootfolder/.snp',
     };
     console.log({ setArgs: args });

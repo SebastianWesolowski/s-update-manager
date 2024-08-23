@@ -1,6 +1,7 @@
 import { ConfigTemplateType, ConfigType, RepositoryMapFileConfigType } from '@/feature/config/types';
 
 export const defaultConfig: ConfigType = {
+  templateCatalogName: 'templateCatalog',
   snpCatalog: './.snp',
   sUpdaterVersion: undefined,
   availableSNPSuffix: ['-default.md', '-instructions.md', '-custom.md', '-extend.md'],
@@ -12,9 +13,11 @@ export const defaultConfig: ConfigType = {
   temporaryFolder: './.snp/temporary/',
   snpConfigFileName: 'snp.config.json',
   snpConfigFile: './.snp/snp.config.json',
-  remoteRepository: 'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/dev/template/', // TODO Change to main branch before release 1.00
-  // remoteRepository: 'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/main/template/',
-  repositoryUrl: 'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/dev/template/node',
+  remoteRootRepositoryUrl: 'https://raw.githubusercontent.com/SebastianWesolowski/testTemplate/main/template/node',
+  remoteRepository:
+    'https://github.com/SebastianWesolowski/testTemplate/blob/main/template/node/templateCatalog/repositoryMap.json', // TODO Change to main branch before release 1.00
+  remoteFileMapURL:
+    'https://raw.githubusercontent.com/SebastianWesolowski/testTemplate/main/template/node/templateCatalog/repositoryMap.json', // TODO Change to main node template branch before release 1.00
   isDebug: false,
   _: [],
 };
