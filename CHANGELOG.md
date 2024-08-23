@@ -1,3 +1,16 @@
+## [1.0.0-dev.27](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.26...v1.0.0-dev.27) (2024-08-23)
+
+
+### Features
+
+* ✨ remove template arg ([3cd2672](https://github.com/SebastianWesolowski/s-update-manager/commit/3cd26722e0842b33731c9c7e78041e64798c89e4))
+* ✨ renovate remote reposytory linking ([f6b006a](https://github.com/SebastianWesolowski/s-update-manager/commit/f6b006a06ed883962a788e7a88a6799334607203))
+
+
+### Bug Fixes
+
+* 🐛 prepareFileList from real file content ([e942396](https://github.com/SebastianWesolowski/s-update-manager/commit/e9423962bb4af1721a9032bf2afb1b1a90ba6dcb))
+
 ## [1.0.0-dev.26](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.25...v1.0.0-dev.26) (2024-08-21)
 
 
