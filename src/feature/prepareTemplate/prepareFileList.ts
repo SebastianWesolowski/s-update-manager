@@ -17,17 +17,17 @@ export const prepareFileList = async ({
   templateFileList: string[] | [];
   rootPathFileList: string[] | [];
 }> => {
-  debugFunction(config.isDebug, { config, templateFileList }, '[PrepareTemplate] prepareTemplateFile');
+  debugFunction(config.isDebug, { config, templateFileList }, '[PrepareTemplate] prepareFileList');
   const rootPathFileList: string[] = [];
   const fileList: string[] = [];
   for (const filePath of templateFileList) {
     const fileName = path.basename(filePath) + '-default.md';
     const fileDir = path.dirname(filePath);
-    const templateFilePath = createPath([config.templateCatalogPath, filePath]);
+    const templateFilePath = createPath([config.projectCatalog, filePath]);
     rootPathFileList.push(createPath([config.projectCatalog, filePath]));
     fileList.push(createPath([config.templateCatalogName, filePath + '-default.md']));
     const content = await readFile(templateFilePath);
-
+    debugFunction(config.isDebug, { content }, `[PrepareTemplate] readed Content from file ${templateFilePath}`);
     await createFile({
       filePath: createPath([config.templateCatalogPath, fileDir, fileName]),
       content,
