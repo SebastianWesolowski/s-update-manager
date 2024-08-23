@@ -1,3 +1,4 @@
+import path from 'path';
 import { AvailableSNPKeySuffixTypes, ConfigType } from '@/feature/config/types';
 import { formatSnp } from '@/feature/formatSnp';
 import { FileMapConfig, updateDetailsFileMapConfig2 } from '@/feature/updateFileMapConfig';
@@ -30,13 +31,20 @@ export async function prepareBaseSnpFileMap(config: ConfigType): Promise<ConfigT
           }
 
           if (snpFileMapConfig.snpFileMap && !snpFileMapConfig.snpFileMap[realFileName]['_']) {
+            const filePath = createPath([
+              config.projectCatalog,
+              SNPSuffixFileName.replace(config.templateCatalogName, ''),
+            ]);
+            const directoryPath = path.dirname(filePath);
+            const originalFilePath = path.join(directoryPath, realFileName);
+
             snpFileMapConfig = await updateDetailsFileMapConfig2({
               snpFileMapConfig,
               config,
               operation: 'addConfigSuffixFile',
               SNPKeySuffix: '_',
               isCreated: false,
-              path: createPath([config.projectCatalog, realFileName]),
+              path: originalFilePath,
               realFileName,
               realPath: createPath([config.projectCatalog, realFileName]),
               templateVersion: snpFileMapConfig.templateVersion,
