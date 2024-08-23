@@ -1,5 +1,5 @@
 {
-  "templateVersion": "1.0.11",
+  "templateVersion": "1.0.17",
   "fileMap": [
     "templateCatalog/README.md-default.md",
     "templateCatalog/tools/addDependency.js-default.md",
