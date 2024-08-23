@@ -1,3 +1,10 @@
+## [1.0.0-dev.26](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.25...v1.0.0-dev.26) (2024-08-21)
+
+
+### Features
+
+* ✨ move config in templateCatalog and improve isFileExist ([b933d55](https://github.com/SebastianWesolowski/s-update-manager/commit/b933d5595b7fe3211aca438715a1538d068bab4b))
+
 ## [1.0.0-dev.25](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.24...v1.0.0-dev.25) (2024-08-20)
 
 
