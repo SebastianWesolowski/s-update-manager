@@ -5,14 +5,12 @@ export const formatSnp = (
   returnValue: 'key' | 'suffix'
 ): AvailableSNPKeySuffixTypes | AvailableSNPSuffixTypes | null => {
   const suffixMapping: { [key in AvailableSNPSuffixTypes]: AvailableSNPKeySuffixTypes } = {
-    '-instructions.md': 'instructionsFile',
     '-custom.md': 'customFile',
     '-extend.md': 'extendFile',
     '-default.md': 'defaultFile',
   };
 
   const reverseSuffixMapping: { [key in AvailableSNPKeySuffixTypes]: AvailableSNPSuffixTypes } = {
-    instructionsFile: '-instructions.md',
     customFile: '-custom.md',
     extendFile: '-extend.md',
     defaultFile: '-default.md',

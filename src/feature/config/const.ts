@@ -4,8 +4,8 @@ export const defaultConfig: ConfigType = {
   templateCatalogName: 'templateCatalog',
   snpCatalog: './.snp',
   sUpdaterVersion: undefined,
-  availableSNPSuffix: ['-default.md', '-instructions.md', '-custom.md', '-extend.md'],
-  availableSNPKeySuffix: ['defaultFile', 'instructionsFile', 'customFile', 'extendFile'],
+  availableSNPSuffix: ['-default.md', '-custom.md', '-extend.md'],
+  availableSNPKeySuffix: ['defaultFile', 'customFile', 'extendFile'],
   templateVersion: undefined,
   REPOSITORY_MAP_FILE_NAME: 'repositoryMap.json', // TODO zmienic nazwę na snpFileMapConfig
   snpFileMapConfig: './.snp/repositoryMap.json',
