@@ -8,7 +8,7 @@ export interface snpFile {
   SNPKeySuffix: string;
   isCreated: boolean;
   path: string;
-  realFileName: string;
+  realFilePath: string;
   realPath: string;
   templateVersion: string;
 }
@@ -27,7 +27,7 @@ export interface FileMapConfig {
 }
 
 export const updateDetailsFileMapConfig2 = async ({
-  realFileName,
+  realFilePath,
   operation,
   config,
   snpFileMapConfig,
@@ -39,7 +39,7 @@ export const updateDetailsFileMapConfig2 = async ({
   templateVersion,
 }: {
   SNPKeySuffix?: AvailableSNPKeySuffixTypes | '_';
-  realFileName?: string;
+  realFilePath?: string;
   operation:
     | 'addConfigSuffixFile'
     | 'createSuffixFile'
@@ -84,7 +84,7 @@ export const updateDetailsFileMapConfig2 = async ({
       replaceFile: false,
     },
     path: path || '',
-    realFileName: realFileName || '',
+    realFilePath: realFilePath || '',
     realPath: realPath || '',
     templateVersion: templateVersion || '1.0.0',
   };
@@ -93,40 +93,40 @@ export const updateDetailsFileMapConfig2 = async ({
     operation === 'addConfigSuffixFile' &&
     details.SNPKeySuffix &&
     details.path &&
-    details.realFileName &&
+    details.realFilePath &&
     details.realPath &&
     details.templateVersion
   ) {
     details.options.replaceFile = true;
 
-    if (!newFileMapConfig.snpFileMap[details.realFileName]) {
-      newFileMapConfig.snpFileMap[details.realFileName] = {};
+    if (!newFileMapConfig.snpFileMap[details.realFilePath]) {
+      newFileMapConfig.snpFileMap[details.realFilePath] = {};
     }
-    if (!newFileMapConfig.snpFileMap[details.realFileName][details.SNPKeySuffix]) {
-      newFileMapConfig.snpFileMap[details.realFileName][details.SNPKeySuffix] = {};
+    if (!newFileMapConfig.snpFileMap[details.realFilePath][details.SNPKeySuffix]) {
+      newFileMapConfig.snpFileMap[details.realFilePath][details.SNPKeySuffix] = {};
     }
 
-    newFileMapConfig.snpFileMap[details.realFileName][details.SNPKeySuffix] = {
+    newFileMapConfig.snpFileMap[details.realFilePath][details.SNPKeySuffix] = {
       SNPKeySuffix: details.SNPKeySuffix,
       isCreated: details.isCreated,
       path: details.path,
-      realFileName: details.realFileName,
+      realFilePath: details.realFilePath,
       realPath: details.realPath,
       templateVersion: details.templateVersion,
     };
 
     if (details.SNPSuffixFileName) {
-      newFileMapConfig.snpFileMap[details.realFileName][details.SNPKeySuffix].SNPSuffixFileName =
+      newFileMapConfig.snpFileMap[details.realFilePath][details.SNPKeySuffix].SNPSuffixFileName =
         details.SNPSuffixFileName;
     }
   }
 
-  if (operation === 'createRealFileName' && details.realFileName) {
+  if (operation === 'createRealFileName' && details.realFilePath) {
     details.options.replaceFile = true;
-    if (!newFileMapConfig.snpFileMap[details.realFileName]) {
+    if (!newFileMapConfig.snpFileMap[details.realFilePath]) {
       newFileMapConfig.snpFileMap = {
         ...newFileMapConfig.snpFileMap,
-        [details.realFileName]: {},
+        [details.realFilePath]: {},
       };
     }
   }
@@ -136,54 +136,54 @@ export const updateDetailsFileMapConfig2 = async ({
     newFileMapConfig.fileMap = [];
   }
 
-  if (operation === 'deleteFile' && details.realFileName && details.SNPKeySuffix) {
+  if (operation === 'deleteFile' && details.realFilePath && details.SNPKeySuffix) {
     details.options.replaceFile = true;
     if (
-      newFileMapConfig.snpFileMap[details.realFileName][details.SNPKeySuffix].isCreated === false ||
-      !newFileMapConfig.snpFileMap[details.realFileName][details.SNPKeySuffix]
+      newFileMapConfig.snpFileMap[details.realFilePath][details.SNPKeySuffix].isCreated === false ||
+      !newFileMapConfig.snpFileMap[details.realFilePath][details.SNPKeySuffix]
     ) {
       console.log('plik nie istnieje nie można go ponownie usunac');
     }
 
-    const path = newFileMapConfig.snpFileMap[details.realFileName][details.SNPKeySuffix].path;
+    const path = newFileMapConfig.snpFileMap[details.realFilePath][details.SNPKeySuffix].path;
 
     if (path) {
       newFileMapConfig.createdFileMap = newFileMapConfig.createdFileMap.filter((file) => file !== path);
     }
-    delete newFileMapConfig.snpFileMap[details.realFileName][details.SNPKeySuffix];
+    delete newFileMapConfig.snpFileMap[details.realFilePath][details.SNPKeySuffix];
 
-    if (Object.keys(newFileMapConfig.snpFileMap[details.realFileName]).length === 0) {
-      delete newFileMapConfig.snpFileMap[details.realFileName];
+    if (Object.keys(newFileMapConfig.snpFileMap[details.realFilePath]).length === 0) {
+      delete newFileMapConfig.snpFileMap[details.realFilePath];
     }
   }
 
-  if (operation === 'createSNPRealFile' && details.realFileName) {
+  if (operation === 'createSNPRealFile' && details.realFilePath) {
     details.options.replaceFile = true;
-    if (newFileMapConfig.snpFileMap[details.realFileName]['_'].isCreated === true) {
+    if (newFileMapConfig.snpFileMap[details.realFilePath]['_'].isCreated === true) {
       console.log('plik już byl dodany ! sprawdzic czy istnieje i podjać odpowiednia akcje');
     }
-    const filePath = newFileMapConfig.snpFileMap[details.realFileName]['_'].path;
+    const filePath = newFileMapConfig.snpFileMap[details.realFilePath]['_'].path;
 
     if (!newFileMapConfig.createdFileMap.includes(filePath)) {
       newFileMapConfig.createdFileMap.push(filePath);
     }
 
-    newFileMapConfig.snpFileMap[details.realFileName]['_'].isCreated = true;
+    newFileMapConfig.snpFileMap[details.realFilePath]['_'].isCreated = true;
   }
 
-  if (operation === 'createSuffixFile' && details.realFileName && details.SNPKeySuffix) {
+  if (operation === 'createSuffixFile' && details.realFilePath && details.SNPKeySuffix) {
     details.options.replaceFile = true;
-    if (newFileMapConfig.snpFileMap[details.realFileName][details.SNPKeySuffix].isCreated === true) {
+    if (newFileMapConfig.snpFileMap[details.realFilePath][details.SNPKeySuffix].isCreated === true) {
       console.log('plik już byż dodany ! sprawdzic czy istnieje i podjać odpowiednia akcje');
     }
 
-    const filePath = newFileMapConfig.snpFileMap[details.realFileName][details.SNPKeySuffix].path;
+    const filePath = newFileMapConfig.snpFileMap[details.realFilePath][details.SNPKeySuffix].path;
 
     if (!newFileMapConfig.createdFileMap.includes(filePath)) {
       newFileMapConfig.createdFileMap.push(filePath);
     }
 
-    newFileMapConfig.snpFileMap[details.realFileName][details.SNPKeySuffix].isCreated = true;
+    newFileMapConfig.snpFileMap[details.realFilePath][details.SNPKeySuffix].isCreated = true;
   }
 
   return (

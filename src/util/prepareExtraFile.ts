@@ -1,3 +1,4 @@
+import path from 'path';
 import { AvailableSNPSuffixTypes, ConfigType } from '@/feature/config/types';
 import { formatSnp } from '@/feature/formatSnp';
 import { FileMapConfig, updateDetailsFileMapConfig2 } from '@/feature/updateFileMapConfig';
@@ -14,11 +15,10 @@ export async function prepareExtraFile(config: ConfigType): Promise<ConfigType> 
 
   for (const SNPKeySuffix of config.availableSNPKeySuffix) {
     if (snpFileMapConfig.snpFileMap) {
-      for (const [realFileName, snpPathFileSet] of Object.entries(snpFileMapConfig.snpFileMap)) {
+      for (const [realFilePath, snpPathFileSet] of Object.entries(snpFileMapConfig.snpFileMap)) {
         if (!snpPathFileSet[SNPKeySuffix]) {
           const snpSuffix = formatSnp(SNPKeySuffix, 'suffix') as AvailableSNPSuffixTypes;
-          const SNPSuffixFileName = realFileName + snpSuffix;
-
+          const SNPSuffixFileName = path.basename(realFilePath + snpSuffix);
           snpFileMapConfig = await updateDetailsFileMapConfig2({
             snpFileMapConfig,
             config,
@@ -27,8 +27,8 @@ export async function prepareExtraFile(config: ConfigType): Promise<ConfigType> 
             SNPSuffixFileName,
             isCreated: false,
             path: createPath([config.snpCatalog, SNPSuffixFileName]),
-            realFileName,
-            realPath: createPath([config.projectCatalog, realFileName]),
+            realFilePath,
+            realPath: createPath([config.projectCatalog, realFilePath]),
             templateVersion: snpFileMapConfig.templateVersion,
           });
         }
