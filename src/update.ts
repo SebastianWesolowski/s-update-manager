@@ -63,10 +63,6 @@ update(args)
     finalConfig = config;
     return cleanUp(config);
   })
-  .then((config) => {
-    finalConfig = config;
-    return cleanUp(config);
-  })
   .finally(() => {
     debugFunction(finalConfig?.isDebug, { finalConfig }, '[UPDATE] final config');
     debugFunction(finalConfig?.isDebug, '=== final SNP UPDATE ===');

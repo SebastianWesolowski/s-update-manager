@@ -19,13 +19,13 @@ export const buildFromConfig = async (config: ConfigType): Promise<ConfigType> =
     parseJSON(bufferData.toString())
   );
 
-  for (const realFileName in snpFileMapConfig.snpFileMap) {
-    for (const SNPKeySuffix in snpFileMapConfig.snpFileMap[realFileName]) {
+  for (const realFilePath in snpFileMapConfig.snpFileMap) {
+    for (const SNPKeySuffix in snpFileMapConfig.snpFileMap[realFilePath]) {
       if (SNPKeySuffix === '_') {
         continue;
       }
 
-      const currentFileObject: snpFile = snpFileMapConfig.snpFileMap[realFileName][SNPKeySuffix];
+      const currentFileObject: snpFile = snpFileMapConfig.snpFileMap[realFilePath][SNPKeySuffix];
       if (!currentFileObject.isCreated) {
         await createFile({
           filePath: createPath(currentFileObject.path),
@@ -35,7 +35,7 @@ export const buildFromConfig = async (config: ConfigType): Promise<ConfigType> =
           await updateDetailsFileMapConfig2({
             config,
             operation: 'createSuffixFile',
-            realFileName,
+            realFilePath,
             SNPKeySuffix: SNPKeySuffix as SNPKeySuffixTypes,
           });
         });
@@ -62,10 +62,10 @@ export const buildFromConfig = async (config: ConfigType): Promise<ConfigType> =
       parseJSON(bufferData.toString())
     );
 
-    const realFileObject = snpFileMapConfig.snpFileMap[realFileName]['_'];
+    const realFileObject = snpFileMapConfig.snpFileMap[realFilePath]['_'];
 
     if (updatedSnpFileMapConfig.snpFileMap) {
-      const snpSetObject = updatedSnpFileMapConfig.snpFileMap[realFileName] as snpArrayPathFileSet;
+      const snpSetObject = updatedSnpFileMapConfig.snpFileMap[realFilePath] as snpArrayPathFileSet;
       const content = await getContentToBuild(snpSetObject);
 
       if (content) {
@@ -77,7 +77,7 @@ export const buildFromConfig = async (config: ConfigType): Promise<ConfigType> =
           await updateDetailsFileMapConfig2({
             config,
             operation: 'createSNPRealFile',
-            realFileName,
+            realFilePath,
           });
         });
       }

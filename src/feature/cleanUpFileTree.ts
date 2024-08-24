@@ -2,7 +2,7 @@ import { AvailableSNPKeySuffixTypes, ConfigType } from '@/feature/config/types';
 import { FileMapConfig, snpFile, updateDetailsFileMapConfig2 } from '@/feature/updateFileMapConfig';
 import { createPath } from '@/util/createPath';
 import { deletePath } from '@/util/deletePath';
-import { getRealFileName } from '@/util/getRealFileName';
+import { getRealFilePath } from '@/util/getRealFilePath';
 import { parseJSON } from '@/util/parseJSON';
 import { readFile } from '@/util/readFile';
 
@@ -20,10 +20,10 @@ export const cleanUpFileTree = async (config: ConfigType): Promise<ConfigType> =
     ) {
       const realFilesMap = new Map<string, any>();
 
-      snpFileMapConfig.fileMap.forEach((file) => {
-        const realName = getRealFileName({ config, contentToCheck: [file] })[0];
-        if (!realFilesMap.has(realName)) {
-          realFilesMap.set(realName, file);
+      snpFileMapConfig.fileMap.forEach((SNPSuffixFileName) => {
+        const realFilePath = getRealFilePath({ config, SNPSuffixFileName });
+        if (!realFilesMap.has(realFilePath)) {
+          realFilesMap.set(realFilePath, SNPSuffixFileName);
         }
       });
 
@@ -49,7 +49,7 @@ export const cleanUpFileTree = async (config: ConfigType): Promise<ConfigType> =
               config,
               operation: 'deleteFile',
               SNPKeySuffix: snpFile.SNPKeySuffix as AvailableSNPKeySuffixTypes | '_',
-              realFileName: snpFile.realFileName,
+              realFilePath: snpFile.realFilePath,
             });
           });
         }

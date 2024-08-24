@@ -3,7 +3,7 @@ import { formatSnp } from '@/feature/formatSnp';
 import { FileMapConfig, snpFile, updateDetailsFileMapConfig2 } from '@/feature/updateFileMapConfig';
 import { createPath } from '@/util/createPath';
 import { deletePath } from '@/util/deletePath';
-import { getRealFileName } from '@/util/getRealFileName';
+import { getRealFilePath } from '@/util/getRealFilePath';
 import { parseJSON } from '@/util/parseJSON';
 import { readFile } from '@/util/readFile';
 
@@ -18,16 +18,16 @@ export const cleanUpBeforeUpdate = async (config: ConfigType): Promise<ConfigTyp
     if (snpFileMapConfig.snpFileMap && snpFileMapConfig.fileMap) {
       const createdFileRealName: [string, string][] = [];
       for (const SNPSuffixFileName of snpFileMapConfig.fileMap) {
-        const realName = getRealFileName({ config, contentToCheck: [SNPSuffixFileName] })[0];
+        const realFilePath = getRealFilePath({ config, SNPSuffixFileName });
         const SNPKeySuffix = formatSnp(SNPSuffixFileName, 'key') as AvailableSNPKeySuffixTypes;
-        if (!createdFileRealName.includes([realName, SNPKeySuffix])) {
-          createdFileRealName.push([realName, SNPKeySuffix]);
+        if (!createdFileRealName.includes([realFilePath, SNPKeySuffix])) {
+          createdFileRealName.push([realFilePath, SNPKeySuffix]);
         }
       }
-      for (const [realName, SNPKeySuffix] of createdFileRealName) {
-        fileToClean.push(snpFileMapConfig.snpFileMap[realName][SNPKeySuffix]);
-        if (!fileToClean.includes(snpFileMapConfig.snpFileMap[realName]['_'])) {
-          fileToClean.push(snpFileMapConfig.snpFileMap[realName]['_']);
+      for (const [realFilePath, SNPKeySuffix] of createdFileRealName) {
+        fileToClean.push(snpFileMapConfig.snpFileMap[realFilePath][SNPKeySuffix]);
+        if (!fileToClean.includes(snpFileMapConfig.snpFileMap[realFilePath]['_'])) {
+          fileToClean.push(snpFileMapConfig.snpFileMap[realFilePath]['_']);
         }
       }
     }
@@ -39,7 +39,8 @@ export const cleanUpBeforeUpdate = async (config: ConfigType): Promise<ConfigTyp
           config,
           operation: 'deleteFile',
           SNPKeySuffix: snpFile.SNPKeySuffix as AvailableSNPKeySuffixTypes | '_',
-          realFileName: snpFile.realFileName,
+          // realFileName: snpFile.realFileName,
+          realFilePath: snpFile.realFilePath,
         });
       });
     }

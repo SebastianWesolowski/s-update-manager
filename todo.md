@@ -1,3 +1,4 @@
+[] - zle genereowany SNPSuffixFileName dla extend i custom w configu
 [] - extend jest generowany nadmiarowo
 [] - custom jest generowany nadmiarowo
 [] przetlumaczyc i wszystko na angielski
@@ -14,6 +15,8 @@
 []why are arguments and config not linked in types?
 []dryRun flag
 []config.temporaryFolder is nesesery
+[]obsluga update w momencie nowej wersji w postaci innego pliku w templatce, czy cleantree zadziala ?
+[] opóźnienie w pobieraniu przez wgetAsync, jakiś cashe itp
 
 [x] realne pliki są pozbawione oryginalnych scierzek, wszystko generuje się w roots
 [x] - instruction jest nie potrzebny

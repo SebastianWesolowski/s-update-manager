@@ -5,6 +5,7 @@ import { FileMapConfig, updateDetailsFileMapConfig2 } from '@/feature/updateFile
 import { createPath } from '@/util/createPath';
 import { debugFunction } from '@/util/debugFunction';
 import { getRealFileName } from '@/util/getRealFileName';
+import { getRealFilePath } from '@/util/getRealFilePath';
 import { parseJSON } from '@/util/parseJSON';
 import { readFile } from '@/util/readFile';
 
@@ -18,19 +19,21 @@ export async function prepareBaseSnpFileMap(config: ConfigType): Promise<ConfigT
     if (snpFileMapConfig.snpFileMap && snpFileMapConfig.fileMap) {
       for (const SNPSuffixFileName of snpFileMapConfig.fileMap) {
         const realFileName = getRealFileName({ config, contentToCheck: [SNPSuffixFileName] })[0];
+        const realFilePath = getRealFilePath({ config, SNPSuffixFileName });
+
         const SNPKeySuffix = formatSnp(SNPSuffixFileName, 'key') as AvailableSNPKeySuffixTypes;
 
         if (snpFileMapConfig.snpFileMap) {
-          if (!snpFileMapConfig.snpFileMap[realFileName]) {
+          if (!snpFileMapConfig.snpFileMap[realFilePath]) {
             snpFileMapConfig = await updateDetailsFileMapConfig2({
               snpFileMapConfig,
               config,
               operation: 'createRealFileName',
-              realFileName,
+              realFilePath,
             });
           }
 
-          if (snpFileMapConfig.snpFileMap && !snpFileMapConfig.snpFileMap[realFileName]['_']) {
+          if (snpFileMapConfig.snpFileMap && !snpFileMapConfig.snpFileMap[realFilePath]['_']) {
             const filePath = createPath([
               config.projectCatalog,
               SNPSuffixFileName.replace(config.templateCatalogName, ''),
@@ -45,7 +48,7 @@ export async function prepareBaseSnpFileMap(config: ConfigType): Promise<ConfigT
               SNPKeySuffix: '_',
               isCreated: false,
               path: originalFilePath,
-              realFileName,
+              realFilePath,
               realPath: createPath([config.projectCatalog, realFileName]),
               templateVersion: snpFileMapConfig.templateVersion,
             });
@@ -59,7 +62,7 @@ export async function prepareBaseSnpFileMap(config: ConfigType): Promise<ConfigT
             SNPSuffixFileName,
             isCreated: false,
             path: createPath([config.snpCatalog, SNPSuffixFileName]),
-            realFileName,
+            realFilePath,
             realPath: createPath([config.projectCatalog, realFileName]),
             templateVersion: snpFileMapConfig.templateVersion,
           });
