@@ -1,3 +1,12 @@
+## [1.0.0-dev.28](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.27...v1.0.0-dev.28) (2024-08-24)
+
+
+### Bug Fixes
+
+* 🐛 path for realFile ([6990110](https://github.com/SebastianWesolowski/s-update-manager/commit/699011055c4c9abd0da40a41f613e4a9356c0a09))
+* 🐛 path to generate real file ([5ea85ab](https://github.com/SebastianWesolowski/s-update-manager/commit/5ea85ab08326700cab4ff8a00a075f3906131127))
+* 🐛 removed instuction files ([4dcebf6](https://github.com/SebastianWesolowski/s-update-manager/commit/4dcebf6206c9828a0b788bd21278f6eed05d3dee))
+
 ## [1.0.0-dev.27](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.26...v1.0.0-dev.27) (2024-08-23)
 
 
