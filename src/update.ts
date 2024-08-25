@@ -12,7 +12,7 @@ import { createCatalog } from '@/util/createCatalog';
 import { debugFunction } from '@/util/debugFunction';
 import { downloadConfig } from '@/util/downloadConfig';
 import { prepareBaseSnpFileMap } from '@/util/prepareBaseFile';
-import { prepareExtraFile } from '@/util/prepareExtraFile';
+import { scanExtraFile } from '@/util/scanExtraFile';
 
 export const update = async (args: Args): Promise<ConfigType> => {
   const config = await getConfig(args);
@@ -53,7 +53,7 @@ update(args)
   })
   .then((config) => {
     finalConfig = config;
-    return prepareExtraFile(config);
+    return scanExtraFile(config);
   })
   .then((config) => {
     finalConfig = config;

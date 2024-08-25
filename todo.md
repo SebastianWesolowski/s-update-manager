@@ -1,6 +1,4 @@
-[] - zle genereowany SNPSuffixFileName dla extend i custom w configu
-[] - extend jest generowany nadmiarowo
-[] - custom jest generowany nadmiarowo
+[] brakuje dodawania custom i ext itp do createdFileMap w nowej wrsji
 [] przetlumaczyc i wszystko na angielski
 [] napisac instrukcje
 [] opisać kolejność aplikowania ustawień arg/lokaly plik
@@ -17,7 +15,11 @@
 []config.temporaryFolder is nesesery
 []obsluga update w momencie nowej wersji w postaci innego pliku w templatce, czy cleantree zadziala ?
 [] opóźnienie w pobieraniu przez wgetAsync, jakiś cashe itp
-
+[] dodanie gitignore *-... !-custom, extend ...rzeczy generowane nie powinny być w repo
+ 
+[x] - zle genereowany SNPSuffixFileName dla extend i custom w configu
+[x] - extend jest generowany nadmiarowo
+[x] - custom jest generowany nadmiarowo
 [x] realne pliki są pozbawione oryginalnych scierzek, wszystko generuje się w roots
 [x] - instruction jest nie potrzebny
 [x] pliki są generowane do glownego katalogu
