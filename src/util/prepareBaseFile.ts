@@ -63,7 +63,7 @@ export async function prepareBaseSnpFileMap(config: ConfigType): Promise<ConfigT
             isCreated: false,
             path: createPath([config.snpCatalog, SNPSuffixFileName]),
             realFilePath,
-            realPath: createPath([config.projectCatalog, realFileName]),
+            realPath: createPath([config.projectCatalog, realFilePath]),
             templateVersion: snpFileMapConfig.templateVersion,
           });
         }

@@ -11,7 +11,7 @@ import { debugFunction } from '@/util/debugFunction';
 import { downloadConfig } from '@/util/downloadConfig';
 import { isFileOrFolderExists } from '@/util/isFileOrFolderExists';
 import { prepareBaseSnpFileMap } from '@/util/prepareBaseFile';
-import { prepareExtraFile } from '@/util/prepareExtraFile';
+import { scanExtraFile } from '@/util/scanExtraFile';
 
 export const init = async (args: Args): Promise<ConfigType> => {
   const config = await getConfig(args);
@@ -47,7 +47,7 @@ init(args)
   })
   .then((config) => {
     finalConfig = config;
-    return prepareExtraFile(config);
+    return scanExtraFile(config);
   })
   .then((config) => {
     finalConfig = config;

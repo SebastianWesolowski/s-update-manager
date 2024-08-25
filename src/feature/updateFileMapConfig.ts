@@ -17,13 +17,14 @@ export type snpArrayPathFileSet<T extends string = AvailableSNPKeySuffixTypes & 
   [K in T]?: snpFile;
 } & { defaultFile: snpFile };
 
+export type snpFileMapObjectType = Record<string, snpArrayPathFileSet> | Record<string, NonNullable<unknown>>;
 export interface FileMapConfig {
   updatedContent: any;
   templateVersion: string;
   createdFileMap: string[];
   fileMap: string[];
   // templateFileList: string[];
-  snpFileMap?: Record<string, snpArrayPathFileSet> | Record<string, NonNullable<unknown>>;
+  snpFileMap?: snpFileMapObjectType;
 }
 
 export const updateDetailsFileMapConfig2 = async ({

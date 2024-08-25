@@ -30,7 +30,7 @@ const getKeyFromSuffix = (suffix: string): string => {
   const keyBase = suffix.replace(/^-/, '').replace(/\.md$/, '').replace(/\./g, '');
   return `${keyBase}File`;
 };
-export const prepareExtraFileFromConfig = async (config: ConfigType): Promise<ConfigType> => {
+export const scanExtraFileFromConfig = async (config: ConfigType): Promise<ConfigType> => {
   const snpFileMapConfig: FileMapConfig = await readFile(config.snpFileMapConfig).then(async (bufferData) =>
     parseJSON(bufferData.toString())
   );
