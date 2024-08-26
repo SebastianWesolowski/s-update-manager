@@ -3,7 +3,7 @@ import { defaultTemplateConfig } from '@/feature/config/const';
 import { ConfigTemplateType, PartialConfig } from '@/feature/config/types';
 import { createPath } from '@/util/createPath';
 
-const regenerateConfig = (config: ConfigTemplateType): ConfigTemplateType => {
+export const regenerateTemplateConfig = (config: ConfigTemplateType): ConfigTemplateType => {
   const regeneratedConfig = { ...config };
 
   if (regeneratedConfig.templateCatalogName) {
@@ -24,7 +24,7 @@ const regenerateConfig = (config: ConfigTemplateType): ConfigTemplateType => {
   return regeneratedConfig;
 };
 
-const updateTemplateConfig = (
+export const updateTemplateKeyConfig = (
   config: ConfigTemplateType,
   keyToUpdate: PartialConfig<ConfigTemplateType>
 ): ConfigTemplateType => {
@@ -33,20 +33,20 @@ const updateTemplateConfig = (
   const valueToUpdate = { [keyName]: value };
   const updatedConfig = { ...config, ...valueToUpdate };
 
-  return regenerateConfig(updatedConfig);
+  return regenerateTemplateConfig(updatedConfig);
 };
 
-export const getTemplateConfig = async (args: ArgsTemplate): Promise<ConfigTemplateType> => {
+export const getTemplateConfig = (args: ArgsTemplate): ConfigTemplateType => {
   let config = { ...defaultTemplateConfig };
 
   const argsObject: ArgsTemplate = setArgsTemplate(args);
 
-  config = updateTemplateConfig(config, {
+  config = updateTemplateKeyConfig(config, {
     isDebug: argsObject.isDebug || config.isDebug,
   });
-  config = updateTemplateConfig(config, {
+  config = updateTemplateKeyConfig(config, {
     projectCatalog: argsObject.projectCatalog || config.projectCatalog,
   });
 
-  return regenerateConfig(config);
+  return regenerateTemplateConfig(config);
 };

@@ -1,3 +1,5 @@
+import { defaultArgs } from '@/feature/args/const';
+
 export interface Args {
   snpCatalog?: string;
   projectCatalog?: string;
@@ -10,16 +12,7 @@ export interface Args {
 
 export const setArgs = (args: Args): Args => {
   if (process.env.SDEBUG === 'true') {
-    args = {
-      _: [],
-      isDebug: 'true',
-      projectCatalog: './test/fakeProjectRootfolder',
-      remoteRepository:
-        'https://github.com/SebastianWesolowski/testTemplate/blob/main/template/node/templateCatalog/repositoryMap.json/',
-      // remoteRepository: 'https://github.com/SebastianWesolowski/testTemplate/blob/main/template/node/templateCatalog',
-      // remoteRepository: 'https://raw.githubusercontent.com/SebastianWesolowski/testTemplate/main/template/',
-      snpCatalog: './test/fakeProjectRootfolder/.snp',
-    };
+    args = defaultArgs;
     console.log({ setArgs: args });
   }
 

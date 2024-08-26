@@ -17,7 +17,7 @@ import { formatJsonWithPrettier } from '@/util/formatPrettier';
 import { isFileOrFolderExists } from '@/util/isFileOrFolderExists';
 
 export const prepareTemplate = async (args: ArgsTemplate): Promise<ConfigTemplateType> => {
-  const config: ConfigTemplateType = await getTemplateConfig(args);
+  const config: ConfigTemplateType = getTemplateConfig(args);
 
   debugFunction(config.isDebug, '=== Start prepare template ===', '[PrepareTemplate]');
 
