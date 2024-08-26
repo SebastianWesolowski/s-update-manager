@@ -1,3 +1,17 @@
+## [1.0.0-dev.29](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.28...v1.0.0-dev.29) (2024-08-26)
+
+
+### Features
+
+* ✨ extend config with manualCreatedFileMap ([224d34e](https://github.com/SebastianWesolowski/s-update-manager/commit/224d34e88adb3f35e53968ceea6f27efc9db6b1f))
+* ✨ getRemoteFileMapURL is a separate function ([66c9205](https://github.com/SebastianWesolowski/s-update-manager/commit/66c9205b58f4b6117bde234b49d27e9209229616))
+
+
+### Bug Fixes
+
+* 🐛 path in configs for realFile ([a8b7e8c](https://github.com/SebastianWesolowski/s-update-manager/commit/a8b7e8c93b1898578eec0b9242f3503d0afe5a04))
+* 🐛 use custom and extend template file ([834a59f](https://github.com/SebastianWesolowski/s-update-manager/commit/834a59fcddcc981f624a1cc5859328a0b0bb3ae6))
+
 ## [1.0.0-dev.28](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.27...v1.0.0-dev.28) (2024-08-24)
 
 
