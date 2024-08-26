@@ -3,6 +3,7 @@ import { defaultConfig } from '@/feature/config/const';
 import { ConfigType, LocalConfigType, PartialConfig } from '@/feature/config/types';
 import { createPath } from '@/util/createPath';
 import { buildURL } from '@/util/formatterRepositoryFileNameUrl';
+import { getRemoteFileMapURL } from '@/util/getRemoteURL/getRemoteFileMapURL';
 import { parseJSON } from '@/util/parseJSON';
 import { readFile } from '@/util/readFile';
 import { readPackageVersion } from '@/util/readVersionPackage';
@@ -60,27 +61,7 @@ const regenerateConfig = async (config: ConfigType): Promise<ConfigType> => {
     }
 
     if (regeneratedConfig.remoteRepository && regeneratedConfig.REPOSITORY_MAP_FILE_NAME) {
-      let repositoryURL = regeneratedConfig.remoteRepository;
-      const fileName = regeneratedConfig.REPOSITORY_MAP_FILE_NAME;
-
-      // Sprawdzenie, czy URL zawiera nazwę pliku
-      if (!repositoryURL.endsWith(fileName)) {
-        // Dodanie nazwy pliku do URL, jeśli go brakuje
-        repositoryURL = buildURL({
-          baseURL: repositoryURL,
-          relativePaths: [fileName],
-        });
-      }
-
-      // Sprawdzenie, czy URL należy zmienić na format surowego URL-a GitHub
-      if (repositoryURL.includes('github.com')) {
-        regeneratedConfig.remoteFileMapURL = repositoryURL
-          .replace('github.com', 'raw.githubusercontent.com')
-          .replace('/blob/', '/');
-      } else {
-        // Jeśli już jest to raw URL, pozostaw bez zmian
-        regeneratedConfig.remoteFileMapURL = repositoryURL.replace(/\/$/, '');
-      }
+      regeneratedConfig.remoteFileMapURL = getRemoteFileMapURL(regeneratedConfig);
     }
   }
 
