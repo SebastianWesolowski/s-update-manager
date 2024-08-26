@@ -38,8 +38,8 @@ export interface StableConfig {
 }
 
 export type SNPKeySuffixTypes = AvailableSNPKeySuffixTypes & '_';
-export type AvailableSNPKeySuffixTypes = 'defaultFile' | 'customFile' | 'extendFile';
-export type AvailableSNPSuffixTypes = '-default.md' | '-custom.md' | '-extend.md';
+export type AvailableSNPKeySuffixTypes = 'defaultFile' | 'customFile' | 'extendFile' | string;
+export type AvailableSNPSuffixTypes = '-default.md' | '-custom.md' | '-extend.md' | string;
 
 export type PartialConfig<T> = {
   [K in keyof T]?: any;

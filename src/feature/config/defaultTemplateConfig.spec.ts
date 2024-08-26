@@ -8,7 +8,7 @@ import {
 import { ConfigTemplateType, PartialConfig } from '@/feature/config/types';
 
 // Test suite for the init function
-describe('configuration functions', () => {
+describe('template configuration functions', () => {
   it('regenerateTemplateConfig - should return the expected file configuration', async () => {
     // Mock template configuration to override specific fields
     const mockTemplateConfig = {
