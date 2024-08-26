@@ -3,11 +3,12 @@
 [] napisac instrukcje
 [] opisać kolejność aplikowania ustawień arg/lokaly plik
 [] remove snp keyword
+[] write tests for main scripts
 [] wykonać testy dla dużych repo
 [] przygotować example repo/srcipt/etc
+[] Opisać wszystkoe TODO
  
 # Over MVP
-[]write tests
 [] cookie: can't load punycode; won't use punycode for domain normalisation
 []why are arguments and config not linked in types?
 []dryRun flag
