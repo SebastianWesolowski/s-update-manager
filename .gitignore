@@ -80,7 +80,6 @@ web_modules/
 .parcel-cache
 
 # Next.js build output
-.next
 out
 *.tgz
 # Nuxt.js build / generate output

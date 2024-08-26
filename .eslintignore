@@ -1,9 +1,7 @@
-src/types/global.d.ts
 node_modules
 distTS
 lib/*
 *.scss
-.storybook/**
 dist/*
 tools/*
 snp/*
