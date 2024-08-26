@@ -1,9 +1,9 @@
-[] wyczyścić repo z niepotrzebnych rzeczy
+[] wykluczyć pliki podczas uzywania s-prepare-template
+[] write tests for main scripts
 [] przetlumaczyc i wszystko na angielski
 [] napisac instrukcje
 [] opisać kolejność aplikowania ustawień arg/lokaly plik
 [] remove snp keyword
-[] write tests for main scripts
 [] wykonać testy dla dużych repo
 [] przygotować example repo/srcipt/etc
 [] Opisać wszystkoe TODO
@@ -17,6 +17,7 @@
 [] opóźnienie w pobieraniu przez wgetAsync, jakiś cashe itp
 [] dodanie gitignore *-... !-custom, extend ...rzeczy generowane nie powinny być w repo
  
+[x] wyczyścić repo z niepotrzebnych rzeczy
 [x] brakuje dodawania custom i ext itp do createdFileMap w nowej wrsji
 [x] - zle genereowany SNPSuffixFileName dla extend i custom w configu
 [x] - extend jest generowany nadmiarowo
