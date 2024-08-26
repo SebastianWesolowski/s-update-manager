@@ -15,7 +15,6 @@ module.exports = {
     'prettier',
     'plugin:node/recommended',
     'plugin:@typescript-eslint/recommended',
-    'plugin:storybook/recommended',
   ],
   rules: {
     'node/no-missing-import': 'off',
@@ -80,7 +79,7 @@ module.exports = {
 };
 
 function getDirectoriesToSort() {
-  const ignoredSortingDirectories = ['.git', '.next', '.vscode', 'node_modules'];
+  const ignoredSortingDirectories = ['.git', '.vscode', 'node_modules'];
   return getDirectories(process.cwd()).filter((f) => !ignoredSortingDirectories.includes(f));
 }
 
