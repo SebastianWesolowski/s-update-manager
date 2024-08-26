@@ -120,7 +120,7 @@ export const updateDetailsFileMapConfig2 = async ({
       newFileMapConfig.snpFileMap[details.realFilePath][details.SNPKeySuffix].SNPSuffixFileName =
         details.SNPSuffixFileName;
     }
-    if (details.SNPKeySuffix !== 'defaultFile') {
+    if (details.SNPKeySuffix !== 'defaultFile' && details.SNPKeySuffix !== '_') {
       if (newFileMapConfig.manualCreatedFileMap === undefined) {
         newFileMapConfig.manualCreatedFileMap = [];
       }
