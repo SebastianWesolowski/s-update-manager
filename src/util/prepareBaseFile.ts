@@ -39,7 +39,7 @@ export async function prepareBaseSnpFileMap(config: ConfigType): Promise<ConfigT
               SNPSuffixFileName.replace(config.templateCatalogName, ''),
             ]);
             const directoryPath = path.dirname(filePath);
-            const originalFilePath = path.join(directoryPath, realFileName);
+            const originalFilePath = createPath([directoryPath, realFileName]);
 
             snpFileMapConfig = await updateDetailsFileMapConfig2({
               snpFileMapConfig,

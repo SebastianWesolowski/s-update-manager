@@ -1,11 +1,10 @@
-[] brakuje dodawania custom i ext itp do createdFileMap w nowej wrsji
+[] wyczyścić repo z niepotrzebnych rzeczy
 [] przetlumaczyc i wszystko na angielski
 [] napisac instrukcje
 [] opisać kolejność aplikowania ustawień arg/lokaly plik
-[] wyczyścić repo z niepotrzebnych rzeczy
+[] remove snp keyword
 [] wykonać testy dla dużych repo
 [] przygotować example repo/srcipt/etc
-[] remove snp keyword
  
 # Over MVP
 []write tests
@@ -17,6 +16,7 @@
 [] opóźnienie w pobieraniu przez wgetAsync, jakiś cashe itp
 [] dodanie gitignore *-... !-custom, extend ...rzeczy generowane nie powinny być w repo
  
+[x] brakuje dodawania custom i ext itp do createdFileMap w nowej wrsji
 [x] - zle genereowany SNPSuffixFileName dla extend i custom w configu
 [x] - extend jest generowany nadmiarowo
 [x] - custom jest generowany nadmiarowo
