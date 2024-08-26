@@ -7,8 +7,8 @@ import { cleanUp } from '@/feature/cleanUp';
 import { getConfig } from '@/feature/config/defaultConfig';
 import { ConfigType } from '@/feature/config/types';
 import { createConfigFile } from '@/feature/createConfigFile';
+import { downloadConfig } from '@/feature/downloadConfig';
 import { debugFunction } from '@/util/debugFunction';
-import { downloadConfig } from '@/util/downloadConfig';
 import { isFileOrFolderExists } from '@/util/isFileOrFolderExists';
 import { prepareBaseSnpFileMap } from '@/util/prepareBaseFile';
 import { scanExtraFile } from '@/util/scanExtraFile';
@@ -41,7 +41,7 @@ init(args)
     finalConfig = config;
     return downloadConfig(config);
   })
-  .then((config) => {
+  .then(({ config }) => {
     finalConfig = config;
     return prepareBaseSnpFileMap(config);
   })

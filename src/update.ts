@@ -8,9 +8,9 @@ import { cleanUpBeforeUpdate } from '@/feature/cleanUpBeforeUpdate';
 import { cleanUpFileTree } from '@/feature/cleanUpFileTree';
 import { getConfig } from '@/feature/config/defaultConfig';
 import { ConfigType } from '@/feature/config/types';
+import { downloadConfig } from '@/feature/downloadConfig';
 import { createCatalog } from '@/util/createCatalog';
 import { debugFunction } from '@/util/debugFunction';
-import { downloadConfig } from '@/util/downloadConfig';
 import { prepareBaseSnpFileMap } from '@/util/prepareBaseFile';
 import { scanExtraFile } from '@/util/scanExtraFile';
 
@@ -43,7 +43,7 @@ update(args)
     finalConfig = config;
     return downloadConfig(config);
   })
-  .then((config) => {
+  .then(({ config }) => {
     finalConfig = config;
     return cleanUpFileTree(config);
   })
