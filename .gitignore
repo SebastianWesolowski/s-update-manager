@@ -127,6 +127,9 @@ test/**/*
 !test/realProject/**
 !test/realProject/**/*
 !test/fakeProjectRootfolder/package.json
+!test/testTemplate/
+!test/testTemplate/**
+!test/testTemplate/**/*
 !template/create-react-app-main/templateCatalog
 !template/create-react-app-main/templateCatalog/*
 !template/create-react-app-main/templateCatalog/**
