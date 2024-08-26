@@ -1,3 +1,5 @@
+import { defaultTemplateArgs } from '@/feature/args/const';
+
 export interface ArgsTemplate {
   projectCatalog?: string;
   isDebug?: string;
@@ -6,11 +8,7 @@ export interface ArgsTemplate {
 
 export const setArgsTemplate = (args: ArgsTemplate): ArgsTemplate => {
   if (process.env.SDEBUG === 'true') {
-    args = {
-      _: [],
-      isDebug: 'true',
-      projectCatalog: './template/node',
-    };
+    args = defaultTemplateArgs;
     console.log({ setArgsTemplate: args });
   }
 
