@@ -19,11 +19,12 @@ export type snpArrayPathFileSet<T extends string = AvailableSNPKeySuffixTypes & 
 
 export type snpFileMapObjectType = Record<string, snpArrayPathFileSet> | Record<string, NonNullable<unknown>>;
 export interface FileMapConfig {
-  updatedContent: any;
-  templateVersion: string;
   createdFileMap: string[];
+  manualCreatedFileMap?: string[];
+  rootPathFileList?: string[];
+  templateVersion: string;
   fileMap: string[];
-  // templateFileList: string[];
+  templateFileList?: string[];
   snpFileMap?: snpFileMapObjectType;
 }
 
@@ -57,7 +58,6 @@ export const updateDetailsFileMapConfig2 = async ({
   templateVersion?: string;
 }): Promise<FileMapConfig> => {
   const defaultConfig: FileMapConfig = {
-    updatedContent: {},
     templateVersion: 'undefined',
     createdFileMap: [],
     fileMap: [],
@@ -119,6 +119,14 @@ export const updateDetailsFileMapConfig2 = async ({
     if (details.SNPSuffixFileName) {
       newFileMapConfig.snpFileMap[details.realFilePath][details.SNPKeySuffix].SNPSuffixFileName =
         details.SNPSuffixFileName;
+    }
+    if (details.SNPKeySuffix !== 'defaultFile') {
+      if (newFileMapConfig.manualCreatedFileMap === undefined) {
+        newFileMapConfig.manualCreatedFileMap = [];
+      }
+      if (!newFileMapConfig.manualCreatedFileMap.includes(details.path)) {
+        newFileMapConfig.manualCreatedFileMap.push(details.path);
+      }
     }
   }
 
