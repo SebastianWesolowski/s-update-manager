@@ -8,7 +8,7 @@ import { parseJSON } from '@/util/parseJSON';
 import { readFile } from '@/util/readFile';
 import { readPackageVersion } from '@/util/readVersionPackage';
 
-const regenerateConfig = async (config: ConfigType): Promise<ConfigType> => {
+export const regenerateConfig = async (config: ConfigType): Promise<ConfigType> => {
   const regeneratedConfig = { ...config };
 
   if (regeneratedConfig.projectCatalog) {
@@ -68,7 +68,10 @@ const regenerateConfig = async (config: ConfigType): Promise<ConfigType> => {
   return regeneratedConfig;
 };
 
-const updateDefaultConfig = async (config: ConfigType, keyToUpdate: PartialConfig<ConfigType>): Promise<ConfigType> => {
+export const updateDefaultConfig = async (
+  config: ConfigType,
+  keyToUpdate: PartialConfig<ConfigType>
+): Promise<ConfigType> => {
   const keyName = Object.keys(keyToUpdate)[0];
   const folderKey = ['snpCatalog', 'projectCatalog', 'temporaryFolder'];
   const fileKey = ['snpConfigFileName', 'snpConfigFile'];
