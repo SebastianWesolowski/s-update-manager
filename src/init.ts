@@ -8,10 +8,10 @@ import { getConfig } from '@/feature/config/defaultConfig';
 import { ConfigType } from '@/feature/config/types';
 import { createConfigFile } from '@/feature/createConfigFile';
 import { downloadConfig } from '@/feature/downloadConfig';
+import { prepareBaseSnpFileMap } from '@/feature/prepareBaseFile';
+import { scanExtraFile } from '@/feature/scanExtraFile';
 import { debugFunction } from '@/util/debugFunction';
 import { isFileOrFolderExists } from '@/util/isFileOrFolderExists';
-import { prepareBaseSnpFileMap } from '@/util/prepareBaseFile';
-import { scanExtraFile } from '@/util/scanExtraFile';
 
 export const init = async (args: Args): Promise<ConfigType> => {
   const config = await getConfig(args);
@@ -37,7 +37,7 @@ init(args)
     finalConfig = config;
     return createConfigFile(config);
   })
-  .then((config) => {
+  .then(({ config }) => {
     finalConfig = config;
     return downloadConfig(config);
   })
@@ -45,15 +45,15 @@ init(args)
     finalConfig = config;
     return prepareBaseSnpFileMap(config);
   })
-  .then((config) => {
+  .then(({ config }) => {
     finalConfig = config;
     return scanExtraFile(config);
   })
-  .then((config) => {
+  .then(({ config }) => {
     finalConfig = config;
     return buildFromConfig(config);
   })
-  .then((config) => {
+  .then(({ config }) => {
     finalConfig = config;
     return cleanUp(config);
   })

@@ -20,7 +20,8 @@ export async function deletePath(targetPath: string, isDebug?: boolean) {
       throw new Error(`Unsupported file type at path: ${targetPath}`);
     }
   } catch (error) {
-    console.error('Error when deleting a path:', error);
-    throw error;
+    if (isDebug) {
+      console.error('Error when deleting a path:', error);
+    }
   }
 }

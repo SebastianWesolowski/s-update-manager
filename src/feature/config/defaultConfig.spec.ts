@@ -1,3 +1,4 @@
+import { mockConfig_step_init, mockConfig_step_initSave } from '@/feature/__tests__/const';
 import { defaultArgs } from '@/feature/args/const';
 import { defaultConfig } from '@/feature/config/const';
 import { getConfig, regenerateConfig, updateDefaultConfig } from '@/feature/config/defaultConfig';
@@ -99,34 +100,53 @@ const testCases: { description: string; mockConfig: Partial<ConfigType>; expecte
     },
   },
   {
-    description: 'config used in downloadConfigTest',
+    description: 'custom config from args',
     mockConfig: {
-      projectCatalog: './test/mockProject',
-      temporaryFolder: './.snp/temporary',
+      REPOSITORY_MAP_FILE_NAME: 'custom.json',
+      _: [],
+      availableSNPKeySuffix: ['superCustomFileName'],
+      availableSNPSuffix: ['-superCustomFileName.md'],
+      isDebug: true,
+      projectCatalog: './frontEnd/',
+      remoteFileMapURL: '',
+      remoteRepository:
+        'https://github.com/SebastianWesolowski/testTemplate/blob/main/template/node/templateCatalogCustom',
+      remoteRootRepositoryUrl: '',
+      sUpdaterVersion: '',
+      snpCatalog: '',
       snpConfigFile: './.snp/snp.config.json',
-      remoteRepository: 'https://github.com/SebastianWesolowski/s-update-manager/tree/dev/test/testTemplate',
+      snpConfigFileName: 'template.config.json',
+      snpFileMapConfig: './.snp/repositoryMap.json',
+      templateCatalogName: 'templateCatalogCustom',
+      templateVersion: '',
+      temporaryFolder: './.snp/temporary/',
     },
     expectedConfig: {
-      REPOSITORY_MAP_FILE_NAME: 'repositoryMap.json',
+      REPOSITORY_MAP_FILE_NAME: 'custom.json',
       _: [],
-      availableSNPKeySuffix: ['defaultFile', 'customFile', 'extendFile'],
-      availableSNPSuffix: ['-default.md', '-custom.md', '-extend.md'],
-      isDebug: false,
-      projectCatalog: './test/mockProject',
+      availableSNPKeySuffix: ['superCustomFileName'],
+      availableSNPSuffix: ['-superCustomFileName.md'],
+      isDebug: true,
+      projectCatalog: './frontEnd/',
       remoteFileMapURL:
-        'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/dev/test/testTemplate/templateCatalog/repositoryMap.json',
-      remoteRepository: 'https://github.com/SebastianWesolowski/s-update-manager/tree/dev/test/testTemplate',
-      remoteRootRepositoryUrl:
-        'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/tree/dev/test/testTemplate',
-      sUpdaterVersion: '1.0.0-dev.27',
-      snpCatalog: './test/mockProject/.snp/',
-      snpConfigFile: './test/mockProject/.snp/snp.config.json',
-      snpConfigFileName: 'snp.config.json',
-      snpFileMapConfig: './test/mockProject/.snp/repositoryMap.json',
-      templateCatalogName: 'templateCatalog',
-      templateVersion: undefined,
-      temporaryFolder: './test/mockProject/.snp/temporary/',
+        'https://raw.githubusercontent.com/SebastianWesolowski/testTemplate/main/template/node/templateCatalogCustom/custom.json',
+      remoteRepository:
+        'https://github.com/SebastianWesolowski/testTemplate/blob/main/template/node/templateCatalogCustom',
+      remoteRootRepositoryUrl: 'https://raw.githubusercontent.com/SebastianWesolowski/testTemplate/main/template/node',
+      sUpdaterVersion: '',
+      snpCatalog: './frontEnd/.snp/',
+      snpConfigFile: './frontEnd/.snp/template.config.json',
+      snpConfigFileName: 'template.config.json',
+      snpFileMapConfig: './frontEnd/.snp/custom.json',
+      templateCatalogName: 'templateCatalogCustom',
+      templateVersion: '',
+      temporaryFolder: './frontEnd/.snp/temporary/',
     },
+  },
+  {
+    description: 'config from const for tests',
+    mockConfig: mockConfig_step_init,
+    expectedConfig: mockConfig_step_initSave,
   },
 ];
 

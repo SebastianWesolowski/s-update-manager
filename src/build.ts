@@ -6,9 +6,9 @@ import { Args } from '@/feature/args/args';
 import { buildFromConfig } from '@/feature/buildFromConfig';
 import { cleanUp } from '@/feature/cleanUp';
 import { ConfigType } from '@/feature/config/types';
+import { scanExtraFile } from '@/feature/scanExtraFile';
 import { debugFunction } from '@/util/debugFunction';
 import { isFileOrFolderExists } from '@/util/isFileOrFolderExists';
-import { scanExtraFile } from '@/util/scanExtraFile';
 
 export const build = async (args: Args): Promise<ConfigType> => {
   const config = await getConfig(args);
@@ -35,11 +35,11 @@ build(args)
     finalConfig = config;
     return scanExtraFile(config);
   })
-  .then((config) => {
+  .then(({ config }) => {
     finalConfig = config;
     return buildFromConfig(config);
   })
-  .then((config) => {
+  .then(({ config }) => {
     finalConfig = config;
     return cleanUp(config);
   })

@@ -13,10 +13,12 @@ import { isFileOrFolderExists } from '@/util/isFileOrFolderExists';
 import { parseJSON } from '@/util/parseJSON';
 import { readFile } from '@/util/readFile';
 
-export const buildFromConfig = async (config: ConfigType): Promise<ConfigType> => {
+export const buildFromConfig = async (
+  config: ConfigType
+): Promise<{ config: ConfigType; snpFileMapConfig: FileMapConfig }> => {
   debugFunction(config.isDebug, 'start', '[INIT] buildFromConfig');
 
-  const snpFileMapConfig: FileMapConfig = await readFile(config.snpFileMapConfig).then(async (bufferData) =>
+  let snpFileMapConfig: FileMapConfig = await readFile(config.snpFileMapConfig).then(async (bufferData) =>
     parseJSON(bufferData.toString())
   );
 
@@ -88,8 +90,9 @@ export const buildFromConfig = async (config: ConfigType): Promise<ConfigType> =
         });
       }
     }
+    snpFileMapConfig = updatedSnpFileMapConfig;
   }
 
   debugFunction(config.isDebug, { snpFileMapConfig }, '[INIT] buildFromConfig');
-  return config;
+  return { config, snpFileMapConfig };
 };
