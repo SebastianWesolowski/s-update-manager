@@ -69,7 +69,11 @@ export async function downloadConfig(config: ConfigType): Promise<{
           { ...config, templateVersion: combinedConfig.templateVersion },
           '[INIT] downloadConfig - end'
         );
-        return { config: { ...config, templateVersion: combinedConfig.templateVersion }, downloadContent };
+        return {
+          config: { ...config, templateVersion: combinedConfig.templateVersion },
+          snpFileMapConfig: combinedConfig,
+          downloadContent,
+        };
       });
   } catch (err) {
     console.error('Error while downloading config from github', err);
