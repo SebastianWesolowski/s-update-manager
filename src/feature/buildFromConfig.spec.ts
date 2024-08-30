@@ -2,12 +2,10 @@ import { cleanUpFiles } from '@/feature/__tests__/cleanForTests';
 import {
   mockConfig_step_buildFromConfig_empty,
   mockConfig_step_buildFromConfig_fullFiled,
-  mockConfig_step_initSave,
   mockConfig_step_scanExtraFile_empty,
   mockConfig_step_scanExtraFile_fullFiled,
   mockSnpFileMapConfig_step_buildFromConfig_empty,
   mockSnpFileMapConfig_step_buildFromConfig_fullFiled,
-  mockSnpFileMapConfig_step_prepareBaseSnpFileMap,
   mockSnpFileMapConfig_step_scanExtraFile_empty,
   mockSnpFileMapConfig_step_scanExtraFile_fullFiled,
 } from '@/feature/__tests__/const';
