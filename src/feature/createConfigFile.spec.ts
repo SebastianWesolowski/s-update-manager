@@ -1,16 +1,15 @@
 import { cleanUpFiles } from '@/feature/__tests__/cleanForTests';
-import { mockConfig_step_init } from '@/feature/__tests__/const';
+import { mockConfig_step_init, mockConfig_step_initSave } from '@/feature/__tests__/const';
+import { searchFilesInDirectory } from '@/feature/__tests__/searchFilesInDirectory';
 import { ConfigType } from '@/feature/config/types';
 import { createConfigFile } from '@/feature/createConfigFile';
-import { isFileOrFolderExists } from '@/util/isFileOrFolderExists';
-import { parseJSON } from '@/util/parseJSON';
-import { readFile } from '@/util/readFile';
 
 describe('createConfigFile', () => {
   let config: ConfigType;
 
   beforeEach(async () => {
     config = { ...mockConfig_step_init };
+
     await cleanUpFiles({
       snpCatalog: config.snpCatalog,
       directoryPath: config.projectCatalog,
@@ -27,16 +26,17 @@ describe('createConfigFile', () => {
   });
 
   it('should return correct creation', async () => {
-    createConfigFile(config).then(async ({ configFilePath }) => {
-      let result: any;
-      if (await isFileOrFolderExists(configFilePath)) {
-        result = await readFile(configFilePath).then(async (bufferData) => parseJSON(bufferData.toString()));
-      }
-      expect(result).toStrictEqual({
-        config: {
-          ...config,
-        },
-      });
+    const result = await createConfigFile(config);
+    const allFiles = searchFilesInDirectory({
+      directoryPath: config.projectCatalog,
+      excludedFileNames: ['.DS_Store'],
+      excludedPhrases: ['.backup'],
+    });
+
+    expect({ ...result, allFiles }).toStrictEqual({
+      config: mockConfig_step_initSave,
+      configFilePath: mockConfig_step_initSave.snpConfigFile,
+      allFiles: ['test/mockProject/.snp/snp.config.json'],
     });
   });
 });

@@ -44,7 +44,7 @@
     "staged:lint:fix": "eslint --fix",
     "staged:prettier:check": "prettier --check",
     "staged:prettier:fix": "prettier --write",
-    "test:check": "jest --coverage",
+    "test:check": "jest --coverage --runInBand",
     "test:watch": "jest --watch",
     "typescript:check": "tsc --noEmit",
     "cm": "cz",
