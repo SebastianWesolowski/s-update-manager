@@ -53,7 +53,8 @@ export const regenerateConfig = async (config: ConfigType): Promise<ConfigType> 
         repositoryURL = repositoryURL.replace(/\/$/, '');
         regeneratedConfig.remoteRootRepositoryUrl = repositoryURL
           .replace('github.com', 'raw.githubusercontent.com')
-          .replace('/blob/', '/');
+          .replace('/blob/', '/')
+          .replace('/tree/', '/');
       } else {
         // Jeśli już jest to raw URL, pozostaw bez zmian
         regeneratedConfig.remoteRootRepositoryUrl = repositoryURL.replace(/\/$/, '');

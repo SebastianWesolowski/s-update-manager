@@ -23,9 +23,6 @@ export const buildFromConfig = async (
   );
 
   for (const realFilePath in snpFileMapConfig.snpFileMap) {
-    if (realFilePath === 'tools/test.sh') {
-      console.log('');
-    }
     // bo sprawdzamy tylko po default reszta powinn być wygenewoana ręcznie lub korzysta tylko z getContent
     // const SNPKeySuffix = "defaulFile"
     for (const SNPKeySuffix in snpFileMapConfig.snpFileMap[realFilePath]) {
@@ -85,7 +82,7 @@ export const buildFromConfig = async (
           content,
           isDebug: config.isDebug,
         }).then(async () => {
-          await updateDetailsFileMapConfig2({
+          snpFileMapConfig = await updateDetailsFileMapConfig2({
             config,
             operation: 'createSNPRealFile',
             realFilePath,

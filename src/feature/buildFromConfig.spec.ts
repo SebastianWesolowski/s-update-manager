@@ -76,6 +76,7 @@ describe('buildFromConfig', () => {
       config: mockConfig_step_buildFromConfig_empty,
       snpFileMapConfig: mockSnpFileMapConfig_step_buildFromConfig_empty,
       allFiles: [
+        'test/mockProject/.gitignore',
         'test/mockProject/.snp/repositoryMap.json',
         'test/mockProject/.snp/snp.config.json',
         'test/mockProject/.snp/templateCatalog/.gitignore-default.md',
@@ -90,6 +91,11 @@ describe('buildFromConfig', () => {
         'test/mockProject/.snp/temporary/test.sh-default.md',
         'test/mockProject/.snp/temporary/tsconfig.json-default.md',
         'test/mockProject/.snp/temporary/yarn.lock-default.md',
+        'test/mockProject/README.md',
+        'test/mockProject/package.json',
+        'test/mockProject/tools/test.sh',
+        'test/mockProject/tsconfig.json',
+        'test/mockProject/yarn.lock',
       ],
     });
   });
@@ -133,11 +139,9 @@ describe('buildFromConfig', () => {
       excludedFileNames: ['.DS_Store'],
       excludedPhrases: ['.backup'],
     });
-
-    expect({ allFiles }).toStrictEqual({
-      // expect({ ...result, allFiles }).toStrictEqual({
-      // config: mockConfig_step_buildFromConfig_fullFiled,
-      // snpFileMapConfig: mockSnpFileMapConfig_step_buildFromConfig_fullFiled,
+    expect({ ...result, allFiles }).toStrictEqual({
+      config: mockConfig_step_buildFromConfig_fullFiled,
+      snpFileMapConfig: mockSnpFileMapConfig_step_buildFromConfig_fullFiled,
       allFiles: [
         'test/mockProject/.gitignore',
         'test/mockProject/.snp/repositoryMap.json',
@@ -162,6 +166,9 @@ describe('buildFromConfig', () => {
         'test/mockProject/.snp/temporary/yarn.lock-default.md',
         'test/mockProject/README.md',
         'test/mockProject/package.json',
+        'test/mockProject/tools/test.sh',
+        'test/mockProject/tsconfig.json',
+        'test/mockProject/yarn.lock',
       ],
     });
   });
