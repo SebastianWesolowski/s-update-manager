@@ -9,7 +9,7 @@ export const mockConfig_step_init = {
     'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/dev/test/testTemplate/templateCatalog/repositoryMap.json',
   remoteRepository: 'https://github.com/SebastianWesolowski/s-update-manager/tree/dev/test/testTemplate',
   remoteRootRepositoryUrl:
-    'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/tree/dev/test/testTemplate',
+    'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/dev/test/testTemplate',
   templateVersion: '1.0.0',
   snpCatalog: './test/mockProject/.snp/',
   snpConfigFile: './test/mockProject/.snp/snp.config.json',
@@ -279,11 +279,17 @@ export const mockSnpFileMapConfig_step_buildFromConfig_empty = {
   ...mockSnpFileMapConfig_step_scanExtraFile_empty,
   createdFileMap: [
     './test/mockProject/.snp/templateCatalog/.gitignore-default.md',
+    './test/mockProject/.gitignore',
     './test/mockProject/.snp/templateCatalog/README.md-default.md',
+    './test/mockProject/README.md',
     './test/mockProject/.snp/templateCatalog/package.json-default.md',
+    './test/mockProject/package.json',
     './test/mockProject/.snp/templateCatalog/tools/test.sh-default.md',
+    './test/mockProject/tools/test.sh',
     './test/mockProject/.snp/templateCatalog/tsconfig.json-default.md',
+    './test/mockProject/tsconfig.json',
     './test/mockProject/.snp/templateCatalog/yarn.lock-default.md',
+    './test/mockProject/yarn.lock',
   ],
   snpFileMap: Object.fromEntries(
     Object.entries({
@@ -297,6 +303,10 @@ export const mockSnpFileMapConfig_step_buildFromConfig_empty = {
       key,
       {
         ...mockSnpFileMapConfig_step_scanExtraFile_empty.snpFileMap[key],
+        _: {
+          ...mockSnpFileMapConfig_step_scanExtraFile_fullFiled.snpFileMap[key]?.['_'],
+          isCreated: true,
+        },
         defaultFile: {
           ...mockSnpFileMapConfig_step_scanExtraFile_empty.snpFileMap[key].defaultFile,
           isCreated: true,
@@ -316,8 +326,11 @@ export const mockSnpFileMapConfig_step_buildFromConfig_fullFiled = {
     './test/mockProject/.snp/templateCatalog/package.json-default.md',
     './test/mockProject/package.json',
     './test/mockProject/.snp/templateCatalog/tools/test.sh-default.md',
+    './test/mockProject/tools/test.sh',
     './test/mockProject/.snp/templateCatalog/tsconfig.json-default.md',
+    './test/mockProject/tsconfig.json',
     './test/mockProject/.snp/templateCatalog/yarn.lock-default.md',
+    './test/mockProject/yarn.lock',
   ],
   snpFileMap: Object.fromEntries(
     Object.entries({

@@ -18,6 +18,7 @@
 [] opóźnienie w pobieraniu przez wgetAsync, jakiś cashe itp
 [] dodanie gitignore *-... !-custom, extend ...rzeczy generowane nie powinny być w repo
 [] order key in configs is different
+[] improve updateDefaultConfig and add more single cases
 
 [x] wyczyścić repo z niepotrzebnych rzeczy
 [x] brakuje dodawania custom i ext itp do createdFileMap w nowej wrsji

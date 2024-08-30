@@ -39,6 +39,20 @@ describe('getRemoteFileMapURL', () => {
     );
   });
 
+  it('should return correct URL for GitHub nested folder', () => {
+    const mockConfig = {
+      remoteRepository: 'https://github.com/SebastianWesolowski/s-update-manager/tree/dev/test/testTemplate',
+      templateCatalogName: 'templateCatalog',
+    };
+    config = { ...config, ...mockConfig };
+
+    const result = getRemoteFileMapURL(config);
+
+    expect(result).toBe(
+      'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/dev/test/testTemplate/templateCatalog/repositoryMap.json'
+    );
+  });
+
   it('should return correct URL for GitHub file path', () => {
     const mockConfig = {
       remoteRepository:
