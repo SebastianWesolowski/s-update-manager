@@ -23,6 +23,9 @@ export const buildFromConfig = async (
   );
 
   for (const realFilePath in snpFileMapConfig.snpFileMap) {
+    if (realFilePath === 'tools/test.sh') {
+      console.log('');
+    }
     // bo sprawdzamy tylko po default reszta powinn być wygenewoana ręcznie lub korzysta tylko z getContent
     // const SNPKeySuffix = "defaulFile"
     for (const SNPKeySuffix in snpFileMapConfig.snpFileMap[realFilePath]) {
@@ -40,7 +43,7 @@ export const buildFromConfig = async (
             overwriteFile: true,
           },
         }).then(async () => {
-          await updateDetailsFileMapConfig2({
+          snpFileMapConfig = await updateDetailsFileMapConfig2({
             config,
             operation: 'createSuffixFile',
             realFilePath,
@@ -66,14 +69,14 @@ export const buildFromConfig = async (
       }
     }
 
-    const updatedSnpFileMapConfig: FileMapConfig = await readFile(config.snpFileMapConfig).then(async (bufferData) =>
-      parseJSON(bufferData.toString())
-    );
+    // const updatedSnpFileMapConfig: FileMapConfig = await readFile(config.snpFileMapConfig).then(async (bufferData) =>
+    //   parseJSON(bufferData.toString())
+    // );
 
     const realFileObject = snpFileMapConfig.snpFileMap[realFilePath]['_'];
 
-    if (updatedSnpFileMapConfig.snpFileMap) {
-      const snpSetObject = updatedSnpFileMapConfig.snpFileMap[realFilePath] as snpArrayPathFileSet;
+    if (snpFileMapConfig.snpFileMap) {
+      const snpSetObject = snpFileMapConfig.snpFileMap[realFilePath] as snpArrayPathFileSet;
       const content = await getContentToBuild(snpSetObject);
 
       if (content) {
@@ -90,7 +93,6 @@ export const buildFromConfig = async (
         });
       }
     }
-    snpFileMapConfig = updatedSnpFileMapConfig;
   }
 
   debugFunction(config.isDebug, { snpFileMapConfig }, '[INIT] buildFromConfig');

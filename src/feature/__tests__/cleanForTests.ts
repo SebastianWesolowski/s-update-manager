@@ -13,8 +13,7 @@ export const cleanUpFiles = async ({
 }): Promise<void> => {
   await deletePath(createPath(snpCatalog), isDebug);
   const allFiles = searchFilesInDirectory({ directoryPath });
-  console.log(allFiles);
-  // for (const file of allFiles) {
-  //   await deletePath(createPath(file), isDebug);
-  // }
+  for (const file of allFiles) {
+    await deletePath(createPath(file), isDebug);
+  }
 };

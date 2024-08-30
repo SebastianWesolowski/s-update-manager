@@ -23,58 +23,20 @@ export const mockConfig_step_initSave = {
   ...mockConfig_step_init,
 };
 
-export const mockConfig_step_buildFromConfig_empty = {
+export const mockConfig_step_scanExtraFile_empty = {
   ...mockConfig_step_initSave,
-  createdFileMap: [
-    'test/mockProject/.gitignore',
-    'test/mockProject/.snp/repositoryMap.json',
-    'test/mockProject/.snp/repositoryMap.json.backup',
-    'test/mockProject/.snp/snp.config.json',
-    'test/mockProject/.snp/templateCatalog/.gitignore-default.md',
-    'test/mockProject/.snp/templateCatalog/README.md-default.md',
-    'test/mockProject/.snp/templateCatalog/package.json-default.md',
-    'test/mockProject/.snp/templateCatalog/tools/test.sh-default.md',
-    'test/mockProject/.snp/templateCatalog/tsconfig.json-default.md',
-    'test/mockProject/.snp/templateCatalog/yarn.lock-default.md',
-    'test/mockProject/.snp/temporary/.gitignore-default.md',
-    'test/mockProject/.snp/temporary/README.md-default.md',
-    'test/mockProject/.snp/temporary/package.json-default.md',
-    'test/mockProject/.snp/temporary/test.sh-default.md',
-    'test/mockProject/.snp/temporary/tsconfig.json-default.md',
-    'test/mockProject/.snp/temporary/yarn.lock-default.md',
-    'test/mockProject/README.md',
-    'test/mockProject/package.json',
-  ],
+};
+
+export const mockConfig_step_scanExtraFile_fullFiled = {
+  ...mockConfig_step_initSave,
+};
+
+export const mockConfig_step_buildFromConfig_empty = {
+  ...mockConfig_step_scanExtraFile_empty,
 };
 
 export const mockConfig_step_buildFromConfig_fullFiled = {
-  ...mockConfig_step_initSave,
-  createdFileMap: [
-    'test/mockProject/.gitignore',
-    'test/mockProject/.snp/repositoryMap.json',
-    'test/mockProject/.snp/repositoryMap.json.backup',
-    'test/mockProject/.snp/snp.config.json',
-    'test/mockProject/.snp/templateCatalog/.gitignore-custom.md',
-    'test/mockProject/.snp/templateCatalog/.gitignore-default.md',
-    'test/mockProject/.snp/templateCatalog/.gitignore-extend.md',
-    'test/mockProject/.snp/templateCatalog/README.md-custom.md',
-    'test/mockProject/.snp/templateCatalog/README.md-default.md',
-    'test/mockProject/.snp/templateCatalog/README.md-extend.md',
-    'test/mockProject/.snp/templateCatalog/package.json-custom.md',
-    'test/mockProject/.snp/templateCatalog/package.json-default.md',
-    'test/mockProject/.snp/templateCatalog/package.json-extend.md',
-    'test/mockProject/.snp/templateCatalog/tools/test.sh-default.md',
-    'test/mockProject/.snp/templateCatalog/tsconfig.json-default.md',
-    'test/mockProject/.snp/templateCatalog/yarn.lock-default.md',
-    'test/mockProject/.snp/temporary/.gitignore-default.md',
-    'test/mockProject/.snp/temporary/README.md-default.md',
-    'test/mockProject/.snp/temporary/package.json-default.md',
-    'test/mockProject/.snp/temporary/test.sh-default.md',
-    'test/mockProject/.snp/temporary/tsconfig.json-default.md',
-    'test/mockProject/.snp/temporary/yarn.lock-default.md',
-    'test/mockProject/README.md',
-    'test/mockProject/package.json',
-  ],
+  ...mockConfig_step_scanExtraFile_fullFiled,
 };
 
 export const mockSnpFileMapConfig_step_init = {
@@ -348,8 +310,11 @@ export const mockSnpFileMapConfig_step_buildFromConfig_fullFiled = {
   ...mockSnpFileMapConfig_step_scanExtraFile_fullFiled,
   createdFileMap: [
     './test/mockProject/.snp/templateCatalog/.gitignore-default.md',
+    './test/mockProject/.gitignore',
     './test/mockProject/.snp/templateCatalog/README.md-default.md',
+    './test/mockProject/README.md',
     './test/mockProject/.snp/templateCatalog/package.json-default.md',
+    './test/mockProject/package.json',
     './test/mockProject/.snp/templateCatalog/tools/test.sh-default.md',
     './test/mockProject/.snp/templateCatalog/tsconfig.json-default.md',
     './test/mockProject/.snp/templateCatalog/yarn.lock-default.md',
@@ -366,18 +331,10 @@ export const mockSnpFileMapConfig_step_buildFromConfig_fullFiled = {
       key,
       {
         ...mockSnpFileMapConfig_step_scanExtraFile_fullFiled.snpFileMap[key],
-        ...(key === '.gitignore' || key === 'README.md' || key === 'package.json'
-          ? {
-              extendFile: {
-                ...mockSnpFileMapConfig_step_scanExtraFile_fullFiled.snpFileMap[key]?.extendFile,
-                isCreated: true,
-              },
-              customFile: {
-                ...mockSnpFileMapConfig_step_scanExtraFile_fullFiled.snpFileMap[key]?.customFile,
-                isCreated: true,
-              },
-            }
-          : {}),
+        _: {
+          ...mockSnpFileMapConfig_step_scanExtraFile_fullFiled.snpFileMap[key]?.['_'],
+          isCreated: true,
+        },
         defaultFile: {
           ...mockSnpFileMapConfig_step_scanExtraFile_fullFiled.snpFileMap[key]?.defaultFile,
           isCreated: true,

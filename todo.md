@@ -10,13 +10,15 @@
  
 # Over MVP
 [] cookie: can't load punycode; won't use punycode for domain normalisation
+[] checkout RepositoryMapFileConfigType typ is very similar than FileMapConfig 
 []why are arguments and config not linked in types?
 []dryRun flag
 []config.temporaryFolder is nesesery
 []obsluga update w momencie nowej wersji w postaci innego pliku w templatce, czy cleantree zadziala ?
 [] opóźnienie w pobieraniu przez wgetAsync, jakiś cashe itp
 [] dodanie gitignore *-... !-custom, extend ...rzeczy generowane nie powinny być w repo
- 
+[] order key in configs is different
+
 [x] wyczyścić repo z niepotrzebnych rzeczy
 [x] brakuje dodawania custom i ext itp do createdFileMap w nowej wrsji
 [x] - zle genereowany SNPSuffixFileName dla extend i custom w configu
