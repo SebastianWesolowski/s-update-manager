@@ -9,8 +9,6 @@ import { ConfigType } from '@/feature/config/types';
 import { prepareBaseSnpFileMap } from '@/feature/prepareBaseFile';
 import { FileMapConfig } from '@/feature/updateFileMapConfig';
 import { createFile } from '@/util/createFile';
-import { createPath } from '@/util/createPath';
-import { deletePath } from '@/util/deletePath';
 
 describe('prepareBaseSnpFileMap', () => {
   let config: ConfigType;
