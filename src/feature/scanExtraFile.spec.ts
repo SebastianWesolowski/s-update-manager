@@ -1,12 +1,5 @@
 import { cleanUpFiles } from '@/feature/__tests__/cleanForTests';
-import {
-  mockConfig_step_initSave,
-  mockConfig_step_scanExtraFile_empty,
-  mockConfig_step_scanExtraFile_fullFiled,
-  mockSnpFileMapConfig_step_prepareBaseSnpFileMap,
-  mockSnpFileMapConfig_step_scanExtraFile_empty,
-  mockSnpFileMapConfig_step_scanExtraFile_fullFiled,
-} from '@/feature/__tests__/const';
+import { mockConfig, mockSnpFileMapConfig } from '@/feature/__tests__/const';
 import { extractAndReplacePaths } from '@/feature/__tests__/extractAndReplacePaths';
 import { searchFilesInDirectory } from '@/feature/__tests__/searchFilesInDirectory';
 import { ConfigType } from '@/feature/config/types';
@@ -19,8 +12,8 @@ describe('scanExtraFile', () => {
   let snpFileMapConfig: FileMapConfig;
 
   beforeEach(async () => {
-    config = { ...mockConfig_step_initSave };
-    snpFileMapConfig = { ...mockSnpFileMapConfig_step_prepareBaseSnpFileMap };
+    config = { ...mockConfig.step.createConfigFile };
+    snpFileMapConfig = { ...mockSnpFileMapConfig.step.prepareBaseSnpFileMap };
 
     await cleanUpFiles({
       snpCatalog: config.snpCatalog,
@@ -55,8 +48,8 @@ describe('scanExtraFile', () => {
     });
 
     expect({ ...result, allFiles }).toStrictEqual({
-      config: mockConfig_step_scanExtraFile_empty,
-      snpFileMapConfig: mockSnpFileMapConfig_step_scanExtraFile_empty,
+      config: mockConfig.step.scanExtraFile.empty,
+      snpFileMapConfig: mockSnpFileMapConfig.step.scanExtraFile.empty,
       allFiles: ['test/mockProject/.snp/repositoryMap.json', 'test/mockProject/.snp/snp.config.json'],
     });
   });
@@ -99,8 +92,8 @@ describe('scanExtraFile', () => {
     });
 
     expect({ ...result, allFiles }).toStrictEqual({
-      config: mockConfig_step_scanExtraFile_fullFiled,
-      snpFileMapConfig: mockSnpFileMapConfig_step_scanExtraFile_fullFiled,
+      config: mockConfig.step.scanExtraFile.fullFiled,
+      snpFileMapConfig: mockSnpFileMapConfig.step.scanExtraFile.fullFiled,
       allFiles: [
         'test/mockProject/.snp/repositoryMap.json',
         'test/mockProject/.snp/snp.config.json',

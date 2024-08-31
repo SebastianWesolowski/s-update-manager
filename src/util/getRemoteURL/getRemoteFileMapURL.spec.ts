@@ -1,13 +1,33 @@
 import { getRemoteFileMapURL } from './getRemoteFileMapURL';
-import { defaultConfig } from '@/feature/config/const';
+import { cleanUpFiles } from '@/feature/__tests__/cleanForTests';
+import { mockConfig } from '@/feature/__tests__/const';
 import { ConfigType } from '@/feature/config/types';
+import { createFile } from '@/util/createFile';
 
 describe('getRemoteFileMapURL', () => {
   let config: ConfigType;
 
-  beforeEach(() => {
-    // Resetowanie konfiguracji przed każdym testem
-    config = { ...defaultConfig };
+  beforeEach(async () => {
+    config = { ...mockConfig.step.createConfigFile };
+
+    await cleanUpFiles({
+      snpCatalog: config.snpCatalog,
+      directoryPath: config.projectCatalog,
+      isDebug: config.isDebug,
+    });
+
+    await createFile({
+      filePath: config.snpConfigFile,
+      content: JSON.stringify(config),
+    });
+  });
+
+  afterEach(async () => {
+    await cleanUpFiles({
+      snpCatalog: config.snpCatalog,
+      directoryPath: config.projectCatalog,
+      isDebug: config.isDebug,
+    });
   });
 
   it('should return correct URL for GitHub root folder', () => {

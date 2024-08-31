@@ -1,9 +1,5 @@
 import { cleanUpFiles } from '@/feature/__tests__/cleanForTests';
-import {
-  mockConfig_step_initSave,
-  mockSnpFileMapConfig_step_initSave,
-  mockSnpFileMapConfig_step_prepareBaseSnpFileMap,
-} from '@/feature/__tests__/const';
+import { mockConfig, mockSnpFileMapConfig } from '@/feature/__tests__/const';
 import { searchFilesInDirectory } from '@/feature/__tests__/searchFilesInDirectory';
 import { ConfigType } from '@/feature/config/types';
 import { prepareBaseSnpFileMap } from '@/feature/prepareBaseFile';
@@ -15,8 +11,8 @@ describe('prepareBaseSnpFileMap', () => {
   let snpFileMapConfig: FileMapConfig;
 
   beforeEach(async () => {
-    config = { ...mockConfig_step_initSave };
-    snpFileMapConfig = { ...mockSnpFileMapConfig_step_initSave };
+    config = { ...mockConfig.step.createConfigFile };
+    snpFileMapConfig = { ...mockSnpFileMapConfig.step.createConfigFile };
 
     await cleanUpFiles({
       snpCatalog: config.snpCatalog,
@@ -50,8 +46,8 @@ describe('prepareBaseSnpFileMap', () => {
       excludedPhrases: ['.backup'],
     });
     expect({ ...result, allFiles }).toStrictEqual({
-      config: mockConfig_step_initSave,
-      snpFileMapConfig: mockSnpFileMapConfig_step_prepareBaseSnpFileMap,
+      config: mockConfig.step.createConfigFile,
+      snpFileMapConfig: mockSnpFileMapConfig.step.prepareBaseSnpFileMap,
       allFiles: ['test/mockProject/.snp/repositoryMap.json', 'test/mockProject/.snp/snp.config.json'],
     });
   });
