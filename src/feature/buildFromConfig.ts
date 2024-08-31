@@ -1,5 +1,6 @@
 import { ConfigType, SNPKeySuffixTypes } from '@/feature/config/types';
-import { getContentToBuild, getRemoteContentToBuild } from '@/feature/getContnetToBuild';
+import { getContentToBuild } from '@/feature/getContnetToBuild';
+import { getRemoteContentToBuild } from '@/feature/getRemoteContentToBuild';
 import {
   FileMapConfig,
   snpArrayPathFileSet,
