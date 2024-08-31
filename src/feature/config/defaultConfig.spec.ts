@@ -1,4 +1,4 @@
-import { mockConfig_step_init, mockConfig_step_initSave } from '@/feature/__tests__/const';
+import { mockConfig } from '@/feature/__tests__/const';
 import { defaultArgs } from '@/feature/args/const';
 import { defaultConfig } from '@/feature/config/const';
 import { getConfig, regenerateConfig, updateDefaultConfig } from '@/feature/config/defaultConfig';
@@ -130,8 +130,8 @@ const testCases: { description: string; mockConfig: Partial<ConfigType>; expecte
   },
   {
     description: 'config from const for tests',
-    mockConfig: mockConfig_step_init,
-    expectedConfig: mockConfig_step_initSave,
+    mockConfig: mockConfig.step.init,
+    expectedConfig: mockConfig.step.createConfigFile,
   },
 ];
 

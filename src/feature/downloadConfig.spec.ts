@@ -1,9 +1,5 @@
 import { cleanUpFiles } from '@/feature/__tests__/cleanForTests';
-import {
-  mockConfig_step_initSave,
-  mockSnpFileMapConfig_step_init,
-  mockSnpFileMapConfig_step_initSave,
-} from '@/feature/__tests__/const';
+import { mockConfig, mockSnpFileMapConfig } from '@/feature/__tests__/const';
 import { searchFilesInDirectory } from '@/feature/__tests__/searchFilesInDirectory';
 import { ConfigType } from '@/feature/config/types';
 import { downloadConfig } from '@/feature/downloadConfig';
@@ -15,8 +11,8 @@ describe('downloadConfig', () => {
   let snpFileMapConfig: FileMapConfig;
 
   beforeEach(async () => {
-    config = { ...mockConfig_step_initSave };
-    snpFileMapConfig = { ...mockSnpFileMapConfig_step_initSave };
+    config = { ...mockConfig.step.createConfigFile };
+    snpFileMapConfig = { ...mockSnpFileMapConfig.step.createConfigFile };
 
     await cleanUpFiles({
       snpCatalog: config.snpCatalog,
@@ -48,10 +44,10 @@ describe('downloadConfig', () => {
 
     expect({ ...result, allFiles }).toStrictEqual({
       config: {
-        ...config,
+        ...mockConfig.step.downloadConfigFile,
       },
-      downloadContent: mockSnpFileMapConfig_step_init,
-      snpFileMapConfig: mockSnpFileMapConfig_step_initSave,
+      downloadContent: mockSnpFileMapConfig.step.init,
+      snpFileMapConfig: mockSnpFileMapConfig.step.downloadConfigFile,
       allFiles: [
         'test/mockProject/.snp/repositoryMap.json',
         'test/mockProject/.snp/snp.config.json',
@@ -79,10 +75,10 @@ describe('downloadConfig', () => {
     });
     expect({ ...result, allFiles }).toStrictEqual({
       config: {
-        ...config,
+        ...mockConfig.step.downloadConfigFile,
       },
-      downloadContent: mockSnpFileMapConfig_step_init,
-      snpFileMapConfig: mockSnpFileMapConfig_step_initSave,
+      downloadContent: mockSnpFileMapConfig.step.init,
+      snpFileMapConfig: mockSnpFileMapConfig.step.downloadConfigFile,
       allFiles: [
         'test/mockProject/.snp/repositoryMap.json',
         'test/mockProject/.snp/snp.config.json',
@@ -121,8 +117,8 @@ describe('downloadConfig', () => {
   //     config: {
   //       ...config,
   //     },
-  //     downloadContent: mockSnpFileMapConfig_step_init,
-  //     snpFileMapConfig: mockSnpFileMapConfig_step_initSave,
+  //     downloadContent: mockSnpFileMapConfig.step.init,
+  //     snpFileMapConfig: mockSnpFileMapConfig.step.downloadConfigFile,
   //     allFiles: [
   //       'test/mockProject/.snp/repositoryMap.json',
   //       'test/mockProject/.snp/snp.config.json',

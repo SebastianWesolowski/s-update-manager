@@ -1,4 +1,4 @@
-export const mockConfig_step_init = {
+const mockConfig_step_init = {
   REPOSITORY_MAP_FILE_NAME: 'repositoryMap.json',
   _: [],
   availableSNPKeySuffix: ['defaultFile', 'customFile', 'extendFile'],
@@ -19,27 +19,34 @@ export const mockConfig_step_init = {
   temporaryFolder: './test/mockProject/.snp/temporary/',
 };
 
-export const mockConfig_step_initSave = {
+const mockConfig_step_createConfigFile = {
   ...mockConfig_step_init,
 };
-
-export const mockConfig_step_scanExtraFile_empty = {
-  ...mockConfig_step_initSave,
+const mockConfig_step_downloadConfigFile = {
+  ...mockConfig_step_createConfigFile,
 };
 
-export const mockConfig_step_scanExtraFile_fullFiled = {
-  ...mockConfig_step_initSave,
+const mockConfig_step_prepareBaseSnpFileMap = {
+  ...mockConfig_step_downloadConfigFile,
 };
 
-export const mockConfig_step_buildFromConfig_empty = {
+const mockConfig_step_scanExtraFile_empty = {
+  ...mockConfig_step_downloadConfigFile,
+};
+
+const mockConfig_step_scanExtraFile_fullFiled = {
+  ...mockConfig_step_downloadConfigFile,
+};
+
+const mockConfig_step_buildFromConfig_empty = {
   ...mockConfig_step_scanExtraFile_empty,
 };
 
-export const mockConfig_step_buildFromConfig_fullFiled = {
+const mockConfig_step_buildFromConfig_fullFiled = {
   ...mockConfig_step_scanExtraFile_fullFiled,
 };
 
-export const mockSnpFileMapConfig_step_init = {
+const mockSnpFileMapConfig_step_init = {
   fileMap: [
     'templateCatalog/.gitignore-default.md',
     'templateCatalog/README.md-default.md',
@@ -67,14 +74,18 @@ export const mockSnpFileMapConfig_step_init = {
   templateVersion: '1.0.0',
 };
 
-export const mockSnpFileMapConfig_step_initSave = {
+const mockSnpFileMapConfig_step_createConfigFile = {
   ...mockSnpFileMapConfig_step_init,
   snpFileMap: {},
   createdFileMap: [],
 };
 
-export const mockSnpFileMapConfig_step_prepareBaseSnpFileMap = {
-  ...mockSnpFileMapConfig_step_initSave,
+const mockSnpFileMapConfig_step_downloadConfigFile = {
+  ...mockSnpFileMapConfig_step_createConfigFile,
+};
+
+const mockSnpFileMapConfig_step_prepareBaseSnpFileMap = {
+  ...mockSnpFileMapConfig_step_downloadConfigFile,
   snpFileMap: {
     '.gitignore': {
       _: {
@@ -193,11 +204,11 @@ export const mockSnpFileMapConfig_step_prepareBaseSnpFileMap = {
   },
 };
 
-export const mockSnpFileMapConfig_step_scanExtraFile_empty = {
+const mockSnpFileMapConfig_step_scanExtraFile_empty = {
   ...mockSnpFileMapConfig_step_prepareBaseSnpFileMap,
 };
 
-export const mockSnpFileMapConfig_step_scanExtraFile_fullFiled = {
+const mockSnpFileMapConfig_step_scanExtraFile_fullFiled = {
   ...mockSnpFileMapConfig_step_prepareBaseSnpFileMap,
   manualCreatedFileMap: [
     './test/mockProject/.snp/templateCatalog/.gitignore-custom.md',
@@ -275,7 +286,7 @@ export const mockSnpFileMapConfig_step_scanExtraFile_fullFiled = {
   },
 };
 
-export const mockSnpFileMapConfig_step_buildFromConfig_empty = {
+const mockSnpFileMapConfig_step_buildFromConfig_empty = {
   ...mockSnpFileMapConfig_step_scanExtraFile_empty,
   createdFileMap: [
     './test/mockProject/.snp/templateCatalog/.gitignore-default.md',
@@ -316,7 +327,7 @@ export const mockSnpFileMapConfig_step_buildFromConfig_empty = {
   ),
 };
 
-export const mockSnpFileMapConfig_step_buildFromConfig_fullFiled = {
+const mockSnpFileMapConfig_step_buildFromConfig_fullFiled = {
   ...mockSnpFileMapConfig_step_scanExtraFile_fullFiled,
   createdFileMap: [
     './test/mockProject/.snp/templateCatalog/.gitignore-default.md',
@@ -355,4 +366,38 @@ export const mockSnpFileMapConfig_step_buildFromConfig_fullFiled = {
       },
     ])
   ),
+};
+
+export const mockConfig = {
+  step: {
+    init: mockConfig_step_init,
+    createConfigFile: mockConfig_step_createConfigFile,
+    downloadConfigFile: mockConfig_step_downloadConfigFile,
+    prepareBaseSnpFileMap: mockConfig_step_prepareBaseSnpFileMap,
+    scanExtraFile: {
+      empty: mockConfig_step_scanExtraFile_empty,
+      fullFiled: mockConfig_step_scanExtraFile_fullFiled,
+    },
+    buildFromConfig: {
+      empty: mockConfig_step_buildFromConfig_empty,
+      fullFiled: mockConfig_step_buildFromConfig_fullFiled,
+    },
+  },
+};
+
+export const mockSnpFileMapConfig = {
+  step: {
+    init: mockSnpFileMapConfig_step_init,
+    createConfigFile: mockSnpFileMapConfig_step_createConfigFile,
+    downloadConfigFile: mockSnpFileMapConfig_step_downloadConfigFile,
+    prepareBaseSnpFileMap: mockSnpFileMapConfig_step_prepareBaseSnpFileMap,
+    scanExtraFile: {
+      empty: mockSnpFileMapConfig_step_scanExtraFile_empty,
+      fullFiled: mockSnpFileMapConfig_step_scanExtraFile_fullFiled,
+    },
+    buildFromConfig: {
+      empty: mockSnpFileMapConfig_step_buildFromConfig_empty,
+      fullFiled: mockSnpFileMapConfig_step_buildFromConfig_fullFiled,
+    },
+  },
 };

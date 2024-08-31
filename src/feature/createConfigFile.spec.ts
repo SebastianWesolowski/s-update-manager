@@ -1,5 +1,5 @@
 import { cleanUpFiles } from '@/feature/__tests__/cleanForTests';
-import { mockConfig_step_init, mockConfig_step_initSave } from '@/feature/__tests__/const';
+import { mockConfig } from '@/feature/__tests__/const';
 import { searchFilesInDirectory } from '@/feature/__tests__/searchFilesInDirectory';
 import { ConfigType } from '@/feature/config/types';
 import { createConfigFile } from '@/feature/createConfigFile';
@@ -8,7 +8,7 @@ describe('createConfigFile', () => {
   let config: ConfigType;
 
   beforeEach(async () => {
-    config = { ...mockConfig_step_init };
+    config = { ...mockConfig.step.init };
 
     await cleanUpFiles({
       snpCatalog: config.snpCatalog,
@@ -34,8 +34,8 @@ describe('createConfigFile', () => {
     });
 
     expect({ ...result, allFiles }).toStrictEqual({
-      config: mockConfig_step_initSave,
-      configFilePath: mockConfig_step_initSave.snpConfigFile,
+      config: mockConfig.step.createConfigFile,
+      configFilePath: mockConfig.step.createConfigFile.snpConfigFile,
       allFiles: ['test/mockProject/.snp/snp.config.json'],
     });
   });

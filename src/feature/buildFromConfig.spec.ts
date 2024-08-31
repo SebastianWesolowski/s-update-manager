@@ -1,14 +1,5 @@
 import { cleanUpFiles } from '@/feature/__tests__/cleanForTests';
-import {
-  mockConfig_step_buildFromConfig_empty,
-  mockConfig_step_buildFromConfig_fullFiled,
-  mockConfig_step_scanExtraFile_empty,
-  mockConfig_step_scanExtraFile_fullFiled,
-  mockSnpFileMapConfig_step_buildFromConfig_empty,
-  mockSnpFileMapConfig_step_buildFromConfig_fullFiled,
-  mockSnpFileMapConfig_step_scanExtraFile_empty,
-  mockSnpFileMapConfig_step_scanExtraFile_fullFiled,
-} from '@/feature/__tests__/const';
+import { mockConfig, mockSnpFileMapConfig } from '@/feature/__tests__/const';
 import { extractAndReplacePaths } from '@/feature/__tests__/extractAndReplacePaths';
 import { searchFilesInDirectory } from '@/feature/__tests__/searchFilesInDirectory';
 import { updateConfigBasedOnComparison } from '@/feature/__tests__/updateConfigBasedOnComparison';
@@ -23,8 +14,8 @@ describe('buildFromConfig', () => {
   let snpFileMapConfig: FileMapConfig;
 
   beforeEach(async () => {
-    const configFullField = mockConfig_step_scanExtraFile_fullFiled;
-    const configEmpty = mockConfig_step_scanExtraFile_empty;
+    const configFullField = mockConfig.step.scanExtraFile.fullFiled;
+    const configEmpty = mockConfig.step.scanExtraFile.empty;
     const keysToCompare: (keyof ConfigType)[] = ['snpCatalog', 'projectCatalog', 'isDebug'];
 
     partialConfig = updateConfigBasedOnComparison<Partial<ConfigType>>(
@@ -52,8 +43,8 @@ describe('buildFromConfig', () => {
   });
 
   it('should return correct content without extra file', async () => {
-    config = { ...mockConfig_step_scanExtraFile_empty, ...partialConfig };
-    snpFileMapConfig = { ...mockSnpFileMapConfig_step_scanExtraFile_empty };
+    config = { ...mockConfig.step.scanExtraFile.empty, ...partialConfig };
+    snpFileMapConfig = { ...mockSnpFileMapConfig.step.scanExtraFile.empty };
 
     await createFile({
       filePath: config.snpConfigFile,
@@ -71,8 +62,8 @@ describe('buildFromConfig', () => {
       excludedPhrases: ['.backup'],
     });
     expect({ ...result, allFiles }).toStrictEqual({
-      config: mockConfig_step_buildFromConfig_empty,
-      snpFileMapConfig: mockSnpFileMapConfig_step_buildFromConfig_empty,
+      config: mockConfig.step.buildFromConfig.empty,
+      snpFileMapConfig: mockSnpFileMapConfig.step.buildFromConfig.empty,
       allFiles: [
         'test/mockProject/.gitignore',
         'test/mockProject/.snp/repositoryMap.json',
@@ -99,8 +90,8 @@ describe('buildFromConfig', () => {
   });
 
   it('should return correct content with extra file', async () => {
-    config = { ...mockConfig_step_scanExtraFile_fullFiled };
-    snpFileMapConfig = { ...mockSnpFileMapConfig_step_scanExtraFile_fullFiled };
+    config = { ...mockConfig.step.scanExtraFile.fullFiled };
+    snpFileMapConfig = { ...mockSnpFileMapConfig.step.scanExtraFile.fullFiled };
     await createFile({
       filePath: config.snpConfigFile,
       content: JSON.stringify(config),
@@ -138,8 +129,8 @@ describe('buildFromConfig', () => {
       excludedPhrases: ['.backup'],
     });
     expect({ ...result, allFiles }).toStrictEqual({
-      config: mockConfig_step_buildFromConfig_fullFiled,
-      snpFileMapConfig: mockSnpFileMapConfig_step_buildFromConfig_fullFiled,
+      config: mockConfig.step.buildFromConfig.fullFiled,
+      snpFileMapConfig: mockSnpFileMapConfig.step.buildFromConfig.fullFiled,
       allFiles: [
         'test/mockProject/.gitignore',
         'test/mockProject/.snp/repositoryMap.json',
