@@ -46,6 +46,14 @@ const mockConfig_step_buildFromConfig_fullFiled = {
   ...mockConfig_step_scanExtraFile_fullFiled,
 };
 
+const mockConfig_step_cleanUp_empty = {
+  ...mockConfig_step_buildFromConfig_empty,
+};
+
+const mockConfig_step_cleanUp_fullFiled = {
+  ...mockConfig_step_buildFromConfig_fullFiled,
+};
+
 const mockSnpFileMapConfig_step_init = {
   fileMap: [
     'templateCatalog/.gitignore-default.md',
@@ -368,6 +376,13 @@ const mockSnpFileMapConfig_step_buildFromConfig_fullFiled = {
   ),
 };
 
+const mockSnpFileMapConfig_step_cleanUp_empty = {
+  ...mockSnpFileMapConfig_step_buildFromConfig_empty,
+};
+const mockSnpFileMapConfig_step_cleanUp_fullFiled = {
+  ...mockSnpFileMapConfig_step_buildFromConfig_fullFiled,
+};
+
 export const mockConfig = {
   step: {
     init: mockConfig_step_init,
@@ -381,6 +396,10 @@ export const mockConfig = {
     buildFromConfig: {
       empty: mockConfig_step_buildFromConfig_empty,
       fullFiled: mockConfig_step_buildFromConfig_fullFiled,
+    },
+    cleanUp: {
+      empty: mockConfig_step_cleanUp_empty,
+      fullFiled: mockConfig_step_cleanUp_fullFiled,
     },
   },
 };
@@ -398,6 +417,10 @@ export const mockSnpFileMapConfig = {
     buildFromConfig: {
       empty: mockSnpFileMapConfig_step_buildFromConfig_empty,
       fullFiled: mockSnpFileMapConfig_step_buildFromConfig_fullFiled,
+    },
+    cleanUp: {
+      empty: mockSnpFileMapConfig_step_cleanUp_empty,
+      fullFiled: mockSnpFileMapConfig_step_cleanUp_fullFiled,
     },
   },
 };

@@ -3,16 +3,18 @@ import { deletePath } from '@/util/deletePath';
 import { formatJsonWithPrettier } from '@/util/formatPrettier';
 import { isFileOrFolderExists } from '@/util/isFileOrFolderExists';
 
-export const cleanUp = async (config: ConfigType): Promise<ConfigType> => {
+export const cleanUp = async (config: ConfigType): Promise<{ config: ConfigType }> => {
   try {
-    await formatJsonWithPrettier(config.snpFileMapConfig);
-    await formatJsonWithPrettier(config.snpConfigFile);
+    await formatJsonWithPrettier(config.snpFileMapConfig, config.snpFileMapConfig, config.isDebug);
+    await formatJsonWithPrettier(config.snpConfigFile, config.snpConfigFile, config.isDebug);
     if (await isFileOrFolderExists(config.temporaryFolder)) {
       await deletePath(config.temporaryFolder, config.isDebug);
     }
-    return config;
+    return { config };
   } catch (error) {
-    console.error(`Error isnt exist: ${(error as Error).message}`);
-    return config;
+    if (config.isDebug) {
+      console.error(`Error isnt exist: ${(error as Error).message}`);
+    }
+    return { config };
   }
 };
