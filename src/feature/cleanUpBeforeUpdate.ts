@@ -7,12 +7,15 @@ import { getRealFilePath } from '@/util/getRealFilePath';
 import { parseJSON } from '@/util/parseJSON';
 import { readFile } from '@/util/readFile';
 
-export const cleanUpBeforeUpdate = async (config: ConfigType): Promise<ConfigType> => {
+export const cleanUpBeforeUpdate = async (
+  config: ConfigType
+): Promise<{ config: ConfigType; deletedPath: string[]; snpFileMapConfig: FileMapConfig }> => {
   let snpFileMapConfig: FileMapConfig = await readFile(config.snpFileMapConfig).then(async (bufferData) =>
     parseJSON(bufferData.toString())
   );
 
   const fileToClean: snpFile[] = [];
+  const deletedPath: string[] = [];
 
   try {
     if (snpFileMapConfig.snpFileMap && snpFileMapConfig.fileMap) {
@@ -33,16 +36,21 @@ export const cleanUpBeforeUpdate = async (config: ConfigType): Promise<ConfigTyp
     }
 
     for (const snpFile of fileToClean) {
-      await deletePath(createPath(snpFile.path), config.isDebug).then(async () => {
-        snpFileMapConfig = await updateDetailsFileMapConfig2({
-          snpFileMapConfig,
-          config,
-          operation: 'deleteFile',
-          SNPKeySuffix: snpFile.SNPKeySuffix as AvailableSNPKeySuffixTypes | '_',
-          // realFileName: snpFile.realFileName,
-          realFilePath: snpFile.realFilePath,
+      await deletePath(createPath(snpFile.path), config.isDebug)
+        .then(async () => {
+          snpFileMapConfig = await updateDetailsFileMapConfig2({
+            snpFileMapConfig,
+            config,
+            operation: 'deleteFile',
+            SNPKeySuffix: snpFile.SNPKeySuffix as AvailableSNPKeySuffixTypes | '_',
+            // realFileName: snpFile.realFileName,
+            realFilePath: snpFile.realFilePath,
+          });
+          return snpFile.path;
+        })
+        .then((path) => {
+          deletedPath.push(path);
         });
-      });
     }
 
     snpFileMapConfig = await updateDetailsFileMapConfig2({
@@ -51,7 +59,7 @@ export const cleanUpBeforeUpdate = async (config: ConfigType): Promise<ConfigTyp
       operation: 'removeFileMap',
     });
 
-    return config;
+    return { config, deletedPath, snpFileMapConfig };
   } catch (err) {
     console.error('Error while downloading config from github', err);
     throw err;

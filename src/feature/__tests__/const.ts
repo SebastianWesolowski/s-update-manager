@@ -54,6 +54,14 @@ const mockConfig_step_cleanUp_fullFiled = {
   ...mockConfig_step_buildFromConfig_fullFiled,
 };
 
+const mockConfig_step_cleanUpBeforeUpdate_empty = {
+  ...mockConfig_step_cleanUp_empty,
+};
+
+const mockConfig_step_cleanUpBeforeUpdate_fullFiled = {
+  ...mockConfig_step_cleanUp_fullFiled,
+};
+
 const mockSnpFileMapConfig_step_init = {
   fileMap: [
     'templateCatalog/.gitignore-default.md',
@@ -383,6 +391,19 @@ const mockSnpFileMapConfig_step_cleanUp_fullFiled = {
   ...mockSnpFileMapConfig_step_buildFromConfig_fullFiled,
 };
 
+const mockSnpFileMapConfig_step_cleanUpBeforeUpdate_empty = {
+  ...mockSnpFileMapConfig_step_cleanUp_empty,
+  createdFileMap: [],
+  fileMap: [],
+  rootPathFileList: mockSnpFileMapConfig_step_cleanUp_empty.rootPathFileList,
+  snpFileMap: {},
+  templateFileList: mockSnpFileMapConfig_step_cleanUp_empty.templateFileList,
+};
+
+const mockSnpFileMapConfig_step_cleanUpBeforeUpdate_fullFiled = {
+  ...mockSnpFileMapConfig_step_cleanUp_fullFiled,
+};
+
 export const mockConfig = {
   step: {
     init: mockConfig_step_init,
@@ -400,6 +421,10 @@ export const mockConfig = {
     cleanUp: {
       empty: mockConfig_step_cleanUp_empty,
       fullFiled: mockConfig_step_cleanUp_fullFiled,
+    },
+    cleanUpBeforeUpdate: {
+      empty: mockConfig_step_cleanUpBeforeUpdate_empty,
+      fullFiled: mockConfig_step_cleanUpBeforeUpdate_fullFiled,
     },
   },
 };
@@ -421,6 +446,10 @@ export const mockSnpFileMapConfig = {
     cleanUp: {
       empty: mockSnpFileMapConfig_step_cleanUp_empty,
       fullFiled: mockSnpFileMapConfig_step_cleanUp_fullFiled,
+    },
+    cleanUpBeforeUpdate: {
+      empty: mockSnpFileMapConfig_step_cleanUpBeforeUpdate_empty,
+      fullFiled: mockSnpFileMapConfig_step_cleanUpBeforeUpdate_fullFiled,
     },
   },
 };
