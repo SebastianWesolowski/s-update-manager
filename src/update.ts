@@ -39,7 +39,7 @@ update(args)
     finalConfig = config;
     return cleanUpBeforeUpdate(config);
   })
-  .then((config) => {
+  .then(({ config }) => {
     finalConfig = config;
     return downloadConfig(config);
   })
