@@ -402,6 +402,27 @@ const mockSnpFileMapConfig_step_cleanUpBeforeUpdate_empty = {
 
 const mockSnpFileMapConfig_step_cleanUpBeforeUpdate_fullFiled = {
   ...mockSnpFileMapConfig_step_cleanUp_fullFiled,
+  createdFileMap: [],
+  fileMap: [],
+  rootPathFileList: mockSnpFileMapConfig_step_cleanUp_fullFiled.rootPathFileList,
+  snpFileMap: Object.fromEntries(
+    Object.entries({
+      '.gitignore': {},
+      'README.md': {},
+      'package.json': {},
+    }).map(([key]) => [
+      key,
+      {
+        customFile: {
+          ...mockSnpFileMapConfig_step_cleanUp_fullFiled.snpFileMap[key]?.customFile,
+        },
+        extendFile: {
+          ...mockSnpFileMapConfig_step_cleanUp_fullFiled.snpFileMap[key]?.extendFile,
+        },
+      },
+    ])
+  ),
+  templateFileList: mockSnpFileMapConfig_step_cleanUp_fullFiled.templateFileList,
 };
 
 export const mockConfig = {
