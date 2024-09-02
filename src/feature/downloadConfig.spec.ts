@@ -87,7 +87,7 @@ describe('downloadConfig', () => {
     });
   });
 
-  // it('should return correct content with both configs file and update', async () => {
+  // it('should return correct content with both configs file', async () => {
   //   config = {
   //     ...config,
   //     remoteFileMapURL:
@@ -113,9 +113,9 @@ describe('downloadConfig', () => {
   //     excludedFileNames: ['.DS_Store'],
   //     excludedPhrases: ['.backup'],
   //   });
-  //   expect({ result, allFiles }).toStrictEqual({
+  //   expect({ ...result, allFiles }).toStrictEqual({
   //     config: {
-  //       ...config,
+  //       ...mockConfig.step.downloadConfigFile,
   //     },
   //     downloadContent: mockSnpFileMapConfig.step.init,
   //     snpFileMapConfig: mockSnpFileMapConfig.step.downloadConfigFile,

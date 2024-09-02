@@ -130,6 +130,12 @@ test/**/*
 !test/testTemplate/
 !test/testTemplate/**
 !test/testTemplate/**/*
+!test/mockTemplate/
+!test/mockTemplate/**
+!test/mockTemplate/**/*
+!test/mockUpdatedTemplate/
+!test/mockUpdatedTemplate/**
+!test/mockUpdatedTemplate/**/*
 !template/create-react-app-main/templateCatalog
 !template/create-react-app-main/templateCatalog/*
 !template/create-react-app-main/templateCatalog/**
