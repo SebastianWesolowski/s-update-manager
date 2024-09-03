@@ -44,10 +44,10 @@ describe('downloadConfig', () => {
 
     expect({ ...result, allFiles }).toStrictEqual({
       config: {
-        ...mockConfig.step.downloadConfigFile,
+        ...mockConfig.step.downloadConfigFile.forInit,
       },
       downloadContent: mockSnpFileMapConfig.step.init,
-      snpFileMapConfig: mockSnpFileMapConfig.step.downloadConfigFile,
+      snpFileMapConfig: mockSnpFileMapConfig.step.downloadConfigFile.forInit,
       allFiles: [
         'test/mockProject/.snp/repositoryMap.json',
         'test/mockProject/.snp/snp.config.json',
@@ -75,10 +75,10 @@ describe('downloadConfig', () => {
     });
     expect({ ...result, allFiles }).toStrictEqual({
       config: {
-        ...mockConfig.step.downloadConfigFile,
+        ...mockConfig.step.downloadConfigFile.forInit,
       },
       downloadContent: mockSnpFileMapConfig.step.init,
-      snpFileMapConfig: mockSnpFileMapConfig.step.downloadConfigFile,
+      snpFileMapConfig: mockSnpFileMapConfig.step.downloadConfigFile.forInit,
       allFiles: [
         'test/mockProject/.snp/repositoryMap.json',
         'test/mockProject/.snp/snp.config.json',
@@ -87,43 +87,43 @@ describe('downloadConfig', () => {
     });
   });
 
-  // it('should return correct content with both configs file', async () => {
-  //   config = {
-  //     ...config,
-  //     remoteFileMapURL:
-  //       'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/dev/test/mockUpdatedTemplate/templateCatalog/repositoryMap.json',
-  //     remoteRepository: 'https://github.com/SebastianWesolowski/s-update-manager/tree/dev/test/mockUpdatedTemplate',
-  //     remoteRootRepositoryUrl:
-  //       'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/tree/dev/test/mockUpdatedTemplate',
-  //   };
-  //
-  //   await createFile({
-  //     filePath: config.snpConfigFile,
-  //     content: JSON.stringify(config),
-  //   });
-  //
-  //   await createFile({
-  //     filePath: config.snpFileMapConfig,
-  //     content: JSON.stringify(snpFileMapConfig),
-  //   });
-  //
-  //   const result = await downloadConfig(config);
-  //   const allFiles = searchFilesInDirectory({
-  //     directoryPath: config.projectCatalog,
-  //     excludedFileNames: ['.DS_Store'],
-  //     excludedPhrases: ['.backup'],
-  //   });
-  //   expect({ ...result, allFiles }).toStrictEqual({
-  //     config: {
-  //       ...mockConfig.step.downloadConfigFile,
-  //     },
-  //     downloadContent: mockSnpFileMapConfig.step.init,
-  //     snpFileMapConfig: mockSnpFileMapConfig.step.downloadConfigFile,
-  //     allFiles: [
-  //       'test/mockProject/.snp/repositoryMap.json',
-  //       'test/mockProject/.snp/snp.config.json',
-  //       'test/mockProject/.snp/temporary/repositoryMap.json',
-  //     ],
-  //   });
-  // });
+  it('should return correct content with both configs file', async () => {
+    config = {
+      ...config,
+      remoteFileMapURL:
+        'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/dev/test/mockUpdatedTemplate/templateCatalog/repositoryMap.json',
+      remoteRepository: 'https://github.com/SebastianWesolowski/s-update-manager/tree/dev/test/mockUpdatedTemplate',
+      remoteRootRepositoryUrl:
+        'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/tree/dev/test/mockUpdatedTemplate',
+    };
+
+    await createFile({
+      filePath: config.snpConfigFile,
+      content: JSON.stringify(config),
+    });
+
+    await createFile({
+      filePath: config.snpFileMapConfig,
+      content: JSON.stringify(snpFileMapConfig),
+    });
+
+    const result = await downloadConfig(config);
+    const allFiles = searchFilesInDirectory({
+      directoryPath: config.projectCatalog,
+      excludedFileNames: ['.DS_Store'],
+      excludedPhrases: ['.backup'],
+    });
+    expect({ ...result, allFiles }).toStrictEqual({
+      config: {
+        ...mockConfig.step.downloadConfigFile.forUpdate,
+      },
+      downloadContent: mockSnpFileMapConfig.step.downloadConfigFile.downloaded,
+      snpFileMapConfig: mockSnpFileMapConfig.step.downloadConfigFile.updated,
+      allFiles: [
+        'test/mockProject/.snp/repositoryMap.json',
+        'test/mockProject/.snp/snp.config.json',
+        'test/mockProject/.snp/temporary/repositoryMap.json',
+      ],
+    });
+  });
 });
