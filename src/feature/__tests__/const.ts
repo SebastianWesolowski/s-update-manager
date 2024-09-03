@@ -22,20 +22,28 @@ const mockConfig_step_init = {
 const mockConfig_step_createConfigFile = {
   ...mockConfig_step_init,
 };
-const mockConfig_step_downloadConfigFile = {
+const mockConfig_step_downloadConfigFileForInit = {
   ...mockConfig_step_createConfigFile,
+};
+const mockConfig_step_downloadConfigFileForUpdate = {
+  ...mockConfig_step_createConfigFile,
+  remoteFileMapURL:
+    'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/dev/test/mockUpdatedTemplate/templateCatalog/repositoryMap.json',
+  remoteRepository: 'https://github.com/SebastianWesolowski/s-update-manager/tree/dev/test/mockUpdatedTemplate',
+  remoteRootRepositoryUrl:
+    'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/tree/dev/test/mockUpdatedTemplate',
 };
 
 const mockConfig_step_prepareBaseSnpFileMap = {
-  ...mockConfig_step_downloadConfigFile,
+  ...mockConfig_step_downloadConfigFileForInit,
 };
 
 const mockConfig_step_scanExtraFile_empty = {
-  ...mockConfig_step_downloadConfigFile,
+  ...mockConfig_step_downloadConfigFileForInit,
 };
 
 const mockConfig_step_scanExtraFile_fullFiled = {
-  ...mockConfig_step_downloadConfigFile,
+  ...mockConfig_step_downloadConfigFileForInit,
 };
 
 const mockConfig_step_buildFromConfig_empty = {
@@ -96,12 +104,74 @@ const mockSnpFileMapConfig_step_createConfigFile = {
   createdFileMap: [],
 };
 
-const mockSnpFileMapConfig_step_downloadConfigFile = {
+const mockSnpFileMapConfig_step_downloadConfigFileForInit = {
   ...mockSnpFileMapConfig_step_createConfigFile,
+};
+const mockSnpFileMapConfig_step_downloadConfigFileForDownloaded = {
+  ...mockSnpFileMapConfig_step_createConfigFile,
+  fileMap: [
+    'templateCatalog/.gitignore-default.md',
+    'templateCatalog/package.json-default.md',
+    'templateCatalog/tools/newTest.sh-default.md',
+    'templateCatalog/tools/test.sh-default.md',
+    'templateCatalog/tsconfig.json-default.md',
+    'templateCatalog/yarn.lock-default.md',
+  ],
+  rootPathFileList: [
+    './.gitignore',
+    './package.json',
+    './tools/newTest.sh',
+    './tools/test.sh',
+    './tsconfig.json',
+    './yarn.lock',
+  ],
+  templateFileList: [
+    './.gitignore',
+    './package.json',
+    './tools/newTest.sh',
+    './tools/test.sh',
+    './tsconfig.json',
+    './yarn.lock',
+  ],
+};
+
+// @ts-ignore
+delete mockSnpFileMapConfig_step_downloadConfigFileForDownloaded.createdFileMap;
+// @ts-ignore
+delete mockSnpFileMapConfig_step_downloadConfigFileForDownloaded.snpFileMap;
+
+const mockSnpFileMapConfig_step_downloadConfigFileForUpdated = {
+  ...mockSnpFileMapConfig_step_createConfigFile,
+  createdFileMap: [],
+  snpFileMap: {},
+  fileMap: [
+    'templateCatalog/.gitignore-default.md',
+    'templateCatalog/package.json-default.md',
+    'templateCatalog/tools/newTest.sh-default.md',
+    'templateCatalog/tools/test.sh-default.md',
+    'templateCatalog/tsconfig.json-default.md',
+    'templateCatalog/yarn.lock-default.md',
+  ],
+  rootPathFileList: [
+    './.gitignore',
+    './package.json',
+    './tools/newTest.sh',
+    './tools/test.sh',
+    './tsconfig.json',
+    './yarn.lock',
+  ],
+  templateFileList: [
+    './.gitignore',
+    './package.json',
+    './tools/newTest.sh',
+    './tools/test.sh',
+    './tsconfig.json',
+    './yarn.lock',
+  ],
 };
 
 const mockSnpFileMapConfig_step_prepareBaseSnpFileMap = {
-  ...mockSnpFileMapConfig_step_downloadConfigFile,
+  ...mockSnpFileMapConfig_step_downloadConfigFileForInit,
   snpFileMap: {
     '.gitignore': {
       _: {
@@ -429,7 +499,10 @@ export const mockConfig = {
   step: {
     init: mockConfig_step_init,
     createConfigFile: mockConfig_step_createConfigFile,
-    downloadConfigFile: mockConfig_step_downloadConfigFile,
+    downloadConfigFile: {
+      forInit: mockConfig_step_downloadConfigFileForInit,
+      forUpdate: mockConfig_step_downloadConfigFileForUpdate,
+    },
     prepareBaseSnpFileMap: mockConfig_step_prepareBaseSnpFileMap,
     scanExtraFile: {
       empty: mockConfig_step_scanExtraFile_empty,
@@ -454,7 +527,11 @@ export const mockSnpFileMapConfig = {
   step: {
     init: mockSnpFileMapConfig_step_init,
     createConfigFile: mockSnpFileMapConfig_step_createConfigFile,
-    downloadConfigFile: mockSnpFileMapConfig_step_downloadConfigFile,
+    downloadConfigFile: {
+      forInit: mockSnpFileMapConfig_step_downloadConfigFileForInit,
+      downloaded: mockSnpFileMapConfig_step_downloadConfigFileForDownloaded,
+      updated: mockSnpFileMapConfig_step_downloadConfigFileForUpdated,
+    },
     prepareBaseSnpFileMap: mockSnpFileMapConfig_step_prepareBaseSnpFileMap,
     scanExtraFile: {
       empty: mockSnpFileMapConfig_step_scanExtraFile_empty,

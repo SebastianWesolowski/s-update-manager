@@ -7,6 +7,7 @@
 [] wykonać testy dla dużych repo
 [] przygotować example repo/srcipt/etc
 [] Opisać wszystkoe TODO
+[] test downloadConfig ? "rootPathFileList": [ -> "./.gitignore.md",Opisać wszystkoe TODO
  
 # Over MVP
 [] cookie: can't load punycode; won't use punycode for domain normalisation

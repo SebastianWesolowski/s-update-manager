@@ -11,8 +11,8 @@ describe('prepareBaseSnpFileMap', () => {
   let snpFileMapConfig: FileMapConfig;
 
   beforeEach(async () => {
-    config = { ...mockConfig.step.createConfigFile };
-    snpFileMapConfig = { ...mockSnpFileMapConfig.step.createConfigFile };
+    config = { ...mockConfig.step.downloadConfigFile.forInit };
+    snpFileMapConfig = { ...mockSnpFileMapConfig.step.downloadConfigFile.forInit };
 
     await cleanUpFiles({
       snpCatalog: config.snpCatalog,
