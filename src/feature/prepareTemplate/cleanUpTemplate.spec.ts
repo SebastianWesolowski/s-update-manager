@@ -58,7 +58,7 @@ describe('cleanUpTemplate', () => {
 
     expect({ ...result, allFiles }).toEqual({
       templateConfig,
-      allFiles: ['test/mockTemplate/repositoryMap.json'],
+      allFiles: ['./test/mockTemplate/repositoryMap.json'],
     });
   });
 
@@ -79,7 +79,7 @@ describe('cleanUpTemplate', () => {
 
     expect({ ...result, allFiles }).toEqual({
       templateConfig,
-      allFiles: ['test/mockTemplate/repositoryMap.json'],
+      allFiles: ['./test/mockTemplate/repositoryMap.json'],
     });
   });
 
@@ -104,7 +104,7 @@ describe('cleanUpTemplate', () => {
 
     expect({ ...result, allFiles }).toEqual({
       templateConfig,
-      allFiles: ['test/mockTemplate/repositoryMap.json'],
+      allFiles: ['./test/mockTemplate/repositoryMap.json'],
     });
   });
 
@@ -130,7 +130,7 @@ describe('cleanUpTemplate', () => {
 
     expect({ ...result, allFiles }).toEqual({
       templateConfig,
-      allFiles: ['test/mockTemplate/repositoryMap.json'],
+      allFiles: ['./test/mockTemplate/repositoryMap.json'],
     });
   });
 });

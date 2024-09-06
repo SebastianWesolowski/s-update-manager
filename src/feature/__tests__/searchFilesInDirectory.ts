@@ -50,12 +50,12 @@ export async function searchFilesInDirectory({
       if (phrases) {
         for (const phrase of phrases) {
           if (itemPath.includes(phrase)) {
-            matchingFiles.push('./' + path.relative(normalizedDirectoryPath, itemPath));
+            matchingFiles.push(normalizePath(itemPath));
             break; // Przerywamy, jeśli jedna z fraz została znaleziona
           }
         }
       } else {
-        matchingFiles.push('./' + path.relative(normalizedDirectoryPath, itemPath));
+        matchingFiles.push(normalizePath(itemPath));
       }
     } else if (stats.isDirectory()) {
       // Jeśli to folder, rekurencyjnie przeszukaj jego zawartość, ale tylko jeśli nie jest wykluczony
@@ -67,14 +67,21 @@ export async function searchFilesInDirectory({
           excludedPhrases,
           excludePaths: cleanedExcludePaths,
         });
-        matchingFiles.push(
-          ...nestedMatchingFiles.map(
-            (file) => './' + path.relative(normalizedDirectoryPath, path.join(itemPath, file.slice(2)))
-          )
-        );
+        matchingFiles.push(...nestedMatchingFiles);
       }
     }
   }
 
   return matchingFiles;
+}
+
+function normalizePath(filePath: string): string {
+  // Usuń './' z początku ścieżki, jeśli istnieje
+  let normalizedPath = filePath.startsWith('./') ? filePath.slice(2) : filePath;
+
+  // Zamień wszystkie podwójne ukośniki na pojedyncze
+  normalizedPath = normalizedPath.replace(/\/\//g, '/');
+
+  // Dodaj './' na początku, jeśli ścieżka nie zaczyna się od '/'
+  return normalizedPath.startsWith('/') ? normalizedPath : './' + normalizedPath;
 }

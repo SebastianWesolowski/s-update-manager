@@ -1,3 +1,4 @@
+import path from 'path';
 import { searchFilesInDirectory } from '../__tests__/searchFilesInDirectory';
 import { ConfigTemplateType } from '@/feature/config/types';
 import { createPath } from '@/util/createPath';
@@ -26,7 +27,8 @@ export const scanProjectFolder = async (
         '[PrepareTemplate - searchFilesInDirectory - START]'
       );
       const cleanupArray = fileList.map((file) => {
-        return file.replace(templateConfig.projectCatalog + '/', '');
+        const relativePath = file.replace(templateConfig.projectCatalog, '');
+        return './' + path.normalize(relativePath).replace(/\\/g, '/');
       });
       debugFunction(
         templateConfig.isDebug,

@@ -47,7 +47,7 @@ describe('scanProjectFolder', () => {
     expect({ ...result, allFiles }).toEqual({
       templateConfig: mockTemplateConfig.scanProjectFolder,
       templateFileList: ['./dummy.md'],
-      allFiles: ['test/mockTemplate/dummy.md', 'test/mockTemplate/repositoryMap.json'],
+      allFiles: ['./test/mockTemplate/dummy.md', './test/mockTemplate/repositoryMap.json'],
     });
   });
 
@@ -79,12 +79,12 @@ describe('scanProjectFolder', () => {
       templateConfig: mockTemplateConfig.scanProjectFolder,
       templateFileList: ['./abc/index.ts', './dummy.md', './readme.md'],
       allFiles: [
-        'test/mockTemplate/abc/index.ts',
-        'test/mockTemplate/dummy.md',
-        'test/mockTemplate/readme.md',
-        'test/mockTemplate/repositoryMap.json',
-        'test/mockTemplate/templateCatalog/abc/index.ts-default.md',
-        'test/mockTemplate/templateCatalog/readme.md-default.md',
+        './test/mockTemplate/abc/index.ts',
+        './test/mockTemplate/dummy.md',
+        './test/mockTemplate/readme.md',
+        './test/mockTemplate/repositoryMap.json',
+        './test/mockTemplate/templateCatalog/abc/index.ts-default.md',
+        './test/mockTemplate/templateCatalog/readme.md-default.md',
       ],
     });
   });
@@ -127,18 +127,18 @@ describe('scanProjectFolder', () => {
       templateConfig: mockTemplateConfig.scanProjectFolder,
       templateFileList: ['./.gitignore', './abc/index.ts', './dummy.md', './readme.md'],
       allFiles: [
-        'test/mockTemplate/.gitignore',
-        'test/mockTemplate/abc/index.ts',
-        'test/mockTemplate/dummy.md',
-        'test/mockTemplate/node_modules/.bin/acorn',
-        'test/mockTemplate/node_modules/.bin/cdl',
-        'test/mockTemplate/node_modules/.bin/ejs',
-        'test/mockTemplate/node_modules/@babel/index.js',
-        'test/mockTemplate/readme.md',
-        'test/mockTemplate/repositoryMap.json',
-        'test/mockTemplate/templateCatalog/abc/index.ts-default.md',
-        'test/mockTemplate/templateCatalog/readme.md-default.md',
-        'test/mockTemplate/test/index.spec.ts',
+        './test/mockTemplate/.gitignore',
+        './test/mockTemplate/abc/index.ts',
+        './test/mockTemplate/dummy.md',
+        './test/mockTemplate/node_modules/.bin/acorn',
+        './test/mockTemplate/node_modules/.bin/cdl',
+        './test/mockTemplate/node_modules/.bin/ejs',
+        './test/mockTemplate/node_modules/@babel/index.js',
+        './test/mockTemplate/readme.md',
+        './test/mockTemplate/repositoryMap.json',
+        './test/mockTemplate/templateCatalog/abc/index.ts-default.md',
+        './test/mockTemplate/templateCatalog/readme.md-default.md',
+        './test/mockTemplate/test/index.spec.ts',
       ],
     });
   });

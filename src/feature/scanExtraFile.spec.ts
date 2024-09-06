@@ -50,7 +50,7 @@ describe('scanExtraFile', () => {
     expect({ ...result, allFiles }).toStrictEqual({
       config: mockConfig.step.scanExtraFile.empty,
       snpFileMapConfig: mockSnpFileMapConfig.step.scanExtraFile.empty,
-      allFiles: ['test/mockProject/.snp/repositoryMap.json', 'test/mockProject/.snp/snp.config.json'],
+      allFiles: ['./test/mockProject/.snp/repositoryMap.json', './test/mockProject/.snp/snp.config.json'],
     });
   });
 
@@ -95,14 +95,14 @@ describe('scanExtraFile', () => {
       config: mockConfig.step.scanExtraFile.fullFiled,
       snpFileMapConfig: mockSnpFileMapConfig.step.scanExtraFile.fullFiled,
       allFiles: [
-        'test/mockProject/.snp/repositoryMap.json',
-        'test/mockProject/.snp/snp.config.json',
-        'test/mockProject/.snp/templateCatalog/.gitignore-custom.md',
-        'test/mockProject/.snp/templateCatalog/.gitignore-extend.md',
-        'test/mockProject/.snp/templateCatalog/README.md-custom.md',
-        'test/mockProject/.snp/templateCatalog/README.md-extend.md',
-        'test/mockProject/.snp/templateCatalog/package.json-custom.md',
-        'test/mockProject/.snp/templateCatalog/package.json-extend.md',
+        './test/mockProject/.snp/repositoryMap.json',
+        './test/mockProject/.snp/snp.config.json',
+        './test/mockProject/.snp/templateCatalog/.gitignore-custom.md',
+        './test/mockProject/.snp/templateCatalog/.gitignore-extend.md',
+        './test/mockProject/.snp/templateCatalog/README.md-custom.md',
+        './test/mockProject/.snp/templateCatalog/README.md-extend.md',
+        './test/mockProject/.snp/templateCatalog/package.json-custom.md',
+        './test/mockProject/.snp/templateCatalog/package.json-extend.md',
       ],
     });
   });

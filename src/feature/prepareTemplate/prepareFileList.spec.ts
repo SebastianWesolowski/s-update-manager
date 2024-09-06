@@ -50,7 +50,7 @@ describe('prepareFileList', () => {
     expect({ ...result, allFiles }).toEqual({
       templateConfig: mockTemplateConfig.prepareFileList,
       templateFileList: [],
-      allFiles: ['test/mockTemplate/dummy.md', 'test/mockTemplate/repositoryMap.json'],
+      allFiles: ['./test/mockTemplate/dummy.md', './test/mockTemplate/repositoryMap.json'],
       fileList: [],
       rootPathFileList: [],
     });
@@ -69,9 +69,9 @@ describe('prepareFileList', () => {
       templateConfig: mockTemplateConfig.prepareFileList,
       templateFileList: ['test/mockTemplate/dummy.md'],
       allFiles: [
-        'test/mockTemplate/dummy.md',
-        'test/mockTemplate/repositoryMap.json',
-        'test/mockTemplate/templateCatalog/test/mockTemplate/dummy.md-default.md',
+        './test/mockTemplate/dummy.md',
+        './test/mockTemplate/repositoryMap.json',
+        './test/mockTemplate/templateCatalog/test/mockTemplate/dummy.md-default.md',
       ],
       fileList: ['templateCatalog/test/mockTemplate/dummy.md-default.md'],
       rootPathFileList: ['./test/mockTemplate/test/mockTemplate/dummy.md'],

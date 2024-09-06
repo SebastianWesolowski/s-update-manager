@@ -1,1 +1,0 @@
-file path = ./test/mockTemplate/readme.md
