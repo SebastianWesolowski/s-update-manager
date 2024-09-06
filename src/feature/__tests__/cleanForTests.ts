@@ -3,7 +3,7 @@ import { createPath } from '@/util/createPath';
 import { deletePath } from '@/util/deletePath';
 
 export const cleanUpFiles = async ({
-  snpCatalog,
+  snpCatalog, //TODO - make it reusable
   directoryPath,
   isDebug,
 }: {
@@ -12,7 +12,7 @@ export const cleanUpFiles = async ({
   isDebug: boolean;
 }): Promise<void> => {
   await deletePath(createPath(snpCatalog), isDebug);
-  const allFiles = searchFilesInDirectory({ directoryPath });
+  const allFiles = await searchFilesInDirectory({ directoryPath });
   for (const file of allFiles) {
     await deletePath(createPath(file), isDebug);
   }

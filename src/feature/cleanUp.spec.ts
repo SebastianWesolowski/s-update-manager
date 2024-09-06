@@ -63,7 +63,7 @@ describe('cleanUp', () => {
 
     const result = await cleanUp(config);
 
-    const allFiles = searchFilesInDirectory({
+    const allFiles = await searchFilesInDirectory({
       directoryPath: config.projectCatalog,
       excludedFileNames: ['.DS_Store'],
       excludedPhrases: ['.backup'],

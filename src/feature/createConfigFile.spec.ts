@@ -27,7 +27,7 @@ describe('createConfigFile', () => {
 
   it('should return correct creation', async () => {
     const result = await createConfigFile(config);
-    const allFiles = searchFilesInDirectory({
+    const allFiles = await searchFilesInDirectory({
       directoryPath: config.projectCatalog,
       excludedFileNames: ['.DS_Store'],
       excludedPhrases: ['.backup'],

@@ -4,6 +4,7 @@ export interface ConfigTemplateType {
   templateCatalogPath: string;
   repositoryMapFileName: string;
   repositoryMapFilePath: string;
+  templateVersion?: string;
   bumpVersion: boolean;
   isDebug: boolean;
   _: any[];

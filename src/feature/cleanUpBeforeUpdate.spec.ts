@@ -68,7 +68,7 @@ describe('cleanUpBeforeUpdate', () => {
     // Run the cleanUpBeforeUpdate function
     const result = await cleanUpBeforeUpdate(config);
 
-    const allFiles = searchFilesInDirectory({
+    const allFiles = await searchFilesInDirectory({
       directoryPath: config.projectCatalog,
       excludedFileNames: ['.DS_Store'],
       excludedPhrases: ['.backup'],
@@ -135,7 +135,7 @@ describe('cleanUpBeforeUpdate', () => {
     // Run the cleanUpBeforeUpdate function
     const result = await cleanUpBeforeUpdate(config);
 
-    const allFiles = searchFilesInDirectory({
+    const allFiles = await searchFilesInDirectory({
       directoryPath: config.projectCatalog,
       excludedFileNames: ['.DS_Store'],
       excludedPhrases: ['.backup'],

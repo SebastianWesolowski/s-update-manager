@@ -6,17 +6,19 @@ import { isFileOrFolderExists } from '@/util/isFileOrFolderExists';
 import { parseJSON } from '@/util/parseJSON';
 import { readFile } from '@/util/readFile';
 
-export const cleanUpTemplate = async (config: ConfigTemplateType): Promise<ConfigTemplateType> => {
-  debugFunction(config.isDebug, { config }, '[PrepareTemplate] cleanUpTemplate');
+export const cleanUpTemplate = async (
+  templateConfig: ConfigTemplateType
+): Promise<{ templateConfig: ConfigTemplateType }> => {
+  debugFunction(templateConfig.isDebug, { templateConfig }, '[PrepareTemplate] cleanUpTemplate');
   let repositoryMapFileConfig: null | RepositoryMapFileConfigType = null;
-  if (await isFileOrFolderExists(config.templateCatalogPath)) {
-    if (await isFileOrFolderExists(config.repositoryMapFilePath)) {
-      repositoryMapFileConfig = await readFile(config.repositoryMapFilePath).then(async (bufferData) =>
+  if (await isFileOrFolderExists(templateConfig.templateCatalogPath)) {
+    if (await isFileOrFolderExists(templateConfig.repositoryMapFilePath)) {
+      repositoryMapFileConfig = await readFile(templateConfig.repositoryMapFilePath).then(async (bufferData) =>
         parseJSON(bufferData.toString())
       );
     }
 
-    await clearDirectory(config.templateCatalogPath);
+    await clearDirectory(templateConfig.templateCatalogPath);
 
     const newContent = repositoryMapFileConfig;
     if (newContent !== null) {
@@ -25,9 +27,9 @@ export const cleanUpTemplate = async (config: ConfigTemplateType): Promise<Confi
       newContent.rootPathFileList = [];
 
       await createFile({
-        filePath: config.repositoryMapFilePath,
+        filePath: templateConfig.repositoryMapFilePath,
         content: JSON.stringify(newContent),
-        isDebug: config.isDebug,
+        isDebug: templateConfig.isDebug,
         options: {
           overwriteFile: true,
         },
@@ -35,6 +37,6 @@ export const cleanUpTemplate = async (config: ConfigTemplateType): Promise<Confi
     }
   }
 
-  debugFunction(config.isDebug, { config }, '[PrepareTemplate] end cleanUpTemplate');
-  return config;
+  debugFunction(templateConfig.isDebug, { templateConfig }, '[PrepareTemplate] end cleanUpTemplate');
+  return { templateConfig };
 };

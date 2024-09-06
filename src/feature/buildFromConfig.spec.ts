@@ -56,7 +56,7 @@ describe('buildFromConfig', () => {
     });
 
     const result = await buildFromConfig(config);
-    const allFiles = searchFilesInDirectory({
+    const allFiles = await searchFilesInDirectory({
       directoryPath: config.projectCatalog,
       excludedFileNames: ['.DS_Store'],
       excludedPhrases: ['.backup'],
@@ -123,7 +123,7 @@ describe('buildFromConfig', () => {
     }
 
     const result = await buildFromConfig(config);
-    const allFiles = searchFilesInDirectory({
+    const allFiles = await searchFilesInDirectory({
       directoryPath: config.projectCatalog,
       excludedFileNames: ['.DS_Store'],
       excludedPhrases: ['.backup'],
