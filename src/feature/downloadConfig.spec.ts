@@ -36,7 +36,7 @@ describe('downloadConfig', () => {
     });
 
     const result = await downloadConfig(config);
-    const allFiles = searchFilesInDirectory({
+    const allFiles = await searchFilesInDirectory({
       directoryPath: config.projectCatalog,
       excludedFileNames: ['.DS_Store'],
       excludedPhrases: ['.backup'],
@@ -68,7 +68,7 @@ describe('downloadConfig', () => {
     });
 
     const result = await downloadConfig(config);
-    const allFiles = searchFilesInDirectory({
+    const allFiles = await searchFilesInDirectory({
       directoryPath: config.projectCatalog,
       excludedFileNames: ['.DS_Store'],
       excludedPhrases: ['.backup'],
@@ -108,7 +108,7 @@ describe('downloadConfig', () => {
     });
 
     const result = await downloadConfig(config);
-    const allFiles = searchFilesInDirectory({
+    const allFiles = await searchFilesInDirectory({
       directoryPath: config.projectCatalog,
       excludedFileNames: ['.DS_Store'],
       excludedPhrases: ['.backup'],

@@ -41,7 +41,7 @@ describe('scanExtraFile', () => {
     });
 
     const result = await scanExtraFile(config);
-    const allFiles = searchFilesInDirectory({
+    const allFiles = await searchFilesInDirectory({
       directoryPath: config.projectCatalog,
       excludedFileNames: ['.DS_Store'],
       excludedPhrases: ['.backup'],
@@ -85,7 +85,7 @@ describe('scanExtraFile', () => {
       });
     }
     const result = await scanExtraFile(config);
-    const allFiles = searchFilesInDirectory({
+    const allFiles = await searchFilesInDirectory({
       directoryPath: config.projectCatalog,
       excludedFileNames: ['.DS_Store'],
       excludedPhrases: ['.backup'],

@@ -16,34 +16,38 @@ import { debugFunction } from '@/util/debugFunction';
 import { formatJsonWithPrettier } from '@/util/formatPrettier';
 import { isFileOrFolderExists } from '@/util/isFileOrFolderExists';
 
-export const prepareTemplate = async (args: ArgsTemplate): Promise<ConfigTemplateType> => {
-  const config: ConfigTemplateType = getTemplateConfig(args);
+export const prepareTemplate = async (args: ArgsTemplate): Promise<{ templateConfig: ConfigTemplateType }> => {
+  const templateConfig: ConfigTemplateType = getTemplateConfig(args);
 
-  debugFunction(config.isDebug, '=== Start prepare template ===', '[PrepareTemplate]');
+  debugFunction(templateConfig.isDebug, '=== Start prepare template ===', '[PrepareTemplate]');
 
-  if (!(await isFileOrFolderExists(config.templateCatalogPath)) || process.env.SDEBUG !== 'true') {
-    await createCatalog(config.templateCatalogPath);
+  if (!(await isFileOrFolderExists(templateConfig.templateCatalogPath)) || process.env.SDEBUG !== 'true') {
+    await createCatalog(templateConfig.templateCatalogPath);
   }
   if (
-    ((await isFileOrFolderExists(config.templateCatalogPath)) &&
-      !(await isFileOrFolderExists(config.repositoryMapFilePath))) ||
+    ((await isFileOrFolderExists(templateConfig.templateCatalogPath)) &&
+      !(await isFileOrFolderExists(templateConfig.repositoryMapFilePath))) ||
     process.env.SDEBUG !== 'true'
   ) {
-    debugFunction(config.isDebug, `isFileOrFolderExists ${config.repositoryMapFilePath}`, '[PrepareTemplate]');
-    debugFunction(config.isDebug, config, '[PrepareTemplate]');
+    debugFunction(
+      templateConfig.isDebug,
+      `isFileOrFolderExists ${templateConfig.repositoryMapFilePath}`,
+      '[PrepareTemplate]'
+    );
+    debugFunction(templateConfig.isDebug, templateConfig, '[PrepareTemplate]');
     await createFile({
-      filePath: config.repositoryMapFilePath,
+      filePath: templateConfig.repositoryMapFilePath,
       content: JSON.stringify(defaultRepositoryMapFileConfig),
-      isDebug: config.isDebug,
+      isDebug: templateConfig.isDebug,
       options: {
         overwriteFile: true,
       },
     });
-    config.bumpVersion = false;
+    templateConfig.bumpVersion = false;
   }
 
-  debugFunction(config.isDebug, config, '[PrepareTemplate] END init');
-  return config;
+  debugFunction(templateConfig.isDebug, templateConfig, '[PrepareTemplate] END init');
+  return { templateConfig };
 };
 
 const args: ArgsTemplate = minimist(process.argv.slice(2));
@@ -53,28 +57,28 @@ let finalConfig = {
 };
 
 prepareTemplate(args)
-  .then((config) => {
-    finalConfig = config;
-    return bumpVersion(config);
+  .then(({ templateConfig }) => {
+    finalConfig = templateConfig;
+    return bumpVersion(templateConfig);
   })
-  .then((config) => {
-    finalConfig = config;
-    return cleanUpTemplate(config);
+  .then(({ templateConfig }) => {
+    finalConfig = templateConfig;
+    return cleanUpTemplate(templateConfig);
   })
-  .then((config) => {
-    finalConfig = config;
-    return scanProjectFolder(config);
+  .then(({ templateConfig }) => {
+    finalConfig = templateConfig;
+    return scanProjectFolder(templateConfig);
   })
-  .then(({ config, templateFileList }) => {
-    finalConfig = config;
-    return prepareFileList({ config, templateFileList });
+  .then(({ templateConfig, templateFileList }) => {
+    finalConfig = templateConfig;
+    return prepareFileList({ templateConfig, templateFileList });
   })
-  .then(({ config, templateFileList, fileList, rootPathFileList }) => {
-    finalConfig = config;
-    return updateTemplateConfig({ config, fileList, templateFileList, rootPathFileList });
+  .then(({ templateConfig, templateFileList, fileList, rootPathFileList }) => {
+    finalConfig = templateConfig;
+    return updateTemplateConfig({ config: templateConfig, fileList, templateFileList, rootPathFileList });
   })
-  .then(async ({ config }) => {
-    await formatJsonWithPrettier(config.repositoryMapFilePath);
+  .then(async ({ templateConfig }) => {
+    await formatJsonWithPrettier(templateConfig.repositoryMapFilePath);
   })
   .finally(() => {
     debugFunction(finalConfig?.isDebug, { finalConfig }, '[PrepareTemplate] final config');

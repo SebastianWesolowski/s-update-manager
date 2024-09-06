@@ -1,31 +1,43 @@
+import { searchFilesInDirectory } from '../__tests__/searchFilesInDirectory';
 import { ConfigTemplateType } from '@/feature/config/types';
 import { createPath } from '@/util/createPath';
 import { debugFunction } from '@/util/debugFunction';
-import { scanDirectory } from '@/util/scanDirectory';
 
 export const scanProjectFolder = async (
-  config: ConfigTemplateType
-): Promise<{ config: ConfigTemplateType; templateFileList: string[] | [] }> => {
-  debugFunction(config.isDebug, { config }, '[PrepareTemplate - scanProjectFolder START]');
+  templateConfig: ConfigTemplateType
+): Promise<{ templateConfig: ConfigTemplateType; templateFileList: string[] | [] }> => {
+  debugFunction(templateConfig.isDebug, { templateConfig }, '[PrepareTemplate - scanProjectFolder START]');
 
   const excludePaths = [
-    createPath([config.projectCatalog, '.DS_Store']),
-    createPath([config.projectCatalog, config.repositoryMapFileName]),
-    createPath([config.projectCatalog, config.templateCatalogName]),
+    createPath([templateConfig.projectCatalog, 'node_modules/']),
+    createPath([templateConfig.projectCatalog, 'test/']),
+    createPath([templateConfig.projectCatalog, templateConfig.templateCatalogName]),
   ];
-
-  return scanDirectory(config.projectCatalog, excludePaths)
+  return searchFilesInDirectory({
+    directoryPath: templateConfig.projectCatalog,
+    excludePaths: excludePaths,
+    excludedFileNames: [createPath(templateConfig.repositoryMapFileName), '.DS_Store'],
+    excludedPhrases: ['.backup'],
+  })
     .then((fileList) => {
-      debugFunction(config.isDebug, { config, fileList }, '[PrepareTemplate - scanDirectory - START]');
+      debugFunction(
+        templateConfig.isDebug,
+        { templateConfig, fileList },
+        '[PrepareTemplate - searchFilesInDirectory - START]'
+      );
       const cleanupArray = fileList.map((file) => {
-        return file.replace(config.projectCatalog + '/', '');
+        return file.replace(templateConfig.projectCatalog + '/', '');
       });
-      debugFunction(config.isDebug, { config, fileList, cleanupArray }, '[PrepareTemplate - scanDirectory - END]');
-      debugFunction(config.isDebug, { config }, '[PrepareTemplate - scanProjectFolder END]');
-      return { config, templateFileList: cleanupArray }; // Wyświetli przefiltrowane pliki
+      debugFunction(
+        templateConfig.isDebug,
+        { templateConfig, fileList, cleanupArray },
+        '[PrepareTemplate - searchFilesInDirectory - END]'
+      );
+      debugFunction(templateConfig.isDebug, { templateConfig }, '[PrepareTemplate - scanProjectFolder END]');
+      return { templateConfig, templateFileList: cleanupArray }; // Wyświetli przefiltrowane pliki
     })
     .catch((error) => {
       console.error('An error occurred:', error);
-      return { config, templateFileList: [] }; // Wyświetli przefiltrowane plikireturn [];
+      return { templateConfig, templateFileList: [] }; // Wyświetli przefiltrowane plikireturn [];
     });
 };

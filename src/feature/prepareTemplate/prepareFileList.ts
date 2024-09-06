@@ -6,32 +6,36 @@ import { debugFunction } from '@/util/debugFunction';
 import { readFile } from '@/util/readFile';
 
 export const prepareFileList = async ({
-  config,
+  templateConfig,
   templateFileList,
 }: {
-  config: ConfigTemplateType;
+  templateConfig: ConfigTemplateType;
   templateFileList: string[] | [];
 }): Promise<{
-  config: ConfigTemplateType;
+  templateConfig: ConfigTemplateType;
   fileList: string[] | [];
   templateFileList: string[] | [];
   rootPathFileList: string[] | [];
 }> => {
-  debugFunction(config.isDebug, { config, templateFileList }, '[PrepareTemplate] prepareFileList');
+  debugFunction(templateConfig.isDebug, { templateConfig, templateFileList }, '[PrepareTemplate] prepareFileList');
   const rootPathFileList: string[] = [];
   const fileList: string[] = [];
   for (const filePath of templateFileList) {
     const fileName = path.basename(filePath) + '-default.md';
     const fileDir = path.dirname(filePath);
-    const templateFilePath = createPath([config.projectCatalog, filePath]);
-    rootPathFileList.push(createPath([config.projectCatalog, filePath]));
-    fileList.push(createPath([config.templateCatalogName, filePath + '-default.md']));
+    const templateFilePath = createPath([templateConfig.projectCatalog, filePath]);
+    rootPathFileList.push(createPath([templateConfig.projectCatalog, filePath]));
+    fileList.push(createPath([templateConfig.templateCatalogName, filePath + '-default.md']));
     const content = await readFile(templateFilePath);
-    debugFunction(config.isDebug, { content }, `[PrepareTemplate] readed Content from file ${templateFilePath}`);
+    debugFunction(
+      templateConfig.isDebug,
+      { content },
+      `[PrepareTemplate] readed Content from file ${templateFilePath}`
+    );
     await createFile({
-      filePath: createPath([config.templateCatalogPath, fileDir, fileName]),
+      filePath: createPath([templateConfig.templateCatalogPath, fileDir, fileName]),
       content,
-      isDebug: config.isDebug,
+      isDebug: templateConfig.isDebug,
       options: {
         overwriteFile: true,
       },
@@ -39,9 +43,9 @@ export const prepareFileList = async ({
   }
 
   debugFunction(
-    config.isDebug,
-    { config, fileList, templateFileList, rootPathFileList },
+    templateConfig.isDebug,
+    { templateConfig, fileList, templateFileList, rootPathFileList },
     '[PrepareTemplate] END prepareTemplateFile'
   );
-  return { config, templateFileList, fileList, rootPathFileList };
+  return { templateConfig, templateFileList, fileList, rootPathFileList };
 };

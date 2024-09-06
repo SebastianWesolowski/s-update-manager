@@ -1,35 +1,41 @@
-[] wykluczyć pliki podczas uzywania s-prepare-template
-[] write tests for main scripts
-[] przetlumaczyc i wszystko na angielski
-[] napisac instrukcje
-[] opisać kolejność aplikowania ustawień arg/lokaly plik
-[] remove snp keyword
-[] wykonać testy dla dużych repo
-[] przygotować example repo/srcipt/etc
-[] Opisać wszystkoe TODO
-[] test downloadConfig ? "rootPathFileList": [ -> "./.gitignore.md",Opisać wszystkoe TODO
- 
-# Over MVP
-[] cookie: can't load punycode; won't use punycode for domain normalisation
-[] checkout RepositoryMapFileConfigType typ is very similar than FileMapConfig 
-[]why are arguments and config not linked in types?
-[]dryRun flag
-[]config.temporaryFolder is nesesery
-[]obsluga update w momencie nowej wersji w postaci innego pliku w templatce, czy cleantree zadziala ?
-[] opóźnienie w pobieraniu przez wgetAsync, jakiś cashe itp
-[] dodanie gitignore *-... !-custom, extend ...rzeczy generowane nie powinny być w repo
-[] order key in configs is different
-[] improve updateDefaultConfig and add more single cases
+# Core Tasks
 
-[x] wyczyścić repo z niepotrzebnych rzeczy
-[x] brakuje dodawania custom i ext itp do createdFileMap w nowej wrsji
-[x] - zle genereowany SNPSuffixFileName dla extend i custom w configu
-[x] - extend jest generowany nadmiarowo
-[x] - custom jest generowany nadmiarowo
-[x] realne pliki są pozbawione oryginalnych scierzek, wszystko generuje się w roots
-[x] - instruction jest nie potrzebny
-[x] pliki są generowane do glownego katalogu
-[x] zmienić strukture pobierania i wykorystywania plikow na specyficzny katalog
-[x] poprawić url do repo
-[x] różnica remoteRepository i repositoryUrl w configu ? do wyjaśnienia
-[x] zamiana url repo z arg na rotowy katalog repo
+- [ ] Exclude files when using s-prepare-template
+- [ ] Write tests for main scripts
+- [ ] Translate everything to English
+- [ ] Write instructions
+- [ ] Describe the order of applying settings arg/local file
+- [ ] Remove snp keyword
+- [ ] Perform tests for large repos
+- [ ] Prepare example repo/script/etc
+- [ ] Describe all TODOs
+- [ ] Test downloadConfig ? "rootPathFileList": [ -> "./.gitignore.md", ...]
+
+# Beyond MVP
+
+- [ ] Export const cleanUpFiles - snpCatalog - make it reusable
+- [ ] cookie: can't load punycode; won't use punycode for domain normalisation
+- [ ] Checkout RepositoryMapFileConfigType type is very similar to FileMapConfig
+- [ ] Why are arguments and config not linked in types?
+- [ ] dryRun flag
+- [ ] config.temporaryFolder is necessary
+- [ ] Handle updates when new version is in template file, will cleanTree work?
+- [ ] Delay in downloading by wgetAsync, some cache etc
+- [ ] Add gitignore \*-... !-custom, extend ...generated things shouldn't be in repo
+- [ ] Order key in configs is different
+- [ ] Improve updateDefaultConfig and add more single cases
+
+# Completed Tasks
+
+- [x] Clean repo of unnecessary things
+- [x] Missing addition of custom and ext etc to createdFileMap in new version
+- [x] Incorrectly generated SNPSuffixFileName for extend and custom in config
+- [x] Extend is generated excessively
+- [x] Custom is generated excessively
+- [x] Real files are devoid of original paths, everything is generated in roots
+- [x] Instruction is unnecessary
+- [x] Files are generated to the main directory
+- [x] Change structure of file retrieval and use to specific directory
+- [x] Fix url to repo
+- [x] Difference between remoteRepository and repositoryUrl in config ? to be clarified
+- [x] Change repo url from arg to root repo directory

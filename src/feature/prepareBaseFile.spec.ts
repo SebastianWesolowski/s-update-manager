@@ -40,7 +40,7 @@ describe('prepareBaseSnpFileMap', () => {
     });
 
     const result = await prepareBaseSnpFileMap(config);
-    const allFiles = searchFilesInDirectory({
+    const allFiles = await searchFilesInDirectory({
       directoryPath: config.projectCatalog,
       excludedFileNames: ['.DS_Store'],
       excludedPhrases: ['.backup'],

@@ -1,59 +1,80 @@
-import * as fs from 'fs';
+import * as fs from 'fs/promises';
 import * as path from 'path';
 
-export function searchFilesInDirectory({
+export async function searchFilesInDirectory({
   directoryPath,
   phrases,
   excludedFileNames = [],
   excludedPhrases = [],
+  excludePaths = [],
 }: {
   directoryPath: string;
   phrases?: string[];
   excludedFileNames?: string[];
-  excludedPhrases?: string[]; // Nowy parametr do wykluczania plików na podstawie fraz w ścieżce
-}): string[] {
+  excludedPhrases?: string[];
+  excludePaths?: string[];
+}): Promise<string[]> {
   const matchingFiles: string[] = [];
 
-  // Pobranie wszystkich plików i folderów w katalogu
-  const items = fs.readdirSync(directoryPath);
+  // Normalizacja ścieżki wejściowej
+  const normalizedDirectoryPath = directoryPath.startsWith('/') ? directoryPath : path.join('.', directoryPath);
 
-  items.forEach((item) => {
-    const itemPath = path.join(directoryPath, item);
+  // Pobranie wszystkich plików i folderów w katalogu
+  const items = await fs.readdir(normalizedDirectoryPath);
+
+  // Usuwanie './' z początku ścieżek w excludePaths
+  const cleanedExcludePaths = excludePaths.map((path) => (path.startsWith('./') ? path.slice(2) : path));
+
+  for (const item of items) {
+    const itemPath = path.join(normalizedDirectoryPath, item);
+
+    // Sprawdzenie, czy ścieżka jest wykluczona
+    if (cleanedExcludePaths.some((excludePath) => itemPath.includes(excludePath))) {
+      continue; // Pominięcie tej ścieżki i wszystkich jej podfolderów/plików
+    }
 
     // Sprawdzenie, czy to plik
-    if (fs.statSync(itemPath).isFile()) {
+    const stats = await fs.stat(itemPath);
+    if (stats.isFile()) {
       // Sprawdzenie, czy nazwa pliku znajduje się na liście wykluczeń
       if (excludedFileNames.includes(item)) {
-        return; // Pominięcie tego pliku
+        continue; // Pominięcie tego pliku
       }
 
       // Sprawdzenie, czy ścieżka zawiera którąkolwiek z wykluczających fraz
       if (excludedPhrases.some((phrase) => itemPath.includes(phrase))) {
-        return; // Pominięcie tego pliku
+        continue; // Pominięcie tego pliku
       }
 
       // Sprawdzenie, czy nazwa pliku lub ścieżka zawiera którąkolwiek z fraz
       if (phrases) {
         for (const phrase of phrases) {
           if (itemPath.includes(phrase)) {
-            matchingFiles.push(itemPath);
+            matchingFiles.push('./' + path.relative(normalizedDirectoryPath, itemPath));
             break; // Przerywamy, jeśli jedna z fraz została znaleziona
           }
         }
       } else {
-        matchingFiles.push(itemPath);
+        matchingFiles.push('./' + path.relative(normalizedDirectoryPath, itemPath));
       }
-    } else if (fs.statSync(itemPath).isDirectory()) {
-      // Jeśli to folder, rekurencyjnie przeszukaj jego zawartość
-      const nestedMatchingFiles = searchFilesInDirectory({
-        directoryPath: itemPath,
-        phrases,
-        excludedFileNames,
-        excludedPhrases, // Przekazujemy dalej wykluczające frazy
-      });
-      matchingFiles.push(...nestedMatchingFiles);
+    } else if (stats.isDirectory()) {
+      // Jeśli to folder, rekurencyjnie przeszukaj jego zawartość, ale tylko jeśli nie jest wykluczony
+      if (!cleanedExcludePaths.some((excludePath) => itemPath.includes(excludePath))) {
+        const nestedMatchingFiles = await searchFilesInDirectory({
+          directoryPath: itemPath,
+          phrases,
+          excludedFileNames,
+          excludedPhrases,
+          excludePaths: cleanedExcludePaths,
+        });
+        matchingFiles.push(
+          ...nestedMatchingFiles.map(
+            (file) => './' + path.relative(normalizedDirectoryPath, path.join(itemPath, file.slice(2)))
+          )
+        );
+      }
     }
-  });
+  }
 
   return matchingFiles;
 }

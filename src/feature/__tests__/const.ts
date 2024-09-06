@@ -1,3 +1,5 @@
+import { ConfigTemplateType } from '../config/types';
+
 const mockConfig_step_init = {
   REPOSITORY_MAP_FILE_NAME: 'repositoryMap.json',
   _: [],
@@ -550,4 +552,45 @@ export const mockSnpFileMapConfig = {
       fullFiled: mockSnpFileMapConfig_step_cleanUpBeforeUpdate_fullFiled,
     },
   },
+};
+
+const mockTemplateConfig_step_init: ConfigTemplateType = {
+  projectCatalog: './test/mockTemplate/',
+  templateCatalogName: 'templateCatalog',
+  templateCatalogPath: './test/mockTemplate/templateCatalog',
+  repositoryMapFileName: 'repositoryMap.json',
+  repositoryMapFilePath: './test/mockTemplate/repositoryMap.json',
+  bumpVersion: true,
+  isDebug: false,
+  _: [],
+};
+
+const mockTemplateConfig_step_bumpVersion: ConfigTemplateType = {
+  ...mockTemplateConfig_step_init,
+  templateVersion: '1.0.0',
+};
+const mockTemplateConfig_step_cleanUpTemplate: ConfigTemplateType = {
+  ...mockTemplateConfig_step_bumpVersion,
+};
+const mockTemplateConfig_step_prepareFileList: ConfigTemplateType = {
+  ...mockTemplateConfig_step_cleanUpTemplate,
+};
+const mockTemplateConfig_step_scanProjectFolder: ConfigTemplateType = {
+  ...mockTemplateConfig_step_prepareFileList,
+};
+const mockTemplateConfig_step_updateTemplateConfig: ConfigTemplateType = {
+  ...mockTemplateConfig_step_scanProjectFolder,
+};
+const mockTemplateConfig_step_formatJsonWithPrettier: ConfigTemplateType = {
+  ...mockTemplateConfig_step_updateTemplateConfig,
+};
+
+export const mockTemplateConfig = {
+  init: mockTemplateConfig_step_init,
+  bumpVersion: mockTemplateConfig_step_bumpVersion,
+  cleanUpTemplate: mockTemplateConfig_step_cleanUpTemplate,
+  prepareFileList: mockTemplateConfig_step_prepareFileList,
+  scanProjectFolder: mockTemplateConfig_step_scanProjectFolder,
+  updateTemplateConfig: mockTemplateConfig_step_updateTemplateConfig,
+  formatJsonWithPrettier: mockTemplateConfig_step_formatJsonWithPrettier,
 };
