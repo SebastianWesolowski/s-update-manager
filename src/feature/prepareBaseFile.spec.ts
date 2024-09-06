@@ -48,7 +48,7 @@ describe('prepareBaseSnpFileMap', () => {
     expect({ ...result, allFiles }).toStrictEqual({
       config: mockConfig.step.createConfigFile,
       snpFileMapConfig: mockSnpFileMapConfig.step.prepareBaseSnpFileMap,
-      allFiles: ['test/mockProject/.snp/repositoryMap.json', 'test/mockProject/.snp/snp.config.json'],
+      allFiles: ['./test/mockProject/.snp/repositoryMap.json', './test/mockProject/.snp/snp.config.json'],
     });
   });
 });

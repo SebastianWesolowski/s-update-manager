@@ -75,7 +75,7 @@ prepareTemplate(args)
   })
   .then(({ templateConfig, templateFileList, fileList, rootPathFileList }) => {
     finalConfig = templateConfig;
-    return updateTemplateConfig({ config: templateConfig, fileList, templateFileList, rootPathFileList });
+    return updateTemplateConfig({ templateConfig, fileList, templateFileList, rootPathFileList });
   })
   .then(async ({ templateConfig }) => {
     await formatJsonWithPrettier(templateConfig.repositoryMapFilePath);

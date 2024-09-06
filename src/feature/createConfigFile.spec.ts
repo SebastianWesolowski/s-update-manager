@@ -36,7 +36,7 @@ describe('createConfigFile', () => {
     expect({ ...result, allFiles }).toStrictEqual({
       config: mockConfig.step.createConfigFile,
       configFilePath: mockConfig.step.createConfigFile.snpConfigFile,
-      allFiles: ['test/mockProject/.snp/snp.config.json'],
+      allFiles: ['./test/mockProject/.snp/snp.config.json'],
     });
   });
 });

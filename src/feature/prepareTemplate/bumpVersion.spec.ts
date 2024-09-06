@@ -1,5 +1,6 @@
 import { bumpVersion } from './bumpVersion';
 import { cleanUpFiles } from '../__tests__/cleanForTests';
+import { searchFilesInDirectory } from '../__tests__/searchFilesInDirectory';
 import { ConfigTemplateType } from '../config/types';
 import { mockTemplateConfig } from '@/feature/__tests__/const';
 import { createFile } from '@/util/createFile';
@@ -29,7 +30,16 @@ describe('bumpVersion', () => {
     const expectTemplateConfig = { ...mockTemplateConfig.bumpVersion };
     delete expectTemplateConfig.templateVersion;
 
-    expect({ ...result }).toStrictEqual({ templateConfig: expectTemplateConfig });
+    const allFiles = await searchFilesInDirectory({
+      directoryPath: templateConfig.projectCatalog,
+      excludedFileNames: ['.DS_Store'],
+      excludedPhrases: ['.backup'],
+    });
+
+    expect({ ...result, allFiles }).toStrictEqual({
+      templateConfig: expectTemplateConfig,
+      allFiles: ['./test/mockTemplate/repositoryMap.json'],
+    });
   });
 
   it('should correctly bump version - without config file, with existing templateVersion', async () => {
@@ -37,7 +47,14 @@ describe('bumpVersion', () => {
 
     const result = await bumpVersion(templateConfig);
 
-    expect({ ...result }).toStrictEqual({
+    const allFiles = await searchFilesInDirectory({
+      directoryPath: templateConfig.projectCatalog,
+      excludedFileNames: ['.DS_Store'],
+      excludedPhrases: ['.backup'],
+    });
+
+    expect({ ...result, allFiles }).toStrictEqual({
+      allFiles: ['./test/mockTemplate/repositoryMap.json'],
       templateConfig: { ...mockTemplateConfig.bumpVersion },
     });
   });
@@ -52,8 +69,15 @@ describe('bumpVersion', () => {
 
     const result = await bumpVersion(templateConfig);
 
-    expect({ ...result }).toStrictEqual({
+    const allFiles = await searchFilesInDirectory({
+      directoryPath: templateConfig.projectCatalog,
+      excludedFileNames: ['.DS_Store'],
+      excludedPhrases: ['.backup'],
+    });
+
+    expect({ ...result, allFiles }).toStrictEqual({
       templateConfig: { ...mockTemplateConfig.bumpVersion, templateVersion: '1.0.1' },
+      allFiles: ['./test/mockTemplate/repositoryMap.json'],
     });
   });
 
@@ -68,8 +92,15 @@ describe('bumpVersion', () => {
 
     const result = await bumpVersion(templateConfig);
 
-    expect({ ...result }).toStrictEqual({
+    const allFiles = await searchFilesInDirectory({
+      directoryPath: templateConfig.projectCatalog,
+      excludedFileNames: ['.DS_Store'],
+      excludedPhrases: ['.backup'],
+    });
+
+    expect({ ...result, allFiles }).toStrictEqual({
       templateConfig: { ...mockTemplateConfig.bumpVersion, bumpVersion: false },
+      allFiles: ['./test/mockTemplate/repositoryMap.json'],
     });
   });
 });

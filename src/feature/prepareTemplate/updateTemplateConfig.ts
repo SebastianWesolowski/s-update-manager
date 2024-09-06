@@ -5,20 +5,20 @@ import { readFile } from '@/util/readFile';
 import { updateJsonFile } from '@/util/updateJsonFile';
 
 export const updateTemplateConfig = async ({
-  config,
+  templateConfig,
   fileList,
   templateFileList,
   rootPathFileList,
 }: {
-  config: ConfigTemplateType;
+  templateConfig: ConfigTemplateType;
   fileList: string[] | [];
   templateFileList: string[] | [];
   rootPathFileList: string[] | [];
-}): Promise<{ config: ConfigTemplateType }> => {
-  debugFunction(config.isDebug, { config }, '[PrepareTemplate] updateTemplateConfig');
-  const repositoryMapFileConfig: RepositoryMapFileConfigType = await readFile(config.repositoryMapFilePath).then(
-    async (bufferData) => parseJSON(bufferData.toString())
-  );
+}): Promise<{ templateConfig: ConfigTemplateType }> => {
+  debugFunction(templateConfig.isDebug, { templateConfig }, '[PrepareTemplate] updateTemplateConfig');
+  const repositoryMapFileConfig: RepositoryMapFileConfigType = await readFile(
+    templateConfig.repositoryMapFilePath
+  ).then(async (bufferData) => parseJSON(bufferData.toString()));
   const newContent = repositoryMapFileConfig;
   const replaceFile = true;
   newContent.fileMap = fileList;
@@ -26,12 +26,16 @@ export const updateTemplateConfig = async ({
   newContent.rootPathFileList = rootPathFileList;
 
   await updateJsonFile({
-    filePath: config.repositoryMapFilePath,
-    config,
+    filePath: templateConfig.repositoryMapFilePath,
+    config: templateConfig,
     newContent,
     replaceFile,
   });
 
-  debugFunction(config.isDebug, { config, fileList, templateFileList }, '[PrepareTemplate] END updateTemplateConfig');
-  return { config };
+  debugFunction(
+    templateConfig.isDebug,
+    { templateConfig, fileList, templateFileList },
+    '[PrepareTemplate] END updateTemplateConfig'
+  );
+  return { templateConfig };
 };

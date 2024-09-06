@@ -1,6 +1,5 @@
 import semver from 'semver';
 import { ConfigTemplateType } from '@/feature/config/types';
-import { FileMapConfig } from '@/feature/updateFileMapConfig';
 import { createFile } from '@/util/createFile';
 import { debugFunction } from '@/util/debugFunction';
 import { isFileOrFolderExists } from '@/util/isFileOrFolderExists';

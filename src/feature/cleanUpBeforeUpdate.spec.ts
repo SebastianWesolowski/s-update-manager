@@ -78,7 +78,7 @@ describe('cleanUpBeforeUpdate', () => {
     expect({ ...result, allFiles }).toStrictEqual({
       config: mockConfig.step.cleanUpBeforeUpdate.empty,
       snpFileMapConfig: mockSnpFileMapConfig.step.cleanUpBeforeUpdate.empty,
-      allFiles: ['test/mockProject/.snp/repositoryMap.json', 'test/mockProject/.snp/snp.config.json'],
+      allFiles: ['./test/mockProject/.snp/repositoryMap.json', './test/mockProject/.snp/snp.config.json'],
       deletedPath: [
         './test/mockProject/.snp/templateCatalog/.gitignore-default.md',
         './test/mockProject/.gitignore',
@@ -146,14 +146,14 @@ describe('cleanUpBeforeUpdate', () => {
       config: mockConfig.step.cleanUpBeforeUpdate.fullFiled,
       snpFileMapConfig: mockSnpFileMapConfig.step.cleanUpBeforeUpdate.fullFiled,
       allFiles: [
-        'test/mockProject/.snp/repositoryMap.json',
-        'test/mockProject/.snp/snp.config.json',
-        'test/mockProject/.snp/templateCatalog/.gitignore-custom.md',
-        'test/mockProject/.snp/templateCatalog/.gitignore-extend.md',
-        'test/mockProject/.snp/templateCatalog/README.md-custom.md',
-        'test/mockProject/.snp/templateCatalog/README.md-extend.md',
-        'test/mockProject/.snp/templateCatalog/package.json-custom.md',
-        'test/mockProject/.snp/templateCatalog/package.json-extend.md',
+        './test/mockProject/.snp/repositoryMap.json',
+        './test/mockProject/.snp/snp.config.json',
+        './test/mockProject/.snp/templateCatalog/.gitignore-custom.md',
+        './test/mockProject/.snp/templateCatalog/.gitignore-extend.md',
+        './test/mockProject/.snp/templateCatalog/README.md-custom.md',
+        './test/mockProject/.snp/templateCatalog/README.md-extend.md',
+        './test/mockProject/.snp/templateCatalog/package.json-custom.md',
+        './test/mockProject/.snp/templateCatalog/package.json-extend.md',
       ],
       deletedPath: [
         './test/mockProject/.snp/templateCatalog/.gitignore-default.md',

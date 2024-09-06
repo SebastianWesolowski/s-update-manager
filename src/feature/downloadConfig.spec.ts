@@ -49,9 +49,9 @@ describe('downloadConfig', () => {
       downloadContent: mockSnpFileMapConfig.step.init,
       snpFileMapConfig: mockSnpFileMapConfig.step.downloadConfigFile.forInit,
       allFiles: [
-        'test/mockProject/.snp/repositoryMap.json',
-        'test/mockProject/.snp/snp.config.json',
-        'test/mockProject/.snp/temporary/repositoryMap.json',
+        './test/mockProject/.snp/repositoryMap.json',
+        './test/mockProject/.snp/snp.config.json',
+        './test/mockProject/.snp/temporary/repositoryMap.json',
       ],
     });
   });
@@ -80,9 +80,9 @@ describe('downloadConfig', () => {
       downloadContent: mockSnpFileMapConfig.step.init,
       snpFileMapConfig: mockSnpFileMapConfig.step.downloadConfigFile.forInit,
       allFiles: [
-        'test/mockProject/.snp/repositoryMap.json',
-        'test/mockProject/.snp/snp.config.json',
-        'test/mockProject/.snp/temporary/repositoryMap.json',
+        './test/mockProject/.snp/repositoryMap.json',
+        './test/mockProject/.snp/snp.config.json',
+        './test/mockProject/.snp/temporary/repositoryMap.json',
       ],
     });
   });
@@ -120,9 +120,9 @@ describe('downloadConfig', () => {
       downloadContent: mockSnpFileMapConfig.step.downloadConfigFile.downloaded,
       snpFileMapConfig: mockSnpFileMapConfig.step.downloadConfigFile.updated,
       allFiles: [
-        'test/mockProject/.snp/repositoryMap.json',
-        'test/mockProject/.snp/snp.config.json',
-        'test/mockProject/.snp/temporary/repositoryMap.json',
+        './test/mockProject/.snp/repositoryMap.json',
+        './test/mockProject/.snp/snp.config.json',
+        './test/mockProject/.snp/temporary/repositoryMap.json',
       ],
     });
   });
