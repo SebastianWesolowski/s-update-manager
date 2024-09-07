@@ -28,6 +28,8 @@ describe('cleanUpTemplate', () => {
   });
 
   it('should do nothing when directory is empty', async () => {
+    await createCatalog(templateConfig.projectCatalog);
+
     const allFiles = await searchFilesInDirectory({
       directoryPath: templateConfig.projectCatalog,
       excludedFileNames: ['.DS_Store'],

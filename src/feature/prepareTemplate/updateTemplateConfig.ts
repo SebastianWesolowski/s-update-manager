@@ -14,7 +14,7 @@ export const updateTemplateConfig = async ({
   fileList: string[] | [];
   templateFileList: string[] | [];
   rootPathFileList: string[] | [];
-}): Promise<{ templateConfig: ConfigTemplateType }> => {
+}): Promise<{ templateConfig: ConfigTemplateType; newContent: RepositoryMapFileConfigType }> => {
   debugFunction(templateConfig.isDebug, { templateConfig }, '[PrepareTemplate] updateTemplateConfig');
   const repositoryMapFileConfig: RepositoryMapFileConfigType = await readFile(
     templateConfig.repositoryMapFilePath
@@ -37,5 +37,5 @@ export const updateTemplateConfig = async ({
     { templateConfig, fileList, templateFileList },
     '[PrepareTemplate] END updateTemplateConfig'
   );
-  return { templateConfig };
+  return { templateConfig, newContent };
 };

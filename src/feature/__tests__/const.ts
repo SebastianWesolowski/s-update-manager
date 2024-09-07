@@ -1,4 +1,4 @@
-import { ConfigTemplateType } from '../config/types';
+import { ConfigTemplateType, RepositoryMapFileConfigType } from '../config/types';
 
 const mockConfig_step_init = {
   REPOSITORY_MAP_FILE_NAME: 'repositoryMap.json',
@@ -581,6 +581,24 @@ const mockTemplateConfig_step_scanProjectFolder: ConfigTemplateType = {
 const mockTemplateConfig_step_updateTemplateConfig: ConfigTemplateType = {
   ...mockTemplateConfig_step_scanProjectFolder,
 };
+
+const repositoryMapFileConfigType_step_updateTemplateConfig: RepositoryMapFileConfigType = {
+  ...mockTemplateConfig_step_scanProjectFolder,
+  templateVersion: '1.0.0',
+  fileMap: [
+    'templateCatalog/.gitignore-default.md',
+    'templateCatalog/abc/index.ts-default.md',
+    'templateCatalog/dummy.md-default.md',
+    'templateCatalog/readme.md-default.md',
+  ],
+  rootPathFileList: [
+    './test/mockTemplate/.gitignore',
+    './test/mockTemplate/abc/index.ts',
+    './test/mockTemplate/dummy.md',
+    './test/mockTemplate/readme.md',
+  ],
+  templateFileList: ['./.gitignore', './abc/index.ts', './dummy.md', './readme.md'],
+};
 const mockTemplateConfig_step_formatJsonWithPrettier: ConfigTemplateType = {
   ...mockTemplateConfig_step_updateTemplateConfig,
 };
@@ -591,6 +609,10 @@ export const mockTemplateConfig = {
   cleanUpTemplate: mockTemplateConfig_step_cleanUpTemplate,
   prepareFileList: mockTemplateConfig_step_prepareFileList,
   scanProjectFolder: mockTemplateConfig_step_scanProjectFolder,
-  updateTemplateConfig: mockTemplateConfig_step_updateTemplateConfig,
+  updateTemplateConfig: {
+    templateConfig: mockTemplateConfig_step_updateTemplateConfig,
+    repositoryMapFileConfig: repositoryMapFileConfigType_step_updateTemplateConfig,
+  },
+
   formatJsonWithPrettier: mockTemplateConfig_step_formatJsonWithPrettier,
 };

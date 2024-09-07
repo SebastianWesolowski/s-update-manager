@@ -1,0 +1,18 @@
+{
+  "name": "real-project",
+  "version": "test-s-update-1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test:update:testTemplate": "s-update --isDebug='true' --snpCatalog='./.snp' --projectCatalog='./' --remoteRepository='https://raw.githubusercontent.com/SebastianWesolowski/testTemplate/master/template/'",
+    "test:build:testTemplate": "s-build --isDebug='true' --snpCatalog='./.snp' --projectCatalog='./' --remoteRepository='https://raw.githubusercontent.com/SebastianWesolowski/testTemplate/master/template/'",
+    "test:init:testTemplate": "s-init --isDebug='true' --snpCatalog='./.snp' --projectCatalog='./' --remoteRepository='https://raw.githubusercontent.com/SebastianWesolowski/testTemplate/master/template/'",
+    "test": "s-init --isDebug='true' --snpCatalog='./.snp' --projectCatalog='./' --remoteRepository='https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/dev/template/'",
+    "//": "//TODO change before to master release"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "s-update-manager": "../../dist/s-update-manager-1.0.0-dev.17T.tgz"
+  }
+}

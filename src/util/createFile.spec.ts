@@ -1,4 +1,4 @@
-import { createFile } from '@/util/createFile'; // Replace with the actual file name
+import { createFile } from '@/util/createFile';
 
 describe('createFile', () => {
   it('should create a file when given filePath and content', async () => {
