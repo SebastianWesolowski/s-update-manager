@@ -46,7 +46,7 @@ export type PartialConfig<T> = {
   [K in keyof T]?: any;
 };
 
-export interface RepositoryMapFileConfigType {
+export interface RepositoryMapFileConfigType extends ConfigTemplateType {
   templateVersion: string;
   fileMap: string[];
   templateFileList: string[];
