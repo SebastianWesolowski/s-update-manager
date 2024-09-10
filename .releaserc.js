@@ -27,9 +27,7 @@ module.exports = {
       '@semantic-release/release-notes-generator',
       {
         preset: 'conventionalcommits',
-        issuePrefixes: ['SC-'],
-        issueUrlFormat: 'https://linear.app/wesolowskidev/issue/SC-{{id}}',
-        linkReferences: true,
+
         presetConfig: {
           types: [
             {
@@ -46,7 +44,18 @@ module.exports = {
               hidden: false,
             },
           ],
+          noteKeywords: ['BREAKING CHANGE', 'BREAKING CHANGES'],
+          commitGroupsSort: 'prefix',
+          commitsSort: 'subject',
         },
+        writerOpts: {
+          header: '### ${section}',
+          commitPartial: '* ${emoji} [${issue}](${issueUrl}) ${subject} (${commitUrl})',
+          issuePrefixes: [{ value: 'SC-', name: 'Linear' }],
+        },
+        issuePrefixes: ['SC-'],
+        issueUrlFormat: 'https://linear.app/wesolowskidev/issue/{{prefix}}{{id}}',
+        linkReferences: true,
       },
     ],
     [
