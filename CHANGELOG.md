@@ -1,3 +1,10 @@
+## [1.0.0-dev.31](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.30...v1.0.0-dev.31) (2024-09-10)
+
+
+### Bug Fixes
+
+* 🐛 [SC-24] link to linear issue ([91e908f](https://github.com/SebastianWesolowski/s-update-manager/commit/91e908f6d263187460d1cb019566dc96df5b1ae5))
+
 ## [1.0.0-dev.30](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.29...v1.0.0-dev.30) (2024-09-10)
 
 
