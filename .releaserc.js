@@ -28,6 +28,7 @@ module.exports = {
       {
         preset: 'conventionalcommits',
         issuePrefixes: ['SC-'],
+        issueUrlFormat: 'https://linear.app/wesolowskidev/issue/SC-{{id}}',
         linkReferences: true,
         presetConfig: {
           types: [
@@ -45,13 +46,6 @@ module.exports = {
               hidden: false,
             },
           ],
-        },
-        transform: function (commit) {
-          const issuePattern = /SC-(\d+)/g;
-          commit.subject = commit.subject.replace(issuePattern, (_, issue) => {
-            return `[SC-${issue}](https://linear.app/wesolowskidev/issue/SC-${issue})`;
-          });
-          return commit;
         },
       },
     ],
