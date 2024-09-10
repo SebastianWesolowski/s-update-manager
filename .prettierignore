@@ -42,3 +42,4 @@ prettier.config.js
 tools/*
 snp/*
 template/*
+mock/*
