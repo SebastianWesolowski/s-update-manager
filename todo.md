@@ -11,8 +11,16 @@
 - [ ] Describe all TODOs
 - [ ] Test downloadConfig ? "rootPathFileList": [ -> "./.gitignore.md", ...]
 
+testMockProject
+testMockProjectToUpdate
+testMockProjectToBuild
+testMockTemplate
+testMockTemplateToUpdate
+
 # Beyond MVP
 
+- [ ] improve develop preces with mock catalog
+- [ ] Prepare separate data for different scripts using process.env.STYPE. This should handle different argument sets for init, update, build, and template scripts
 - [ ] Export const cleanUpFiles - snpCatalog - make it reusable
 - [ ] cookie: can't load punycode; won't use punycode for domain normalisation
 - [ ] Checkout RepositoryMapFileConfigType type is very similar to FileMapConfig

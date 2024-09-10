@@ -11,6 +11,7 @@
 <br>
 
 **Remove before final release**
+
 - [Set up your repository](docs/HowToAutoDeploy.md)
 - [Way to work](docs/WayToWrok.md)
 - [Known issues](docs/knowProblems.md)
@@ -30,6 +31,7 @@ npm install s-update-manager
 ## Usage
 
 use s-init script in your package json file
+
 ```bash
 "init": "s-init --snpConfig ./.snp --template node --project ./ --remoteRepository https://raw.githubusercontent.com/SebastianWesolowski/testTemplate/main/template/"
 ```
@@ -38,19 +40,18 @@ use CLI parameters:
 
 `snpConfig: './.snp'`
 `template: 'node'`
-`project: './tes/fakeProjectRootfolder'`
+`project: './mock/mockProject'`
 `remoteRepository: 'https://raw.githubusercontent.com/SebastianWesolowski/testTemplate/main/template/'`
 `debug: true`
 
 You can see example project in `test/realProject/`
 
-
 ## Badges
+
 [![Downloads][downloads-img]][downloads-url]
 [![Issues][issues-img]][issues-url]
 [![Commitizen Friendly][commitizen-img]][commitizen-url]
 [![Semantic Release][semantic-release-img]][semantic-release-url]
-
 
 [build-img]: https://github.com/SebastianWesolowski/s-update-manager/actions/workflows/release.yml/badge.svg
 [build-url]: https://github.com/SebastianWesolowski/s-update-manager/actions/workflows/release.yml
@@ -64,5 +65,5 @@ You can see example project in `test/realProject/`
 [semantic-release-url]: https://github.com/semantic-release/semantic-release
 [commitizen-img]: https://img.shields.io/badge/commitizen-friendly-brightgreen.svg
 [commitizen-url]: http://commitizen.github.io/cz-cli/
-repository react
 
+repository react

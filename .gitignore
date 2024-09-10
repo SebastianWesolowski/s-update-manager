@@ -76,17 +76,25 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
-# Test files
-test/**/*
-!test/realProject
-!test/fakeProjectRootfolder
-!test/testTemplate/**/*
-!test/testTemplate/**
-!test/testTemplate/*
-!test/testFiles
-!test/mockTemplate
-!test/mockUpdatedTemplate
-!/Users/sebastian/web/s-update-manager/test/testTemplate
+# Pliki testowe
+/test/*
+# !/test/realProject/
+# !/test/testTemplate/
+!/test/mockTemplate/
+!/test/mockUpdatedTemplate/
+
+# Upewnij się, że wszystkie pliki w dozwolonych katalogach są uwzględnione
+# !/test/realProject/**
+# !/test/testTemplate/**
+!/test/mockTemplate/**
+!/test/mockUpdatedTemplate/**
+
+# Upewnij się, że wszystkie pliki w dozwolonych katalogach są uwzględnione
+# !/test/realProject/**/*
+# !/test/testTemplate/**/*
+!/test/mockTemplate/**/*
+!/test/mockUpdatedTemplate/**/*
+
 
 # Project-specific directories
 !template/create-react-app-main/templateCatalog

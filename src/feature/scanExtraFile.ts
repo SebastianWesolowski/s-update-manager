@@ -27,7 +27,7 @@ export async function scanExtraFile(
       ][]) {
         const snpSuffix = formatSnp(SNPKeySuffix, 'suffix') as AvailableSNPSuffixTypes;
         const SNPSuffixFilePath = createPath([config.snpCatalog, config.templateCatalogName, realFilePath + snpSuffix]);
-        if (await isFileOrFolderExists(SNPSuffixFilePath)) {
+        if (await isFileOrFolderExists({ isDebug: config.isDebug, filePath: SNPSuffixFilePath })) {
           const SNPSuffixFileName = createPath([realFilePath + snpSuffix]);
           snpFileMapConfig = await updateDetailsFileMapConfig2({
             snpFileMapConfig,

@@ -11,8 +11,10 @@ export const cleanUpTemplate = async (
 ): Promise<{ templateConfig: ConfigTemplateType }> => {
   debugFunction(templateConfig.isDebug, { templateConfig }, '[PrepareTemplate] cleanUpTemplate');
   let repositoryMapFileConfig: null | RepositoryMapFileConfigType = null;
-  if (await isFileOrFolderExists(templateConfig.templateCatalogPath)) {
-    if (await isFileOrFolderExists(templateConfig.repositoryMapFilePath)) {
+  if (await isFileOrFolderExists({ isDebug: templateConfig.isDebug, filePath: templateConfig.templateCatalogPath })) {
+    if (
+      await isFileOrFolderExists({ isDebug: templateConfig.isDebug, filePath: templateConfig.repositoryMapFilePath })
+    ) {
       repositoryMapFileConfig = await readFile(templateConfig.repositoryMapFilePath).then(async (bufferData) =>
         parseJSON(bufferData.toString())
       );

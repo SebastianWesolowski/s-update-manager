@@ -32,7 +32,7 @@ export const buildFromConfig = async (
       }
 
       const currentFileObject: snpFile = snpFileMapConfig.snpFileMap[realFilePath][SNPKeySuffix];
-      if (!(await isFileOrFolderExists(currentFileObject.path))) {
+      if (!(await isFileOrFolderExists({ isDebug: config.isDebug, filePath: currentFileObject.path }))) {
         await createFile({
           filePath: createPath(currentFileObject.path),
           content: '',

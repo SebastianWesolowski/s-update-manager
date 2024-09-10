@@ -1,5 +1,0 @@
-{
-  "fileMap": ["file1.txt", "file2.txt"],
-  "templateFileList": ["template1.txt", "template2.txt"],
-  "rootPathFileList": ["/root/file1.txt", "/root/file2.txt"]
-}

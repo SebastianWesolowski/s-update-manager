@@ -17,7 +17,7 @@ export const updateJsonFile = async ({
   newContent: object;
   replaceFile?: boolean;
 }): Promise<object | null> => {
-  if (await isFileOrFolderExists(filePath)) {
+  if (await isFileOrFolderExists({ isDebug: config.isDebug, filePath })) {
     return await updateJson({ filePath: filePath, newContent, replace: replaceFile }).then(() => {
       if (replaceFile) {
         return newContent;

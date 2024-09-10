@@ -42,7 +42,7 @@ export async function createFile({
       createFolder: options?.createFolder || true,
     });
 
-    if ((await isFileOrFolderExists(filePath)) && isDebug) {
+    if ((await isFileOrFolderExists({ isDebug, filePath: filePath })) && isDebug) {
       console.warn('File already exists: ' + filePath);
     }
 
