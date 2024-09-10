@@ -3,6 +3,7 @@ distTS
 lib/*
 *.scss
 dist/*
+mock/*
 tools/*
 snp/*
 template/*

@@ -1,5 +1,6 @@
 import { ConfigTemplateType, RepositoryMapFileConfigType } from '../config/types';
 
+// TODO [SC-28] after release change all dev repolinks to master
 const mockConfig_step_init = {
   REPOSITORY_MAP_FILE_NAME: 'repositoryMap.json',
   _: [],
@@ -8,10 +9,10 @@ const mockConfig_step_init = {
   isDebug: false,
   projectCatalog: './test/mockProject',
   remoteFileMapURL:
-    'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/dev/test/testTemplate/templateCatalog/repositoryMap.json',
-  remoteRepository: 'https://github.com/SebastianWesolowski/s-update-manager/tree/dev/test/testTemplate',
+    'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/dev/mock/mockTemplate/templateCatalog/repositoryMap.json',
+  remoteRepository: 'https://github.com/SebastianWesolowski/s-update-manager/tree/dev/mock/mockTemplate',
   remoteRootRepositoryUrl:
-    'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/dev/test/testTemplate',
+    'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/dev/mock/mockTemplate',
   templateVersion: '1.0.0',
   snpCatalog: './test/mockProject/.snp/',
   snpConfigFile: './test/mockProject/.snp/snp.config.json',

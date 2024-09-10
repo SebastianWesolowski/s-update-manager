@@ -61,7 +61,6 @@ describe('updateTemplateConfig', () => {
   });
 
   it('should update template config correctly', async () => {
-    debugger;
     const templateFileList = ['./.gitignore', './abc/index.ts', './dummy.md', './readme.md'];
     const rootPathFileList = [
       './test/mockTemplate/.gitignore',
