@@ -1,0 +1,16 @@
+{
+  "name": "real-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "update": "s-update --remoteRepository='https://github.com/SebastianWesolowski/s-update-manager/tree/dev/template/node/templateCatalog'",
+    "build": "s-build --remoteRepository='https://github.com/SebastianWesolowski/s-update-manager/tree/dev/template/node/templateCatalog'",
+    "init": "s-init --remoteRepository='https://github.com/SebastianWesolowski/s-update-manager/tree/dev/template/node/templateCatalog'"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "s-update-manager": "../../dist/s-update-manager-1.0.0-dev.27.tgz"
+  }
+}

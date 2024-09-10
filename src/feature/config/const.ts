@@ -34,6 +34,7 @@ export const defaultTemplateConfig: ConfigTemplateType = {
 };
 
 export const defaultRepositoryMapFileConfig: RepositoryMapFileConfigType = {
+  ...defaultTemplateConfig,
   templateVersion: '1.0.0',
   fileMap: [],
   templateFileList: [],

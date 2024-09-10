@@ -13,7 +13,10 @@ import { isFileOrFolderExists } from '@/util/isFileOrFolderExists';
 export const build = async (args: Args): Promise<ConfigType> => {
   const config = await getConfig(args);
 
-  if (!(await isFileOrFolderExists(config.snpFileMapConfig)) && (await isFileOrFolderExists(config.snpConfigFile))) {
+  if (
+    !(await isFileOrFolderExists({ isDebug: config.isDebug, filePath: config.snpFileMapConfig })) &&
+    !(await isFileOrFolderExists({ isDebug: config.isDebug, filePath: config.snpConfigFile }))
+  ) {
     if (process.env.SDEBUG !== 'true') {
       throw new Error('Config files (snpFileMapConfig or snpConfigFile)  not exists, use init script');
     }

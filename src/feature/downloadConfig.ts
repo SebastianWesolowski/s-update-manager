@@ -30,7 +30,7 @@ export async function downloadConfig(config: ConfigType): Promise<{
       '[INIT - downloadConfig]'
     );
 
-    if (!(await isFileOrFolderExists(config.temporaryFolder))) {
+    if (!(await isFileOrFolderExists({ isDebug: config.isDebug, filePath: config.temporaryFolder }))) {
       await createCatalog(config.temporaryFolder);
     }
     // TODO config.temporaryFolder is nesesery

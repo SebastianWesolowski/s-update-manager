@@ -23,7 +23,7 @@ export const bumpVersion = async (
     return { templateConfig };
   }
 
-  if (await isFileOrFolderExists(templateConfig.repositoryMapFilePath)) {
+  if (await isFileOrFolderExists({ isDebug: templateConfig.isDebug, filePath: templateConfig.repositoryMapFilePath })) {
     const safeCurrentVersion = currentVersion || '1.0.0';
     repositoryMapFileConfig.templateVersion = semver.inc(safeCurrentVersion, 'patch') || '1.0.0';
   }

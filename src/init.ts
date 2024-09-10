@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 
 import minimist from 'minimist';
+import { cleanUpSinglePath, cleanUpSpecificFiles } from './feature/__tests__/cleanForTests';
+import { searchFilesInDirectory } from './feature/__tests__/searchFilesInDirectory';
 import { Args } from '@/feature/args/args';
 import { buildFromConfig } from '@/feature/buildFromConfig';
 import { cleanUp } from '@/feature/cleanUp';
@@ -16,11 +18,29 @@ import { isFileOrFolderExists } from '@/util/isFileOrFolderExists';
 export const init = async (args: Args): Promise<ConfigType> => {
   const config = await getConfig(args);
 
-  if ((await isFileOrFolderExists(config.snpFileMapConfig)) && (await isFileOrFolderExists(config.snpConfigFile))) {
+  if (
+    (await isFileOrFolderExists({ isDebug: config.isDebug, filePath: config.snpFileMapConfig })) &&
+    (await isFileOrFolderExists({ isDebug: config.isDebug, filePath: config.snpConfigFile }))
+  ) {
     if (process.env.SDEBUG !== 'true') {
       throw new Error('Config file exists, use build script or update');
     }
   }
+
+  if (process.env.SDEBUG === 'true') {
+    await cleanUpSinglePath({
+      path: config.snpCatalog,
+      isDebug: config.isDebug,
+    });
+
+    const allFiles = await searchFilesInDirectory({
+      directoryPath: config.projectCatalog,
+      excludedFileNames: ['.gitignore', 'package.json'],
+    });
+
+    await cleanUpSpecificFiles({ files: allFiles, isDebug: config.isDebug });
+  }
+
   debugFunction(config.isDebug, '=== Start SNP INIT ===', '[INIT]');
 
   return config;

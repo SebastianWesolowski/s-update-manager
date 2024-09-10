@@ -17,7 +17,7 @@ export const getRemoteContentToBuild = async ({
       baseURL: config.remoteRootRepositoryUrl,
       relativePaths: [snpObject.SNPSuffixFileName],
     });
-    if (!(await isFileOrFolderExists(config.temporaryFolder))) {
+    if (!(await isFileOrFolderExists({ isDebug: config.isDebug, filePath: config.temporaryFolder }))) {
       await createCatalog(config.temporaryFolder);
     }
     return await wgetAsync(contentUrl, config.temporaryFolder).then(async (remoteContent) => {

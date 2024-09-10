@@ -3,6 +3,12 @@ import { defaultArgs } from '@/feature/args/const';
 import { defaultConfig } from '@/feature/config/const';
 import { getConfig, regenerateConfig, updateDefaultConfig } from '@/feature/config/defaultConfig';
 import { ConfigType } from '@/feature/config/types';
+import { readPackageVersion } from '@/util/readVersionPackage';
+
+const updateSUpdaterVersion = async (projectCatalog: string): Promise<Partial<{ sUpdaterVersion: string }>> => {
+  const sUpdaterVersion = await readPackageVersion(projectCatalog + '/package.json');
+  return { sUpdaterVersion };
+};
 
 const testCases: { description: string; mockConfig: Partial<ConfigType>; expectedConfig: Partial<ConfigType> }[] = [
   {
@@ -148,17 +154,24 @@ describe('configuration functions', () => {
       expectedConfig: Partial<ConfigType>;
     }) => {
       it(`regenerateConfig - should ${description}`, async () => {
-        const expectedConfigOverwrite: Partial<ConfigType> = {
+        const { sUpdaterVersion } = await updateSUpdaterVersion(expectedConfig.projectCatalog || './');
+
+        const updatedExpectedConfig = {
           ...expectedConfig,
-          sUpdaterVersion: '1.0.0-dev.27', // common override
+          sUpdaterVersion,
         };
+
+        const expectedConfigOverwrite = await regenerateConfig({
+          ...defaultConfig,
+          ...mockConfig,
+          projectCatalog: mockConfig.projectCatalog || './',
+        });
 
         const result = await regenerateConfig({
           ...defaultConfig,
           ...mockConfig,
         });
 
-        result.sUpdaterVersion = '1.0.0-dev.27';
         expect(result).toStrictEqual(expectedConfigOverwrite);
       });
     }
@@ -201,24 +214,29 @@ describe('configuration functions', () => {
       availableSNPKeySuffix: ['defaultFile', 'customFile', 'extendFile'],
       availableSNPSuffix: ['-default.md', '-custom.md', '-extend.md'],
       isDebug: 'true',
-      projectCatalog: './test/fakeProjectRootfolder/',
+      projectCatalog: './mock/mockProject/',
       remoteFileMapURL:
         'https://raw.githubusercontent.com/SebastianWesolowski/testTemplate/main/template/node/templateCatalog/repositoryMap.json',
       remoteRepository:
         'https://github.com/SebastianWesolowski/testTemplate/blob/main/template/node/templateCatalog/repositoryMap.json',
       remoteRootRepositoryUrl: 'https://raw.githubusercontent.com/SebastianWesolowski/testTemplate/main/template/node',
       sUpdaterVersion: '../../dist/s-update-manager-1.0.0-dev.17T.tgz',
-      snpCatalog: './test/fakeProjectRootfolder/.snp/',
-      snpConfigFile: './test/fakeProjectRootfolder/.snp/snp.config.json',
+      snpCatalog: './mock/mockProject/.snp/',
+      snpConfigFile: './mock/mockProject/.snp/snp.config.json',
       snpConfigFileName: 'snp.config.json',
-      snpFileMapConfig: './test/fakeProjectRootfolder/.snp/repositoryMap.json',
+      snpFileMapConfig: './mock/mockProject/.snp/repositoryMap.json',
       templateCatalogName: 'templateCatalog',
       templateVersion: undefined,
-      temporaryFolder: './test/fakeProjectRootfolder/.snp/temporary/',
+      temporaryFolder: './mock/mockProject/.snp/temporary/',
     };
 
     const result: ConfigType = await getConfig(defaultArgs);
+    const { sUpdaterVersion } = await updateSUpdaterVersion(expectedConfig.projectCatalog);
 
-    expect(result).toStrictEqual(expectedConfig);
+    const updatedExpectedConfig = {
+      ...expectedConfig,
+      sUpdaterVersion,
+    };
+    expect(result).toStrictEqual(updatedExpectedConfig);
   });
 });

@@ -21,12 +21,19 @@ export const prepareTemplate = async (args: ArgsTemplate): Promise<{ templateCon
 
   debugFunction(templateConfig.isDebug, '=== Start prepare template ===', '[PrepareTemplate]');
 
-  if (!(await isFileOrFolderExists(templateConfig.templateCatalogPath)) || process.env.SDEBUG !== 'true') {
+  // TODO improve develop preces with mock catalog
+  if (
+    !(await isFileOrFolderExists({ isDebug: templateConfig.isDebug, filePath: templateConfig.templateCatalogPath })) ||
+    process.env.SDEBUG !== 'true'
+  ) {
     await createCatalog(templateConfig.templateCatalogPath);
   }
   if (
-    ((await isFileOrFolderExists(templateConfig.templateCatalogPath)) &&
-      !(await isFileOrFolderExists(templateConfig.repositoryMapFilePath))) ||
+    ((await isFileOrFolderExists({ isDebug: templateConfig.isDebug, filePath: templateConfig.templateCatalogPath })) &&
+      !(await isFileOrFolderExists({
+        isDebug: templateConfig.isDebug,
+        filePath: templateConfig.repositoryMapFilePath,
+      }))) ||
     process.env.SDEBUG !== 'true'
   ) {
     debugFunction(
