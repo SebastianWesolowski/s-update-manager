@@ -11,27 +11,21 @@
 - [ ] Describe all TODOs
 - [ ] Test downloadConfig ? "rootPathFileList": [ -> "./.gitignore.md", ...]
 
-testMockProject
-testMockProjectToUpdate
-testMockProjectToBuild
-testMockTemplate
-testMockTemplateToUpdate
-
 # Beyond MVP
 
-- [ ] improve develop preces with mock catalog
-- [ ] Prepare separate data for different scripts using process.env.STYPE. This should handle different argument sets for init, update, build, and template scripts
-- [ ] Export const cleanUpFiles - snpCatalog - make it reusable
-- [ ] cookie: can't load punycode; won't use punycode for domain normalisation
-- [ ] Checkout RepositoryMapFileConfigType type is very similar to FileMapConfig
-- [ ] Why are arguments and config not linked in types?
-- [ ] dryRun flag
-- [ ] config.temporaryFolder is necessary
-- [ ] Handle updates when new version is in template file, will cleanTree work?
-- [ ] Delay in downloading by wgetAsync, some cache etc
-- [ ] Add gitignore \*-... !-custom, extend ...generated things shouldn't be in repo
-- [ ] Order key in configs is different
-- [ ] Improve updateDefaultConfig and add more single cases
+improve develop preces with mock catalog
+Prepare separate data for different scripts using process.env.STYPE. This should handle different argument sets for init, update, build, and template scripts
+Export const cleanUpFiles - snpCatalog - make it reusable
+cookie: can't load punycode; won't use punycode for domain normalisation
+Checkout RepositoryMapFileConfigType type is very similar to FileMapConfig
+Why are arguments and config not linked in types?
+dryRun flag
+config.temporaryFolder is necessary
+Handle updates when new version is in template file, will cleanTree work?
+Delay in downloading by wgetAsync, some cache etc
+Add gitignore \*-... !-custom, extend ...generated things shouldn't be in repo
+Order key in configs is different
+Improve updateDefaultConfig and add more single cases
 
 # Completed Tasks
 
