@@ -156,14 +156,10 @@ describe('configuration functions', () => {
       it(`regenerateConfig - should ${description}`, async () => {
         const { sUpdaterVersion } = await updateSUpdaterVersion(expectedConfig.projectCatalog || './');
 
-        const updatedExpectedConfig = {
-          ...expectedConfig,
-          sUpdaterVersion,
-        };
-
         const expectedConfigOverwrite = await regenerateConfig({
           ...defaultConfig,
-          ...mockConfig,
+          ...expectedConfig,
+          sUpdaterVersion,
           projectCatalog: mockConfig.projectCatalog || './',
         });
 
