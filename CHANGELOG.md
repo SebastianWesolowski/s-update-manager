@@ -1,3 +1,10 @@
+## [1.0.0-dev.30](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.29...v1.0.0-dev.30) (2024-09-10)
+
+
+### Features
+
+* ✨ [SC-24] add new config for releaserc ([f30525b](https://github.com/SebastianWesolowski/s-update-manager/commit/f30525b6ae19dc8cd35ab0b42ca4d9d948a1a282))
+
 ## [1.0.0-dev.29](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.28...v1.0.0-dev.29) (2024-08-26)
 
 
