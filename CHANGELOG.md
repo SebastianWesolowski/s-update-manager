@@ -1,3 +1,10 @@
+## [1.0.0-dev.32](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.31...v1.0.0-dev.32) (2024-09-10)
+
+
+### Features
+
+* ${emoji} [${issue}](${issueUrl}) ${subject} (${commitUrl})* ${emoji} [${issue}](${issueUrl}) ${subject} (${commitUrl})
+
 ## [1.0.0-dev.31](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.30...v1.0.0-dev.31) (2024-09-10)
 
 
