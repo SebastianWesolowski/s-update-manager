@@ -43,31 +43,74 @@ module.exports = {
               hidden: false,
             },
           ],
-          noteKeywords: ['BREAKING CHANGE', 'BREAKING CHANGES'],
-          commitGroupsSort: 'prefix',
-          commitsSort: 'subject',
         },
         writerOpts: {
-          header: '### ${section}',
-          commitPartial: '* ${emoji} [${issue}](${issueUrl}) ${subject} (${commitUrl})',
-          issuePrefixes: [{ value: 'SC-', name: 'Linear' }],
+          groupBy: 'scIssue',
+          commitsSort: ['scIssue', 'type'],
+          commitGroupsSort: 'title',
+          transform: (commit, context) => {
+            if (commit.type === 'feat') {
+              commit.type = 'Features';
+            } else if (commit.type === 'fix') {
+              commit.type = 'Bug Fixes';
+            } else if (commit.type === 'build') {
+              commit.type = 'Dependencies and Other Build Updates';
+            }
+
+            if (typeof commit.hash === 'string') {
+              commit.shortHash = commit.hash.substring(0, 7);
+            }
+
+            if (typeof commit.subject === 'string') {
+              let url = context.repository ? `${context.host}/${context.owner}/${context.repository}` : context.repoUrl;
+
+              // Extract SC issue number
+              const scMatch = commit.subject.match(/\[?(SC-\d+)\]?/);
+              if (scMatch) {
+                const scIssue = scMatch[1];
+                commit.scIssue = scIssue;
+                // Replace SC issue with linked version
+                commit.subject = commit.subject.replace(
+                  /\[?(SC-\d+)\]?/,
+                  `[[${scIssue}](https://linear.app/wesolowskidev/issue/${scIssue})]`
+                );
+              }
+
+              if (url) {
+                commit.commitUrl = `${url}/commit/${commit.hash}`;
+              }
+            }
+
+            return commit;
+          },
+          commitPartial: '* {{subject}} ([{{shortHash}}]({{commitUrl}}))\n',
+          commitGroupsSort: (a, b) => {
+            const aMatch = a.title.match(/SC-(\d+)/);
+            const bMatch = b.title.match(/SC-(\d+)/);
+            if (aMatch && bMatch) {
+              return parseInt(aMatch[1]) - parseInt(bMatch[1]);
+            }
+            return a.title.localeCompare(b.title);
+          },
+          mainTemplate: `{{> header}}
+
+{{#each commitGroups}}
+
+### [{{title}}](https://linear.app/wesolowskidev/issue/{{title}})
+
+{{#each commits}}
+{{> commit root=@root}}
+{{/each}}
+
+{{/each}}
+{{> footer}}`,
         },
-        issuePrefixes: ['SC-'],
-        issueUrlFormat: 'https://linear.app/wesolowskidev/issue/{{prefix}}{{id}}',
-        linkReferences: true,
       },
     ],
     [
       '@semantic-release/changelog',
       {
         changelogFile: 'CHANGELOG.md',
-      },
-    ],
-    '@semantic-release/npm',
-    [
-      '@semantic-release/github',
-      {
-        branches: ['main'],
       },
     ],
     [
