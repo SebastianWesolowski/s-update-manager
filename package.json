@@ -31,7 +31,7 @@
     "husky:commit-msg": "commitlint --edit $GIT_PARAMS",
     "husky:pre-commit": "lint-staged -c ./.husky/lint-staged.config.json",
     "husky:pre-push": "run-s lint:check test:check build:prod",
-    "husky:prepare-commit-msg": "exec < /dev/tty && node_modules/.bin/git-cz --hook || true",
+    "husky:prepare-commit-msg": "exec < /dev/tty && yarn commit --hook || true",
     "lint": "run-s lint:fix lint:check",
     "lint:commitMessage": "run-s lint:fix lint:check",
     "lint:check": "run-s prettier:check eslint:check typescript:check",
@@ -46,7 +46,7 @@
     "test:check": "node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage --runInBand",
     "test:watch": "jest --watch",
     "typescript:check": "tsc --noEmit",
-    "cm": "cz",
+    "commit": "czg",
     "prepare": "husky",
     "prepack": "clean-package",
     "postpack": "clean-package restore"
@@ -108,13 +108,13 @@
     "conventional-changelog-conventionalcommits": "^5.0.0",
     "cpy-cli": "^5.0.0",
     "cross-env": "^7.0.3",
+    "czg": "^1.9.4",
     "eslint": "8.50.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^3.4.0",
     "fs-extra": "^11.2.0",
-    "git-cz": "^4.9.0",
     "glob": "^10.3.10",
     "handlebars-helpers": "^0.10.0",
     "husky": "^9.0.0",
@@ -138,7 +138,7 @@
   },
   "config": {
     "commitizen": {
-      "path": "git-cz"
+      "path": "node_modules/cz-git"
     }
   }
 }
