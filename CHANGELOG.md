@@ -1,3 +1,16 @@
+## [1.0.0-dev.34](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.33...v1.0.0-dev.34) (September 12, 2024)
+
+
+### [SC-21](https://linear.app/wesolowskidev/issue/SC-21)
+
+- [[SC-21](https://linear.app/wesolowskidev/issue/SC-21)] ✨ improve commit message ([dbc1d7a](https://github.com/SebastianWesolowski/s-update-manager/commit/dbc1d7aa2ed11d719c738f3d7e801a25c3fdd212))
+- ✨ [[SC-21](https://linear.app/wesolowskidev/issue/SC-21)] improve comitizen ([d2f783e](https://github.com/SebastianWesolowski/s-update-manager/commit/d2f783e2646413e302a26970b93fa04c4a184932))
+
+
+### Other tasks
+
+- ✨ improve comitizen wizzard ([887498a](https://github.com/SebastianWesolowski/s-update-manager/commit/887498a51f69527fcdf5c7040dd308790e32f48a))
+
 ## [1.0.0-dev.33](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.32...v1.0.0-dev.33) (September 12, 2024)
 
 ### [SC-21](https://linear.app/wesolowskidev/issue/SC-21)
