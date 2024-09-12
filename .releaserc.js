@@ -1,3 +1,4 @@
+const helpers = require('handlebars-helpers')();
 module.exports = {
   branches: [
     {
@@ -47,6 +48,7 @@ module.exports = {
         writerOpts: {
           groupBy: 'scIssue',
           commitsSort: ['scIssue', 'type'],
+          helpers,
           commitGroupsSort: 'title',
           transform: (commit, context) => {
             if (commit.type === 'feat') {
@@ -74,6 +76,8 @@ module.exports = {
                   /\[?(SC-\d+)\]?/,
                   `[[${scIssue}](https://linear.app/wesolowskidev/issue/${scIssue})]`
                 );
+              } else {
+                commit.scIssue = 'Other tasks'; // Assign to "Other tasks" if no SC- issue is found
               }
 
               if (url) {
@@ -85,18 +89,24 @@ module.exports = {
           },
           commitPartial: '* {{subject}} ([{{shortHash}}]({{commitUrl}}))\n',
           commitGroupsSort: (a, b) => {
-            const aMatch = a.title.match(/SC-(\d+)/);
-            const bMatch = b.title.match(/SC-(\d+)/);
+            const aMatch = typeof a.title === 'string' && a.title.match(/SC-(\d+)/);
+            const bMatch = typeof b.title === 'string' && b.title.match(/SC-(\d+)/);
+
             if (aMatch && bMatch) {
               return parseInt(aMatch[1]) - parseInt(bMatch[1]);
             }
+
+            // Ensure "Other tasks" comes last
+            if (a.title === 'Other tasks') return 1;
+            if (b.title === 'Other tasks') return -1;
+
             return a.title.localeCompare(b.title);
           },
           mainTemplate: `{{> header}}
 
 {{#each commitGroups}}
 
-### [{{title}}](https://linear.app/wesolowskidev/issue/{{title}})
+### {{#if (eq title "Other tasks")}}Other tasks{{else}}[{{title}}](https://linear.app/wesolowskidev/issue/{{title}}){{/if}}
 
 {{#each commits}}
 {{> commit root=@root}}
