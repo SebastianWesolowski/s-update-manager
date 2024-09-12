@@ -27,4 +27,13 @@ else
     exit 1
 fi
 
+if grep -qE "SC-[0-9]+" "$commit_msg_file"; then
+    issue_number=$(grep -oE "SC-[0-9]+" "$commit_msg_file" | head -n1)
+    sed -i.bak -E "s/^([^:]+: )(.*)/\1[$issue_number] \2/" "$commit_msg_file"
+    sed -i.bak "/^$issue_number$/d" "$commit_msg_file"
+    sed -i.bak '/^$/N;/^\n$/D' "$commit_msg_file"
+    rm "${commit_msg_file}.bak"
+    echo "[🐶 Husky] Added issue number [$issue_number] to commit message and removed footer."
+fi
+
 echo "[🐶 Husky] Done ✅ prepare-commit-msg hook..."
