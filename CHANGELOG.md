@@ -1,3 +1,22 @@
+## [1.0.0-dev.33](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.32...v1.0.0-dev.33) (September 12, 2024)
+
+
+### [SC-21](https://linear.app/wesolowskidev/issue/SC-21)
+
+* 🐛 [[SC-21](https://linear.app/wesolowskidev/issue/SC-21)] generate changelog without SC issue ([9ad624e](https://github.com/SebastianWesolowski/s-update-manager/commit/9ad624e0884c15049db8e692d17b522149cdf984))
+
+
+### [SC-24](https://linear.app/wesolowskidev/issue/SC-24)
+
+* 🐛 [[SC-24](https://linear.app/wesolowskidev/issue/SC-24)] release config ([e7625ae](https://github.com/SebastianWesolowski/s-update-manager/commit/e7625aecf9a32525639bf761e2407c5c8e2dc315))
+
+
+### Other tasks
+
+* 🔧 bump husky to ^9 ([e798c42](https://github.com/SebastianWesolowski/s-update-manager/commit/e798c4200fc95fe7afc1d23375ac2d49f7c86ccd))
+* 🔧 bump husky to ^8 ([de62bff](https://github.com/SebastianWesolowski/s-update-manager/commit/de62bff4d1969ec23b4a51a58927f53cb01b5e5f))
+* 🔧 bump husky ([630570a](https://github.com/SebastianWesolowski/s-update-manager/commit/630570aee0a89379b2416b268934d6c695071e3a))
+
 ## [1.0.0-dev.32](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.31...v1.0.0-dev.32) (2024-09-10)
 
 
