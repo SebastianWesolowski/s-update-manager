@@ -87,7 +87,7 @@ module.exports = {
 
             return commit;
           },
-          commitPartial: '* {{subject}} ([{{shortHash}}]({{commitUrl}}))\n',
+          commitPartial: '- {{subject}} ([{{shortHash}}]({{commitUrl}}))\n',
           commitGroupsSort: (a, b) => {
             const aMatch = typeof a.title === 'string' && a.title.match(/SC-(\d+)/);
             const bMatch = typeof b.title === 'string' && b.title.match(/SC-(\d+)/);
