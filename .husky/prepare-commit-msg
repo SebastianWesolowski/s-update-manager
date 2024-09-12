@@ -1,5 +1,30 @@
-echo \[🐶 Husky] Running prepare-commit-msg hook...\
+echo "[🐶 Husky] Running prepare-commit-msg hook..."
 
-yarn husky:prepare-commit-msg
+commit_msg_file=$1
+commit_source=$2
 
-echo \[🐶 Husky] Done ✅ prepare-commit-msg hook...\
+if [ "$commit_source" = "commit" ]; then
+    echo "[🐶 Husky] Amend commit detected. Skipping prepare-commit-msg script."
+    echo "[🐶 Husky] Done ✅ prepare-commit-msg hook..."
+    exit 0
+fi
+
+commitlint_output=$(yarn commitlint --edit "$commit_msg_file" 2>&1)
+commitlint_exit_code=$?
+
+if [ "$commitlint_exit_code" -ne 1 ]; then
+
+  if [ "$commit_source" = "message" ]; then
+      echo "[🐶 Husky] Amend commit detected. Skipping prepare-commit-msg script."
+      echo "[🐶 Husky] Done ✅ prepare-commit-msg hook..."
+      exit 0
+  fi
+
+    echo "[🐶 Husky] Commitlint failed. Starting wizard commit message."
+    yarn husky:prepare-commit-msg
+else
+    echo "[🐶 Husky] ❌ Commitlint passed. Proceeding with the commit."
+    exit 1
+fi
+
+echo "[🐶 Husky] Done ✅ prepare-commit-msg hook..."

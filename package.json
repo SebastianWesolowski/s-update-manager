@@ -1,7 +1,6 @@
 {
   "name": "s-update-manager",
-  "version": "1.0.0-dev.29",
-  "version-SNP": "1.0.3",
+  "version": "1.0.0-dev.33",
   "description": "s-update-manager is an npm package for updating a template dependent project",
   "bin": {
     "s-init": "./lib/src/init.mjs",
@@ -34,6 +33,7 @@
     "husky:pre-push": "run-s lint:check test:check build:prod",
     "husky:prepare-commit-msg": "exec < /dev/tty && node_modules/.bin/git-cz --hook || true",
     "lint": "run-s lint:fix lint:check",
+    "lint:commitMessage": "run-s lint:fix lint:check",
     "lint:check": "run-s prettier:check eslint:check typescript:check",
     "lint:fix": "run-s prettier:fix eslint:fix",
     "prettier:check": "prettier --check '**/*.{js,jsx,ts,tsx,json}'",
@@ -87,6 +87,8 @@
     "node-wget": "^0.4.3"
   },
   "devDependencies": {
+    "@commitlint/cli": "^19.5.0",
+    "@commitlint/config-conventional": "^19.5.0",
     "@ef-carbon/tspm": "^2.2.5",
     "@rollup/plugin-babel": "^6.0.4",
     "@rollup/plugin-commonjs": "^25.0.7",
