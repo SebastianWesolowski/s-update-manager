@@ -7,23 +7,23 @@ on:
       - dev
 jobs:
   release:
-    name: Release
+    name: PreRelease
     runs-on: ubuntu-latest
     steps:
-      - name: "📝Checkout"
+      - name: '📝Checkout'
         uses: actions/checkout@v4
       - run: echo "node_version=$(cat .github/nodejs.version)" >> $GITHUB_ENV
 
-      - name: "Setup 🟢Node ${{ env.node_version }}"
+      - name: 'Setup 🟢Node ${{ env.node_version }}'
         uses: actions/setup-node@v4
         with:
-          node-version: "${{ env.node_version }}"
+          node-version: '${{ env.node_version }}'
           cache: 'yarn'
 
-      - name: "📂 Install dependencies"
+      - name: '📂 Install dependencies'
         run: yarn install --frozen-lockfile --ignore-scripts  --omit=dev
 
-      - name: "🚀Release"
+      - name: '🚀Release'
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
