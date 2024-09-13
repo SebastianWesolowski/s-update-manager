@@ -1,3 +1,10 @@
+## [1.0.0-dev.33](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.32...v1.0.0-dev.33) (September 13, 2024)
+
+
+### Other tasks
+
+- 🐛 release processprocess ([bb8f7a4](https://github.com/SebastianWesolowski/s-update-manager/commit/bb8f7a40e3c3226970aea62ac9876b36d3bbc02c))
+
 ## [1.0.0-dev.32](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.31...v1.0.0-dev.32) (September 13, 2024)
 
 
