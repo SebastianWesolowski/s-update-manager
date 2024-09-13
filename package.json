@@ -1,6 +1,6 @@
 {
   "name": "s-update-manager",
-  "version": "1.0.0-dev.33",
+  "version": "1.0.0-dev.34",
   "description": "s-update-manager is an npm package for updating a template dependent project",
   "bin": {
     "s-init": "./lib/src/init.mjs",
