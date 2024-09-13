@@ -136,5 +136,12 @@ module.exports = {
         prepareCmd: 'echo "Preparing release" && yarn build:prod',
       },
     ],
+    '@semantic-release/npm',
+    [
+      '@semantic-release/exec',
+      {
+        prepareCmd: 'echo "Preparing release" && yarn build:prod',
+      },
+    ],
   ],
 };
