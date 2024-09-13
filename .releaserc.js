@@ -123,6 +123,13 @@ module.exports = {
         changelogFile: 'CHANGELOG.md',
       },
     ],
+    '@semantic-release/npm',
+    [
+      '@semantic-release/github',
+      {
+        branches: ['main'],
+      },
+    ],
     [
       '@semantic-release/git',
       {
@@ -130,13 +137,6 @@ module.exports = {
         message: 'release: 📦 ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}',
       },
     ],
-    [
-      '@semantic-release/exec',
-      {
-        prepareCmd: 'echo "Preparing release" && yarn build:prod',
-      },
-    ],
-    '@semantic-release/npm',
     [
       '@semantic-release/exec',
       {
