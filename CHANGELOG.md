@@ -1,3 +1,10 @@
+## [1.0.0-dev.34](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.33...v1.0.0-dev.34) (September 13, 2024)
+
+
+### [SC-21](https://linear.app/wesolowskidev/issue/SC-21)
+
+- [[SC-21](https://linear.app/wesolowskidev/issue/SC-21)] 🐛 config for prerelease ([7a6315a](https://github.com/SebastianWesolowski/s-update-manager/commit/7a6315a91e408f36a5143ec98f9bcae7d1956edd))
+
 ## [1.0.0-dev.33](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.32...v1.0.0-dev.33) (September 13, 2024)
 
 
