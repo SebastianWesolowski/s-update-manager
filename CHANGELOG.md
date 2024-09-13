@@ -1,3 +1,31 @@
+## [1.0.0-dev.32](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.31...v1.0.0-dev.32) (September 13, 2024)
+
+
+### [SC-21](https://linear.app/wesolowskidev/issue/SC-21)
+
+- 🐛 [[SC-21](https://linear.app/wesolowskidev/issue/SC-21)] generate changelog without SC issue ([9ad624e](https://github.com/SebastianWesolowski/s-update-manager/commit/9ad624e0884c15049db8e692d17b522149cdf984))
+- [[SC-21](https://linear.app/wesolowskidev/issue/SC-21)] ✨ improve commit message ([dbc1d7a](https://github.com/SebastianWesolowski/s-update-manager/commit/dbc1d7aa2ed11d719c738f3d7e801a25c3fdd212))
+- ✨ [[SC-21](https://linear.app/wesolowskidev/issue/SC-21)] improve comitizen ([d2f783e](https://github.com/SebastianWesolowski/s-update-manager/commit/d2f783e2646413e302a26970b93fa04c4a184932))
+
+
+### [SC-24](https://linear.app/wesolowskidev/issue/SC-24)
+
+- 🐛 [[SC-24](https://linear.app/wesolowskidev/issue/SC-24)] release config ([e7625ae](https://github.com/SebastianWesolowski/s-update-manager/commit/e7625aecf9a32525639bf761e2407c5c8e2dc315))
+- ✨ [[SC-24](https://linear.app/wesolowskidev/issue/SC-24)] new url for prefix ([a3c35d8](https://github.com/SebastianWesolowski/s-update-manager/commit/a3c35d891cf83b957f3d7a1a1ad4108f915aa00f))
+
+
+### Other tasks
+
+- 🐛 fix version package ([6219e17](https://github.com/SebastianWesolowski/s-update-manager/commit/6219e179716add41fca8f470681f1d6d950d52b5))
+- 🔧 bump husky to ^9 ([e798c42](https://github.com/SebastianWesolowski/s-update-manager/commit/e798c4200fc95fe7afc1d23375ac2d49f7c86ccd))
+- 🔧 bump husky to ^8 ([de62bff](https://github.com/SebastianWesolowski/s-update-manager/commit/de62bff4d1969ec23b4a51a58927f53cb01b5e5f))
+- 🔧 bump husky ([630570a](https://github.com/SebastianWesolowski/s-update-manager/commit/630570aee0a89379b2416b268934d6c695071e3a))
+- ✨ improve comitizen wizzard ([887498a](https://github.com/SebastianWesolowski/s-update-manager/commit/887498a51f69527fcdf5c7040dd308790e32f48a))
+- ✨ new url format in changelog ([6b758ff](https://github.com/SebastianWesolowski/s-update-manager/commit/6b758ff0a1034a98e977fbf44f20fc6798b30fbb))
+- 📦 1.0.0-dev.34 [skip ci] ([f55205a](https://github.com/SebastianWesolowski/s-update-manager/commit/f55205ae7354f74b75f95860417108702d0ed224))
+- 📦 1.0.0-dev.33 [skip ci] ([a1bae68](https://github.com/SebastianWesolowski/s-update-manager/commit/a1bae689b1e196103a23b251b0957215e48d179b))
+- 📦 1.0.0-dev.32 [skip ci] ([4748127](https://github.com/SebastianWesolowski/s-update-manager/commit/47481272d9d3a33bdcc46610407aa0ba40c2b1b4))
+
 ## [1.0.0-dev.34](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.33...v1.0.0-dev.34) (September 12, 2024)
 
 
