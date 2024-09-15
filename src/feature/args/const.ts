@@ -13,5 +13,5 @@ export const defaultArgs: Args = {
 export const defaultTemplateArgs: ArgsTemplate = {
   _: [],
   isDebug: 'true',
-  projectCatalog: './template/node',
+  projectCatalog: './mock/mockTemplate',
 };

@@ -76,6 +76,13 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
+# Pliki mock
+/mock/mockTemplate/templateCatalog/**/*
+/mock/mockTemplate/templateCatalog/*
+/mock/mockTemplate/tools/**
+/mock/mockTemplate/tools/*
+
+
 # Pliki testowe
 /test/*
 # !/test/realProject/
