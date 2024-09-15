@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 
 import minimist from 'minimist';
+import { cleanUpSinglePath } from './feature/__tests__/cleanForTests';
+import { createPath } from './util/createPath';
 import { ArgsTemplate } from '@/feature/args/argsTemplate';
 import { defaultRepositoryMapFileConfig } from '@/feature/config/const';
 import { getTemplateConfig } from '@/feature/config/defaultTemplateConfig';
@@ -16,12 +18,45 @@ import { debugFunction } from '@/util/debugFunction';
 import { formatJsonWithPrettier } from '@/util/formatPrettier';
 import { isFileOrFolderExists } from '@/util/isFileOrFolderExists';
 
+export const initPrepareTemplate = async (templateConfig: ConfigTemplateType): Promise<void> => {
+  await cleanUpSinglePath({
+    path: createPath([templateConfig.projectCatalog, 'tools']),
+    isDebug: templateConfig.isDebug,
+  });
+  await createFile({
+    filePath: createPath([templateConfig.projectCatalog, 'tools', 'test.sh']),
+    options: {
+      createFolder: true,
+    },
+    content: 'lorem ipsum dolor sit amet, consectetur adipis',
+  });
+
+  if (process.env.STYPE !== 'template') {
+    await cleanUpSinglePath({
+      path: templateConfig.templateCatalogPath,
+      isDebug: templateConfig.isDebug,
+    });
+  }
+
+  if (process.env.STYPE !== 'templateRebuild') {
+    await createFile({
+      filePath: createPath([templateConfig.projectCatalog, 'tools', 'test-new.sh']),
+      options: {
+        createFolder: true,
+      },
+      content: 'lorem ipsum dolor sit amet, consectetur adipis new SH',
+    });
+  }
+
+  return;
+};
+
 export const prepareTemplate = async (args: ArgsTemplate): Promise<{ templateConfig: ConfigTemplateType }> => {
   const templateConfig: ConfigTemplateType = getTemplateConfig(args);
 
   debugFunction(templateConfig.isDebug, '=== Start prepare template ===', '[PrepareTemplate]');
 
-  // TODO improve develop preces with mock catalog
+  await initPrepareTemplate(templateConfig);
   if (
     !(await isFileOrFolderExists({ isDebug: templateConfig.isDebug, filePath: templateConfig.templateCatalogPath })) ||
     process.env.SDEBUG !== 'true'
