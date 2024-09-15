@@ -1,3 +1,10 @@
+## [1.0.0-dev.35](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.34...v1.0.0-dev.35) (September 15, 2024)
+
+
+### [SC-24](https://linear.app/wesolowskidev/issue/SC-24)
+
+- 🐛 [[SC-24](https://linear.app/wesolowskidev/issue/SC-24)] improve commit format ([2524bc6](https://github.com/SebastianWesolowski/s-update-manager/commit/2524bc6921232214974131551cc0c0a563df744f))
+
 ## [1.0.0-dev.34](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.33...v1.0.0-dev.34) (September 13, 2024)
 
 
