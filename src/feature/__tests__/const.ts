@@ -560,10 +560,25 @@ const mockTemplateConfig_step_init: ConfigTemplateType = {
   templateCatalogName: 'templateCatalog',
   templateCatalogPath: './test/mockTemplate/templateCatalog',
   repositoryMapFileName: 'repositoryMap.json',
-  repositoryMapFilePath: './test/mockTemplate/repositoryMap.json',
+  repositoryMapFilePath: './test/mockTemplate/templateCatalog/repositoryMap.json',
   bumpVersion: true,
   isDebug: false,
   _: [],
+};
+
+const repositoryMapFileConfig_step_init: RepositoryMapFileConfigType = {
+  projectCatalog: './',
+  templateCatalogName: 'templateCatalog',
+  templateCatalogPath: './templateCatalog',
+  repositoryMapFileName: 'repositoryMap.json',
+  repositoryMapFilePath: './repositoryMap.json',
+  bumpVersion: true,
+  isDebug: false,
+  _: [],
+  templateVersion: '1.0.0',
+  fileMap: [],
+  templateFileList: [],
+  rootPathFileList: [],
 };
 
 const mockTemplateConfig_step_bumpVersion: ConfigTemplateType = {
@@ -605,7 +620,10 @@ const mockTemplateConfig_step_formatJsonWithPrettier: ConfigTemplateType = {
 };
 
 export const mockTemplateConfig = {
-  init: mockTemplateConfig_step_init,
+  init: {
+    templateConfig: mockTemplateConfig_step_init,
+    repositoryMapFileConfig: repositoryMapFileConfig_step_init,
+  },
   bumpVersion: mockTemplateConfig_step_bumpVersion,
   cleanUpTemplate: mockTemplateConfig_step_cleanUpTemplate,
   prepareFileList: mockTemplateConfig_step_prepareFileList,
