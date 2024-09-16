@@ -209,7 +209,7 @@ describe('configuration functions', () => {
       _: [],
       availableSNPKeySuffix: ['defaultFile', 'customFile', 'extendFile'],
       availableSNPSuffix: ['-default.md', '-custom.md', '-extend.md'],
-      isDebug: 'true',
+      isDebug: true,
       projectCatalog: './mock/mockProject/',
       remoteFileMapURL:
         'https://raw.githubusercontent.com/SebastianWesolowski/testTemplate/main/template/node/templateCatalog/repositoryMap.json',

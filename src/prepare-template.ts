@@ -53,10 +53,11 @@ export const initPrepareTemplate = async (templateConfig: ConfigTemplateType): P
 
 export const prepareTemplate = async (args: ArgsTemplate): Promise<{ templateConfig: ConfigTemplateType }> => {
   const templateConfig: ConfigTemplateType = getTemplateConfig(args);
-
   debugFunction(templateConfig.isDebug, '=== Start prepare template ===', '[PrepareTemplate]');
 
-  await initPrepareTemplate(templateConfig);
+  if (process.env.SDEBUG === 'true') {
+    await initPrepareTemplate(templateConfig);
+  }
   if (
     !(await isFileOrFolderExists({ isDebug: templateConfig.isDebug, filePath: templateConfig.templateCatalogPath })) ||
     process.env.SDEBUG !== 'true'
