@@ -28,8 +28,10 @@ export const scanProjectFolder = async (
       );
       const cleanupArray = fileList.map((file) => {
         const relativePath = file.replace(templateConfig.projectCatalog, '');
-        return './' + path.normalize(relativePath).replace(/\\/g, '/');
+        const normalizedPath = path.normalize(relativePath).replace(/^[/\\]+/, '');
+        return './' + normalizedPath.replace(/\\/g, '/');
       });
+
       debugFunction(
         templateConfig.isDebug,
         { templateConfig, fileList, cleanupArray },

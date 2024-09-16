@@ -63,12 +63,12 @@ describe('template configuration functions', () => {
     const expectedConfig = {
       _: [],
       bumpVersion: true,
-      isDebug: 'true',
-      projectCatalog: './template/node',
+      isDebug: true,
+      projectCatalog: './mock/mockTemplate',
       repositoryMapFileName: 'repositoryMap.json',
-      repositoryMapFilePath: './template/node/templateCatalog/repositoryMap.json',
+      repositoryMapFilePath: './mock/mockTemplate/templateCatalog/repositoryMap.json',
       templateCatalogName: 'templateCatalog',
-      templateCatalogPath: './template/node/templateCatalog',
+      templateCatalogPath: './mock/mockTemplate/templateCatalog',
     };
 
     const result: ConfigTemplateType = getTemplateConfig(defaultTemplateArgs);

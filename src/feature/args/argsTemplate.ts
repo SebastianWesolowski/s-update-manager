@@ -6,7 +6,13 @@ export interface ArgsTemplate {
   _: string[];
 }
 
-export const setArgsTemplate = (args: ArgsTemplate): ArgsTemplate => {
+export interface ProcessedArgsTemplate {
+  projectCatalog?: string;
+  isDebug?: boolean;
+  _: string[];
+}
+
+export const setArgsTemplate = (args: ArgsTemplate): ProcessedArgsTemplate => {
   if (process.env.SDEBUG === 'true') {
     args = defaultTemplateArgs;
     console.log({ setArgsTemplate: args });
@@ -16,8 +22,8 @@ export const setArgsTemplate = (args: ArgsTemplate): ArgsTemplate => {
   const argIsDebug: string = args.isDebug || args._[1];
 
   return {
-    projectCatalog: argProjectCatalog,
-    isDebug: argIsDebug,
+    projectCatalog: argProjectCatalog ? String(argProjectCatalog) : undefined,
+    isDebug: argIsDebug ? Boolean(argIsDebug) : undefined,
     _: args._,
   };
 };

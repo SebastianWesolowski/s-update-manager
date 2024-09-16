@@ -9,8 +9,17 @@ export interface Args {
   isDebug?: string;
   _: string[];
 }
+export interface ProcessedArgs {
+  snpCatalog?: string;
+  projectCatalog?: string;
+  snpConfigFileName?: string;
+  snpConfigFile?: string;
+  remoteRepository?: string;
+  isDebug?: boolean;
+  _: string[];
+}
 
-export const setArgs = (args: Args): Args => {
+export const setArgs = (args: Args): ProcessedArgs => {
   // TODO: Prepare separate data for different scripts using process.env.STYPE
   // This should handle different argument sets for init, update, build, and template scripts
   if (process.env.SDEBUG === 'true') {
@@ -26,12 +35,12 @@ export const setArgs = (args: Args): Args => {
   const argIsDebug: string = args.isDebug || args._[6];
 
   return {
-    snpCatalog: argSnpCatalog,
-    projectCatalog: argProjectCatalog,
-    snpConfigFileName: argSnpConfigFileName,
-    snpConfigFile: argSnpConfigFile,
-    remoteRepository: argRemoteRepository,
-    isDebug: argIsDebug,
+    snpCatalog: argSnpCatalog ? String(argSnpCatalog) : undefined,
+    projectCatalog: argProjectCatalog ? String(argProjectCatalog) : undefined,
+    snpConfigFileName: argSnpConfigFileName ? String(argSnpConfigFileName) : undefined,
+    snpConfigFile: argSnpConfigFile ? String(argSnpConfigFile) : undefined,
+    remoteRepository: argRemoteRepository ? String(argRemoteRepository) : undefined,
+    isDebug: argIsDebug ? Boolean(argIsDebug) : undefined,
     _: args._,
   };
 };
