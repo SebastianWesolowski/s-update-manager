@@ -31,14 +31,14 @@ export const initPrepareTemplate = async (templateConfig: ConfigTemplateType): P
     content: 'lorem ipsum dolor sit amet, consectetur adipis',
   });
 
-  if (process.env.STYPE !== 'template') {
+  if (process.env.STYPE === 'template') {
     await cleanUpSinglePath({
       path: templateConfig.templateCatalogPath,
       isDebug: templateConfig.isDebug,
     });
   }
 
-  if (process.env.STYPE !== 'templateRebuild') {
+  if (process.env.STYPE === 'templateRebuild') {
     await createFile({
       filePath: createPath([templateConfig.projectCatalog, 'tools', 'test-new.sh']),
       options: {
@@ -51,37 +51,29 @@ export const initPrepareTemplate = async (templateConfig: ConfigTemplateType): P
   return;
 };
 
-export const prepareTemplate = async (args: ArgsTemplate): Promise<{ templateConfig: ConfigTemplateType }> => {
+export const init = async (args: ArgsTemplate): Promise<{ templateConfig: ConfigTemplateType }> => {
   const templateConfig: ConfigTemplateType = getTemplateConfig(args);
-  debugFunction(templateConfig.isDebug, '=== Start prepare template ===', '[PrepareTemplate]');
+  const { isDebug, templateCatalogPath, repositoryMapFilePath } = templateConfig;
+  debugFunction(isDebug, '=== Start prepare template ===', '[PrepareTemplate]');
 
   if (process.env.SDEBUG === 'true') {
     await initPrepareTemplate(templateConfig);
   }
+
+  await createCatalog(templateCatalogPath);
+
   if (
-    !(await isFileOrFolderExists({ isDebug: templateConfig.isDebug, filePath: templateConfig.templateCatalogPath })) ||
-    process.env.SDEBUG !== 'true'
+    !(await isFileOrFolderExists({
+      isDebug,
+      filePath: repositoryMapFilePath,
+    }))
   ) {
-    await createCatalog(templateConfig.templateCatalogPath);
-  }
-  if (
-    ((await isFileOrFolderExists({ isDebug: templateConfig.isDebug, filePath: templateConfig.templateCatalogPath })) &&
-      !(await isFileOrFolderExists({
-        isDebug: templateConfig.isDebug,
-        filePath: templateConfig.repositoryMapFilePath,
-      }))) ||
-    process.env.SDEBUG !== 'true'
-  ) {
-    debugFunction(
-      templateConfig.isDebug,
-      `isFileOrFolderExists ${templateConfig.repositoryMapFilePath}`,
-      '[PrepareTemplate]'
-    );
-    debugFunction(templateConfig.isDebug, templateConfig, '[PrepareTemplate]');
+    debugFunction(isDebug, { fileExist: repositoryMapFilePath, templateConfig }, '[PrepareTemplate]');
+
     await createFile({
-      filePath: templateConfig.repositoryMapFilePath,
+      filePath: repositoryMapFilePath,
       content: JSON.stringify(defaultRepositoryMapFileConfig),
-      isDebug: templateConfig.isDebug,
+      isDebug,
       options: {
         overwriteFile: true,
       },
@@ -89,7 +81,7 @@ export const prepareTemplate = async (args: ArgsTemplate): Promise<{ templateCon
     templateConfig.bumpVersion = false;
   }
 
-  debugFunction(templateConfig.isDebug, templateConfig, '[PrepareTemplate] END init');
+  debugFunction(isDebug, templateConfig, '[PrepareTemplate] END init');
   return { templateConfig };
 };
 
@@ -99,7 +91,7 @@ let finalConfig = {
   isDebug: false,
 };
 
-prepareTemplate(args)
+init(args)
   .then(({ templateConfig }) => {
     finalConfig = templateConfig;
     return bumpVersion(templateConfig);
