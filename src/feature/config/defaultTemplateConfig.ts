@@ -39,7 +39,7 @@ export const updateTemplateKeyConfig = (
 export const getTemplateConfig = (args: ArgsTemplate): ConfigTemplateType => {
   let config = { ...defaultTemplateConfig };
 
-  const argsObject: ArgsTemplate = setArgsTemplate(args);
+  const argsObject = setArgsTemplate(args);
 
   config = updateTemplateKeyConfig(config, {
     isDebug: argsObject.isDebug || config.isDebug,

@@ -1,138 +1,195 @@
 import { cleanUpTemplate } from './cleanUpTemplate';
-import { cleanUpFiles } from '../__tests__/cleanForTests';
+import { cleanUpSinglePath } from '../__tests__/cleanForTests';
+import { cleanUpProjectCatalog, cleanUpTemplateCatalog } from '../__tests__/prepareFileForTests';
 import { searchFilesInDirectory } from '../__tests__/searchFilesInDirectory';
-import { ConfigTemplateType } from '../config/types';
+import { ConfigTemplateType, RepositoryMapFileConfigType } from '../config/types';
 import { mockTemplateConfig } from '@/feature/__tests__/const';
 import { createCatalog } from '@/util/createCatalog';
 import { createFile } from '@/util/createFile';
 import { createPath } from '@/util/createPath';
 
 describe('cleanUpTemplate', () => {
-  let templateConfig: ConfigTemplateType;
-  beforeEach(async () => {
-    templateConfig = { ...mockTemplateConfig.bumpVersion };
+  describe('context mock', () => {
+    let templateConfig: ConfigTemplateType;
+    let repositoryMapFileConfig: RepositoryMapFileConfigType;
 
-    await cleanUpFiles({
-      snpCatalog: templateConfig.templateCatalogPath,
-      directoryPath: templateConfig.projectCatalog,
-      isDebug: templateConfig.isDebug,
+    beforeEach(async () => {
+      templateConfig = {
+        projectCatalog: './',
+        templateCatalogName: 'templateCatalog',
+        templateCatalogPath: './templateCatalog',
+        repositoryMapFileName: 'repositoryMap.json',
+        repositoryMapFilePath: './templateCatalog/repositoryMap.json',
+        bumpVersion: true,
+        isDebug: false,
+        _: [],
+        templateVersion: '1.0.0',
+        fileMap: [],
+        templateFileList: [],
+        rootPathFileList: [],
+      };
+
+      // set as mock:
+      templateConfig = {
+        ...templateConfig,
+        projectCatalog: './mock/mockTemplate',
+        templateCatalogPath: './mock/mockTemplate/templateCatalog',
+        repositoryMapFilePath: './mock/mockTemplate/templateCatalog/repositoryMap.json',
+      };
+
+      repositoryMapFileConfig = {
+        projectCatalog: './',
+        templateCatalogName: 'templateCatalog',
+        templateCatalogPath: './templateCatalog',
+        repositoryMapFileName: 'repositoryMap.json',
+        repositoryMapFilePath: './templateCatalog/repositoryMap.json',
+        bumpVersion: true,
+        isDebug: false,
+        _: [],
+        templateVersion: '1.0.0',
+        fileMap: [],
+        templateFileList: [],
+        rootPathFileList: [],
+      };
+      await cleanUpSinglePath({
+        path: createPath([templateConfig.projectCatalog, 'tools']),
+        isDebug: templateConfig.isDebug,
+      });
+      await cleanUpTemplateCatalog('mock');
+      await createCatalog(templateConfig.templateCatalogPath);
+      await createFile({
+        filePath: templateConfig.repositoryMapFilePath,
+        content: JSON.stringify(templateConfig),
+      });
+    });
+    it('a', async () => {
+      expect(1).toEqual(1);
     });
   });
 
-  afterEach(async () => {
-    await cleanUpFiles({
-      snpCatalog: templateConfig.templateCatalogPath,
-      directoryPath: templateConfig.projectCatalog,
-      isDebug: templateConfig.isDebug,
-    });
-  });
+  describe('context test', () => {
+    let templateConfig: ConfigTemplateType;
+    let repositoryMapFileConfig: RepositoryMapFileConfigType;
+    beforeEach(async () => {
+      templateConfig = { ...mockTemplateConfig.bumpVersion };
+      repositoryMapFileConfig = { ...mockTemplateConfig.init.repositoryMapFileConfig };
 
-  it('should do nothing when directory is empty', async () => {
-    await createCatalog(templateConfig.projectCatalog);
-
-    const allFiles = await searchFilesInDirectory({
-      directoryPath: templateConfig.projectCatalog,
-      excludedFileNames: ['.DS_Store'],
-      excludedPhrases: ['.backup'],
+      await cleanUpTemplateCatalog('test');
+      await cleanUpProjectCatalog('test');
     });
 
-    const result = await cleanUpTemplate(templateConfig);
-
-    expect({ ...result, allFiles }).toEqual({
-      templateConfig,
-      allFiles: [],
-    });
-  });
-
-  it('should do nothing when only template config file exists', async () => {
-    await createFile({
-      filePath: templateConfig.repositoryMapFilePath,
-      content: JSON.stringify(templateConfig),
+    afterEach(async () => {
+      await cleanUpTemplateCatalog('test');
+      await cleanUpProjectCatalog('test');
     });
 
-    const allFiles = await searchFilesInDirectory({
-      directoryPath: templateConfig.projectCatalog,
-      excludedFileNames: ['.DS_Store'],
-      excludedPhrases: ['.backup'],
+    it('should do nothing when directory is empty', async () => {
+      await createCatalog(templateConfig.projectCatalog);
+
+      const allFiles = await searchFilesInDirectory({
+        directoryPath: templateConfig.projectCatalog,
+        excludedFileNames: ['.DS_Store'],
+        excludedPhrases: ['.backup'],
+      });
+
+      const result = await cleanUpTemplate(templateConfig);
+
+      expect({ ...result, allFiles }).toEqual({
+        templateConfig,
+        allFiles: [],
+      });
     });
 
-    const result = await cleanUpTemplate(templateConfig);
+    it('should do nothing when only template config file exists', async () => {
+      await createFile({
+        filePath: templateConfig.repositoryMapFilePath,
+        content: JSON.stringify(templateConfig),
+      });
 
-    expect({ ...result, allFiles }).toEqual({
-      templateConfig,
-      allFiles: ['./test/mockTemplate/repositoryMap.json'],
-    });
-  });
+      const allFiles = await searchFilesInDirectory({
+        directoryPath: templateConfig.projectCatalog,
+        excludedFileNames: ['.DS_Store'],
+        excludedPhrases: ['.backup'],
+      });
 
-  it('should keep only config file when template catalog exists', async () => {
-    await createFile({
-      filePath: templateConfig.repositoryMapFilePath,
-      content: JSON.stringify(templateConfig),
-    });
-    await createCatalog(templateConfig.templateCatalogPath);
+      const result = await cleanUpTemplate(templateConfig);
 
-    const allFiles = await searchFilesInDirectory({
-      directoryPath: templateConfig.projectCatalog,
-      excludedFileNames: ['.DS_Store'],
-      excludedPhrases: ['.backup'],
-    });
-
-    const result = await cleanUpTemplate(templateConfig);
-
-    expect({ ...result, allFiles }).toEqual({
-      templateConfig,
-      allFiles: ['./test/mockTemplate/repositoryMap.json'],
-    });
-  });
-
-  it('should clean up template catalog, leaving only config file', async () => {
-    await createFile({
-      filePath: templateConfig.repositoryMapFilePath,
-      content: JSON.stringify(templateConfig),
-    });
-    await createCatalog(templateConfig.templateCatalogPath);
-    await createFile({
-      filePath: createPath([templateConfig.repositoryMapFilePath, 'dummy.md']),
-      content: JSON.stringify('dummy'),
+      expect({ ...result, allFiles }).toEqual({
+        templateConfig,
+        allFiles: ['./test/mockTemplate/templateCatalog/repositoryMap.json'],
+      });
     });
 
-    const allFiles = await searchFilesInDirectory({
-      directoryPath: templateConfig.projectCatalog,
-      excludedFileNames: ['.DS_Store'],
-      excludedPhrases: ['.backup'],
+    it('should keep only config file when template catalog exists', async () => {
+      await createFile({
+        filePath: templateConfig.repositoryMapFilePath,
+        content: JSON.stringify(templateConfig),
+      });
+      await createCatalog(templateConfig.templateCatalogPath);
+
+      const allFiles = await searchFilesInDirectory({
+        directoryPath: templateConfig.projectCatalog,
+        excludedFileNames: ['.DS_Store'],
+        excludedPhrases: ['.backup'],
+      });
+
+      const result = await cleanUpTemplate(templateConfig);
+
+      expect({ ...result, allFiles }).toEqual({
+        templateConfig,
+        allFiles: ['./test/mockTemplate/templateCatalog/repositoryMap.json'],
+      });
     });
 
-    const result = await cleanUpTemplate(templateConfig);
+    it('should clean up template catalog, leaving only config file', async () => {
+      await createFile({
+        filePath: templateConfig.repositoryMapFilePath,
+        content: JSON.stringify(templateConfig),
+      });
+      await createCatalog(templateConfig.templateCatalogPath);
+      await createFile({
+        filePath: createPath([templateConfig.repositoryMapFilePath, 'dummy.md']),
+        content: JSON.stringify('dummy'),
+      });
 
-    expect({ ...result, allFiles }).toEqual({
-      templateConfig,
-      allFiles: ['./test/mockTemplate/repositoryMap.json'],
+      const allFiles = await searchFilesInDirectory({
+        directoryPath: templateConfig.projectCatalog,
+        excludedFileNames: ['.DS_Store'],
+        excludedPhrases: ['.backup'],
+      });
+
+      const result = await cleanUpTemplate(templateConfig);
+
+      expect({ ...result, allFiles }).toEqual({
+        templateConfig,
+        allFiles: ['./test/mockTemplate/templateCatalog/repositoryMap.json'],
+      });
     });
-  });
 
-  it('should keep only config file after file update', async () => {
-    const templateConfig = mockTemplateConfig.prepareFileList;
-    await createFile({
-      filePath: templateConfig.repositoryMapFilePath,
-      content: JSON.stringify(templateConfig),
-    });
-    await createCatalog(templateConfig.templateCatalogPath);
-    await createFile({
-      filePath: createPath([templateConfig.repositoryMapFilePath, 'dummy.md']),
-      content: JSON.stringify('dummy'),
-    });
+    it('should keep only config file after file update', async () => {
+      const templateConfig = mockTemplateConfig.prepareFileList;
+      await createFile({
+        filePath: templateConfig.repositoryMapFilePath,
+        content: JSON.stringify(templateConfig),
+      });
+      await createCatalog(templateConfig.templateCatalogPath);
+      await createFile({
+        filePath: createPath([templateConfig.repositoryMapFilePath, 'dummy.md']),
+        content: JSON.stringify('dummy'),
+      });
 
-    const allFiles = await searchFilesInDirectory({
-      directoryPath: templateConfig.projectCatalog,
-      excludedFileNames: ['.DS_Store'],
-      excludedPhrases: ['.backup'],
-    });
+      const allFiles = await searchFilesInDirectory({
+        directoryPath: templateConfig.projectCatalog,
+        excludedFileNames: ['.DS_Store'],
+        excludedPhrases: ['.backup'],
+      });
 
-    const result = await cleanUpTemplate(templateConfig);
+      const result = await cleanUpTemplate(templateConfig);
 
-    expect({ ...result, allFiles }).toEqual({
-      templateConfig,
-      allFiles: ['./test/mockTemplate/repositoryMap.json'],
+      expect({ ...result, allFiles }).toEqual({
+        templateConfig,
+        allFiles: ['./test/mockTemplate/templateCatalog/repositoryMap.json'],
+      });
     });
   });
 });
