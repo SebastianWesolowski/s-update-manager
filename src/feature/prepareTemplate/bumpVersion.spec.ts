@@ -1,15 +1,13 @@
 import { bumpVersion } from './bumpVersion';
 import { cleanUpSinglePath } from '../__tests__/cleanForTests';
+import { getTestData } from '../__tests__/getTestData';
 import { cleanUpProjectCatalog, cleanUpTemplateCatalog } from '../__tests__/prepareFileForTests';
-import { searchFilesInDirectory } from '../__tests__/searchFilesInDirectory';
 import { ConfigTemplateType, RepositoryMapFileConfigType } from '../config/types';
 import { mockTemplateConfig } from '@/feature/__tests__/const';
 import { createCatalog } from '@/util/createCatalog';
 import { createFile } from '@/util/createFile';
 import { createPath } from '@/util/createPath';
 import { deletePath } from '@/util/deletePath';
-import { parseJSON } from '@/util/parseJSON';
-import { readFile } from '@/util/readFile';
 
 describe('bumpVersion', () => {
   describe('context mock', () => {
@@ -77,19 +75,9 @@ describe('bumpVersion', () => {
 
       templateConfig.bumpVersion = false;
 
-      const result = await bumpVersion(templateConfig);
+      const dataToTest = await getTestData(templateConfig, bumpVersion);
 
-      const allFiles = await searchFilesInDirectory({
-        directoryPath: templateConfig.projectCatalog,
-        excludedFileNames: ['.DS_Store'],
-        excludedPhrases: ['.backup'],
-      });
-
-      const repositoryMapFileConfigContent: ConfigTemplateType = await readFile(
-        templateConfig.repositoryMapFilePath
-      ).then(async (bufferData) => parseJSON(bufferData.toString()));
-
-      expect({ ...result, allFiles, repositoryMapFileConfigContent }).toStrictEqual({
+      expect({ ...dataToTest }).toStrictEqual({
         templateConfig: {
           ...templateConfig,
           bumpVersion: true,
@@ -152,19 +140,9 @@ describe('bumpVersion', () => {
         rootPathFileList: [],
       };
 
-      const result = await bumpVersion(templateConfig);
+      const dataToTest = await getTestData(templateConfig, bumpVersion);
 
-      const allFiles = await searchFilesInDirectory({
-        directoryPath: templateConfig.projectCatalog,
-        excludedFileNames: ['.DS_Store'],
-        excludedPhrases: ['.backup'],
-      });
-
-      const repositoryMapFileConfigContent: ConfigTemplateType = await readFile(
-        templateConfig.repositoryMapFilePath
-      ).then(async (bufferData) => parseJSON(bufferData.toString()));
-
-      expect({ ...result, allFiles, repositoryMapFileConfigContent }).toStrictEqual({
+      expect({ ...dataToTest }).toStrictEqual({
         templateConfig: {
           ...templateConfig,
           bumpVersion: true,
@@ -221,21 +199,11 @@ describe('bumpVersion', () => {
     it('should correctly bump version - without config file and templateVersion', async () => {
       await deletePath(templateConfig.repositoryMapFilePath, templateConfig.isDebug);
 
-      const result = await bumpVersion(templateConfig);
       const expectTemplateConfig = { ...mockTemplateConfig.bumpVersion };
       delete expectTemplateConfig.templateVersion;
 
-      const allFiles = await searchFilesInDirectory({
-        directoryPath: templateConfig.projectCatalog,
-        excludedFileNames: ['.DS_Store'],
-        excludedPhrases: ['.backup'],
-      });
-
-      const repositoryMapFileConfigContent: ConfigTemplateType = await readFile(
-        templateConfig.repositoryMapFilePath
-      ).then(async (bufferData) => parseJSON(bufferData.toString()));
-
-      expect({ ...result, allFiles, repositoryMapFileConfigContent }).toStrictEqual({
+      const dataToTest = await getTestData(templateConfig, bumpVersion);
+      expect({ ...dataToTest }).toStrictEqual({
         templateConfig: {
           ...expectTemplateConfig,
         },
@@ -260,19 +228,9 @@ describe('bumpVersion', () => {
     it('should correctly bump version - without config file, with existing templateVersion', async () => {
       templateConfig.templateVersion = '1.0.0';
       await deletePath(templateConfig.repositoryMapFilePath, templateConfig.isDebug);
-      const result = await bumpVersion(templateConfig);
 
-      const allFiles = await searchFilesInDirectory({
-        directoryPath: templateConfig.projectCatalog,
-        excludedFileNames: ['.DS_Store'],
-        excludedPhrases: ['.backup'],
-      });
-
-      const repositoryMapFileConfigContent: ConfigTemplateType = await readFile(
-        templateConfig.repositoryMapFilePath
-      ).then(async (bufferData) => parseJSON(bufferData.toString()));
-
-      expect({ ...result, allFiles, repositoryMapFileConfigContent }).toStrictEqual({
+      const dataToTest = await getTestData(templateConfig, bumpVersion);
+      expect({ ...dataToTest }).toStrictEqual({
         allFiles: ['./test/mockTemplate/templateCatalog/repositoryMap.json'],
         templateConfig: {
           ...mockTemplateConfig.bumpVersion,
@@ -302,19 +260,9 @@ describe('bumpVersion', () => {
         content: JSON.stringify(templateConfig),
       });
 
-      const result = await bumpVersion(templateConfig);
-
-      const allFiles = await searchFilesInDirectory({
-        directoryPath: templateConfig.projectCatalog,
-        excludedFileNames: ['.DS_Store'],
-        excludedPhrases: ['.backup'],
-      });
-
-      const repositoryMapFileConfigContent: ConfigTemplateType = await readFile(
-        templateConfig.repositoryMapFilePath
-      ).then(async (bufferData) => parseJSON(bufferData.toString()));
-
-      expect({ ...result, allFiles, repositoryMapFileConfigContent }).toStrictEqual({
+      const dataToTest = await getTestData(templateConfig, bumpVersion);
+      expect({ ...dataToTest }).toStrictEqual({
+        // expect({ ...result, allFiles, repositoryMapFileConfigContent }).toStrictEqual({
         templateConfig: {
           ...mockTemplateConfig.bumpVersion,
           templateVersion: '1.0.1',
@@ -346,19 +294,9 @@ describe('bumpVersion', () => {
         content: JSON.stringify(templateConfig),
       });
 
-      const result = await bumpVersion(templateConfig);
-
-      const allFiles = await searchFilesInDirectory({
-        directoryPath: templateConfig.projectCatalog,
-        excludedFileNames: ['.DS_Store'],
-        excludedPhrases: ['.backup'],
-      });
-
-      const repositoryMapFileConfigContent: ConfigTemplateType = await readFile(
-        templateConfig.repositoryMapFilePath
-      ).then(async (bufferData) => parseJSON(bufferData.toString()));
-
-      expect({ ...result, allFiles, repositoryMapFileConfigContent }).toStrictEqual({
+      const dataToTest = await getTestData(templateConfig, bumpVersion);
+      expect({ ...dataToTest }).toStrictEqual({
+        // expect({ ...result, allFiles, repositoryMapFileConfigContent }).toStrictEqual({
         templateConfig: {
           ...mockTemplateConfig.bumpVersion,
           bumpVersion: true,
