@@ -81,6 +81,8 @@ dist
 /mock/mockTemplate/templateCatalog/*
 /mock/mockTemplate/tools/**
 /mock/mockTemplate/tools/*
+/mock/mockTemplateToUpdate/tools/**
+/mock/mockTemplateToUpdate/tools/*
 
 
 # Pliki testowe

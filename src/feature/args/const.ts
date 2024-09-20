@@ -15,3 +15,8 @@ export const defaultTemplateArgs: ArgsTemplate = {
   isDebug: 'true',
   projectCatalog: './mock/mockTemplate',
 };
+export const defaultTemplateArgsRebuild: ArgsTemplate = {
+  _: [],
+  isDebug: 'true',
+  projectCatalog: './mock/mockTemplateToUpdate',
+};

@@ -15,26 +15,15 @@ describe('cleanUpTemplate', () => {
 
     beforeEach(async () => {
       templateConfig = {
-        projectCatalog: './',
+        projectCatalog: './mock/mockTemplate',
         templateCatalogName: 'templateCatalog',
-        templateCatalogPath: './templateCatalog',
+        templateCatalogPath: './mock/mockTemplate/templateCatalog',
         repositoryMapFileName: 'repositoryMap.json',
-        repositoryMapFilePath: './templateCatalog/repositoryMap.json',
+        repositoryMapFilePath: './mock/mockTemplate/templateCatalog/repositoryMap.json',
         bumpVersion: true,
-        isDebug: false,
+        isDebug: true,
         _: [],
         templateVersion: '1.0.0',
-        fileMap: [],
-        templateFileList: [],
-        rootPathFileList: [],
-      };
-
-      // set as mock:
-      templateConfig = {
-        ...templateConfig,
-        projectCatalog: './mock/mockTemplate',
-        templateCatalogPath: './mock/mockTemplate/templateCatalog',
-        repositoryMapFilePath: './mock/mockTemplate/templateCatalog/repositoryMap.json',
       };
 
       repositoryMapFileConfig = {
@@ -51,6 +40,7 @@ describe('cleanUpTemplate', () => {
         templateFileList: [],
         rootPathFileList: [],
       };
+
       await cleanUpSinglePath({
         path: createPath([templateConfig.projectCatalog, 'tools']),
         isDebug: templateConfig.isDebug,

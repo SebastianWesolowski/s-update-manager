@@ -10,17 +10,17 @@ export const cleanUpTemplate = async (
   templateConfig: ConfigTemplateType
 ): Promise<{ templateConfig: ConfigTemplateType }> => {
   debugFunction(templateConfig.isDebug, { templateConfig }, '[PrepareTemplate] cleanUpTemplate');
+  const { isDebug, templateCatalogPath, repositoryMapFilePath } = templateConfig;
   let repositoryMapFileConfig: null | RepositoryMapFileConfigType = null;
-  if (await isFileOrFolderExists({ isDebug: templateConfig.isDebug, filePath: templateConfig.templateCatalogPath })) {
-    if (
-      await isFileOrFolderExists({ isDebug: templateConfig.isDebug, filePath: templateConfig.repositoryMapFilePath })
-    ) {
-      repositoryMapFileConfig = await readFile(templateConfig.repositoryMapFilePath).then(async (bufferData) =>
+
+  if (await isFileOrFolderExists({ isDebug, filePath: templateCatalogPath })) {
+    if (await isFileOrFolderExists({ isDebug, filePath: repositoryMapFilePath })) {
+      repositoryMapFileConfig = await readFile(repositoryMapFilePath).then(async (bufferData) =>
         parseJSON(bufferData.toString())
       );
     }
 
-    await clearDirectory(templateConfig.templateCatalogPath);
+    await clearDirectory(templateCatalogPath);
 
     const newContent = repositoryMapFileConfig;
     if (newContent !== null) {
@@ -29,9 +29,9 @@ export const cleanUpTemplate = async (
       newContent.rootPathFileList = [];
 
       await createFile({
-        filePath: templateConfig.repositoryMapFilePath,
+        filePath: repositoryMapFilePath,
         content: JSON.stringify(newContent),
-        isDebug: templateConfig.isDebug,
+        isDebug,
         options: {
           overwriteFile: true,
         },
