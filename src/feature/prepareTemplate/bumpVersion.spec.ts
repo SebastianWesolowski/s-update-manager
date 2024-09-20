@@ -1,11 +1,15 @@
 import { bumpVersion } from './bumpVersion';
 import { cleanUpSinglePath } from '../__tests__/cleanForTests';
 import { getTestData } from '../__tests__/getTestData';
-import { cleanUpProjectCatalog, cleanUpTemplateCatalog } from '../__tests__/prepareFileForTests';
+import {
+  cleanUpProjectCatalog,
+  cleanUpTemplateCatalog,
+  FileToCreate,
+  setupTestFiles,
+} from '../__tests__/prepareFileForTests';
 import { ConfigTemplateType, RepositoryMapFileConfigType } from '../config/types';
 import { mockTemplateConfig } from '@/feature/__tests__/const';
 import { createCatalog } from '@/util/createCatalog';
-import { createFile } from '@/util/createFile';
 import { createPath } from '@/util/createPath';
 import { deletePath } from '@/util/deletePath';
 
@@ -54,10 +58,14 @@ describe('bumpVersion', () => {
       });
       await cleanUpTemplateCatalog('mock');
       await createCatalog(templateConfig.templateCatalogPath);
-      await createFile({
-        filePath: templateConfig.repositoryMapFilePath,
-        content: JSON.stringify(templateConfig),
-      });
+
+      const FileToCreate: FileToCreate[] = [
+        {
+          filePath: templateConfig.repositoryMapFilePath,
+          content: JSON.stringify(templateConfig),
+        },
+      ];
+      await setupTestFiles(FileToCreate, templateConfig.isDebug);
     });
 
     afterEach(async () => {
@@ -65,13 +73,13 @@ describe('bumpVersion', () => {
     });
 
     it('as a first time should use mock and default', async () => {
-      await createFile({
-        filePath: createPath([templateConfig.projectCatalog, 'tools', 'test.sh']),
-        options: {
-          createFolder: true,
+      const FileToCreate: FileToCreate[] = [
+        {
+          filePath: createPath([templateConfig.projectCatalog, 'tools', 'test.sh']),
+          options: { createFolder: true },
         },
-        content: 'lorem ipsum dolor sit amet, consectetur adipis',
-      });
+      ];
+      await setupTestFiles(FileToCreate, templateConfig.isDebug);
 
       templateConfig.bumpVersion = false;
 
@@ -109,20 +117,14 @@ describe('bumpVersion', () => {
     });
 
     it('should set bump becouse depends exist file', async () => {
-      await createFile({
-        filePath: createPath([templateConfig.projectCatalog, 'tools', 'test.sh']),
-        options: {
-          createFolder: true,
+      const FileToCreate: FileToCreate[] = [
+        {
+          filePath: createPath([templateConfig.projectCatalog, 'tools', 'test.sh']),
+          options: { createFolder: true },
         },
-        content: 'lorem ipsum dolor sit amet, consectetur adipis',
-      });
-      await createFile({
-        filePath: createPath([templateConfig.projectCatalog, 'tools', 'test-new.sh']),
-        options: {
-          createFolder: true,
-        },
-        content: 'lorem ipsum dolor sit amet, consectetur adipis',
-      });
+        { filePath: createPath([templateConfig.projectCatalog, 'tools', 'test-new.sh']) },
+      ];
+      await setupTestFiles(FileToCreate, templateConfig.isDebug);
 
       templateConfig.bumpVersion = true;
       repositoryMapFileConfig = {
@@ -185,10 +187,13 @@ describe('bumpVersion', () => {
       await cleanUpTemplateCatalog('test');
       await cleanUpProjectCatalog('test');
 
-      await createFile({
-        filePath: templateConfig.repositoryMapFilePath,
-        content: JSON.stringify(repositoryMapFileConfig),
-      });
+      const FileToCreate: FileToCreate[] = [
+        {
+          filePath: templateConfig.repositoryMapFilePath,
+          content: JSON.stringify(templateConfig),
+        },
+      ];
+      await setupTestFiles(FileToCreate, templateConfig.isDebug);
     });
 
     afterEach(async () => {
@@ -255,14 +260,16 @@ describe('bumpVersion', () => {
     it('should correctly bump version - with config file', async () => {
       templateConfig.templateVersion = '1.0.0';
 
-      await createFile({
-        filePath: templateConfig.repositoryMapFilePath,
-        content: JSON.stringify(templateConfig),
-      });
+      const FileToCreate: FileToCreate[] = [
+        {
+          filePath: templateConfig.repositoryMapFilePath,
+          content: JSON.stringify(templateConfig),
+        },
+      ];
+      await setupTestFiles(FileToCreate, templateConfig.isDebug);
 
       const dataToTest = await getTestData(templateConfig, bumpVersion);
       expect({ ...dataToTest }).toStrictEqual({
-        // expect({ ...result, allFiles, repositoryMapFileConfigContent }).toStrictEqual({
         templateConfig: {
           ...mockTemplateConfig.bumpVersion,
           templateVersion: '1.0.1',
@@ -289,14 +296,16 @@ describe('bumpVersion', () => {
       templateConfig.templateVersion = '1.0.0';
       templateConfig.bumpVersion = false;
 
-      await createFile({
-        filePath: templateConfig.repositoryMapFilePath,
-        content: JSON.stringify(templateConfig),
-      });
+      const FileToCreate: FileToCreate[] = [
+        {
+          filePath: templateConfig.repositoryMapFilePath,
+          content: JSON.stringify(templateConfig),
+        },
+      ];
+      await setupTestFiles(FileToCreate, templateConfig.isDebug);
 
       const dataToTest = await getTestData(templateConfig, bumpVersion);
       expect({ ...dataToTest }).toStrictEqual({
-        // expect({ ...result, allFiles, repositoryMapFileConfigContent }).toStrictEqual({
         templateConfig: {
           ...mockTemplateConfig.bumpVersion,
           bumpVersion: true,

@@ -1,23 +1,24 @@
 import { cleanUpSinglePath } from './cleanForTests';
+import { createFile } from '@/util/createFile';
 // import { ConfigTemplateType } from '../config/types';
 // import { createFile } from '@/util/createFile';
 // import { deletePath } from '@/util/deletePath';
 
-// export interface FileToCreate {
-//   filePath: string;
-//   content: string;
-//   options?: { createFolder?: boolean };
-// }
+export interface FileToCreate {
+  filePath: string;
+  content?: string;
+  options?: { createFolder?: boolean };
+}
 
-// export const setupTestFiles = async (filesToCreate: FileToCreate[], isDebug: boolean) => {
-//   for (const file of filesToCreate) {
-//     await createFile({
-//       filePath: file.filePath,
-//       content: file.content,
-//       options: file.options,
-//     });
-//   }
-// };
+export const setupTestFiles = async (filesToCreate: FileToCreate[], isDebug: boolean) => {
+  for (const file of filesToCreate) {
+    await createFile({
+      filePath: file.filePath,
+      content: file.content ?? `{path: ${file.filePath}}`,
+      options: file.options,
+    });
+  }
+};
 
 // export const tearDown = async (filesToDeleteAfterTest: string[] = []) => {
 //   for (const filePath of filesToDeleteAfterTest) {
