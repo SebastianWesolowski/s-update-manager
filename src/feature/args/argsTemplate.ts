@@ -1,4 +1,4 @@
-import { defaultTemplateArgs } from '@/feature/args/const';
+import { defaultTemplateArgs, defaultTemplateArgsRebuild } from '@/feature/args/const';
 
 export interface ArgsTemplate {
   projectCatalog?: string;
@@ -15,6 +15,11 @@ export interface ProcessedArgsTemplate {
 export const setArgsTemplate = (args: ArgsTemplate): ProcessedArgsTemplate => {
   if (process.env.SDEBUG === 'true') {
     args = defaultTemplateArgs;
+
+    if (process.env.STYPE === 'templateRebuild') {
+      args = defaultTemplateArgsRebuild;
+    }
+
     console.log({ setArgsTemplate: args });
   }
 
