@@ -571,7 +571,7 @@ const repositoryMapFileConfig_step_init: RepositoryMapFileConfigType = {
   templateCatalogName: 'templateCatalog',
   templateCatalogPath: './templateCatalog',
   repositoryMapFileName: 'repositoryMap.json',
-  repositoryMapFilePath: './repositoryMap.json',
+  repositoryMapFilePath: './templateCatalog/repositoryMap.json',
   bumpVersion: true,
   isDebug: false,
   _: [],
@@ -579,6 +579,22 @@ const repositoryMapFileConfig_step_init: RepositoryMapFileConfigType = {
   fileMap: [],
   templateFileList: [],
   rootPathFileList: [],
+};
+
+const repositoryMapFileConfig_step_bumpVersion: RepositoryMapFileConfigType = {
+  ...repositoryMapFileConfig_step_init,
+};
+const repositoryMapFileConfig_step_cleanUpTemplate: RepositoryMapFileConfigType = {
+  ...repositoryMapFileConfig_step_bumpVersion,
+};
+const repositoryMapFileConfig_step_prepareFileList: RepositoryMapFileConfigType = {
+  ...repositoryMapFileConfig_step_cleanUpTemplate,
+};
+const repositoryMapFileConfig_step_scanProjectFolder: RepositoryMapFileConfigType = {
+  ...repositoryMapFileConfig_step_prepareFileList,
+};
+const repositoryMapFileConfig_step_updateTemplateConfig: RepositoryMapFileConfigType = {
+  ...repositoryMapFileConfig_step_scanProjectFolder,
 };
 
 const mockTemplateConfig_step_bumpVersion: ConfigTemplateType = {
@@ -624,14 +640,32 @@ export const mockTemplateConfig = {
     templateConfig: mockTemplateConfig_step_init,
     repositoryMapFileConfig: repositoryMapFileConfig_step_init,
   },
-  bumpVersion: mockTemplateConfig_step_bumpVersion,
+  bumpVersion: {
+    templateConfig: mockTemplateConfig_step_bumpVersion,
+    repositoryMapFileConfig: repositoryMapFileConfig_step_bumpVersion,
+  },
+  cleanUpTemplateEnd: {
+    templateConfig: mockTemplateConfig_step_cleanUpTemplate,
+    repositoryMapFileConfig: repositoryMapFileConfig_step_cleanUpTemplate,
+  },
   cleanUpTemplate: mockTemplateConfig_step_cleanUpTemplate,
+  prepareFileListEnd: {
+    templateConfig: mockTemplateConfig_step_prepareFileList,
+    repositoryMapFileConfig: repositoryMapFileConfig_step_prepareFileList,
+  },
   prepareFileList: mockTemplateConfig_step_prepareFileList,
+  scanProjectFolderEnd: {
+    templateConfig: mockTemplateConfig_step_scanProjectFolder,
+    repositoryMapFileConfig: repositoryMapFileConfig_step_scanProjectFolder,
+  },
   scanProjectFolder: mockTemplateConfig_step_scanProjectFolder,
+  updateTemplateConfigEnd: {
+    templateConfig: mockTemplateConfig_step_updateTemplateConfig,
+    repositoryMapFileConfig: repositoryMapFileConfig_step_updateTemplateConfig,
+  },
   updateTemplateConfig: {
     templateConfig: mockTemplateConfig_step_updateTemplateConfig,
     repositoryMapFileConfig: repositoryMapFileConfigType_step_updateTemplateConfig,
   },
-
   formatJsonWithPrettier: mockTemplateConfig_step_formatJsonWithPrettier,
 };

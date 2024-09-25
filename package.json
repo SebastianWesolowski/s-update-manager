@@ -16,7 +16,7 @@
     "start:init": "cross-env SDEBUG=true STYPE=init tsx watch ./src/init.ts",
     "start:update": "cross-env SDEBUG=true STYPE=update tsx watch ./src/update.ts",
     "start:build": "cross-env SDEBUG=true STYPE=build tsx watch ./src/build.ts",
-    "start:template": "cross-env SDEBUG=true STYPE=template tsx watch ./src/prepare-template.ts",
+    "start:template": "cross-env SDEBUG=true STYPE=template tsx watch --inspect ./src/prepare-template.ts",
     "start:templateRebuild": "cross-env SDEBUG=true STYPE=templateRebuild tsx watch ./src/prepare-template.ts",
     "prestart:dev": "tsc -p tsconfig.json --watch",
     "build": "run-s build:clean && npx rollup -c rollup.config.mjs",
