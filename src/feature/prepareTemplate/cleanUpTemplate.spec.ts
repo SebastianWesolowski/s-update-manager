@@ -4,7 +4,7 @@ import { getTestData } from '../__tests__/getTestData';
 import {
   cleanUpProjectCatalog,
   cleanUpTemplateCatalog,
-  FileToCreate,
+  FileToCreateType,
   setupTestFiles,
 } from '../__tests__/prepareFileForTests';
 import { ConfigTemplateType, RepositoryMapFileConfigType } from '../config/types';
@@ -49,25 +49,23 @@ describe('cleanUpTemplate', () => {
         path: createPath([templateConfig.projectCatalog, 'tools']),
         isDebug: templateConfig.isDebug,
       });
-      // await cleanUpTemplateCatalog('mock');
       await createCatalog(templateConfig.templateCatalogPath);
 
-      const FileToCreate: FileToCreate[] = [
+      const FileToCreate: FileToCreateType[] = [
         {
           filePath: templateConfig.repositoryMapFilePath,
-          content: JSON.stringify(templateConfig),
+          content: JSON.stringify(repositoryMapFileConfig),
         },
       ];
       await setupTestFiles(FileToCreate, templateConfig.isDebug);
     });
 
     afterEach(async () => {
-      await cleanUpTemplateCatalog('test');
-      await cleanUpProjectCatalog('test');
+      await cleanUpTemplateCatalog('mock');
     });
 
     it('as a first time should use mock and default', async () => {
-      const FileToCreate: FileToCreate[] = [
+      const FileToCreate: FileToCreateType[] = [
         {
           filePath: createPath([templateConfig.projectCatalog, 'tools', 'test.sh']),
           options: { createFolder: true },
@@ -90,13 +88,13 @@ describe('cleanUpTemplate', () => {
           _: [],
           bumpVersion: true,
           fileMap: [],
-          isDebug: true,
-          projectCatalog: './mock/mockTemplate',
+          isDebug: false,
+          projectCatalog: './',
           repositoryMapFileName: 'repositoryMap.json',
-          repositoryMapFilePath: './mock/mockTemplate/templateCatalog/repositoryMap.json',
+          repositoryMapFilePath: './templateCatalog/repositoryMap.json',
           rootPathFileList: [],
           templateCatalogName: 'templateCatalog',
-          templateCatalogPath: './mock/mockTemplate/templateCatalog',
+          templateCatalogPath: './templateCatalog',
           templateFileList: [],
           templateVersion: '1.0.0',
         },
@@ -107,7 +105,7 @@ describe('cleanUpTemplate', () => {
     });
 
     it(' return cleanup folder and use mock and default', async () => {
-      const FileToCreate: FileToCreate[] = [
+      const FileToCreate: FileToCreateType[] = [
         { filePath: createPath([templateConfig.projectCatalog, 'tools', 'test.sh']), options: { createFolder: true } },
         { filePath: createPath([templateConfig.projectCatalog, 'templateCatalog', '.gitignore-default.md']) },
         { filePath: createPath([templateConfig.projectCatalog, 'templateCatalog', 'package.json-default.md']) },
@@ -135,13 +133,13 @@ describe('cleanUpTemplate', () => {
           _: [],
           bumpVersion: true,
           fileMap: [],
-          isDebug: true,
-          projectCatalog: './mock/mockTemplate',
+          isDebug: false,
+          projectCatalog: './',
           repositoryMapFileName: 'repositoryMap.json',
-          repositoryMapFilePath: './mock/mockTemplate/templateCatalog/repositoryMap.json',
+          repositoryMapFilePath: './templateCatalog/repositoryMap.json',
           rootPathFileList: [],
           templateCatalogName: 'templateCatalog',
-          templateCatalogPath: './mock/mockTemplate/templateCatalog',
+          templateCatalogPath: './templateCatalog',
           templateFileList: [],
           templateVersion: '1.0.0',
         },
@@ -156,7 +154,7 @@ describe('cleanUpTemplate', () => {
     let templateConfig: ConfigTemplateType;
     let repositoryMapFileConfig: RepositoryMapFileConfigType;
     beforeEach(async () => {
-      templateConfig = { ...mockTemplateConfig.bumpVersion };
+      templateConfig = { ...mockTemplateConfig.bumpVersion.templateConfig };
       repositoryMapFileConfig = { ...mockTemplateConfig.init.repositoryMapFileConfig };
 
       await cleanUpTemplateCatalog('test');
@@ -181,10 +179,10 @@ describe('cleanUpTemplate', () => {
     });
 
     it('should do nothing when only template config file exists', async () => {
-      const FileToCreate: FileToCreate[] = [
+      const FileToCreate: FileToCreateType[] = [
         {
           filePath: templateConfig.repositoryMapFilePath,
-          content: JSON.stringify(templateConfig),
+          content: JSON.stringify(repositoryMapFileConfig),
         },
       ];
       await setupTestFiles(FileToCreate, templateConfig.isDebug);
@@ -194,20 +192,17 @@ describe('cleanUpTemplate', () => {
       expect({ ...dataToTest }).toStrictEqual({
         templateConfig,
         repositoryMapFileConfigContent: {
-          ...repositoryMapFileConfig,
-          projectCatalog: './test/mockTemplate/',
-          repositoryMapFilePath: './test/mockTemplate/templateCatalog/repositoryMap.json',
-          templateCatalogPath: './test/mockTemplate/templateCatalog',
+          ...mockTemplateConfig.bumpVersion.repositoryMapFileConfig,
         },
         allFiles: ['./test/mockTemplate/templateCatalog/repositoryMap.json'],
       });
     });
 
     it('should keep only config file when template catalog exists', async () => {
-      const FileToCreate: FileToCreate[] = [
+      const FileToCreate: FileToCreateType[] = [
         {
           filePath: templateConfig.repositoryMapFilePath,
-          content: JSON.stringify(templateConfig),
+          content: JSON.stringify(repositoryMapFileConfig),
         },
         {
           filePath: templateConfig.templateCatalogPath,
@@ -222,19 +217,16 @@ describe('cleanUpTemplate', () => {
         templateConfig,
         allFiles: ['./test/mockTemplate/templateCatalog/repositoryMap.json'],
         repositoryMapFileConfigContent: {
-          ...repositoryMapFileConfig,
-          projectCatalog: './test/mockTemplate/',
-          repositoryMapFilePath: './test/mockTemplate/templateCatalog/repositoryMap.json',
-          templateCatalogPath: './test/mockTemplate/templateCatalog',
+          ...mockTemplateConfig.bumpVersion.repositoryMapFileConfig,
         },
       });
     });
 
     it('should clean up template catalog, leaving only config file', async () => {
-      const FileToCreate: FileToCreate[] = [
+      const FileToCreate: FileToCreateType[] = [
         {
           filePath: templateConfig.repositoryMapFilePath,
-          content: JSON.stringify(templateConfig),
+          content: JSON.stringify(repositoryMapFileConfig),
         },
         {
           filePath: createPath([templateConfig.repositoryMapFilePath, 'dummy.md']),
@@ -250,10 +242,7 @@ describe('cleanUpTemplate', () => {
         templateConfig,
         allFiles: ['./test/mockTemplate/templateCatalog/repositoryMap.json'],
         repositoryMapFileConfigContent: {
-          ...repositoryMapFileConfig,
-          projectCatalog: './test/mockTemplate/',
-          repositoryMapFilePath: './test/mockTemplate/templateCatalog/repositoryMap.json',
-          templateCatalogPath: './test/mockTemplate/templateCatalog',
+          ...mockTemplateConfig.bumpVersion.repositoryMapFileConfig,
         },
       });
     });
@@ -261,10 +250,10 @@ describe('cleanUpTemplate', () => {
     it('should keep only config file after file update', async () => {
       const templateConfig = mockTemplateConfig.prepareFileList;
 
-      const FileToCreate: FileToCreate[] = [
+      const FileToCreate: FileToCreateType[] = [
         {
           filePath: templateConfig.repositoryMapFilePath,
-          content: JSON.stringify(templateConfig),
+          content: JSON.stringify(repositoryMapFileConfig),
         },
         {
           filePath: templateConfig.templateCatalogPath,
@@ -279,10 +268,7 @@ describe('cleanUpTemplate', () => {
         templateConfig,
         allFiles: ['./test/mockTemplate/templateCatalog/repositoryMap.json'],
         repositoryMapFileConfigContent: {
-          ...repositoryMapFileConfig,
-          projectCatalog: './test/mockTemplate/',
-          repositoryMapFilePath: './test/mockTemplate/templateCatalog/repositoryMap.json',
-          templateCatalogPath: './test/mockTemplate/templateCatalog',
+          ...mockTemplateConfig.bumpVersion.repositoryMapFileConfig,
         },
       });
     });

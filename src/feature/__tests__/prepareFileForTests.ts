@@ -1,16 +1,13 @@
 import { cleanUpSinglePath } from './cleanForTests';
 import { createFile } from '@/util/createFile';
-// import { ConfigTemplateType } from '../config/types';
-// import { createFile } from '@/util/createFile';
-// import { deletePath } from '@/util/deletePath';
 
-export interface FileToCreate {
+export interface FileToCreateType {
   filePath: string;
   content?: string;
   options?: { createFolder?: boolean };
 }
 
-export const setupTestFiles = async (filesToCreate: FileToCreate[], isDebug: boolean) => {
+export const setupTestFiles = async (filesToCreate: FileToCreateType[], isDebug: boolean) => {
   for (const file of filesToCreate) {
     await createFile({
       filePath: file.filePath,
@@ -19,15 +16,6 @@ export const setupTestFiles = async (filesToCreate: FileToCreate[], isDebug: boo
     });
   }
 };
-
-// export const tearDown = async (filesToDeleteAfterTest: string[] = []) => {
-//   for (const filePath of filesToDeleteAfterTest) {
-//     await cleanUpSinglePath({
-//       path: filePath,
-//       isDebug: true,
-//     });
-//   }
-// };
 
 const getCleanupPath = (type: 'test' | 'mock', folder: string, step?: string): string => {
   let path = type === 'test' ? `./test/${folder}` : `./mock/${folder}`;

@@ -1,5 +1,12 @@
 import { updateTemplateConfig } from './updateTemplateConfig';
-import { cleanUpProjectCatalog, cleanUpTemplateCatalog } from '../__tests__/prepareFileForTests';
+import { cleanUpSinglePath } from '../__tests__/cleanForTests';
+import { getTestData } from '../__tests__/getTestData';
+import {
+  cleanUpProjectCatalog,
+  cleanUpTemplateCatalog,
+  FileToCreateType,
+  setupTestFiles,
+} from '../__tests__/prepareFileForTests';
 import { searchFilesInDirectory } from '../__tests__/searchFilesInDirectory';
 import { ConfigTemplateType, RepositoryMapFileConfigType } from '../config/types';
 import { mockTemplateConfig } from '@/feature/__tests__/const';
@@ -11,11 +18,152 @@ import { readFile } from '@/util/readFile';
 
 describe('updateTemplateConfig', () => {
   describe('context mock', () => {
+    let templateConfig: ConfigTemplateType;
+    let repositoryMapFileConfig: RepositoryMapFileConfigType;
+
+    beforeEach(async () => {
+      templateConfig = {
+        projectCatalog: './mock/mockTemplate',
+        templateCatalogName: 'templateCatalog',
+        templateCatalogPath: './mock/mockTemplate/templateCatalog',
+        repositoryMapFileName: 'repositoryMap.json',
+        repositoryMapFilePath: './mock/mockTemplate/templateCatalog/repositoryMap.json',
+        bumpVersion: true,
+        isDebug: true,
+        _: [],
+        templateVersion: '1.0.0',
+      };
+
+      repositoryMapFileConfig = {
+        projectCatalog: './',
+        templateCatalogName: 'templateCatalog',
+        templateCatalogPath: './templateCatalog',
+        repositoryMapFileName: 'repositoryMap.json',
+        repositoryMapFilePath: './templateCatalog/repositoryMap.json',
+        bumpVersion: true,
+        isDebug: false,
+        _: [],
+        templateVersion: '1.0.0',
+        fileMap: [],
+        templateFileList: [],
+        rootPathFileList: [],
+      };
+
+      await cleanUpSinglePath({
+        path: createPath([templateConfig.projectCatalog, 'tools']),
+        isDebug: templateConfig.isDebug,
+      });
+      await createCatalog(templateConfig.templateCatalogPath);
+
+      const FileToCreate: FileToCreateType[] = [
+        {
+          filePath: templateConfig.repositoryMapFilePath,
+          content: JSON.stringify(repositoryMapFileConfig),
+        },
+        {
+          filePath: createPath([templateConfig.projectCatalog, 'tools', 'test.sh']),
+          options: { createFolder: true },
+        },
+        {
+          filePath: createPath([templateConfig.templateCatalogPath, '.gitignore-default.md']),
+        },
+        {
+          filePath: createPath([templateConfig.templateCatalogPath, 'package.json-default.md']),
+        },
+        {
+          filePath: createPath([templateConfig.templateCatalogPath, 'repositoryMap.json']),
+        },
+        {
+          filePath: createPath([templateConfig.templateCatalogPath, 'tools', 'test.sh-default.md']),
+          options: { createFolder: true },
+        },
+        {
+          filePath: createPath([templateConfig.templateCatalogPath, 'tsconfig.json-default.md']),
+        },
+        {
+          filePath: createPath([templateConfig.templateCatalogPath, 'yarn.lock-default.md']),
+        },
+      ];
+      await setupTestFiles(FileToCreate, templateConfig.isDebug);
+    });
+
     afterEach(async () => {
       await cleanUpTemplateCatalog('mock');
     });
-    it('a', async () => {
-      expect(1).toEqual(1);
+
+    it('should return mock file', async () => {
+      const fileList = [
+        'templateCatalog/.gitignore-default.md',
+        'templateCatalog/package.json-default.md',
+        'templateCatalog/tools/test.sh-default.md',
+        'templateCatalog/tsconfig.json-default.md',
+        'templateCatalog/yarn.lock-default.md',
+      ];
+      const rootPathFileList = [
+        './mock/mockTemplate/.gitignore',
+        './mock/mockTemplate/package.json',
+        './mock/mockTemplate/tools/test.sh',
+        './mock/mockTemplate/tsconfig.json',
+        './mock/mockTemplate/yarn.lock',
+      ];
+      const templateFileList = ['./.gitignore', './package.json', './tools/test.sh', './tsconfig.json', './yarn.lock'];
+
+      const dataToTest = await getTestData(templateConfig, () =>
+        updateTemplateConfig({ templateConfig, fileList, templateFileList, rootPathFileList })
+      );
+
+      expect({ ...dataToTest }).toStrictEqual({
+        newContent: {
+          fileMap: [
+            'templateCatalog/.gitignore-default.md',
+            'templateCatalog/package.json-default.md',
+            'templateCatalog/tools/test.sh-default.md',
+            'templateCatalog/tsconfig.json-default.md',
+            'templateCatalog/yarn.lock-default.md',
+          ],
+          rootPathFileList: [
+            './mock/mockTemplate/.gitignore',
+            './mock/mockTemplate/package.json',
+            './mock/mockTemplate/tools/test.sh',
+            './mock/mockTemplate/tsconfig.json',
+            './mock/mockTemplate/yarn.lock',
+          ],
+          templateFileList: ['./.gitignore', './package.json', './tools/test.sh', './tsconfig.json', './yarn.lock'],
+        },
+        allFiles: [
+          './mock/mockTemplate/.gitignore',
+          './mock/mockTemplate/package.json',
+          './mock/mockTemplate/templateCatalog/.gitignore-default.md',
+          './mock/mockTemplate/templateCatalog/package.json-default.md',
+          './mock/mockTemplate/templateCatalog/repositoryMap.json',
+          './mock/mockTemplate/templateCatalog/tools/test.sh-default.md',
+          './mock/mockTemplate/templateCatalog/tsconfig.json-default.md',
+          './mock/mockTemplate/templateCatalog/yarn.lock-default.md',
+          './mock/mockTemplate/tools/test.sh',
+          './mock/mockTemplate/tsconfig.json',
+          './mock/mockTemplate/yarn.lock',
+        ],
+        templateConfig: {
+          ...templateConfig,
+        },
+        repositoryMapFileConfigContent: {
+          fileMap: [
+            'templateCatalog/.gitignore-default.md',
+            'templateCatalog/package.json-default.md',
+            'templateCatalog/tools/test.sh-default.md',
+            'templateCatalog/tsconfig.json-default.md',
+            'templateCatalog/yarn.lock-default.md',
+          ],
+          rootPathFileList: [
+            './mock/mockTemplate/.gitignore',
+            './mock/mockTemplate/package.json',
+            './mock/mockTemplate/tools/test.sh',
+            './mock/mockTemplate/tsconfig.json',
+            './mock/mockTemplate/yarn.lock',
+          ],
+          templateFileList: ['./.gitignore', './package.json', './tools/test.sh', './tsconfig.json', './yarn.lock'],
+        },
+      });
     });
   });
 

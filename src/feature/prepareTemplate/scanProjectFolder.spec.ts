@@ -1,5 +1,12 @@
 import { scanProjectFolder } from './scanProjectFolder';
-import { cleanUpProjectCatalog, cleanUpTemplateCatalog } from '../__tests__/prepareFileForTests';
+import { cleanUpSinglePath } from '../__tests__/cleanForTests';
+import { getTestData } from '../__tests__/getTestData';
+import {
+  cleanUpProjectCatalog,
+  cleanUpTemplateCatalog,
+  FileToCreateType,
+  setupTestFiles,
+} from '../__tests__/prepareFileForTests';
 import { searchFilesInDirectory } from '../__tests__/searchFilesInDirectory';
 import { ConfigTemplateType, RepositoryMapFileConfigType } from '../config/types';
 import { mockTemplateConfig } from '@/feature/__tests__/const';
@@ -9,13 +16,94 @@ import { createPath } from '@/util/createPath';
 
 describe('scanProjectFolder', () => {
   describe('context mock', () => {
+    let templateConfig: ConfigTemplateType;
+    let repositoryMapFileConfig: RepositoryMapFileConfigType;
+
+    beforeEach(async () => {
+      templateConfig = {
+        projectCatalog: './mock/mockTemplate',
+        templateCatalogName: 'templateCatalog',
+        templateCatalogPath: './mock/mockTemplate/templateCatalog',
+        repositoryMapFileName: 'repositoryMap.json',
+        repositoryMapFilePath: './mock/mockTemplate/templateCatalog/repositoryMap.json',
+        bumpVersion: true,
+        isDebug: true,
+        _: [],
+        templateVersion: '1.0.0',
+      };
+
+      repositoryMapFileConfig = {
+        projectCatalog: './',
+        templateCatalogName: 'templateCatalog',
+        templateCatalogPath: './templateCatalog',
+        repositoryMapFileName: 'repositoryMap.json',
+        repositoryMapFilePath: './templateCatalog/repositoryMap.json',
+        bumpVersion: true,
+        isDebug: false,
+        _: [],
+        templateVersion: '1.0.0',
+        fileMap: [],
+        templateFileList: [],
+        rootPathFileList: [],
+      };
+
+      await cleanUpSinglePath({
+        path: createPath([templateConfig.projectCatalog, 'tools']),
+        isDebug: templateConfig.isDebug,
+      });
+      await createCatalog(templateConfig.templateCatalogPath);
+
+      const FileToCreate: FileToCreateType[] = [
+        {
+          filePath: templateConfig.repositoryMapFilePath,
+          content: JSON.stringify(repositoryMapFileConfig),
+        },
+        {
+          filePath: createPath([templateConfig.projectCatalog, 'tools', 'test.sh']),
+          options: { createFolder: true },
+        },
+      ];
+      await setupTestFiles(FileToCreate, templateConfig.isDebug);
+    });
+
     afterEach(async () => {
       await cleanUpTemplateCatalog('mock');
     });
-    it('a', async () => {
-      expect(1).toEqual(1);
+
+    it('should return mock file', async () => {
+      const dataToTest = await getTestData(templateConfig, scanProjectFolder);
+
+      expect({ ...dataToTest }).toStrictEqual({
+        allFiles: [
+          './mock/mockTemplate/.gitignore',
+          './mock/mockTemplate/package.json',
+          './mock/mockTemplate/templateCatalog/repositoryMap.json',
+          './mock/mockTemplate/tools/test.sh',
+          './mock/mockTemplate/tsconfig.json',
+          './mock/mockTemplate/yarn.lock',
+        ],
+        templateFileList: ['./.gitignore', './package.json', './tools/test.sh', './tsconfig.json', './yarn.lock'],
+        repositoryMapFileConfigContent: {
+          projectCatalog: './',
+          templateCatalogName: 'templateCatalog',
+          templateCatalogPath: './templateCatalog',
+          repositoryMapFileName: 'repositoryMap.json',
+          repositoryMapFilePath: './templateCatalog/repositoryMap.json',
+          bumpVersion: true,
+          isDebug: false,
+          _: [],
+          templateVersion: '1.0.0',
+          fileMap: [],
+          templateFileList: [],
+          rootPathFileList: [],
+        },
+        templateConfig: {
+          ...templateConfig,
+        },
+      });
     });
   });
+
   describe('context test', () => {
     let templateConfig: ConfigTemplateType;
     let repositoryMapFileConfig: RepositoryMapFileConfigType;
@@ -31,7 +119,7 @@ describe('scanProjectFolder', () => {
 
       await createFile({
         filePath: templateConfig.repositoryMapFilePath,
-        content: JSON.stringify(templateConfig),
+        content: JSON.stringify(repositoryMapFileConfig),
       });
       await createFile({
         filePath: createPath([templateConfig.projectCatalog, 'dummy.md']),

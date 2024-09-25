@@ -87,6 +87,7 @@ dist
 
 # Pliki testowe
 /test/*
+/test/mockTemplate/templateCatalog/*
 # !/test/realProject/
 # !/test/testTemplate/
 !/test/mockTemplate/

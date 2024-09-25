@@ -50,11 +50,21 @@ export const bumpVersion = async (
 
   const repositoryMapFilePathContent = {
     ...defaultRepositoryMapFileConfig,
+
+    ...repositoryMapFileConfig,
+    projectCatalog: templateConfig.projectCatalog
+      ? templateConfig.projectCatalog
+      : defaultRepositoryMapFileConfig.projectCatalog,
+  };
+  templateConfig = {
     ...templateConfig,
     ...repositoryMapFileConfig,
+    repositoryMapFilePath: templateConfig.repositoryMapFilePath
+      ? templateConfig.repositoryMapFilePath
+      : defaultRepositoryMapFileConfig.repositoryMapFilePath,
   };
-  templateConfig = { ...templateConfig, ...repositoryMapFileConfig };
 
+  console.log({ filePath: templateConfig.repositoryMapFilePath });
   await createFile({
     filePath: templateConfig.repositoryMapFilePath,
     content: JSON.stringify(repositoryMapFilePathContent),
