@@ -1,3 +1,17 @@
+## [1.0.0-dev.36](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.35...v1.0.0-dev.36) (September 26, 2024)
+
+
+### [SC-11](https://linear.app/wesolowskidev/issue/SC-11)
+
+- 🐛 [[SC-11](https://linear.app/wesolowskidev/issue/SC-11)] improve args configs ([9f6a15c](https://github.com/SebastianWesolowski/s-update-manager/commit/9f6a15c1cc1e568570b6d4106ff351a7342a20ec))
+- 🔧 [[SC-11](https://linear.app/wesolowskidev/issue/SC-11)] improve devlopment scripts ([baccfef](https://github.com/SebastianWesolowski/s-update-manager/commit/baccfefc02ea13ba45ac65066b9e7d636d0c6363))
+- ⚡ [[SC-11](https://linear.app/wesolowskidev/issue/SC-11)] add templateConfigUpdaded as set data to work ([37a93f2](https://github.com/SebastianWesolowski/s-update-manager/commit/37a93f20ce6967def1d974820357281bf7ef91e4))
+- ♻ [[SC-11](https://linear.app/wesolowskidev/issue/SC-11)] ️ simplification test in prepareTEmplate ([febbfa8](https://github.com/SebastianWesolowski/s-update-manager/commit/febbfa862fc4e73b85978a47bf6cf84f22871795))
+- ♻ [[SC-11](https://linear.app/wesolowskidev/issue/SC-11)] ️ test for prepareTemplate ([8add656](https://github.com/SebastianWesolowski/s-update-manager/commit/8add6569faa5c38de14a64d61251ebdcaa4ebcf0))
+- 🚨 [[SC-11](https://linear.app/wesolowskidev/issue/SC-11)] improve test for prepareTemplate ([5d6794b](https://github.com/SebastianWesolowski/s-update-manager/commit/5d6794bc0817ef1e0de1f0ed58decb028c545691))
+- 🚨 [[SC-11](https://linear.app/wesolowskidev/issue/SC-11)] add reusable fn getTestdData ([45508ea](https://github.com/SebastianWesolowski/s-update-manager/commit/45508ea85cfcf6660c601298222cebb091fe642e))
+- 🚨 [[SC-11](https://linear.app/wesolowskidev/issue/SC-11)] add mock test for bumpVersion ([58d6100](https://github.com/SebastianWesolowski/s-update-manager/commit/58d61005569955e38c953f4624fc035be7d90d31))
+
 ## [1.0.0-dev.35](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.34...v1.0.0-dev.35) (September 15, 2024)
 
 
