@@ -33,6 +33,66 @@
         "program": "${workspaceFolder}/node_modules/jest/bin/jest"
       },
       "skipFiles": ["<node_internals>/**", "${workspaceFolder}/node_modules/**"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Start Init",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "start:init"],
+      "env": {
+        "SDEBUG": "true",
+        "STYPE": "init"
+      },
+      "console": "integratedTerminal"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Start Update",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "start:update"],
+      "env": {
+        "SDEBUG": "true",
+        "STYPE": "update"
+      },
+      "console": "integratedTerminal"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Start Build",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "start:build"],
+      "env": {
+        "SDEBUG": "true",
+        "STYPE": "build"
+      },
+      "console": "integratedTerminal"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Start Template",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "start:template"],
+      "env": {
+        "SDEBUG": "true",
+        "STYPE": "template"
+      },
+      "console": "integratedTerminal"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Start Template Rebuild",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "start:templateRebuild"],
+      "env": {
+        "SDEBUG": "true",
+        "STYPE": "templateRebuild"
+      },
+      "console": "integratedTerminal"
     }
   ]
 }
