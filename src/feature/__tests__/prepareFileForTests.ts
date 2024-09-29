@@ -50,10 +50,25 @@ export const cleanUpTemplateCatalog = async (
 ) => {
   const folder =
     templateCase === 'templateCatalog' ? 'mockTemplate/templateCatalog' : 'mockTemplateUpdate/templateCatalog';
+  const folderNodeModule =
+    templateCase === 'templateCatalog' ? 'mockTemplate/node_modules' : 'mockTemplateUpdate/node_modules';
+  const folderTools = templateCase === 'templateCatalog' ? 'mockTemplate/tools' : 'mockTemplateUpdate/tools';
   const path = getCleanupPath(type, folder, step);
+  const pathNodeModules = getCleanupPath(type, folderNodeModule, step);
+  const pathTools = getCleanupPath(type, folderTools, step);
 
   await cleanUpSinglePath({
     path,
+    isDebug: true,
+  });
+
+  await cleanUpSinglePath({
+    path: pathNodeModules,
+    isDebug: true,
+  });
+
+  await cleanUpSinglePath({
+    path: pathTools,
     isDebug: true,
   });
 };

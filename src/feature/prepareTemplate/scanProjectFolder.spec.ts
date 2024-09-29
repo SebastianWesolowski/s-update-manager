@@ -47,10 +47,7 @@ describe('scanProjectFolder', () => {
         rootPathFileList: [],
       };
 
-      await cleanUpSinglePath({
-        path: createPath([templateConfig.projectCatalog, 'tools']),
-        isDebug: templateConfig.isDebug,
-      });
+      await cleanUpTemplateCatalog('mock');
       await createCatalog(templateConfig.templateCatalogPath);
 
       const FileToCreate: FileToCreateType[] = [
