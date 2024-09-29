@@ -51,10 +51,6 @@ describe('bumpVersion', () => {
         templateFileList: [],
         rootPathFileList: [],
       };
-      await cleanUpSinglePath({
-        path: createPath([templateConfig.projectCatalog, 'tools']),
-        isDebug: templateConfig.isDebug,
-      });
       await cleanUpTemplateCatalog('mock');
 
       const FileToCreate: FileToCreateType[] = [
