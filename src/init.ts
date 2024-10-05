@@ -32,13 +32,6 @@ export const init = async (args: Args): Promise<ConfigType> => {
       path: config.snpCatalog,
       isDebug: config.isDebug,
     });
-
-    const allFiles = await searchFilesInDirectory({
-      directoryPath: config.projectCatalog,
-      excludedFileNames: ['.gitignore', 'package.json'],
-    });
-
-    await cleanUpSpecificFiles({ files: allFiles, isDebug: config.isDebug });
   }
 
   debugFunction(config.isDebug, '=== Start SNP INIT ===', '[INIT]');

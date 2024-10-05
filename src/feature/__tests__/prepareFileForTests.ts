@@ -1,5 +1,6 @@
 import { cleanUpSinglePath } from './cleanForTests';
 import { createFile } from '@/util/createFile';
+import { createPath } from '@/util/createPath';
 
 export interface FileToCreateType {
   filePath: string;
@@ -82,10 +83,13 @@ export const cleanUpProjectCatalog = async (
     | 'prepareFileList'
     | 'updateTemplateConfig'
     | 'formatJsonWithPrettier',
-  templateCase: 'templateCatalog' | 'templateCatalogUpdate' = 'templateCatalog'
+  folderCase: 'mockProject' | 'mockProjectToBuild' | 'mockProjectToUpdate' = 'mockProject'
 ) => {
-  const folder = templateCase === 'templateCatalog' ? 'mockTemplate' : 'mockTemplateUpdate';
-  const path = getCleanupPath(type, folder, step);
+  let path = getCleanupPath(type, folderCase, step);
+
+  if (folderCase === 'mockProject') {
+    path = createPath([path, '.snp']);
+  }
 
   await cleanUpSinglePath({
     path,

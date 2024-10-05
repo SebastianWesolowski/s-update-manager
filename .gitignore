@@ -90,8 +90,6 @@ dist
 /test/mockTemplate/templateCatalog/*
 # !/test/realProject/
 # !/test/testTemplate/
-!/test/mockTemplate/
-!/test/mockUpdatedTemplate/
 
 # Upewnij się, że wszystkie pliki w dozwolonych katalogach są uwzględnione
 # !/test/realProject/**
