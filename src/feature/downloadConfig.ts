@@ -30,10 +30,12 @@ export async function downloadConfig(config: ConfigType): Promise<{
       '[INIT - downloadConfig]'
     );
 
+    // TODO [SC-18] Ensure temporaryFolder config is nesesery
     if (!(await isFileOrFolderExists({ isDebug: config.isDebug, filePath: config.temporaryFolder }))) {
       await createCatalog(config.temporaryFolder);
     }
-    // TODO [SC-18] Ensure temporaryFolder config is nesesery
+
+    // TODO [SC-79] chenge testTamplete repo to mock
     return await wgetAsync(config.remoteFileMapURL, config.temporaryFolder)
       .then(async (snpFileMapConfigContent) => {
         let currentConfig = {};

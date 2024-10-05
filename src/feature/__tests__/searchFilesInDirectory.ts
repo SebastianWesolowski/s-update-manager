@@ -7,12 +7,14 @@ export async function searchFilesInDirectory({
   excludedFileNames = [],
   excludedPhrases = [],
   excludePaths = [],
+  excludeFolders = [],
 }: {
   directoryPath: string;
   phrases?: string[];
   excludedFileNames?: string[];
   excludedPhrases?: string[];
   excludePaths?: string[];
+  excludeFolders?: string[];
 }): Promise<string[]> {
   const matchingFiles: string[] = [];
 
@@ -27,6 +29,10 @@ export async function searchFilesInDirectory({
 
   for (const item of items) {
     const itemPath = path.join(normalizedDirectoryPath, item);
+
+    if (excludeFolders.includes(item)) {
+      continue; // Pominięcie tego folderu i wszystkich jego podfolderów/plików
+    }
 
     // Sprawdzenie, czy ścieżka jest wykluczona
     if (cleanedExcludePaths.some((excludePath) => itemPath.includes(excludePath))) {
