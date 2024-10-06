@@ -87,21 +87,7 @@ dist
 
 # Pliki testowe
 /test/*
-/test/mockTemplate/templateCatalog/*
-# !/test/realProject/
-# !/test/testTemplate/
 
-# Upewnij się, że wszystkie pliki w dozwolonych katalogach są uwzględnione
-# !/test/realProject/**
-# !/test/testTemplate/**
-!/test/mockTemplate/**
-!/test/mockUpdatedTemplate/**
-
-# Upewnij się, że wszystkie pliki w dozwolonych katalogach są uwzględnione
-# !/test/realProject/**/*
-# !/test/testTemplate/**/*
-!/test/mockTemplate/**/*
-!/test/mockUpdatedTemplate/**/*
 
 
 # Project-specific directories
