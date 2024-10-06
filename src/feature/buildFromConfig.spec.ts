@@ -1,3 +1,4 @@
+import { FileToCreateType, setupTestFiles } from './__tests__/prepareFileForTests';
 import { cleanUpFiles } from '@/feature/__tests__/cleanForTests';
 import { mockConfig, mockSnpFileMapConfig } from '@/feature/__tests__/const';
 import { extractAndReplacePaths } from '@/feature/__tests__/extractAndReplacePaths';
@@ -42,18 +43,21 @@ describe('buildFromConfig', () => {
     });
   });
 
-  it('should return correct content without extra file', async () => {
+  it('should return correct content without extra file - empty project templateCatalog ', async () => {
     config = { ...mockConfig.step.scanExtraFile.empty, ...partialConfig };
     snpFileMapConfig = { ...mockSnpFileMapConfig.step.scanExtraFile.empty };
 
-    await createFile({
-      filePath: config.snpConfigFile,
-      content: JSON.stringify(config),
-    });
-    await createFile({
-      filePath: config.snpFileMapConfig,
-      content: JSON.stringify(snpFileMapConfig),
-    });
+    const FileToCreate: FileToCreateType[] = [
+      {
+        filePath: config.snpConfigFile,
+        content: JSON.stringify(config),
+      },
+      {
+        filePath: config.snpFileMapConfig,
+        content: JSON.stringify(snpFileMapConfig),
+      },
+    ];
+    await setupTestFiles(FileToCreate, config.isDebug);
 
     const result = await buildFromConfig(config);
     const allFiles = await searchFilesInDirectory({
@@ -63,6 +67,121 @@ describe('buildFromConfig', () => {
     });
     expect({ ...result, allFiles }).toStrictEqual({
       config: mockConfig.step.buildFromConfig.empty,
+      snpFileMapConfig: {
+        ...mockSnpFileMapConfig.step.buildFromConfig.empty,
+        createdFileMap: [
+          './test/mockProject/.snp/templateCatalog/.gitignore-default.md',
+          './test/mockProject/.snp/templateCatalog/README.md-default.md',
+          './test/mockProject/.snp/templateCatalog/package.json-default.md',
+          './test/mockProject/.snp/templateCatalog/tools/test.sh-default.md',
+          './test/mockProject/.snp/templateCatalog/tsconfig.json-default.md',
+          './test/mockProject/.snp/templateCatalog/yarn.lock-default.md',
+        ],
+        snpFileMap: {
+          ...mockSnpFileMapConfig.step.buildFromConfig.empty.snpFileMap,
+          '.gitignore': {
+            ...mockSnpFileMapConfig.step.buildFromConfig.empty.snpFileMap['.gitignore'],
+            _: {
+              ...mockSnpFileMapConfig.step.buildFromConfig.empty.snpFileMap['.gitignore']['_'],
+              isCreated: false,
+            },
+          },
+          'README.md': {
+            ...mockSnpFileMapConfig.step.buildFromConfig.empty.snpFileMap['README.md'],
+            _: {
+              ...mockSnpFileMapConfig.step.buildFromConfig.empty.snpFileMap['README.md']['_'],
+              isCreated: false,
+            },
+          },
+          'package.json': {
+            ...mockSnpFileMapConfig.step.buildFromConfig.empty.snpFileMap['package.json'],
+            _: {
+              ...mockSnpFileMapConfig.step.buildFromConfig.empty.snpFileMap['package.json']['_'],
+              isCreated: false,
+            },
+          },
+          'tools/test.sh': {
+            ...mockSnpFileMapConfig.step.buildFromConfig.empty.snpFileMap['tools/test.sh'],
+            _: {
+              ...mockSnpFileMapConfig.step.buildFromConfig.empty.snpFileMap['tools/test.sh']['_'],
+              isCreated: false,
+            },
+          },
+          'tsconfig.json': {
+            ...mockSnpFileMapConfig.step.buildFromConfig.empty.snpFileMap['tsconfig.json'],
+            _: {
+              ...mockSnpFileMapConfig.step.buildFromConfig.empty.snpFileMap['tsconfig.json']['_'],
+              isCreated: false,
+            },
+          },
+          'yarn.lock': {
+            ...mockSnpFileMapConfig.step.buildFromConfig.empty.snpFileMap['yarn.lock'],
+            _: {
+              ...mockSnpFileMapConfig.step.buildFromConfig.empty.snpFileMap['yarn.lock']['_'],
+              isCreated: false,
+            },
+          },
+        },
+      },
+      allFiles: [
+        './test/mockProject/.snp/repositoryMap.json',
+        './test/mockProject/.snp/snp.config.json',
+        './test/mockProject/.snp/templateCatalog/.gitignore-default.md',
+        './test/mockProject/.snp/templateCatalog/README.md-default.md',
+        './test/mockProject/.snp/templateCatalog/package.json-default.md',
+        './test/mockProject/.snp/templateCatalog/tools/test.sh-default.md',
+        './test/mockProject/.snp/templateCatalog/tsconfig.json-default.md',
+        './test/mockProject/.snp/templateCatalog/yarn.lock-default.md',
+        './test/mockProject/.snp/temporary/.gitignore-default.md',
+        './test/mockProject/.snp/temporary/README.md-default.md',
+        './test/mockProject/.snp/temporary/package.json-default.md',
+        './test/mockProject/.snp/temporary/test.sh-default.md',
+        './test/mockProject/.snp/temporary/tsconfig.json-default.md',
+        './test/mockProject/.snp/temporary/yarn.lock-default.md',
+      ],
+    });
+  });
+
+  it.failing('should return correct content without extra file - project mockTemplateToUpdate ', async () => {
+    config = { ...mockConfig.step.scanExtraFile.empty, ...partialConfig };
+    snpFileMapConfig = { ...mockSnpFileMapConfig.step.scanExtraFile.empty };
+
+    config = {
+      ...config,
+      remoteFileMapURL:
+        'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/dev/mock/mockTemplateToUpdate/templateCatalog/repositoryMap.json',
+      remoteRepository: 'https://github.com/SebastianWesolowski/s-update-manager/tree/dev/mock/mockTemplateToUpdate',
+      remoteRootRepositoryUrl:
+        'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/dev/mock/mockTemplateToUpdate',
+    };
+
+    const FileToCreate: FileToCreateType[] = [
+      {
+        filePath: config.snpConfigFile,
+        content: JSON.stringify(config),
+      },
+      {
+        filePath: config.snpFileMapConfig,
+        content: JSON.stringify(snpFileMapConfig),
+      },
+    ];
+    await setupTestFiles(FileToCreate, config.isDebug);
+
+    const result = await buildFromConfig(config);
+    const allFiles = await searchFilesInDirectory({
+      directoryPath: config.projectCatalog,
+      excludedFileNames: ['.DS_Store'],
+      excludedPhrases: ['.backup'],
+    });
+    expect({ ...result, allFiles }).toStrictEqual({
+      config: {
+        ...mockConfig.step.buildFromConfig.empty,
+        remoteFileMapURL:
+          'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/dev/mock/mockTemplateToUpdate/templateCatalog/repositoryMap.json',
+        remoteRepository: 'https://github.com/SebastianWesolowski/s-update-manager/tree/dev/mock/mockTemplateToUpdate',
+        remoteRootRepositoryUrl:
+          'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/dev/mock/mockTemplateToUpdate',
+      },
       snpFileMapConfig: mockSnpFileMapConfig.step.buildFromConfig.empty,
       allFiles: [
         './test/mockProject/.gitignore',
@@ -89,8 +208,16 @@ describe('buildFromConfig', () => {
     });
   });
 
-  it('should return correct content with extra file', async () => {
+  it('should return correct content with extra file  - project mockTemplateToUpdate ', async () => {
     config = { ...mockConfig.step.scanExtraFile.fullFiled };
+    config = {
+      ...config,
+      remoteFileMapURL:
+        'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/dev/mock/mockTemplateToUpdate/templateCatalog/repositoryMap.json',
+      remoteRepository: 'https://github.com/SebastianWesolowski/s-update-manager/tree/dev/mock/mockTemplateToUpdate',
+      remoteRootRepositoryUrl:
+        'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/dev/mock/mockTemplateToUpdate',
+    };
     snpFileMapConfig = { ...mockSnpFileMapConfig.step.scanExtraFile.fullFiled };
     await createFile({
       filePath: config.snpConfigFile,
@@ -129,7 +256,14 @@ describe('buildFromConfig', () => {
       excludedPhrases: ['.backup'],
     });
     expect({ ...result, allFiles }).toStrictEqual({
-      config: mockConfig.step.buildFromConfig.fullFiled,
+      config: {
+        ...mockConfig.step.buildFromConfig.fullFiled,
+        remoteFileMapURL:
+          'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/dev/mock/mockTemplateToUpdate/templateCatalog/repositoryMap.json',
+        remoteRepository: 'https://github.com/SebastianWesolowski/s-update-manager/tree/dev/mock/mockTemplateToUpdate',
+        remoteRootRepositoryUrl:
+          'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/dev/mock/mockTemplateToUpdate',
+      },
       snpFileMapConfig: mockSnpFileMapConfig.step.buildFromConfig.fullFiled,
       allFiles: [
         './test/mockProject/.gitignore',

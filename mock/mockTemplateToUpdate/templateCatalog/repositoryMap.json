@@ -11,6 +11,7 @@
   "fileMap": [
     "templateCatalog/.gitignore-default.md",
     "templateCatalog/package.json-default.md",
+    "templateCatalog/README.md-default.md",
     "templateCatalog/tools/test-new.sh-default.md",
     "templateCatalog/tools/test.sh-default.md",
     "templateCatalog/tsconfig.json-default.md",
@@ -19,6 +20,7 @@
   "templateFileList": [
     "./.gitignore",
     "./package.json",
+    "./README.md",
     "./tools/test-new.sh",
     "./tools/test.sh",
     "./tsconfig.json",
@@ -27,6 +29,7 @@
   "rootPathFileList": [
     "./mock/mockTemplateToUpdate/.gitignore",
     "./mock/mockTemplateToUpdate/package.json",
+    "./mock/mockTemplateToUpdate/README.md",
     "./mock/mockTemplateToUpdate/tools/test-new.sh",
     "./mock/mockTemplateToUpdate/tools/test.sh",
     "./mock/mockTemplateToUpdate/tsconfig.json",
