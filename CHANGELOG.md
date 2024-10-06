@@ -1,3 +1,27 @@
+## [1.0.0-dev.37](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.36...v1.0.0-dev.37) (October 06, 2024)
+
+
+### [SC-2](https://linear.app/wesolowskidev/issue/SC-2)
+
+- 🚨 [[SC-2](https://linear.app/wesolowskidev/issue/SC-2)] improve template test ([f6a6034](https://github.com/SebastianWesolowski/s-update-manager/commit/f6a60343d5389207f2fc4207b74723ecf442400a))
+
+
+### [SC-11](https://linear.app/wesolowskidev/issue/SC-11)
+
+- 🔧 [[SC-11](https://linear.app/wesolowskidev/issue/SC-11)] add debug mode for dev sripts ([ee08d57](https://github.com/SebastianWesolowski/s-update-manager/commit/ee08d5702b2c2b91c9c4f88938be3bc34eee0f15))
+- 🚨 [[SC-11](https://linear.app/wesolowskidev/issue/SC-11)] fix buildFromConfig ([0330354](https://github.com/SebastianWesolowski/s-update-manager/commit/033035431f9b4d5c165ad1c695d3942620788398))
+- 🚨 [[SC-11](https://linear.app/wesolowskidev/issue/SC-11)] downloadConfig ([d861937](https://github.com/SebastianWesolowski/s-update-manager/commit/d861937b47dde9ede48ef1ad55e6aada4dcfbc3b))
+
+
+### [SC-21](https://linear.app/wesolowskidev/issue/SC-21)
+
+- ✨ [[SC-21](https://linear.app/wesolowskidev/issue/SC-21)] gitignore rule for template ([ec8a2f2](https://github.com/SebastianWesolowski/s-update-manager/commit/ec8a2f2c1886a410938c76cf98ac9fd755679529))
+
+
+### Other tasks
+
+- 🔧 [] cleangitcache ([53c10da](https://github.com/SebastianWesolowski/s-update-manager/commit/53c10dab02f0f5f3a4fe4207c52fb368c54bcad7))
+
 ## [1.0.0-dev.36](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.35...v1.0.0-dev.36) (September 26, 2024)
 
 
