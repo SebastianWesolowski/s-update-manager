@@ -3,14 +3,20 @@ import { searchFilesInDirectory } from '../__tests__/searchFilesInDirectory';
 import { ConfigTemplateType } from '@/feature/config/types';
 import { createPath } from '@/util/createPath';
 import { debugFunction } from '@/util/debugFunction';
+import { gitignoreToGlobRules } from '@/util/gitignoreToGlobRules/gitignoreToGlobRules';
 
 export const scanProjectFolder = async (
   templateConfig: ConfigTemplateType
 ): Promise<{ templateConfig: ConfigTemplateType; templateFileList: string[] | [] }> => {
   debugFunction(templateConfig.isDebug, { templateConfig }, '[PrepareTemplate - scanProjectFolder START]');
 
+  const globRules: string[] = await gitignoreToGlobRules({
+    prefix: createPath(templateConfig.projectCatalog) + '/',
+    gitignorePath: createPath([templateConfig.projectCatalog, '.gitignore']),
+  });
+
   const excludePaths = [
-    createPath([templateConfig.projectCatalog, 'node_modules/']),
+    ...globRules,
     createPath([templateConfig.projectCatalog, 'test/']),
     createPath([templateConfig.projectCatalog, templateConfig.templateCatalogName]),
   ];
@@ -26,7 +32,7 @@ export const scanProjectFolder = async (
         { templateConfig, fileList },
         '[PrepareTemplate - searchFilesInDirectory - START]'
       );
-      const cleanupArray = fileList.map((file) => {
+      const filteredFiles = fileList.map((file) => {
         const relativePath = file.replace(templateConfig.projectCatalog, '');
         const normalizedPath = path.normalize(relativePath).replace(/^[/\\]+/, '');
         return './' + normalizedPath.replace(/\\/g, '/');
@@ -34,14 +40,14 @@ export const scanProjectFolder = async (
 
       debugFunction(
         templateConfig.isDebug,
-        { templateConfig, fileList, cleanupArray },
+        { templateConfig, fileList, filteredFiles },
         '[PrepareTemplate - searchFilesInDirectory - END]'
       );
       debugFunction(templateConfig.isDebug, { templateConfig }, '[PrepareTemplate - scanProjectFolder END]');
-      return { templateConfig, templateFileList: cleanupArray }; // Wyświetli przefiltrowane pliki
+      return { templateConfig, templateFileList: filteredFiles };
     })
     .catch((error) => {
       console.error('An error occurred:', error);
-      return { templateConfig, templateFileList: [] }; // Wyświetli przefiltrowane plikireturn [];
+      return { templateConfig, templateFileList: [] };
     });
 };

@@ -16,55 +16,57 @@ export async function searchFilesInDirectory({
   excludePaths?: string[];
   excludeFolders?: string[];
 }): Promise<string[]> {
+  //TODO [SC-80] advanced gitignore Rule
+
   const matchingFiles: string[] = [];
 
-  // Normalizacja ścieżki wejściowej
+  // Normalize the input path
   const normalizedDirectoryPath = directoryPath.startsWith('/') ? directoryPath : path.join('.', directoryPath);
 
-  // Pobranie wszystkich plików i folderów w katalogu
+  // Get all files and folders in the directory
   const items = await fs.readdir(normalizedDirectoryPath);
 
-  // Usuwanie './' z początku ścieżek w excludePaths
+  // Remove './' from the beginning of paths in excludePaths
   const cleanedExcludePaths = excludePaths.map((path) => (path.startsWith('./') ? path.slice(2) : path));
 
   for (const item of items) {
     const itemPath = path.join(normalizedDirectoryPath, item);
 
     if (excludeFolders.includes(item)) {
-      continue; // Pominięcie tego folderu i wszystkich jego podfolderów/plików
+      continue; // Skip this folder and all its subfolders/files
     }
 
-    // Sprawdzenie, czy ścieżka jest wykluczona
+    // Check if the path is excluded
     if (cleanedExcludePaths.some((excludePath) => itemPath.includes(excludePath))) {
-      continue; // Pominięcie tej ścieżki i wszystkich jej podfolderów/plików
+      continue; // Skip this path and all its subfolders/files
     }
 
-    // Sprawdzenie, czy to plik
+    // Check if it's a file
     const stats = await fs.stat(itemPath);
     if (stats.isFile()) {
-      // Sprawdzenie, czy nazwa pliku znajduje się na liście wykluczeń
+      // Check if the file name is in the exclusion list
       if (excludedFileNames.includes(item)) {
-        continue; // Pominięcie tego pliku
+        continue; // Skip this file
       }
 
-      // Sprawdzenie, czy ścieżka zawiera którąkolwiek z wykluczających fraz
+      // Check if the path contains any of the excluding phrases
       if (excludedPhrases.some((phrase) => itemPath.includes(phrase))) {
-        continue; // Pominięcie tego pliku
+        continue; // Skip this file
       }
 
-      // Sprawdzenie, czy nazwa pliku lub ścieżka zawiera którąkolwiek z fraz
+      // Check if the file name or path contains any of the phrases
       if (phrases) {
         for (const phrase of phrases) {
           if (itemPath.includes(phrase)) {
             matchingFiles.push(normalizePath(itemPath));
-            break; // Przerywamy, jeśli jedna z fraz została znaleziona
+            break; // Break if one of the phrases is found
           }
         }
       } else {
         matchingFiles.push(normalizePath(itemPath));
       }
     } else if (stats.isDirectory()) {
-      // Jeśli to folder, rekurencyjnie przeszukaj jego zawartość, ale tylko jeśli nie jest wykluczony
+      // If it's a folder, recursively search its contents, but only if it's not excluded
       if (!cleanedExcludePaths.some((excludePath) => itemPath.includes(excludePath))) {
         const nestedMatchingFiles = await searchFilesInDirectory({
           directoryPath: itemPath,
@@ -82,12 +84,12 @@ export async function searchFilesInDirectory({
 }
 
 function normalizePath(filePath: string): string {
-  // Usuń './' z początku ścieżki, jeśli istnieje
+  // Remove './' from the beginning of the path if it exists
   let normalizedPath = filePath.startsWith('./') ? filePath.slice(2) : filePath;
 
-  // Zamień wszystkie podwójne ukośniki na pojedyncze
+  // Replace all double slashes with single ones
   normalizedPath = normalizedPath.replace(/\/\//g, '/');
 
-  // Dodaj './' na początku, jeśli ścieżka nie zaczyna się od '/'
+  // Add './' at the beginning if the path doesn't start with '/'
   return normalizedPath.startsWith('/') ? normalizedPath : './' + normalizedPath;
 }

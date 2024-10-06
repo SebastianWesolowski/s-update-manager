@@ -49,8 +49,18 @@ export const cleanUpTemplateCatalog = async (
     | 'formatJsonWithPrettier',
   templateCase: 'templateCatalog' | 'templateCatalogUpdate' = 'templateCatalog'
 ) => {
-  const folder =
+  let folder =
     templateCase === 'templateCatalog' ? 'mockTemplate/templateCatalog' : 'mockTemplateUpdate/templateCatalog';
+
+  if (type === 'test') {
+    folder = folder.replace('/templateCatalog', '');
+    await cleanUpSinglePath({
+      path: `./test/${folder}`,
+      isDebug: true,
+    });
+    return;
+  }
+
   const folderNodeModule =
     templateCase === 'templateCatalog' ? 'mockTemplate/node_modules' : 'mockTemplateUpdate/node_modules';
   const folderTools = templateCase === 'templateCatalog' ? 'mockTemplate/tools' : 'mockTemplateUpdate/tools';
