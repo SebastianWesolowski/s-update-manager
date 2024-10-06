@@ -76,14 +76,23 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
+# Project-specific directories
+upload/
+snp/
+temporary/
+.snp/
+
 # Pliki mock
 /mock/mockTemplate/templateCatalog/**/*
 /mock/mockTemplate/templateCatalog/*
 /mock/mockTemplate/tools/**
 /mock/mockTemplate/tools/*
 /mock/mockTemplateToUpdate/tools/**
-/mock/mockTemplateToUpdate/tools/*
-
+/mock/mockTemplateToUpdate/tools/**
+!/mock/mockProjectToBuild/.snp
+!/mock/mockProjectToBuild/.snp/*
+!/mock/mockProjectToBuild/.snp/**
+!/mock/mockProjectToBuild/.snp/**/*
 
 # Pliki testowe
 /test/*
@@ -106,11 +115,7 @@ lib/
 *.backup
 *.old
 
-# Project-specific directories
-upload/
-snp/
-temporary/
-.snp/
+
 
 # OS-specific files
 .DS_Store
