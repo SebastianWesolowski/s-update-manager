@@ -142,7 +142,7 @@ describe('buildFromConfig', () => {
     });
   });
 
-  it.failing('should return correct content without extra file - project mockTemplateToUpdate ', async () => {
+  it('should return correct content without extra file - project mockTemplateToUpdate ', async () => {
     config = { ...mockConfig.step.scanExtraFile.empty, ...partialConfig };
     snpFileMapConfig = { ...mockSnpFileMapConfig.step.scanExtraFile.empty };
 
