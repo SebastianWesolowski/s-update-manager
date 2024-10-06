@@ -1,0 +1,26 @@
+{
+  "templateCatalogName": "templateCatalog",
+  "snpCatalog": "./.snp/",
+  "sUpdaterVersion": "1.0.0-dev.37",
+  "availableSNPSuffix": [
+    "-default.md",
+    "-custom.md",
+    "-extend.md"
+  ],
+  "availableSNPKeySuffix": [
+    "defaultFile",
+    "customFile",
+    "extendFile"
+  ],
+  "REPOSITORY_MAP_FILE_NAME": "repositoryMap.json",
+  "snpFileMapConfig": "./.snp/repositoryMap.json",
+  "projectCatalog": "./",
+  "temporaryFolder": "./.snp/temporary/",
+  "snpConfigFileName": "snp.config.json",
+  "snpConfigFile": "./.snp/snp.config.json",
+  "remoteRootRepositoryUrl": "https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/dev/mock/mockTemplate",
+  "remoteRepository": "https://github.com/SebastianWesolowski/s-update-manager/tree/dev/mock/mockTemplate",
+  "remoteFileMapURL": "https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/dev/mock/mockTemplate/templateCatalog/repositoryMap.json",
+  "isDebug": false,
+  "_": []
+}
