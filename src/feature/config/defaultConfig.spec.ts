@@ -3,6 +3,7 @@ import { defaultArgs } from '@/feature/args/const';
 import { defaultConfig } from '@/feature/config/const';
 import { getConfig, regenerateConfig, updateDefaultConfig } from '@/feature/config/defaultConfig';
 import { ConfigType } from '@/feature/config/types';
+import { getRemoteFileMapURL } from '@/util/getRemoteURL/getRemoteFileMapURL';
 import { readPackageVersion } from '@/util/readVersionPackage';
 
 const updateSUpdaterVersion = async (projectCatalog: string): Promise<Partial<{ sUpdaterVersion: string }>> => {
@@ -21,11 +22,11 @@ const testCases: { description: string; mockConfig: Partial<ConfigType>; expecte
       availableSNPSuffix: ['-default.md', '-custom.md', '-extend.md'],
       isDebug: false,
       projectCatalog: './',
+      remoteRootRepositoryUrl:
+        'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/dev/mock/mockTemplateToUpdate',
+      remoteRepository: 'https://github.com/SebastianWesolowski/s-update-manager/tree/dev/mock/mockTemplateToUpdate',
       remoteFileMapURL:
-        'https://raw.githubusercontent.com/SebastianWesolowski/testTemplate/main/template/node/templateCatalog/repositoryMap.json',
-      remoteRepository:
-        'https://github.com/SebastianWesolowski/testTemplate/blob/main/template/node/templateCatalog/repositoryMap.json',
-      remoteRootRepositoryUrl: 'https://raw.githubusercontent.com/SebastianWesolowski/testTemplate/main/template/node',
+        'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/dev/mock/mockTemplateToUpdate/templateCatalog/repositoryMap.json',
       sUpdaterVersion: undefined,
       snpCatalog: './.snp/',
       snpConfigFile: './.snp/snp.config.json',
@@ -47,10 +48,10 @@ const testCases: { description: string; mockConfig: Partial<ConfigType>; expecte
       isDebug: false,
       projectCatalog: './',
       remoteFileMapURL:
-        'https://raw.githubusercontent.com/SebastianWesolowski/testTemplate/main/template/node/templateCatalog/repositoryMap.json',
-      remoteRepository:
-        'https://github.com/SebastianWesolowski/testTemplate/blob/main/template/node/templateCatalog/repositoryMap.json',
-      remoteRootRepositoryUrl: 'https://raw.githubusercontent.com/SebastianWesolowski/testTemplate/main/template/node',
+        'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/dev/mock/mockTemplateToUpdate/templateCatalog/repositoryMap.json',
+      remoteRepository: 'https://github.com/SebastianWesolowski/s-update-manager/tree/dev/mock/mockTemplateToUpdate',
+      remoteRootRepositoryUrl:
+        'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/dev/mock/mockTemplateToUpdate',
       sUpdaterVersion: undefined,
       snpCatalog: './.snp/',
       snpConfigFile: './.snp/snp.config.json',
@@ -212,10 +213,10 @@ describe('configuration functions', () => {
       isDebug: true,
       projectCatalog: './mock/mockProject/',
       remoteFileMapURL:
-        'https://raw.githubusercontent.com/SebastianWesolowski/testTemplate/main/template/node/templateCatalog/repositoryMap.json',
-      remoteRepository:
-        'https://github.com/SebastianWesolowski/testTemplate/blob/main/template/node/templateCatalog/repositoryMap.json',
-      remoteRootRepositoryUrl: 'https://raw.githubusercontent.com/SebastianWesolowski/testTemplate/main/template/node',
+        'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/dev/mock/mockTemplateToUpdate/templateCatalog/repositoryMap.json',
+      remoteRepository: 'https://github.com/SebastianWesolowski/s-update-manager/tree/dev/mock/mockTemplateToUpdate',
+      remoteRootRepositoryUrl:
+        'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/dev/mock/mockTemplateToUpdate',
       sUpdaterVersion: '../../dist/s-update-manager-1.0.0-dev.17T.tgz',
       snpCatalog: './mock/mockProject/.snp/',
       snpConfigFile: './mock/mockProject/.snp/snp.config.json',

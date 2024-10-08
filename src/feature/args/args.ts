@@ -24,6 +24,21 @@ export const setArgs = (args: Args): ProcessedArgs => {
   // This should handle different argument sets for init, update, build, and template scripts
   if (process.env.SDEBUG === 'true') {
     args = defaultArgs;
+
+    if (process.env.STYPE === 'update') {
+      args = {
+        ...args,
+        projectCatalog: './mock/mockProjectToUpdated',
+        snpCatalog: './mock/mockProjectToUpdated/.snp',
+      };
+    }
+    if (process.env.STYPE === 'build') {
+      args = {
+        ...args,
+        projectCatalog: './mock/mockProjectToBuild',
+        snpCatalog: './mock/mockProjectToBuild/.snp',
+      };
+    }
     console.log({ setArgs: args });
   }
 

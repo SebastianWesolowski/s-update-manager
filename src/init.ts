@@ -1,8 +1,7 @@
 #!/usr/bin/env node
 
 import minimist from 'minimist';
-import { cleanUpSinglePath, cleanUpSpecificFiles } from './feature/__tests__/cleanForTests';
-import { searchFilesInDirectory } from './feature/__tests__/searchFilesInDirectory';
+import { cleanUpSinglePath } from './feature/__tests__/cleanForTests';
 import { Args } from '@/feature/args/args';
 import { buildFromConfig } from '@/feature/buildFromConfig';
 import { cleanUp } from '@/feature/cleanUp';

@@ -5,8 +5,7 @@ export const defaultArgs: Args = {
   _: [],
   isDebug: 'true',
   projectCatalog: './mock/mockProject',
-  remoteRepository:
-    'https://github.com/SebastianWesolowski/testTemplate/blob/main/template/node/templateCatalog/repositoryMap.json/',
+  remoteRepository: 'https://github.com/SebastianWesolowski/s-update-manager/tree/dev/mock/mockTemplateToUpdate',
   snpCatalog: './mock/mockProject/.snp',
 };
 

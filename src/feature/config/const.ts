@@ -13,11 +13,11 @@ export const defaultConfig: ConfigType = {
   temporaryFolder: './.snp/temporary/',
   snpConfigFileName: 'snp.config.json',
   snpConfigFile: './.snp/snp.config.json',
-  remoteRootRepositoryUrl: 'https://raw.githubusercontent.com/SebastianWesolowski/testTemplate/main/template/node',
-  remoteRepository:
-    'https://github.com/SebastianWesolowski/testTemplate/blob/main/template/node/templateCatalog/repositoryMap.json', // TODO Change to main branch before release 1.00
+  remoteRootRepositoryUrl:
+    'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/dev/mock/mockTemplateToUpdate/templateCatalog/repositoryMap.json',
+  remoteRepository: 'https://github.com/SebastianWesolowski/s-update-manager/tree/dev/mock/mockTemplateToUpdate',
   remoteFileMapURL:
-    'https://raw.githubusercontent.com/SebastianWesolowski/testTemplate/main/template/node/templateCatalog/repositoryMap.json', // TODO Change to main node template branch before release 1.00
+    'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/dev/mock/mockTemplateToUpdate/templateCatalog/repositoryMap.json',
   isDebug: false,
   _: [],
 };
