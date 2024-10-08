@@ -31,10 +31,10 @@ const mockConfig_step_downloadConfigFileForInit = {
 const mockConfig_step_downloadConfigFileForUpdate = {
   ...mockConfig_step_createConfigFile,
   remoteFileMapURL:
-    'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/dev/test/mockUpdatedTemplate/templateCatalog/repositoryMap.json',
-  remoteRepository: 'https://github.com/SebastianWesolowski/s-update-manager/tree/dev/test/mockUpdatedTemplate',
+    'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/dev/mock/mockTemplateUpdated/templateCatalog/repositoryMap.json',
+  remoteRepository: 'https://github.com/SebastianWesolowski/s-update-manager/tree/dev/mock/mockTemplateUpdated',
   remoteRootRepositoryUrl:
-    'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/tree/dev/test/mockUpdatedTemplate',
+    'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/tree/dev/mock/mockTemplateUpdated',
 };
 
 const mockConfig_step_prepareBaseSnpFileMap = {
@@ -112,26 +112,37 @@ const mockSnpFileMapConfig_step_downloadConfigFileForInit = {
 };
 const mockSnpFileMapConfig_step_downloadConfigFileForDownloaded = {
   ...mockSnpFileMapConfig_step_createConfigFile,
+  _: [],
+  bumpVersion: true,
+  isDebug: false,
+  projectCatalog: './',
+  repositoryMapFileName: 'repositoryMap.json',
+  repositoryMapFilePath: './templateCatalog/repositoryMap.json',
+  templateCatalogName: 'templateCatalog',
+  templateCatalogPath: './templateCatalog',
   fileMap: [
     'templateCatalog/.gitignore-default.md',
     'templateCatalog/package.json-default.md',
-    'templateCatalog/tools/newTest.sh-default.md',
+    'templateCatalog/README.md-default.md',
+    'templateCatalog/tools/test-new.sh-default.md',
     'templateCatalog/tools/test.sh-default.md',
     'templateCatalog/tsconfig.json-default.md',
     'templateCatalog/yarn.lock-default.md',
   ],
   rootPathFileList: [
-    './.gitignore',
-    './package.json',
-    './tools/newTest.sh',
-    './tools/test.sh',
-    './tsconfig.json',
-    './yarn.lock',
+    './mock/mockTemplateUpdated/.gitignore',
+    './mock/mockTemplateUpdated/package.json',
+    './mock/mockTemplateUpdated/README.md',
+    './mock/mockTemplateUpdated/tools/test-new.sh',
+    './mock/mockTemplateUpdated/tools/test.sh',
+    './mock/mockTemplateUpdated/tsconfig.json',
+    './mock/mockTemplateUpdated/yarn.lock',
   ],
   templateFileList: [
     './.gitignore',
     './package.json',
-    './tools/newTest.sh',
+    './README.md',
+    './tools/test-new.sh',
     './tools/test.sh',
     './tsconfig.json',
     './yarn.lock',
