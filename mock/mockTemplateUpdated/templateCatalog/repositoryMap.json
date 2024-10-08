@@ -1,0 +1,38 @@
+{
+  "projectCatalog": "./",
+  "templateCatalogName": "templateCatalog",
+  "templateCatalogPath": "./templateCatalog",
+  "repositoryMapFileName": "repositoryMap.json",
+  "repositoryMapFilePath": "./templateCatalog/repositoryMap.json",
+  "bumpVersion": true,
+  "isDebug": false,
+  "_": [],
+  "templateVersion": "1.0.0",
+  "fileMap": [
+    "templateCatalog/.gitignore-default.md",
+    "templateCatalog/package.json-default.md",
+    "templateCatalog/README.md-default.md",
+    "templateCatalog/tools/test-new.sh-default.md",
+    "templateCatalog/tools/test.sh-default.md",
+    "templateCatalog/tsconfig.json-default.md",
+    "templateCatalog/yarn.lock-default.md"
+  ],
+  "templateFileList": [
+    "./.gitignore",
+    "./package.json",
+    "./README.md",
+    "./tools/test-new.sh",
+    "./tools/test.sh",
+    "./tsconfig.json",
+    "./yarn.lock"
+  ],
+  "rootPathFileList": [
+    "./mock/mockTemplateUpdated/.gitignore",
+    "./mock/mockTemplateUpdated/package.json",
+    "./mock/mockTemplateUpdated/README.md",
+    "./mock/mockTemplateUpdated/tools/test-new.sh",
+    "./mock/mockTemplateUpdated/tools/test.sh",
+    "./mock/mockTemplateUpdated/tsconfig.json",
+    "./mock/mockTemplateUpdated/yarn.lock"
+  ]
+}

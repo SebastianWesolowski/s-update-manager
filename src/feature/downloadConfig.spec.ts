@@ -611,8 +611,40 @@ describe('downloadConfig', () => {
         config: {
           ...mockConfig.step.downloadConfigFile.forUpdate,
         },
+
         downloadContent: mockSnpFileMapConfig.step.downloadConfigFile.downloaded,
-        snpFileMapConfig: mockSnpFileMapConfig.step.downloadConfigFile.updated,
+        // snpFileMapConfig: mockSnpFileMapConfig.step.downloadConfigFile.updated,
+
+        // downloadContent: {},
+        snpFileMapConfig: {
+          createdFileMap: [],
+          fileMap: [
+            'templateCatalog/.gitignore-default.md',
+            'templateCatalog/README.md-default.md',
+            'templateCatalog/package.json-default.md',
+            'templateCatalog/tools/test.sh-default.md',
+            'templateCatalog/tsconfig.json-default.md',
+            'templateCatalog/yarn.lock-default.md',
+          ],
+          rootPathFileList: [
+            './.gitignore.md',
+            './README.md',
+            './package.json',
+            './tools/test.sh',
+            './tsconfig.json',
+            './yarn.lock',
+          ],
+          snpFileMap: {},
+          templateFileList: [
+            './.gitignore.md',
+            './README.md',
+            './package.json',
+            './tools/test.sh',
+            './tsconfig.json',
+            './yarn.lock',
+          ],
+          templateVersion: '1.0.0',
+        },
         allFiles: [
           './test/mockProject/.snp/repositoryMap.json',
           './test/mockProject/.snp/snp.config.json',

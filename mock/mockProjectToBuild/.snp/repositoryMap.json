@@ -1,4 +1,224 @@
 {
-  "createdFileMap": [],
-  "snpFileMap": {}
+  "projectCatalog": "./",
+  "templateCatalogName": "templateCatalog",
+  "templateCatalogPath": "./templateCatalog",
+  "repositoryMapFileName": "repositoryMap.json",
+  "repositoryMapFilePath": "./templateCatalog/repositoryMap.json",
+  "bumpVersion": true,
+  "isDebug": false,
+  "_": [],
+  "templateVersion": "1.0.0",
+  "fileMap": [
+    "templateCatalog/.gitignore-default.md",
+    "templateCatalog/package.json-default.md",
+    "templateCatalog/README.md-default.md",
+    "templateCatalog/tools/test-new.sh-default.md",
+    "templateCatalog/tools/test.sh-default.md",
+    "templateCatalog/tsconfig.json-default.md",
+    "templateCatalog/yarn.lock-default.md"
+  ],
+  "templateFileList": [
+    "./.gitignore",
+    "./package.json",
+    "./README.md",
+    "./tools/test-new.sh",
+    "./tools/test.sh",
+    "./tsconfig.json",
+    "./yarn.lock"
+  ],
+  "rootPathFileList": [
+    "./mock/mockTemplateToUpdate/.gitignore",
+    "./mock/mockTemplateToUpdate/package.json",
+    "./mock/mockTemplateToUpdate/README.md",
+    "./mock/mockTemplateToUpdate/tools/test-new.sh",
+    "./mock/mockTemplateToUpdate/tools/test.sh",
+    "./mock/mockTemplateToUpdate/tsconfig.json",
+    "./mock/mockTemplateToUpdate/yarn.lock"
+  ],
+  "createdFileMap": [
+    "./mock/mockProjectToBuild/.snp/templateCatalog/.gitignore-default.md",
+    "./mock/mockProjectToBuild/.gitignore",
+    "./mock/mockProjectToBuild/.snp/templateCatalog/package.json-default.md",
+    "./mock/mockProjectToBuild/package.json",
+    "./mock/mockProjectToBuild/.snp/templateCatalog/README.md-default.md",
+    "./mock/mockProjectToBuild/README.md",
+    "./mock/mockProjectToBuild/.snp/templateCatalog/tools/test-new.sh-default.md",
+    "./mock/mockProjectToBuild/tools/test-new.sh",
+    "./mock/mockProjectToBuild/.snp/templateCatalog/tools/test.sh-default.md",
+    "./mock/mockProjectToBuild/tools/test.sh",
+    "./mock/mockProjectToBuild/.snp/templateCatalog/tsconfig.json-default.md",
+    "./mock/mockProjectToBuild/tsconfig.json",
+    "./mock/mockProjectToBuild/.snp/templateCatalog/yarn.lock-default.md",
+    "./mock/mockProjectToBuild/yarn.lock"
+  ],
+  "snpFileMap": {
+    ".gitignore": {
+      "_": {
+        "SNPKeySuffix": "_",
+        "isCreated": true,
+        "path": "./mock/mockProjectToBuild/.gitignore",
+        "realFilePath": ".gitignore",
+        "realPath": "./mock/mockProjectToBuild/.gitignore",
+        "templateVersion": "1.0.0"
+      },
+      "defaultFile": {
+        "SNPKeySuffix": "defaultFile",
+        "isCreated": true,
+        "path": "./mock/mockProjectToBuild/.snp/templateCatalog/.gitignore-default.md",
+        "realFilePath": ".gitignore",
+        "realPath": "./mock/mockProjectToBuild/.gitignore",
+        "templateVersion": "1.0.0",
+        "SNPSuffixFileName": "templateCatalog/.gitignore-default.md"
+      }
+    },
+    "package.json": {
+      "_": {
+        "SNPKeySuffix": "_",
+        "isCreated": true,
+        "path": "./mock/mockProjectToBuild/package.json",
+        "realFilePath": "package.json",
+        "realPath": "./mock/mockProjectToBuild/package.json",
+        "templateVersion": "1.0.0"
+      },
+      "defaultFile": {
+        "SNPKeySuffix": "defaultFile",
+        "isCreated": true,
+        "path": "./mock/mockProjectToBuild/.snp/templateCatalog/package.json-default.md",
+        "realFilePath": "package.json",
+        "realPath": "./mock/mockProjectToBuild/package.json",
+        "templateVersion": "1.0.0",
+        "SNPSuffixFileName": "templateCatalog/package.json-default.md"
+      }
+    },
+    "README.md": {
+      "_": {
+        "SNPKeySuffix": "_",
+        "isCreated": true,
+        "path": "./mock/mockProjectToBuild/README.md",
+        "realFilePath": "README.md",
+        "realPath": "./mock/mockProjectToBuild/README.md",
+        "templateVersion": "1.0.0"
+      },
+      "defaultFile": {
+        "SNPKeySuffix": "defaultFile",
+        "isCreated": true,
+        "path": "./mock/mockProjectToBuild/.snp/templateCatalog/README.md-default.md",
+        "realFilePath": "README.md",
+        "realPath": "./mock/mockProjectToBuild/README.md",
+        "templateVersion": "1.0.0",
+        "SNPSuffixFileName": "templateCatalog/README.md-default.md"
+      },
+      "customFile": {
+        "SNPKeySuffix": "customFile",
+        "isCreated": true,
+        "path": "./mock/mockProjectToBuild/.snp/templateCatalog/README.md-custom.md",
+        "realFilePath": "README.md",
+        "realPath": "./mock/mockProjectToBuild/README.md",
+        "templateVersion": "1.0.0",
+        "SNPSuffixFileName": "README.md-custom.md"
+      }
+    },
+    "tools/test-new.sh": {
+      "_": {
+        "SNPKeySuffix": "_",
+        "isCreated": true,
+        "path": "./mock/mockProjectToBuild/tools/test-new.sh",
+        "realFilePath": "tools/test-new.sh",
+        "realPath": "./mock/mockProjectToBuild/test-new.sh",
+        "templateVersion": "1.0.0"
+      },
+      "defaultFile": {
+        "SNPKeySuffix": "defaultFile",
+        "isCreated": true,
+        "path": "./mock/mockProjectToBuild/.snp/templateCatalog/tools/test-new.sh-default.md",
+        "realFilePath": "tools/test-new.sh",
+        "realPath": "./mock/mockProjectToBuild/tools/test-new.sh",
+        "templateVersion": "1.0.0",
+        "SNPSuffixFileName": "templateCatalog/tools/test-new.sh-default.md"
+      }
+    },
+    "tools/test.sh": {
+      "_": {
+        "SNPKeySuffix": "_",
+        "isCreated": true,
+        "path": "./mock/mockProjectToBuild/tools/test.sh",
+        "realFilePath": "tools/test.sh",
+        "realPath": "./mock/mockProjectToBuild/test.sh",
+        "templateVersion": "1.0.0"
+      },
+      "defaultFile": {
+        "SNPKeySuffix": "defaultFile",
+        "isCreated": true,
+        "path": "./mock/mockProjectToBuild/.snp/templateCatalog/tools/test.sh-default.md",
+        "realFilePath": "tools/test.sh",
+        "realPath": "./mock/mockProjectToBuild/tools/test.sh",
+        "templateVersion": "1.0.0",
+        "SNPSuffixFileName": "templateCatalog/tools/test.sh-default.md"
+      }
+    },
+    "tsconfig.json": {
+      "_": {
+        "SNPKeySuffix": "_",
+        "isCreated": true,
+        "path": "./mock/mockProjectToBuild/tsconfig.json",
+        "realFilePath": "tsconfig.json",
+        "realPath": "./mock/mockProjectToBuild/tsconfig.json",
+        "templateVersion": "1.0.0"
+      },
+      "defaultFile": {
+        "SNPKeySuffix": "defaultFile",
+        "isCreated": true,
+        "path": "./mock/mockProjectToBuild/.snp/templateCatalog/tsconfig.json-default.md",
+        "realFilePath": "tsconfig.json",
+        "realPath": "./mock/mockProjectToBuild/tsconfig.json",
+        "templateVersion": "1.0.0",
+        "SNPSuffixFileName": "templateCatalog/tsconfig.json-default.md"
+      },
+      "customFile": {
+        "SNPKeySuffix": "customFile",
+        "isCreated": true,
+        "path": "./mock/mockProjectToBuild/.snp/templateCatalog/tsconfig.json-custom.md",
+        "realFilePath": "tsconfig.json",
+        "realPath": "./mock/mockProjectToBuild/tsconfig.json",
+        "templateVersion": "1.0.0",
+        "SNPSuffixFileName": "tsconfig.json-custom.md"
+      }
+    },
+    "yarn.lock": {
+      "_": {
+        "SNPKeySuffix": "_",
+        "isCreated": true,
+        "path": "./mock/mockProjectToBuild/yarn.lock",
+        "realFilePath": "yarn.lock",
+        "realPath": "./mock/mockProjectToBuild/yarn.lock",
+        "templateVersion": "1.0.0"
+      },
+      "defaultFile": {
+        "SNPKeySuffix": "defaultFile",
+        "isCreated": true,
+        "path": "./mock/mockProjectToBuild/.snp/templateCatalog/yarn.lock-default.md",
+        "realFilePath": "yarn.lock",
+        "realPath": "./mock/mockProjectToBuild/yarn.lock",
+        "templateVersion": "1.0.0",
+        "SNPSuffixFileName": "templateCatalog/yarn.lock-default.md"
+      },
+      "customFile": {
+        "SNPKeySuffix": "customFile",
+        "isCreated": true,
+        "path": "./mock/mockProjectToBuild/.snp/templateCatalog/yarn.lock-custom.md",
+        "realFilePath": "yarn.lock",
+        "realPath": "./mock/mockProjectToBuild/yarn.lock",
+        "templateVersion": "1.0.0",
+        "SNPSuffixFileName": "yarn.lock-custom.md"
+      }
+    }
+  },
+  "manualCreatedFileMap": [
+    "./mock/mockProjectToBuildToBuild/.snp/templateCatalog/README.md-custom.md",
+    "./mock/mockProjectToBuildToBuild/.snp/templateCatalog/tsconfig.json-custom.md",
+    "./mock/mockProjectToBuildToBuild/.snp/templateCatalog/yarn.lock-custom.md",
+    "./mock/mockProjectToBuild/.snp/templateCatalog/README.md-custom.md",
+    "./mock/mockProjectToBuild/.snp/templateCatalog/tsconfig.json-custom.md",
+    "./mock/mockProjectToBuild/.snp/templateCatalog/yarn.lock-custom.md"
+  ]
 }

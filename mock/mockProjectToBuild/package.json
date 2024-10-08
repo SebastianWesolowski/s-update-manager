@@ -1,16 +1,15 @@
 {
-  "name": "real-project",
+  "name": "testrepository",
   "version": "1.0.0",
-  "description": "",
+  "description": "lorem ipsum dolor sit amet, consectetur adipis",
   "main": "index.js",
   "scripts": {
-    "update": "s-update --remoteRepository='https://github.com/SebastianWesolowski/s-update-manager/tree/dev/mock/mockTemplate'",
-    "build": "s-build --remoteRepository='https://github.com/SebastianWesolowski/s-update-manager/tree/dev/mock/mockTemplate'",
-    "init": "s-init --remoteRepository='https://github.com/SebastianWesolowski/s-update-manager/tree/dev/mock/mockTemplate'"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "generateRepositoryMap": "s-prepare-template --isDebug --projectCatalog='./'"
+  },
+  "dependencies": {
+    "s-update-manager": "^1.0.0-dev.28"
   },
   "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "s-update-manager": "1.0.0-dev.37"
-  }
+  "license": "ISC"
 }

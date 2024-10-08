@@ -1,15 +1,16 @@
 {
-  "name": "testrepository",
+  "name": "real-project",
   "version": "1.0.0",
   "description": "lorem ipsum dolor sit amet, consectetur adipis",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "generateRepositoryMap": "s-prepare-template --isDebug --projectCatalog='./'"
-  },
-  "dependencies": {
-    "s-update-manager": "^1.0.0-dev.28"
+    "update": "s-update --remoteRepository='https://github.com/SebastianWesolowski/s-update-manager/tree/dev/template/node/templateCatalog'",
+    "build": "s-build --remoteRepository='https://github.com/SebastianWesolowski/s-update-manager/tree/dev/template/node/templateCatalog'",
+    "init": "s-init --remoteRepository='https://github.com/SebastianWesolowski/s-update-manager/tree/dev/template/node/templateCatalog'"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "s-update-manager": "^1.0.0-dev.28"
+  }
 }

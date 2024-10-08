@@ -4,6 +4,7 @@ import { debugFunction } from '@/util/debugFunction';
 import { isFolderExist } from '@/util/isFolderExist';
 
 export const createConfigFile = async (config: ConfigType): Promise<{ config: ConfigType; configFilePath: string }> => {
+  // TODO [SC-26] create config in root directory
   debugFunction(config.isDebug, { config }, '[INIT] debugFunction');
   const { snpCatalog, sUpdaterVersion, remoteRepository } = config;
 
