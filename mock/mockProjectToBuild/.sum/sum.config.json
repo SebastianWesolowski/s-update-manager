@@ -1,23 +1,23 @@
 {
   "templateCatalogName": "templateCatalog",
-  "snpCatalog": "./mock/mockProjectToBuild/.snp/",
+  "sumCatalog": "./mock/mockProjectToBuild/.sum/",
   "sUpdaterVersion": "../../dist/s-update-manager-1.0.0-dev.27.tgz",
-  "availableSNPSuffix": [
+  "availableSUMSuffix": [
     "-default.md",
     "-custom.md",
     "-extend.md"
   ],
-  "availableSNPKeySuffix": [
+  "availableSUMKeySuffix": [
     "defaultFile",
     "customFile",
     "extendFile"
   ],
   "REPOSITORY_MAP_FILE_NAME": "repositoryMap.json",
-  "snpFileMapConfig": "./mock/mockProjectToBuild/.snp/repositoryMap.json",
+  "sumFileMapConfig": "./mock/mockProjectToBuild/.sum/repositoryMap.json",
   "projectCatalog": "./mock/mockProjectToBuild/",
-  "temporaryFolder": "./mock/mockProjectToBuild/.snp/temporary/",
-  "snpConfigFileName": "snp.config.json",
-  "snpConfigFile": "./mock/mockProjectToBuild/.snp/snp.config.json",
+  "temporaryFolder": "./mock/mockProjectToBuild/.sum/temporary/",
+  "sumConfigFileName": "sum.config.json",
+  "sumConfigFile": "./mock/mockProjectToBuild/.sum/sum.config.json",
   "remoteRootRepositoryUrl": "https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/dev/mock/mockTemplateToUpdate",
   "remoteRepository": "https://github.com/SebastianWesolowski/s-update-manager/tree/dev/mock/mockTemplateToUpdate",
   "remoteFileMapURL": "https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/dev/mock/mockTemplateToUpdate/templateCatalog/repositoryMap.json",

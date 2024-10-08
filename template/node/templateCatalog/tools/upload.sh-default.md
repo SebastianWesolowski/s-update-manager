@@ -27,7 +27,7 @@ fi
 # Wykonaj diff i skopiuj pliki
 git diff --name-only $first_commit^..$second_commit | while read file; do
     # Utwórz archiwum ZIP i dodaj pliki do niego
-    zip -r "upload/SNP-$tag_first_commit-$tag_second_commit.zip" "$file"
+    zip -r "upload/SUM-$tag_first_commit-$tag_second_commit.zip" "$file"
 
 done
 

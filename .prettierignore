@@ -40,6 +40,6 @@ prettier.config.js
 .eslintrc.js
 .replacerc.js
 tools/*
-snp/*
+sum/*
 template/*
 mock/*

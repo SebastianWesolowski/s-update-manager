@@ -11,7 +11,7 @@ import { cleanUpFileTree } from '@/feature/cleanUpFileTree';
 import { getConfig } from '@/feature/config/defaultConfig';
 import { ConfigType } from '@/feature/config/types';
 import { downloadConfig } from '@/feature/downloadConfig';
-import { prepareBaseSnpFileMap } from '@/feature/prepareBaseFile';
+import { prepareBaseSumFileMap } from '@/feature/prepareBaseFile';
 import { scanExtraFile } from '@/feature/scanExtraFile';
 import { createCatalog } from '@/util/createCatalog';
 import { debugFunction } from '@/util/debugFunction';
@@ -19,7 +19,7 @@ import { debugFunction } from '@/util/debugFunction';
 export const update = async (args: Args): Promise<ConfigType> => {
   const config = await getConfig(args);
 
-  if (!config.snpFileMapConfig) {
+  if (!config.sumFileMapConfig) {
     throw new Error('Config file not exists, use init script');
   }
 
@@ -48,7 +48,7 @@ export const update = async (args: Args): Promise<ConfigType> => {
     setupTestFiles(FileToCreate, config.isDebug);
   }
 
-  debugFunction(config.isDebug, '=== Start SNP UPDATE ===');
+  debugFunction(config.isDebug, '=== Start SUM UPDATE ===');
 
   return await createCatalog(config.temporaryFolder).then(() => {
     return { ...config };
@@ -76,7 +76,7 @@ update(args)
   })
   .then((config) => {
     finalConfig = config;
-    return prepareBaseSnpFileMap(config);
+    return prepareBaseSumFileMap(config);
   })
   .then(({ config }) => {
     finalConfig = config;
@@ -92,5 +92,5 @@ update(args)
   })
   .finally(() => {
     debugFunction(finalConfig?.isDebug, { finalConfig }, '[UPDATE] final config');
-    debugFunction(finalConfig?.isDebug, '=== final SNP UPDATE ===');
+    debugFunction(finalConfig?.isDebug, '=== final SUM UPDATE ===');
   });

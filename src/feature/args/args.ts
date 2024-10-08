@@ -1,19 +1,19 @@
 import { defaultArgs } from '@/feature/args/const';
 
 export interface Args {
-  snpCatalog?: string;
+  sumCatalog?: string;
   projectCatalog?: string;
-  snpConfigFileName?: string;
-  snpConfigFile?: string;
+  sumConfigFileName?: string;
+  sumConfigFile?: string;
   remoteRepository?: string;
   isDebug?: string;
   _: string[];
 }
 export interface ProcessedArgs {
-  snpCatalog?: string;
+  sumCatalog?: string;
   projectCatalog?: string;
-  snpConfigFileName?: string;
-  snpConfigFile?: string;
+  sumConfigFileName?: string;
+  sumConfigFile?: string;
   remoteRepository?: string;
   isDebug?: boolean;
   _: string[];
@@ -29,31 +29,31 @@ export const setArgs = (args: Args): ProcessedArgs => {
       args = {
         ...args,
         projectCatalog: './mock/mockProjectToUpdated',
-        snpCatalog: './mock/mockProjectToUpdated/.snp',
+        sumCatalog: './mock/mockProjectToUpdated/.sum',
       };
     }
     if (process.env.STYPE === 'build') {
       args = {
         ...args,
         projectCatalog: './mock/mockProjectToBuild',
-        snpCatalog: './mock/mockProjectToBuild/.snp',
+        sumCatalog: './mock/mockProjectToBuild/.sum',
       };
     }
     console.log({ setArgs: args });
   }
 
-  const argSnpCatalog: string | undefined = args.snpCatalog || args._[0];
+  const argSumCatalog: string | undefined = args.sumCatalog || args._[0];
   const argProjectCatalog = args.projectCatalog || args._[2];
-  const argSnpConfigFileName = args.snpConfigFileName || args._[3];
-  const argSnpConfigFile = args.snpConfigFile || args._[4];
+  const argSumConfigFileName = args.sumConfigFileName || args._[3];
+  const argSumConfigFile = args.sumConfigFile || args._[4];
   const argRemoteRepository = args.remoteRepository || args._[5];
   const argIsDebug: string = args.isDebug || args._[6];
 
   return {
-    snpCatalog: argSnpCatalog ? String(argSnpCatalog) : undefined,
+    sumCatalog: argSumCatalog ? String(argSumCatalog) : undefined,
     projectCatalog: argProjectCatalog ? String(argProjectCatalog) : undefined,
-    snpConfigFileName: argSnpConfigFileName ? String(argSnpConfigFileName) : undefined,
-    snpConfigFile: argSnpConfigFile ? String(argSnpConfigFile) : undefined,
+    sumConfigFileName: argSumConfigFileName ? String(argSumConfigFileName) : undefined,
+    sumConfigFile: argSumConfigFile ? String(argSumConfigFile) : undefined,
     remoteRepository: argRemoteRepository ? String(argRemoteRepository) : undefined,
     isDebug: argIsDebug ? Boolean(argIsDebug) : undefined,
     _: args._,

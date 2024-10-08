@@ -27,7 +27,7 @@ export const updateJsonFile = async ({
       });
     });
   } else {
-    debugFunction(config?.isDebug, `file snpFileMapConfig is not exist ${filePath}`, '[updateFileMapConfig]');
+    debugFunction(config?.isDebug, `file sumFileMapConfig is not exist ${filePath}`, '[updateFileMapConfig]');
     return null;
   }
 };

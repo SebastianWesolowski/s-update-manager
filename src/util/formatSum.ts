@@ -1,16 +1,16 @@
-import { AvailableSNPKeySuffixTypes, AvailableSNPSuffixTypes } from '@/feature/config/types';
+import { AvailableSUMKeySuffixTypes, AvailableSUMSuffixTypes } from '@/feature/config/types';
 
-export const formatSnp = (
+export const formatSum = (
   input: string,
   returnValue: 'key' | 'suffix'
-): AvailableSNPKeySuffixTypes | AvailableSNPSuffixTypes | null => {
-  const suffixMapping: { [key in AvailableSNPSuffixTypes]: AvailableSNPKeySuffixTypes } = {
+): AvailableSUMKeySuffixTypes | AvailableSUMSuffixTypes | null => {
+  const suffixMapping: { [key in AvailableSUMSuffixTypes]: AvailableSUMKeySuffixTypes } = {
     '-custom.md': 'customFile',
     '-extend.md': 'extendFile',
     '-default.md': 'defaultFile',
   };
 
-  const reverseSuffixMapping: { [key in AvailableSNPKeySuffixTypes]: AvailableSNPSuffixTypes } = {
+  const reverseSuffixMapping: { [key in AvailableSUMKeySuffixTypes]: AvailableSUMSuffixTypes } = {
     customFile: '-custom.md',
     extendFile: '-extend.md',
     defaultFile: '-default.md',
@@ -20,12 +20,12 @@ export const formatSnp = (
     // Sprawdź, czy input kończy się jednym z sufiksów
     for (const suffix in suffixMapping) {
       if (input.endsWith(suffix)) {
-        return suffixMapping[suffix as AvailableSNPKeySuffixTypes];
+        return suffixMapping[suffix as AvailableSUMKeySuffixTypes];
       }
     }
   } else {
     // Sprawdź, czy input jest jednym z kluczy w odwrotnej mapie
-    return reverseSuffixMapping[input as AvailableSNPSuffixTypes] || null;
+    return reverseSuffixMapping[input as AvailableSUMSuffixTypes] || null;
   }
 
   // Gdy nie pasuje żaden z podanych kluczy ani sufiksów

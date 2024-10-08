@@ -9,7 +9,7 @@ export const getRealFileName = ({
   contentToCheck: string[];
 }): string[] => {
   const realFileName = contentToCheck.map((fileName) => {
-    config.availableSNPSuffix.forEach((phrase) => {
+    config.availableSUMSuffix.forEach((phrase) => {
       fileName = fileName.split(phrase).join('');
     });
     return path.basename(fileName);

@@ -1,5 +1,5 @@
 import { cleanUpFiles } from '@/feature/__tests__/cleanForTests';
-import { mockConfig, mockSnpFileMapConfig } from '@/feature/__tests__/const';
+import { mockConfig, mockSumFileMapConfig } from '@/feature/__tests__/const';
 import { extractAndReplacePaths } from '@/feature/__tests__/extractAndReplacePaths';
 import { searchFilesInDirectory } from '@/feature/__tests__/searchFilesInDirectory';
 import { ConfigType } from '@/feature/config/types';
@@ -9,14 +9,14 @@ import { createFile } from '@/util/createFile';
 
 describe('scanExtraFile', () => {
   let config: ConfigType;
-  let snpFileMapConfig: FileMapConfig;
+  let sumFileMapConfig: FileMapConfig;
 
   beforeEach(async () => {
     config = { ...mockConfig.step.createConfigFile };
-    snpFileMapConfig = { ...mockSnpFileMapConfig.step.prepareBaseSnpFileMap };
+    sumFileMapConfig = { ...mockSumFileMapConfig.step.prepareBaseSumFileMap };
 
     await cleanUpFiles({
-      snpCatalog: config.snpCatalog,
+      sumCatalog: config.sumCatalog,
       directoryPath: config.projectCatalog,
       isDebug: config.isDebug,
     });
@@ -24,7 +24,7 @@ describe('scanExtraFile', () => {
 
   afterEach(async () => {
     await cleanUpFiles({
-      snpCatalog: config.snpCatalog,
+      sumCatalog: config.sumCatalog,
       directoryPath: config.projectCatalog,
       isDebug: config.isDebug,
     });
@@ -32,12 +32,12 @@ describe('scanExtraFile', () => {
 
   it('should return correct content without extra file', async () => {
     await createFile({
-      filePath: config.snpConfigFile,
+      filePath: config.sumConfigFile,
       content: JSON.stringify(config),
     });
     await createFile({
-      filePath: config.snpFileMapConfig,
-      content: JSON.stringify(snpFileMapConfig),
+      filePath: config.sumFileMapConfig,
+      content: JSON.stringify(sumFileMapConfig),
     });
 
     const result = await scanExtraFile(config);
@@ -49,26 +49,26 @@ describe('scanExtraFile', () => {
 
     expect({ ...result, allFiles }).toStrictEqual({
       config: mockConfig.step.scanExtraFile.empty,
-      snpFileMapConfig: mockSnpFileMapConfig.step.scanExtraFile.empty,
-      allFiles: ['./test/mockProject/.snp/repositoryMap.json', './test/mockProject/.snp/snp.config.json'],
+      sumFileMapConfig: mockSumFileMapConfig.step.scanExtraFile.empty,
+      allFiles: ['./test/mockProject/.sum/repositoryMap.json', './test/mockProject/.sum/sum.config.json'],
     });
   });
 
   it('should return correct content with extra file', async () => {
     await createFile({
-      filePath: config.snpConfigFile,
+      filePath: config.sumConfigFile,
       content: JSON.stringify(config),
     });
     await createFile({
-      filePath: config.snpFileMapConfig,
-      content: JSON.stringify(snpFileMapConfig),
+      filePath: config.sumFileMapConfig,
+      content: JSON.stringify(sumFileMapConfig),
     });
 
-    let keysToCreateFile: NonNullable<unknown>[] = Object.keys(snpFileMapConfig.snpFileMap || {}).slice(0, 3);
+    let keysToCreateFile: NonNullable<unknown>[] = Object.keys(sumFileMapConfig.sumFileMap || {}).slice(0, 3);
 
     keysToCreateFile = keysToCreateFile.map((key: any) => {
-      if (snpFileMapConfig.snpFileMap) {
-        return snpFileMapConfig.snpFileMap[key];
+      if (sumFileMapConfig.sumFileMap) {
+        return sumFileMapConfig.sumFileMap[key];
       }
       return [];
     });
@@ -93,16 +93,16 @@ describe('scanExtraFile', () => {
 
     expect({ ...result, allFiles }).toStrictEqual({
       config: mockConfig.step.scanExtraFile.fullFiled,
-      snpFileMapConfig: mockSnpFileMapConfig.step.scanExtraFile.fullFiled,
+      sumFileMapConfig: mockSumFileMapConfig.step.scanExtraFile.fullFiled,
       allFiles: [
-        './test/mockProject/.snp/repositoryMap.json',
-        './test/mockProject/.snp/snp.config.json',
-        './test/mockProject/.snp/templateCatalog/.gitignore-custom.md',
-        './test/mockProject/.snp/templateCatalog/.gitignore-extend.md',
-        './test/mockProject/.snp/templateCatalog/README.md-custom.md',
-        './test/mockProject/.snp/templateCatalog/README.md-extend.md',
-        './test/mockProject/.snp/templateCatalog/package.json-custom.md',
-        './test/mockProject/.snp/templateCatalog/package.json-extend.md',
+        './test/mockProject/.sum/repositoryMap.json',
+        './test/mockProject/.sum/sum.config.json',
+        './test/mockProject/.sum/templateCatalog/.gitignore-custom.md',
+        './test/mockProject/.sum/templateCatalog/.gitignore-extend.md',
+        './test/mockProject/.sum/templateCatalog/README.md-custom.md',
+        './test/mockProject/.sum/templateCatalog/README.md-extend.md',
+        './test/mockProject/.sum/templateCatalog/package.json-custom.md',
+        './test/mockProject/.sum/templateCatalog/package.json-extend.md',
       ],
     });
   });

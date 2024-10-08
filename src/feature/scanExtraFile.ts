@@ -1,50 +1,50 @@
-import { AvailableSNPSuffixTypes, ConfigType } from '@/feature/config/types';
-import { FileMapConfig, snpFileMapObjectType, updateDetailsFileMapConfig2 } from '@/feature/updateFileMapConfig';
+import { AvailableSUMSuffixTypes, ConfigType } from '@/feature/config/types';
+import { FileMapConfig, sumFileMapObjectType, updateDetailsFileMapConfig2 } from '@/feature/updateFileMapConfig';
 import { createPath } from '@/util/createPath';
 import { debugFunction } from '@/util/debugFunction';
-import { formatSnp } from '@/util/formatSnp';
+import { formatSum } from '@/util/formatSum';
 import { isFileOrFolderExists } from '@/util/isFileOrFolderExists';
 import { parseJSON } from '@/util/parseJSON';
 import { readFile } from '@/util/readFile';
 
 export async function scanExtraFile(
   config: ConfigType
-): Promise<{ config: ConfigType; snpFileMapConfig: FileMapConfig }> {
+): Promise<{ config: ConfigType; sumFileMapConfig: FileMapConfig }> {
   debugFunction(config.isDebug, 'start', '[INIT] scanExtraFile');
-  let snpFileMapConfig: FileMapConfig = await readFile(config.snpFileMapConfig).then(async (bufferData) =>
+  let sumFileMapConfig: FileMapConfig = await readFile(config.sumFileMapConfig).then(async (bufferData) =>
     parseJSON(bufferData.toString())
   );
 
-  if (snpFileMapConfig.snpFileMap) {
-    for (const SNPKeySuffix of config.availableSNPKeySuffix) {
-      if (SNPKeySuffix === 'defaultFile') {
+  if (sumFileMapConfig.sumFileMap) {
+    for (const SUMKeySuffix of config.availableSUMKeySuffix) {
+      if (SUMKeySuffix === 'defaultFile') {
         continue;
       }
 
-      for (const [realFilePath] of Object.entries(snpFileMapConfig.snpFileMap || {}) as [
+      for (const [realFilePath] of Object.entries(sumFileMapConfig.sumFileMap || {}) as [
         string,
-        snpFileMapObjectType,
+        sumFileMapObjectType,
       ][]) {
-        const snpSuffix = formatSnp(SNPKeySuffix, 'suffix') as AvailableSNPSuffixTypes;
-        const SNPSuffixFilePath = createPath([config.snpCatalog, config.templateCatalogName, realFilePath + snpSuffix]);
-        if (await isFileOrFolderExists({ isDebug: config.isDebug, filePath: SNPSuffixFilePath })) {
-          const SNPSuffixFileName = createPath([realFilePath + snpSuffix]);
-          snpFileMapConfig = await updateDetailsFileMapConfig2({
-            snpFileMapConfig,
+        const sumSuffix = formatSum(SUMKeySuffix, 'suffix') as AvailableSUMSuffixTypes;
+        const SUMSuffixFilePath = createPath([config.sumCatalog, config.templateCatalogName, realFilePath + sumSuffix]);
+        if (await isFileOrFolderExists({ isDebug: config.isDebug, filePath: SUMSuffixFilePath })) {
+          const SUMSuffixFileName = createPath([realFilePath + sumSuffix]);
+          sumFileMapConfig = await updateDetailsFileMapConfig2({
+            sumFileMapConfig,
             config,
             operation: 'addConfigSuffixFile',
-            SNPKeySuffix,
-            SNPSuffixFileName,
+            SUMKeySuffix,
+            SUMSuffixFileName,
             isCreated: true,
-            path: SNPSuffixFilePath,
+            path: SUMSuffixFilePath,
             realFilePath,
             realPath: createPath([config.projectCatalog, realFilePath]),
-            templateVersion: snpFileMapConfig.templateVersion,
+            templateVersion: sumFileMapConfig.templateVersion,
           });
         }
       }
     }
   }
   debugFunction(config.isDebug, config, '[INIT] scanExtraFile - end');
-  return { config, snpFileMapConfig };
+  return { config, sumFileMapConfig };
 }

@@ -78,9 +78,9 @@ dist
 
 # Project-specific directories
 upload/
-snp/
+sum/
 temporary/
-.snp/
+.sum/
 
 # Pliki mock
 /mock/mockTemplate/templateCatalog/**/*
@@ -89,10 +89,10 @@ temporary/
 /mock/mockTemplate/tools/*
 /mock/mockTemplateToUpdate/tools/**
 /mock/mockTemplateToUpdate/tools/**
-!/mock/mockProjectToBuild/.snp
-!/mock/mockProjectToBuild/.snp/*
-!/mock/mockProjectToBuild/.snp/**
-!/mock/mockProjectToBuild/.snp/**/*
+!/mock/mockProjectToBuild/.sum
+!/mock/mockProjectToBuild/.sum/*
+!/mock/mockProjectToBuild/.sum/**
+!/mock/mockProjectToBuild/.sum/**/*
 
 # Pliki testowe
 /test/*

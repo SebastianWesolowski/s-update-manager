@@ -12,17 +12,17 @@ export const regenerateConfig = async (config: ConfigType): Promise<ConfigType> 
   const regeneratedConfig = { ...config };
 
   if (regeneratedConfig.projectCatalog) {
-    regeneratedConfig.snpCatalog = createPath([regeneratedConfig.projectCatalog, '.snp/'], true);
-    regeneratedConfig.temporaryFolder = createPath([regeneratedConfig.snpCatalog, 'temporary/'], true);
+    regeneratedConfig.sumCatalog = createPath([regeneratedConfig.projectCatalog, '.sum/'], true);
+    regeneratedConfig.temporaryFolder = createPath([regeneratedConfig.sumCatalog, 'temporary/'], true);
     regeneratedConfig.sUpdaterVersion = await readPackageVersion(
       createPath([regeneratedConfig.projectCatalog, 'package.json'])
     );
-    regeneratedConfig.snpFileMapConfig = createPath([
-      regeneratedConfig.snpCatalog,
+    regeneratedConfig.sumFileMapConfig = createPath([
+      regeneratedConfig.sumCatalog,
       regeneratedConfig.REPOSITORY_MAP_FILE_NAME,
     ]);
-    if (regeneratedConfig.snpConfigFileName) {
-      regeneratedConfig.snpConfigFile = createPath([regeneratedConfig.snpCatalog, regeneratedConfig.snpConfigFileName]);
+    if (regeneratedConfig.sumConfigFileName) {
+      regeneratedConfig.sumConfigFile = createPath([regeneratedConfig.sumCatalog, regeneratedConfig.sumConfigFileName]);
     }
 
     if (regeneratedConfig.remoteRepository) {
@@ -74,8 +74,8 @@ export const updateDefaultConfig = async (
   keyToUpdate: PartialConfig<ConfigType>
 ): Promise<ConfigType> => {
   const keyName = Object.keys(keyToUpdate)[0];
-  const folderKey = ['snpCatalog', 'projectCatalog', 'temporaryFolder'];
-  const fileKey = ['snpConfigFileName', 'snpConfigFile'];
+  const folderKey = ['sumCatalog', 'projectCatalog', 'temporaryFolder'];
+  const fileKey = ['sumConfigFileName', 'sumConfigFile'];
   const isFolder = folderKey.includes(keyName);
   const isFile = fileKey.includes(keyName);
   let value = keyToUpdate[keyName];
@@ -99,13 +99,13 @@ export const getConfig = async (args: Args): Promise<ConfigType> => {
 
   config = await updateDefaultConfig(config, { isDebug: argsObject.isDebug || config.isDebug });
   config = await updateDefaultConfig(config, { projectCatalog: argsObject.projectCatalog || config.projectCatalog });
-  config = await updateDefaultConfig(config, { snpCatalog: argsObject.snpCatalog || config.snpCatalog });
-  config = await updateDefaultConfig(config, { snpConfigFile: argsObject.snpConfigFile || config.snpConfigFile });
+  config = await updateDefaultConfig(config, { sumCatalog: argsObject.sumCatalog || config.sumCatalog });
+  config = await updateDefaultConfig(config, { sumConfigFile: argsObject.sumConfigFile || config.sumConfigFile });
   config = await updateDefaultConfig(config, {
-    snpConfigFileName: argsObject.snpConfigFileName || config.snpConfigFileName,
+    sumConfigFileName: argsObject.sumConfigFileName || config.sumConfigFileName,
   });
 
-  const dataLocalConfigFile: string | ConfigType | object = parseJSON(await readFile(config.snpConfigFile));
+  const dataLocalConfigFile: string | ConfigType | object = parseJSON(await readFile(config.sumConfigFile));
 
   if (dataLocalConfigFile !== '' && typeof dataLocalConfigFile === 'object') {
     localConfigFile = dataLocalConfigFile;
@@ -119,13 +119,13 @@ export const getConfig = async (args: Args): Promise<ConfigType> => {
     projectCatalog: argsObject.projectCatalog || localConfigFile.projectCatalog || config.projectCatalog,
   });
   config = await updateDefaultConfig(config, {
-    snpCatalog: argsObject.snpCatalog || localConfigFile.snpCatalog || config.snpCatalog,
+    sumCatalog: argsObject.sumCatalog || localConfigFile.sumCatalog || config.sumCatalog,
   });
   config = await updateDefaultConfig(config, {
-    snpConfigFile: argsObject.snpConfigFile || localConfigFile.snpConfigFile || config.snpConfigFile,
+    sumConfigFile: argsObject.sumConfigFile || localConfigFile.sumConfigFile || config.sumConfigFile,
   });
   config = await updateDefaultConfig(config, {
-    snpConfigFileName: argsObject.snpConfigFileName || localConfigFile.snpConfigFileName || config.snpConfigFileName,
+    sumConfigFileName: argsObject.sumConfigFileName || localConfigFile.sumConfigFileName || config.sumConfigFileName,
   });
   config = await updateDefaultConfig(config, {
     remoteRepository: argsObject.remoteRepository || localConfigFile.remoteRepository || config.remoteRepository,

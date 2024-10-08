@@ -13,8 +13,8 @@ export async function downloadConfig(config: ConfigType): Promise<{
   downloadContent: FileMapConfig;
   config: ConfigType;
 }> {
-  debugFunction(config.isDebug, '=== SNP INIT ===', '[INIT] downloadConfig');
-  const snpFileMapConfig: FileMapConfig = await readFile(config.snpFileMapConfig).then(async (bufferData) =>
+  debugFunction(config.isDebug, '=== SUM INIT ===', '[INIT] downloadConfig');
+  const sumFileMapConfig: FileMapConfig = await readFile(config.sumFileMapConfig).then(async (bufferData) =>
     parseJSON(bufferData.toString())
   );
 
@@ -37,12 +37,12 @@ export async function downloadConfig(config: ConfigType): Promise<{
 
     // TODO [SC-79] chenge testTamplete repo to mock
     return await wgetAsync(config.remoteFileMapURL, config.temporaryFolder)
-      .then(async (snpFileMapConfigContent) => {
+      .then(async (sumFileMapConfigContent) => {
         let currentConfig = {};
-        const downloadContent: FileMapConfig = parseJSON(snpFileMapConfigContent);
+        const downloadContent: FileMapConfig = parseJSON(sumFileMapConfigContent);
 
         currentConfig = {
-          ...snpFileMapConfig,
+          ...sumFileMapConfig,
           ...downloadContent,
         };
 
@@ -52,12 +52,12 @@ export async function downloadConfig(config: ConfigType): Promise<{
           combinedConfig.createdFileMap = [];
         }
 
-        if (!combinedConfig.snpFileMap) {
-          combinedConfig.snpFileMap = {};
+        if (!combinedConfig.sumFileMap) {
+          combinedConfig.sumFileMap = {};
         }
 
         await createFile({
-          filePath: config.snpFileMapConfig,
+          filePath: config.sumFileMapConfig,
           content: objectToBuffer(combinedConfig),
           options: {
             overwriteFile: true,
@@ -73,7 +73,7 @@ export async function downloadConfig(config: ConfigType): Promise<{
         );
         return {
           config: { ...config, templateVersion: combinedConfig.templateVersion },
-          snpFileMapConfig: combinedConfig,
+          sumFileMapConfig: combinedConfig,
           downloadContent,
         };
       });

@@ -36,25 +36,25 @@
     "./mock/mockTemplateToUpdate/yarn.lock"
   ],
   "createdFileMap": [
-    "./mock/mockProjectToBuild/.snp/templateCatalog/.gitignore-default.md",
+    "./mock/mockProjectToBuild/.sum/templateCatalog/.gitignore-default.md",
     "./mock/mockProjectToBuild/.gitignore",
-    "./mock/mockProjectToBuild/.snp/templateCatalog/package.json-default.md",
+    "./mock/mockProjectToBuild/.sum/templateCatalog/package.json-default.md",
     "./mock/mockProjectToBuild/package.json",
-    "./mock/mockProjectToBuild/.snp/templateCatalog/README.md-default.md",
+    "./mock/mockProjectToBuild/.sum/templateCatalog/README.md-default.md",
     "./mock/mockProjectToBuild/README.md",
-    "./mock/mockProjectToBuild/.snp/templateCatalog/tools/test-new.sh-default.md",
+    "./mock/mockProjectToBuild/.sum/templateCatalog/tools/test-new.sh-default.md",
     "./mock/mockProjectToBuild/tools/test-new.sh",
-    "./mock/mockProjectToBuild/.snp/templateCatalog/tools/test.sh-default.md",
+    "./mock/mockProjectToBuild/.sum/templateCatalog/tools/test.sh-default.md",
     "./mock/mockProjectToBuild/tools/test.sh",
-    "./mock/mockProjectToBuild/.snp/templateCatalog/tsconfig.json-default.md",
+    "./mock/mockProjectToBuild/.sum/templateCatalog/tsconfig.json-default.md",
     "./mock/mockProjectToBuild/tsconfig.json",
-    "./mock/mockProjectToBuild/.snp/templateCatalog/yarn.lock-default.md",
+    "./mock/mockProjectToBuild/.sum/templateCatalog/yarn.lock-default.md",
     "./mock/mockProjectToBuild/yarn.lock"
   ],
-  "snpFileMap": {
+  "sumFileMap": {
     ".gitignore": {
       "_": {
-        "SNPKeySuffix": "_",
+        "SUMKeySuffix": "_",
         "isCreated": true,
         "path": "./mock/mockProjectToBuild/.gitignore",
         "realFilePath": ".gitignore",
@@ -62,18 +62,18 @@
         "templateVersion": "1.0.0"
       },
       "defaultFile": {
-        "SNPKeySuffix": "defaultFile",
+        "SUMKeySuffix": "defaultFile",
         "isCreated": true,
-        "path": "./mock/mockProjectToBuild/.snp/templateCatalog/.gitignore-default.md",
+        "path": "./mock/mockProjectToBuild/.sum/templateCatalog/.gitignore-default.md",
         "realFilePath": ".gitignore",
         "realPath": "./mock/mockProjectToBuild/.gitignore",
         "templateVersion": "1.0.0",
-        "SNPSuffixFileName": "templateCatalog/.gitignore-default.md"
+        "SUMSuffixFileName": "templateCatalog/.gitignore-default.md"
       }
     },
     "package.json": {
       "_": {
-        "SNPKeySuffix": "_",
+        "SUMKeySuffix": "_",
         "isCreated": true,
         "path": "./mock/mockProjectToBuild/package.json",
         "realFilePath": "package.json",
@@ -81,18 +81,18 @@
         "templateVersion": "1.0.0"
       },
       "defaultFile": {
-        "SNPKeySuffix": "defaultFile",
+        "SUMKeySuffix": "defaultFile",
         "isCreated": true,
-        "path": "./mock/mockProjectToBuild/.snp/templateCatalog/package.json-default.md",
+        "path": "./mock/mockProjectToBuild/.sum/templateCatalog/package.json-default.md",
         "realFilePath": "package.json",
         "realPath": "./mock/mockProjectToBuild/package.json",
         "templateVersion": "1.0.0",
-        "SNPSuffixFileName": "templateCatalog/package.json-default.md"
+        "SUMSuffixFileName": "templateCatalog/package.json-default.md"
       }
     },
     "README.md": {
       "_": {
-        "SNPKeySuffix": "_",
+        "SUMKeySuffix": "_",
         "isCreated": true,
         "path": "./mock/mockProjectToBuild/README.md",
         "realFilePath": "README.md",
@@ -100,27 +100,27 @@
         "templateVersion": "1.0.0"
       },
       "defaultFile": {
-        "SNPKeySuffix": "defaultFile",
+        "SUMKeySuffix": "defaultFile",
         "isCreated": true,
-        "path": "./mock/mockProjectToBuild/.snp/templateCatalog/README.md-default.md",
+        "path": "./mock/mockProjectToBuild/.sum/templateCatalog/README.md-default.md",
         "realFilePath": "README.md",
         "realPath": "./mock/mockProjectToBuild/README.md",
         "templateVersion": "1.0.0",
-        "SNPSuffixFileName": "templateCatalog/README.md-default.md"
+        "SUMSuffixFileName": "templateCatalog/README.md-default.md"
       },
       "customFile": {
-        "SNPKeySuffix": "customFile",
+        "SUMKeySuffix": "customFile",
         "isCreated": true,
-        "path": "./mock/mockProjectToBuild/.snp/templateCatalog/README.md-custom.md",
+        "path": "./mock/mockProjectToBuild/.sum/templateCatalog/README.md-custom.md",
         "realFilePath": "README.md",
         "realPath": "./mock/mockProjectToBuild/README.md",
         "templateVersion": "1.0.0",
-        "SNPSuffixFileName": "README.md-custom.md"
+        "SUMSuffixFileName": "README.md-custom.md"
       }
     },
     "tools/test-new.sh": {
       "_": {
-        "SNPKeySuffix": "_",
+        "SUMKeySuffix": "_",
         "isCreated": true,
         "path": "./mock/mockProjectToBuild/tools/test-new.sh",
         "realFilePath": "tools/test-new.sh",
@@ -128,18 +128,18 @@
         "templateVersion": "1.0.0"
       },
       "defaultFile": {
-        "SNPKeySuffix": "defaultFile",
+        "SUMKeySuffix": "defaultFile",
         "isCreated": true,
-        "path": "./mock/mockProjectToBuild/.snp/templateCatalog/tools/test-new.sh-default.md",
+        "path": "./mock/mockProjectToBuild/.sum/templateCatalog/tools/test-new.sh-default.md",
         "realFilePath": "tools/test-new.sh",
         "realPath": "./mock/mockProjectToBuild/tools/test-new.sh",
         "templateVersion": "1.0.0",
-        "SNPSuffixFileName": "templateCatalog/tools/test-new.sh-default.md"
+        "SUMSuffixFileName": "templateCatalog/tools/test-new.sh-default.md"
       }
     },
     "tools/test.sh": {
       "_": {
-        "SNPKeySuffix": "_",
+        "SUMKeySuffix": "_",
         "isCreated": true,
         "path": "./mock/mockProjectToBuild/tools/test.sh",
         "realFilePath": "tools/test.sh",
@@ -147,18 +147,18 @@
         "templateVersion": "1.0.0"
       },
       "defaultFile": {
-        "SNPKeySuffix": "defaultFile",
+        "SUMKeySuffix": "defaultFile",
         "isCreated": true,
-        "path": "./mock/mockProjectToBuild/.snp/templateCatalog/tools/test.sh-default.md",
+        "path": "./mock/mockProjectToBuild/.sum/templateCatalog/tools/test.sh-default.md",
         "realFilePath": "tools/test.sh",
         "realPath": "./mock/mockProjectToBuild/tools/test.sh",
         "templateVersion": "1.0.0",
-        "SNPSuffixFileName": "templateCatalog/tools/test.sh-default.md"
+        "SUMSuffixFileName": "templateCatalog/tools/test.sh-default.md"
       }
     },
     "tsconfig.json": {
       "_": {
-        "SNPKeySuffix": "_",
+        "SUMKeySuffix": "_",
         "isCreated": true,
         "path": "./mock/mockProjectToBuild/tsconfig.json",
         "realFilePath": "tsconfig.json",
@@ -166,27 +166,27 @@
         "templateVersion": "1.0.0"
       },
       "defaultFile": {
-        "SNPKeySuffix": "defaultFile",
+        "SUMKeySuffix": "defaultFile",
         "isCreated": true,
-        "path": "./mock/mockProjectToBuild/.snp/templateCatalog/tsconfig.json-default.md",
+        "path": "./mock/mockProjectToBuild/.sum/templateCatalog/tsconfig.json-default.md",
         "realFilePath": "tsconfig.json",
         "realPath": "./mock/mockProjectToBuild/tsconfig.json",
         "templateVersion": "1.0.0",
-        "SNPSuffixFileName": "templateCatalog/tsconfig.json-default.md"
+        "SUMSuffixFileName": "templateCatalog/tsconfig.json-default.md"
       },
       "customFile": {
-        "SNPKeySuffix": "customFile",
+        "SUMKeySuffix": "customFile",
         "isCreated": true,
-        "path": "./mock/mockProjectToBuild/.snp/templateCatalog/tsconfig.json-custom.md",
+        "path": "./mock/mockProjectToBuild/.sum/templateCatalog/tsconfig.json-custom.md",
         "realFilePath": "tsconfig.json",
         "realPath": "./mock/mockProjectToBuild/tsconfig.json",
         "templateVersion": "1.0.0",
-        "SNPSuffixFileName": "tsconfig.json-custom.md"
+        "SUMSuffixFileName": "tsconfig.json-custom.md"
       }
     },
     "yarn.lock": {
       "_": {
-        "SNPKeySuffix": "_",
+        "SUMKeySuffix": "_",
         "isCreated": true,
         "path": "./mock/mockProjectToBuild/yarn.lock",
         "realFilePath": "yarn.lock",
@@ -194,31 +194,31 @@
         "templateVersion": "1.0.0"
       },
       "defaultFile": {
-        "SNPKeySuffix": "defaultFile",
+        "SUMKeySuffix": "defaultFile",
         "isCreated": true,
-        "path": "./mock/mockProjectToBuild/.snp/templateCatalog/yarn.lock-default.md",
+        "path": "./mock/mockProjectToBuild/.sum/templateCatalog/yarn.lock-default.md",
         "realFilePath": "yarn.lock",
         "realPath": "./mock/mockProjectToBuild/yarn.lock",
         "templateVersion": "1.0.0",
-        "SNPSuffixFileName": "templateCatalog/yarn.lock-default.md"
+        "SUMSuffixFileName": "templateCatalog/yarn.lock-default.md"
       },
       "customFile": {
-        "SNPKeySuffix": "customFile",
+        "SUMKeySuffix": "customFile",
         "isCreated": true,
-        "path": "./mock/mockProjectToBuild/.snp/templateCatalog/yarn.lock-custom.md",
+        "path": "./mock/mockProjectToBuild/.sum/templateCatalog/yarn.lock-custom.md",
         "realFilePath": "yarn.lock",
         "realPath": "./mock/mockProjectToBuild/yarn.lock",
         "templateVersion": "1.0.0",
-        "SNPSuffixFileName": "yarn.lock-custom.md"
+        "SUMSuffixFileName": "yarn.lock-custom.md"
       }
     }
   },
   "manualCreatedFileMap": [
-    "./mock/mockProjectToBuildToBuild/.snp/templateCatalog/README.md-custom.md",
-    "./mock/mockProjectToBuildToBuild/.snp/templateCatalog/tsconfig.json-custom.md",
-    "./mock/mockProjectToBuildToBuild/.snp/templateCatalog/yarn.lock-custom.md",
-    "./mock/mockProjectToBuild/.snp/templateCatalog/README.md-custom.md",
-    "./mock/mockProjectToBuild/.snp/templateCatalog/tsconfig.json-custom.md",
-    "./mock/mockProjectToBuild/.snp/templateCatalog/yarn.lock-custom.md"
+    "./mock/mockProjectToBuildToBuild/.sum/templateCatalog/README.md-custom.md",
+    "./mock/mockProjectToBuildToBuild/.sum/templateCatalog/tsconfig.json-custom.md",
+    "./mock/mockProjectToBuildToBuild/.sum/templateCatalog/yarn.lock-custom.md",
+    "./mock/mockProjectToBuild/.sum/templateCatalog/README.md-custom.md",
+    "./mock/mockProjectToBuild/.sum/templateCatalog/tsconfig.json-custom.md",
+    "./mock/mockProjectToBuild/.sum/templateCatalog/yarn.lock-custom.md"
   ]
 }
