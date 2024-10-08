@@ -33,12 +33,12 @@ npm install s-update-manager
 use s-init script in your package json file
 
 ```bash
-"init": "s-init --snpConfig ./.snp --template node --project ./ --remoteRepository https://raw.githubusercontent.com/SebastianWesolowski/testTemplate/main/template/"
+"init": "s-init --sumConfig ./.sum --template node --project ./ --remoteRepository https://raw.githubusercontent.com/SebastianWesolowski/testTemplate/main/template/"
 ```
 
 use CLI parameters:
 
-`snpConfig: './.snp'`
+`sumConfig: './.sum'`
 `template: 'node'`
 `project: './mock/mockProject'`
 `remoteRepository: 'https://raw.githubusercontent.com/SebastianWesolowski/testTemplate/main/template/'`

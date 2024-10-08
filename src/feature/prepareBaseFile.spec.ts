@@ -1,21 +1,21 @@
 import { cleanUpFiles } from '@/feature/__tests__/cleanForTests';
-import { mockConfig, mockSnpFileMapConfig } from '@/feature/__tests__/const';
+import { mockConfig, mockSumFileMapConfig } from '@/feature/__tests__/const';
 import { searchFilesInDirectory } from '@/feature/__tests__/searchFilesInDirectory';
 import { ConfigType } from '@/feature/config/types';
-import { prepareBaseSnpFileMap } from '@/feature/prepareBaseFile';
+import { prepareBaseSumFileMap } from '@/feature/prepareBaseFile';
 import { FileMapConfig } from '@/feature/updateFileMapConfig';
 import { createFile } from '@/util/createFile';
 
-describe('prepareBaseSnpFileMap', () => {
+describe('prepareBaseSumFileMap', () => {
   let config: ConfigType;
-  let snpFileMapConfig: FileMapConfig;
+  let sumFileMapConfig: FileMapConfig;
 
   beforeEach(async () => {
     config = { ...mockConfig.step.downloadConfigFile.forInit };
-    snpFileMapConfig = { ...mockSnpFileMapConfig.step.downloadConfigFile.forInit };
+    sumFileMapConfig = { ...mockSumFileMapConfig.step.downloadConfigFile.forInit };
 
     await cleanUpFiles({
-      snpCatalog: config.snpCatalog,
+      sumCatalog: config.sumCatalog,
       directoryPath: config.projectCatalog,
       isDebug: config.isDebug,
     });
@@ -23,7 +23,7 @@ describe('prepareBaseSnpFileMap', () => {
 
   afterEach(async () => {
     await cleanUpFiles({
-      snpCatalog: config.snpCatalog,
+      sumCatalog: config.sumCatalog,
       directoryPath: config.projectCatalog,
       isDebug: config.isDebug,
     });
@@ -31,15 +31,15 @@ describe('prepareBaseSnpFileMap', () => {
 
   it('should return correct content', async () => {
     await createFile({
-      filePath: config.snpConfigFile,
+      filePath: config.sumConfigFile,
       content: JSON.stringify(config),
     });
     await createFile({
-      filePath: config.snpFileMapConfig,
-      content: JSON.stringify(snpFileMapConfig),
+      filePath: config.sumFileMapConfig,
+      content: JSON.stringify(sumFileMapConfig),
     });
 
-    const result = await prepareBaseSnpFileMap(config);
+    const result = await prepareBaseSumFileMap(config);
     const allFiles = await searchFilesInDirectory({
       directoryPath: config.projectCatalog,
       excludedFileNames: ['.DS_Store'],
@@ -47,8 +47,8 @@ describe('prepareBaseSnpFileMap', () => {
     });
     expect({ ...result, allFiles }).toStrictEqual({
       config: mockConfig.step.createConfigFile,
-      snpFileMapConfig: mockSnpFileMapConfig.step.prepareBaseSnpFileMap,
-      allFiles: ['./test/mockProject/.snp/repositoryMap.json', './test/mockProject/.snp/snp.config.json'],
+      sumFileMapConfig: mockSumFileMapConfig.step.prepareBaseSumFileMap,
+      allFiles: ['./test/mockProject/.sum/repositoryMap.json', './test/mockProject/.sum/sum.config.json'],
     });
   });
 });

@@ -11,12 +11,12 @@ export interface ConfigTemplateType {
 }
 
 export interface GeneratedConfig {
-  snpCatalog: string;
+  sumCatalog: string;
   sUpdaterVersion?: string;
   templateVersion?: string;
   temporaryFolder: string;
-  snpConfigFile: string;
-  snpFileMapConfig: string;
+  sumConfigFile: string;
+  sumFileMapConfig: string;
   remoteFileMapURL: string;
   remoteRootRepositoryUrl: string;
 }
@@ -30,17 +30,17 @@ export type LocalConfigType<T> = OptionalKeys<T>;
 export interface StableConfig {
   templateCatalogName: string;
   projectCatalog: string;
-  availableSNPSuffix: AvailableSNPSuffixTypes[];
-  availableSNPKeySuffix: AvailableSNPKeySuffixTypes[];
+  availableSUMSuffix: AvailableSUMSuffixTypes[];
+  availableSUMKeySuffix: AvailableSUMKeySuffixTypes[];
   REPOSITORY_MAP_FILE_NAME: string;
-  snpConfigFileName: string;
+  sumConfigFileName: string;
   remoteRepository: string;
   isDebug: boolean;
 }
 
-export type SNPKeySuffixTypes = AvailableSNPKeySuffixTypes & '_';
-export type AvailableSNPKeySuffixTypes = 'defaultFile' | 'customFile' | 'extendFile' | string;
-export type AvailableSNPSuffixTypes = '-default.md' | '-custom.md' | '-extend.md' | string;
+export type SUMKeySuffixTypes = AvailableSUMKeySuffixTypes & '_';
+export type AvailableSUMKeySuffixTypes = 'defaultFile' | 'customFile' | 'extendFile' | string;
+export type AvailableSUMSuffixTypes = '-default.md' | '-custom.md' | '-extend.md' | string;
 
 export type PartialConfig<T> = {
   [K in keyof T]?: any;

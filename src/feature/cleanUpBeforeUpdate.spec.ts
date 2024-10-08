@@ -1,5 +1,5 @@
 import { cleanUpFiles } from '@/feature/__tests__/cleanForTests';
-import { mockConfig, mockSnpFileMapConfig } from '@/feature/__tests__/const';
+import { mockConfig, mockSumFileMapConfig } from '@/feature/__tests__/const';
 import { extractAndReplacePaths } from '@/feature/__tests__/extractAndReplacePaths';
 import { searchFilesInDirectory } from '@/feature/__tests__/searchFilesInDirectory';
 import { updateConfigBasedOnComparison } from '@/feature/__tests__/updateConfigBasedOnComparison';
@@ -11,12 +11,12 @@ import { createFile } from '@/util/createFile';
 describe('cleanUpBeforeUpdate', () => {
   let partialConfig: Partial<ConfigType>;
   let config: ConfigType;
-  let snpFileMapConfig: FileMapConfig;
+  let sumFileMapConfig: FileMapConfig;
 
   beforeEach(async () => {
     const configFullField = mockConfig.step.cleanUp.fullFiled;
     const configEmpty = mockConfig.step.cleanUp.empty;
-    const keysToCompare: (keyof ConfigType)[] = ['snpCatalog', 'projectCatalog', 'isDebug'];
+    const keysToCompare: (keyof ConfigType)[] = ['sumCatalog', 'projectCatalog', 'isDebug'];
 
     partialConfig = updateConfigBasedOnComparison<Partial<ConfigType>>(
       partialConfig,
@@ -25,9 +25,9 @@ describe('cleanUpBeforeUpdate', () => {
       keysToCompare
     );
 
-    if (partialConfig.snpCatalog && partialConfig.projectCatalog && partialConfig.isDebug) {
+    if (partialConfig.sumCatalog && partialConfig.projectCatalog && partialConfig.isDebug) {
       await cleanUpFiles({
-        snpCatalog: partialConfig.snpCatalog,
+        sumCatalog: partialConfig.sumCatalog,
         directoryPath: partialConfig.projectCatalog,
         isDebug: partialConfig.isDebug,
       });
@@ -36,7 +36,7 @@ describe('cleanUpBeforeUpdate', () => {
 
   afterEach(async () => {
     await cleanUpFiles({
-      snpCatalog: config.snpCatalog,
+      sumCatalog: config.sumCatalog,
       directoryPath: config.projectCatalog,
       isDebug: config.isDebug,
     });
@@ -44,21 +44,21 @@ describe('cleanUpBeforeUpdate', () => {
 
   it('should clean up files and update the configuration accordingly - without extra file', async () => {
     config = { ...mockConfig.step.cleanUp.empty, ...partialConfig };
-    snpFileMapConfig = { ...mockSnpFileMapConfig.step.cleanUp.empty };
+    sumFileMapConfig = { ...mockSumFileMapConfig.step.cleanUp.empty };
 
     // Set up mock files for testing
     await createFile({
-      filePath: config.snpConfigFile,
+      filePath: config.sumConfigFile,
       content: JSON.stringify(config),
     });
     await createFile({
-      filePath: config.snpFileMapConfig,
-      content: JSON.stringify(snpFileMapConfig),
+      filePath: config.sumFileMapConfig,
+      content: JSON.stringify(sumFileMapConfig),
     });
 
-    // Manually create files listed in the snpFileMapConfig's fileMap
+    // Manually create files listed in the sumFileMapConfig's fileMap
 
-    for (const file of snpFileMapConfig.createdFileMap) {
+    for (const file of sumFileMapConfig.createdFileMap) {
       await createFile({
         filePath: file,
         content: `{"path": "${file}"}`,
@@ -77,20 +77,20 @@ describe('cleanUpBeforeUpdate', () => {
     // Expectations: The files should remain untouched as there were no files to clean up
     expect({ ...result, allFiles }).toStrictEqual({
       config: mockConfig.step.cleanUpBeforeUpdate.empty,
-      snpFileMapConfig: mockSnpFileMapConfig.step.cleanUpBeforeUpdate.empty,
-      allFiles: ['./test/mockProject/.snp/repositoryMap.json', './test/mockProject/.snp/snp.config.json'],
+      sumFileMapConfig: mockSumFileMapConfig.step.cleanUpBeforeUpdate.empty,
+      allFiles: ['./test/mockProject/.sum/repositoryMap.json', './test/mockProject/.sum/sum.config.json'],
       deletedPath: [
-        './test/mockProject/.snp/templateCatalog/.gitignore-default.md',
+        './test/mockProject/.sum/templateCatalog/.gitignore-default.md',
         './test/mockProject/.gitignore',
-        './test/mockProject/.snp/templateCatalog/README.md-default.md',
+        './test/mockProject/.sum/templateCatalog/README.md-default.md',
         './test/mockProject/README.md',
-        './test/mockProject/.snp/templateCatalog/package.json-default.md',
+        './test/mockProject/.sum/templateCatalog/package.json-default.md',
         './test/mockProject/package.json',
-        './test/mockProject/.snp/templateCatalog/tools/test.sh-default.md',
+        './test/mockProject/.sum/templateCatalog/tools/test.sh-default.md',
         './test/mockProject/tools/test.sh',
-        './test/mockProject/.snp/templateCatalog/tsconfig.json-default.md',
+        './test/mockProject/.sum/templateCatalog/tsconfig.json-default.md',
         './test/mockProject/tsconfig.json',
-        './test/mockProject/.snp/templateCatalog/yarn.lock-default.md',
+        './test/mockProject/.sum/templateCatalog/yarn.lock-default.md',
         './test/mockProject/yarn.lock',
       ],
     });
@@ -98,23 +98,23 @@ describe('cleanUpBeforeUpdate', () => {
   //
   it('with extra files', async () => {
     config = { ...mockConfig.step.cleanUp.fullFiled, ...partialConfig };
-    snpFileMapConfig = { ...mockSnpFileMapConfig.step.cleanUp.fullFiled };
+    sumFileMapConfig = { ...mockSumFileMapConfig.step.cleanUp.fullFiled };
 
     // Set up mock files for testing
     await createFile({
-      filePath: config.snpConfigFile,
+      filePath: config.sumConfigFile,
       content: JSON.stringify(config),
     });
     await createFile({
-      filePath: config.snpFileMapConfig,
-      content: JSON.stringify(snpFileMapConfig),
+      filePath: config.sumFileMapConfig,
+      content: JSON.stringify(sumFileMapConfig),
     });
 
-    let keysToCreateFile: NonNullable<unknown>[] = Object.keys(snpFileMapConfig.snpFileMap || {}).slice(0, 3);
+    let keysToCreateFile: NonNullable<unknown>[] = Object.keys(sumFileMapConfig.sumFileMap || {}).slice(0, 3);
 
     keysToCreateFile = keysToCreateFile.map((key: any) => {
-      if (snpFileMapConfig.snpFileMap) {
-        return snpFileMapConfig.snpFileMap[key];
+      if (sumFileMapConfig.sumFileMap) {
+        return sumFileMapConfig.sumFileMap[key];
       }
       return [];
     });
@@ -122,7 +122,7 @@ describe('cleanUpBeforeUpdate', () => {
     //Manual creation of custom and extend files
     const pathToCreateCustomFile = extractAndReplacePaths(keysToCreateFile, '-default.md', '-custom.md');
     const pathToCreateExtendFile = extractAndReplacePaths(keysToCreateFile, '-default.md', '-extend.md');
-    const pathToCreate = [...pathToCreateExtendFile, ...pathToCreateCustomFile, ...snpFileMapConfig.createdFileMap];
+    const pathToCreate = [...pathToCreateExtendFile, ...pathToCreateCustomFile, ...sumFileMapConfig.createdFileMap];
     const uniquePathToCreate = [...new Set(pathToCreate)];
 
     for (const file of uniquePathToCreate) {
@@ -144,29 +144,29 @@ describe('cleanUpBeforeUpdate', () => {
     // Expectations: The files should remain untouched as there were no files to clean up
     expect({ ...result, allFiles }).toStrictEqual({
       config: mockConfig.step.cleanUpBeforeUpdate.fullFiled,
-      snpFileMapConfig: mockSnpFileMapConfig.step.cleanUpBeforeUpdate.fullFiled,
+      sumFileMapConfig: mockSumFileMapConfig.step.cleanUpBeforeUpdate.fullFiled,
       allFiles: [
-        './test/mockProject/.snp/repositoryMap.json',
-        './test/mockProject/.snp/snp.config.json',
-        './test/mockProject/.snp/templateCatalog/.gitignore-custom.md',
-        './test/mockProject/.snp/templateCatalog/.gitignore-extend.md',
-        './test/mockProject/.snp/templateCatalog/README.md-custom.md',
-        './test/mockProject/.snp/templateCatalog/README.md-extend.md',
-        './test/mockProject/.snp/templateCatalog/package.json-custom.md',
-        './test/mockProject/.snp/templateCatalog/package.json-extend.md',
+        './test/mockProject/.sum/repositoryMap.json',
+        './test/mockProject/.sum/sum.config.json',
+        './test/mockProject/.sum/templateCatalog/.gitignore-custom.md',
+        './test/mockProject/.sum/templateCatalog/.gitignore-extend.md',
+        './test/mockProject/.sum/templateCatalog/README.md-custom.md',
+        './test/mockProject/.sum/templateCatalog/README.md-extend.md',
+        './test/mockProject/.sum/templateCatalog/package.json-custom.md',
+        './test/mockProject/.sum/templateCatalog/package.json-extend.md',
       ],
       deletedPath: [
-        './test/mockProject/.snp/templateCatalog/.gitignore-default.md',
+        './test/mockProject/.sum/templateCatalog/.gitignore-default.md',
         './test/mockProject/.gitignore',
-        './test/mockProject/.snp/templateCatalog/README.md-default.md',
+        './test/mockProject/.sum/templateCatalog/README.md-default.md',
         './test/mockProject/README.md',
-        './test/mockProject/.snp/templateCatalog/package.json-default.md',
+        './test/mockProject/.sum/templateCatalog/package.json-default.md',
         './test/mockProject/package.json',
-        './test/mockProject/.snp/templateCatalog/tools/test.sh-default.md',
+        './test/mockProject/.sum/templateCatalog/tools/test.sh-default.md',
         './test/mockProject/tools/test.sh',
-        './test/mockProject/.snp/templateCatalog/tsconfig.json-default.md',
+        './test/mockProject/.sum/templateCatalog/tsconfig.json-default.md',
         './test/mockProject/tsconfig.json',
-        './test/mockProject/.snp/templateCatalog/yarn.lock-default.md',
+        './test/mockProject/.sum/templateCatalog/yarn.lock-default.md',
         './test/mockProject/yarn.lock',
       ],
     });

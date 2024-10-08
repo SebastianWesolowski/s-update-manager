@@ -11,20 +11,20 @@ describe('getRemoteFileMapURL', () => {
     config = { ...mockConfig.step.createConfigFile };
 
     await cleanUpFiles({
-      snpCatalog: config.snpCatalog,
+      sumCatalog: config.sumCatalog,
       directoryPath: config.projectCatalog,
       isDebug: config.isDebug,
     });
 
     await createFile({
-      filePath: config.snpConfigFile,
+      filePath: config.sumConfigFile,
       content: JSON.stringify(config),
     });
   });
 
   afterEach(async () => {
     await cleanUpFiles({
-      snpCatalog: config.snpCatalog,
+      sumCatalog: config.sumCatalog,
       directoryPath: config.projectCatalog,
       isDebug: config.isDebug,
     });

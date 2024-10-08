@@ -5,21 +5,21 @@ import { isFileOrFolderExists } from '@/util/isFileOrFolderExists';
 import { isFolderExist } from '@/util/isFolderExist';
 
 export const cleanUpFiles = async ({
-  snpCatalog,
+  sumCatalog,
   directoryPath,
   isDebug,
 }: {
-  snpCatalog: string;
+  sumCatalog: string;
   directoryPath: string;
   isDebug: boolean;
 }): Promise<void> => {
   if (
     await isFileOrFolderExists({
-      filePath: snpCatalog,
+      filePath: sumCatalog,
       isDebug,
     })
   ) {
-    await deletePath(createPath(snpCatalog), isDebug);
+    await deletePath(createPath(sumCatalog), isDebug);
   }
 
   if (

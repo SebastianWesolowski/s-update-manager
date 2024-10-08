@@ -1,5 +1,5 @@
-import { AvailableSNPKeySuffixTypes, ConfigType } from '@/feature/config/types';
-import { FileMapConfig, snpFile, updateDetailsFileMapConfig2 } from '@/feature/updateFileMapConfig';
+import { AvailableSUMKeySuffixTypes, ConfigType } from '@/feature/config/types';
+import { FileMapConfig, sumFile, updateDetailsFileMapConfig2 } from '@/feature/updateFileMapConfig';
 import { createPath } from '@/util/createPath';
 import { deletePath } from '@/util/deletePath';
 import { getRealFilePath } from '@/util/getRealFilePath';
@@ -7,49 +7,49 @@ import { parseJSON } from '@/util/parseJSON';
 import { readFile } from '@/util/readFile';
 
 export const cleanUpFileTree = async (config: ConfigType): Promise<ConfigType> => {
-  let snpFileMapConfig: FileMapConfig = await readFile(config.snpFileMapConfig).then(async (bufferData) =>
+  let sumFileMapConfig: FileMapConfig = await readFile(config.sumFileMapConfig).then(async (bufferData) =>
     parseJSON(bufferData.toString())
   );
 
   try {
     if (
-      snpFileMapConfig.createdFileMap.length > 0 &&
-      snpFileMapConfig.fileMap.length > 0 &&
-      snpFileMapConfig.snpFileMap &&
-      Object.keys(snpFileMapConfig?.snpFileMap).length > 0
+      sumFileMapConfig.createdFileMap.length > 0 &&
+      sumFileMapConfig.fileMap.length > 0 &&
+      sumFileMapConfig.sumFileMap &&
+      Object.keys(sumFileMapConfig?.sumFileMap).length > 0
     ) {
       const realFilesMap = new Map<string, any>();
 
-      snpFileMapConfig.fileMap.forEach((SNPSuffixFileName) => {
-        const realFilePath = getRealFilePath({ config, SNPSuffixFileName });
+      sumFileMapConfig.fileMap.forEach((SUMSuffixFileName) => {
+        const realFilePath = getRealFilePath({ config, SUMSuffixFileName });
         if (!realFilesMap.has(realFilePath)) {
-          realFilesMap.set(realFilePath, SNPSuffixFileName);
+          realFilesMap.set(realFilePath, SUMSuffixFileName);
         }
       });
 
       const realFiles = Array.from(realFilesMap.keys());
-      const temporarySnpFileMap = snpFileMapConfig.snpFileMap;
+      const temporarySumFileMap = sumFileMapConfig.sumFileMap;
 
       realFiles.forEach((file) => {
-        delete temporarySnpFileMap[file];
+        delete temporarySumFileMap[file];
       });
 
-      const fileToClean: snpFile[] = [];
+      const fileToClean: sumFile[] = [];
 
-      for (const realNameFile in temporarySnpFileMap) {
-        for (const SNPKeySuffix in temporarySnpFileMap[realNameFile]) {
-          fileToClean.push(temporarySnpFileMap[realNameFile][SNPKeySuffix]);
+      for (const realNameFile in temporarySumFileMap) {
+        for (const SUMKeySuffix in temporarySumFileMap[realNameFile]) {
+          fileToClean.push(temporarySumFileMap[realNameFile][SUMKeySuffix]);
         }
       }
       if (fileToClean.length > 0) {
-        for (const snpFile of fileToClean) {
-          await deletePath(createPath(snpFile.path), config.isDebug).then(async () => {
-            snpFileMapConfig = await updateDetailsFileMapConfig2({
-              snpFileMapConfig,
+        for (const sumFile of fileToClean) {
+          await deletePath(createPath(sumFile.path), config.isDebug).then(async () => {
+            sumFileMapConfig = await updateDetailsFileMapConfig2({
+              sumFileMapConfig,
               config,
               operation: 'deleteFile',
-              SNPKeySuffix: snpFile.SNPKeySuffix as AvailableSNPKeySuffixTypes | '_',
-              realFilePath: snpFile.realFilePath,
+              SUMKeySuffix: sumFile.SUMKeySuffix as AvailableSUMKeySuffixTypes | '_',
+              realFilePath: sumFile.realFilePath,
             });
           });
         }

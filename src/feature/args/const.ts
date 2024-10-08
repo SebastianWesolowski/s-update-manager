@@ -6,7 +6,7 @@ export const defaultArgs: Args = {
   isDebug: 'true',
   projectCatalog: './mock/mockProject',
   remoteRepository: 'https://github.com/SebastianWesolowski/s-update-manager/tree/dev/mock/mockTemplateToUpdate',
-  snpCatalog: './mock/mockProject/.snp',
+  sumCatalog: './mock/mockProject/.sum',
 };
 
 export const defaultTemplateArgs: ArgsTemplate = {

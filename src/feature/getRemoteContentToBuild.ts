@@ -1,5 +1,5 @@
 import { ConfigType } from '@/feature/config/types';
-import { snpFile } from '@/feature/updateFileMapConfig';
+import { sumFile } from '@/feature/updateFileMapConfig';
 import { createCatalog } from '@/util/createCatalog';
 import { buildURL } from '@/util/formatterRepositoryFileNameUrl';
 import { isFileOrFolderExists } from '@/util/isFileOrFolderExists';
@@ -7,15 +7,15 @@ import { wgetAsync } from '@/util/wget';
 
 export const getRemoteContentToBuild = async ({
   config,
-  snpObject,
+  sumObject,
 }: {
   config: ConfigType;
-  snpObject: snpFile;
+  sumObject: sumFile;
 }): Promise<string | null | undefined> => {
   try {
     const contentUrl = buildURL({
       baseURL: config.remoteRootRepositoryUrl,
-      relativePaths: [snpObject.SNPSuffixFileName],
+      relativePaths: [sumObject.SUMSuffixFileName],
     });
     if (!(await isFileOrFolderExists({ isDebug: config.isDebug, filePath: config.temporaryFolder }))) {
       await createCatalog(config.temporaryFolder);

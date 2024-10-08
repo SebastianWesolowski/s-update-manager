@@ -12,8 +12,8 @@ interface TestDataResult<T> {
 
 interface ProjectTestDataResult<T> {
   allFiles: string[];
-  snpConfigFileContent: ConfigType | null;
-  snpFileMapConfigContent: FileMapConfig | null;
+  sumConfigFileContent: ConfigType | null;
+  sumFileMapConfigContent: FileMapConfig | null;
 }
 
 export async function getTestData<T extends object>(
@@ -64,22 +64,22 @@ export async function getProjectTestData<T extends object>(
     excludeFolders: ['node_modules'],
   });
 
-  let snpConfigFileContent: ConfigType | null = null;
-  let snpFileMapConfigContent: FileMapConfig | null = null;
+  let sumConfigFileContent: ConfigType | null = null;
+  let sumFileMapConfigContent: FileMapConfig | null = null;
 
-  if (await isFileOrFolderExists({ isDebug: config.isDebug, filePath: config.snpConfigFile })) {
+  if (await isFileOrFolderExists({ isDebug: config.isDebug, filePath: config.sumConfigFile })) {
     try {
-      const bufferData = await readFile(config.snpConfigFile);
-      snpConfigFileContent = await parseJSON(bufferData.toString());
+      const bufferData = await readFile(config.sumConfigFile);
+      sumConfigFileContent = await parseJSON(bufferData.toString());
     } catch (error) {
       console.error('Error reading or parsing repository map file:', error);
     }
   }
 
-  if (await isFileOrFolderExists({ isDebug: config.isDebug, filePath: config.snpFileMapConfig })) {
+  if (await isFileOrFolderExists({ isDebug: config.isDebug, filePath: config.sumFileMapConfig })) {
     try {
-      const bufferData = await readFile(config.snpFileMapConfig);
-      snpFileMapConfigContent = await parseJSON(bufferData.toString());
+      const bufferData = await readFile(config.sumFileMapConfig);
+      sumFileMapConfigContent = await parseJSON(bufferData.toString());
     } catch (error) {
       console.error('Error reading or parsing repository map file:', error);
     }
@@ -88,7 +88,7 @@ export async function getProjectTestData<T extends object>(
   return {
     ...result,
     allFiles,
-    snpConfigFileContent,
-    snpFileMapConfigContent,
+    sumConfigFileContent,
+    sumFileMapConfigContent,
   };
 }

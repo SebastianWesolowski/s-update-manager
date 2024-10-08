@@ -16,15 +16,15 @@ export const build = async (args: Args): Promise<ConfigType> => {
   const config = await getConfig(args);
 
   if (
-    !(await isFileOrFolderExists({ isDebug: config.isDebug, filePath: config.snpFileMapConfig })) &&
-    !(await isFileOrFolderExists({ isDebug: config.isDebug, filePath: config.snpConfigFile }))
+    !(await isFileOrFolderExists({ isDebug: config.isDebug, filePath: config.sumFileMapConfig })) &&
+    !(await isFileOrFolderExists({ isDebug: config.isDebug, filePath: config.sumConfigFile }))
   ) {
     if (process.env.SDEBUG !== 'true') {
-      throw new Error('Config files (snpFileMapConfig or snpConfigFile)  not exists, use init script');
+      throw new Error('Config files (sumFileMapConfig or sumConfigFile)  not exists, use init script');
     }
   }
 
-  debugFunction(config.isDebug, '=== Start SNP BUILD ===');
+  debugFunction(config.isDebug, '=== Start SUM BUILD ===');
 
   return config;
 };
@@ -78,5 +78,5 @@ build(args)
   })
   .finally(() => {
     debugFunction(finalConfig?.isDebug, { finalConfig }, '[BUILD] final config');
-    debugFunction(finalConfig?.isDebug, '=== final SNP BUILD ===');
+    debugFunction(finalConfig?.isDebug, '=== final SUM BUILD ===');
   });

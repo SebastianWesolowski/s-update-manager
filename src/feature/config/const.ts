@@ -2,17 +2,17 @@ import { ConfigTemplateType, ConfigType, RepositoryMapFileConfigType } from '@/f
 
 export const defaultConfig: ConfigType = {
   templateCatalogName: 'templateCatalog',
-  snpCatalog: './.snp',
+  sumCatalog: './.sum',
   sUpdaterVersion: undefined,
-  availableSNPSuffix: ['-default.md', '-custom.md', '-extend.md'],
-  availableSNPKeySuffix: ['defaultFile', 'customFile', 'extendFile'],
+  availableSUMSuffix: ['-default.md', '-custom.md', '-extend.md'],
+  availableSUMKeySuffix: ['defaultFile', 'customFile', 'extendFile'],
   templateVersion: undefined,
-  REPOSITORY_MAP_FILE_NAME: 'repositoryMap.json', // TODO zmienic nazwę na snpFileMapConfig
-  snpFileMapConfig: './.snp/repositoryMap.json',
+  REPOSITORY_MAP_FILE_NAME: 'repositoryMap.json', // TODO zmienic nazwę na sumFileMapConfig
+  sumFileMapConfig: './.sum/repositoryMap.json',
   projectCatalog: './',
-  temporaryFolder: './.snp/temporary/',
-  snpConfigFileName: 'snp.config.json',
-  snpConfigFile: './.snp/snp.config.json',
+  temporaryFolder: './.sum/temporary/',
+  sumConfigFileName: 'sum.config.json',
+  sumConfigFile: './.sum/sum.config.json',
   remoteRootRepositoryUrl:
     'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/dev/mock/mockTemplateToUpdate/templateCatalog/repositoryMap.json',
   remoteRepository: 'https://github.com/SebastianWesolowski/s-update-manager/tree/dev/mock/mockTemplateToUpdate',

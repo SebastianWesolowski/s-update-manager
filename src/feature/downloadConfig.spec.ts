@@ -1,7 +1,7 @@
 import { getProjectTestData } from './__tests__/getTestData';
 import { cleanUpProjectCatalog, FileToCreateType, setupTestFiles } from './__tests__/prepareFileForTests';
 import { cleanUpFiles } from '@/feature/__tests__/cleanForTests';
-import { mockConfig, mockSnpFileMapConfig } from '@/feature/__tests__/const';
+import { mockConfig, mockSumFileMapConfig } from '@/feature/__tests__/const';
 import { searchFilesInDirectory } from '@/feature/__tests__/searchFilesInDirectory';
 import { ConfigType } from '@/feature/config/types';
 import { downloadConfig } from '@/feature/downloadConfig';
@@ -10,22 +10,22 @@ import { createFile } from '@/util/createFile';
 describe('downloadConfig', () => {
   describe('context mock', () => {
     let config: ConfigType;
-    let snpConfigFile: ConfigType;
+    let sumConfigFile: ConfigType;
 
     beforeEach(async () => {
       config = {
         templateCatalogName: 'templateCatalog',
-        snpCatalog: './mock/mockProject/.snp/',
+        sumCatalog: './mock/mockProject/.sum/',
         sUpdaterVersion: '../../dist/s-update-manager-1.0.0-dev.27.tgz',
-        availableSNPSuffix: ['-default.md', '-custom.md', '-extend.md'],
-        availableSNPKeySuffix: ['defaultFile', 'customFile', 'extendFile'],
+        availableSUMSuffix: ['-default.md', '-custom.md', '-extend.md'],
+        availableSUMKeySuffix: ['defaultFile', 'customFile', 'extendFile'],
         templateVersion: undefined,
         REPOSITORY_MAP_FILE_NAME: 'repositoryMap.json',
-        snpFileMapConfig: './mock/mockProject/.snp/repositoryMap.json',
+        sumFileMapConfig: './mock/mockProject/.sum/repositoryMap.json',
         projectCatalog: './mock/mockProject/',
-        temporaryFolder: './mock/mockProject/.snp/temporary/',
-        snpConfigFileName: 'snp.config.json',
-        snpConfigFile: './mock/mockProject/.snp/snp.config.json',
+        temporaryFolder: './mock/mockProject/.sum/temporary/',
+        sumConfigFileName: 'sum.config.json',
+        sumConfigFile: './mock/mockProject/.sum/sum.config.json',
         remoteFileMapURL:
           'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/dev/mock/mockTemplateToUpdate/templateCatalog/repositoryMap.json',
         remoteRepository: 'https://github.com/SebastianWesolowski/s-update-manager/tree/dev/mock/mockTemplateToUpdate',
@@ -35,18 +35,18 @@ describe('downloadConfig', () => {
         _: [],
       };
 
-      snpConfigFile = {
+      sumConfigFile = {
         templateCatalogName: 'templateCatalog',
-        snpCatalog: './mock/mockProject/.snp/',
+        sumCatalog: './mock/mockProject/.sum/',
         sUpdaterVersion: '../../dist/s-update-manager-1.0.0-dev.27.tgz',
-        availableSNPSuffix: ['-default.md', '-custom.md', '-extend.md'],
-        availableSNPKeySuffix: ['defaultFile', 'customFile', 'extendFile'],
+        availableSUMSuffix: ['-default.md', '-custom.md', '-extend.md'],
+        availableSUMKeySuffix: ['defaultFile', 'customFile', 'extendFile'],
         REPOSITORY_MAP_FILE_NAME: 'repositoryMap.json',
-        snpFileMapConfig: './mock/mockProject/.snp/repositoryMap.json',
+        sumFileMapConfig: './mock/mockProject/.sum/repositoryMap.json',
         projectCatalog: './mock/mockProject/',
-        temporaryFolder: './mock/mockProject/.snp/temporary/',
-        snpConfigFileName: 'snp.config.json',
-        snpConfigFile: './mock/mockProject/.snp/snp.config.json',
+        temporaryFolder: './mock/mockProject/.sum/temporary/',
+        sumConfigFileName: 'sum.config.json',
+        sumConfigFile: './mock/mockProject/.sum/sum.config.json',
         remoteFileMapURL:
           'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/dev/mock/mockTemplateToUpdate/templateCatalog/repositoryMap.json',
         remoteRepository: 'https://github.com/SebastianWesolowski/s-update-manager/tree/dev/mock/mockTemplateToUpdate',
@@ -60,8 +60,8 @@ describe('downloadConfig', () => {
 
       const FileToCreate: FileToCreateType[] = [
         {
-          filePath: config.snpConfigFile,
-          content: JSON.stringify(snpConfigFile),
+          filePath: config.sumConfigFile,
+          content: JSON.stringify(sumConfigFile),
         },
       ];
       await setupTestFiles(FileToCreate, config.isDebug);
@@ -81,7 +81,7 @@ describe('downloadConfig', () => {
           'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/dev/mock/mockTemplate',
       };
 
-      snpConfigFile = {
+      sumConfigFile = {
         ...config,
         remoteFileMapURL:
           'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/dev/mock/mockTemplate/templateCatalog/repositoryMap.json',
@@ -92,8 +92,8 @@ describe('downloadConfig', () => {
 
       const FileToCreate: FileToCreateType[] = [
         {
-          filePath: config.snpConfigFile,
-          content: JSON.stringify(snpConfigFile),
+          filePath: config.sumConfigFile,
+          content: JSON.stringify(sumConfigFile),
         },
       ];
       await setupTestFiles(FileToCreate, config.isDebug);
@@ -103,17 +103,17 @@ describe('downloadConfig', () => {
       expect({ ...dataToTest }).toStrictEqual({
         config: {
           templateCatalogName: 'templateCatalog',
-          snpCatalog: './mock/mockProject/.snp/',
+          sumCatalog: './mock/mockProject/.sum/',
           sUpdaterVersion: '../../dist/s-update-manager-1.0.0-dev.27.tgz',
-          availableSNPSuffix: ['-default.md', '-custom.md', '-extend.md'],
-          availableSNPKeySuffix: ['defaultFile', 'customFile', 'extendFile'],
+          availableSUMSuffix: ['-default.md', '-custom.md', '-extend.md'],
+          availableSUMKeySuffix: ['defaultFile', 'customFile', 'extendFile'],
           templateVersion: undefined,
           REPOSITORY_MAP_FILE_NAME: 'repositoryMap.json',
-          snpFileMapConfig: './mock/mockProject/.snp/repositoryMap.json',
+          sumFileMapConfig: './mock/mockProject/.sum/repositoryMap.json',
           projectCatalog: './mock/mockProject/',
-          temporaryFolder: './mock/mockProject/.snp/temporary/',
-          snpConfigFileName: 'snp.config.json',
-          snpConfigFile: './mock/mockProject/.snp/snp.config.json',
+          temporaryFolder: './mock/mockProject/.sum/temporary/',
+          sumConfigFileName: 'sum.config.json',
+          sumConfigFile: './mock/mockProject/.sum/sum.config.json',
           remoteFileMapURL:
             'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/dev/mock/mockTemplate/templateCatalog/repositoryMap.json',
           remoteRepository: 'https://github.com/SebastianWesolowski/s-update-manager/tree/dev/mock/mockTemplate',
@@ -122,16 +122,16 @@ describe('downloadConfig', () => {
           isDebug: true,
           _: [],
         },
-        snpFileMapConfig: {
+        sumFileMapConfig: {
           createdFileMap: [],
-          snpFileMap: {},
+          sumFileMap: {},
         },
         downloadContent: {},
         allFiles: [
           './mock/mockProject/.gitignore',
-          './mock/mockProject/.snp/repositoryMap.json',
-          './mock/mockProject/.snp/snp.config.json',
-          './mock/mockProject/.snp/temporary/repositoryMap.json',
+          './mock/mockProject/.sum/repositoryMap.json',
+          './mock/mockProject/.sum/sum.config.json',
+          './mock/mockProject/.sum/temporary/repositoryMap.json',
           './mock/mockProject/README.md',
           './mock/mockProject/package.json',
           './mock/mockProject/tools/addDependency.js',
@@ -142,18 +142,18 @@ describe('downloadConfig', () => {
           './mock/mockProject/tsconfig.json',
           './mock/mockProject/yarn.lock',
         ],
-        snpConfigFileContent: {
+        sumConfigFileContent: {
           templateCatalogName: 'templateCatalog',
-          snpCatalog: './mock/mockProject/.snp/',
+          sumCatalog: './mock/mockProject/.sum/',
           sUpdaterVersion: '../../dist/s-update-manager-1.0.0-dev.27.tgz',
-          availableSNPSuffix: ['-default.md', '-custom.md', '-extend.md'],
-          availableSNPKeySuffix: ['defaultFile', 'customFile', 'extendFile'],
+          availableSUMSuffix: ['-default.md', '-custom.md', '-extend.md'],
+          availableSUMKeySuffix: ['defaultFile', 'customFile', 'extendFile'],
           REPOSITORY_MAP_FILE_NAME: 'repositoryMap.json',
-          snpFileMapConfig: './mock/mockProject/.snp/repositoryMap.json',
+          sumFileMapConfig: './mock/mockProject/.sum/repositoryMap.json',
           projectCatalog: './mock/mockProject/',
-          temporaryFolder: './mock/mockProject/.snp/temporary/',
-          snpConfigFileName: 'snp.config.json',
-          snpConfigFile: './mock/mockProject/.snp/snp.config.json',
+          temporaryFolder: './mock/mockProject/.sum/temporary/',
+          sumConfigFileName: 'sum.config.json',
+          sumConfigFile: './mock/mockProject/.sum/sum.config.json',
           remoteFileMapURL:
             'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/dev/mock/mockTemplate/templateCatalog/repositoryMap.json',
           remoteRepository: 'https://github.com/SebastianWesolowski/s-update-manager/tree/dev/mock/mockTemplate',
@@ -162,9 +162,9 @@ describe('downloadConfig', () => {
           isDebug: true,
           _: [],
         },
-        snpFileMapConfigContent: {
+        sumFileMapConfigContent: {
           createdFileMap: [],
-          snpFileMap: {},
+          sumFileMap: {},
         },
       });
     });
@@ -174,17 +174,17 @@ describe('downloadConfig', () => {
       expect({ ...dataToTest }).toStrictEqual({
         config: {
           templateCatalogName: 'templateCatalog',
-          snpCatalog: './mock/mockProject/.snp/',
+          sumCatalog: './mock/mockProject/.sum/',
           sUpdaterVersion: '../../dist/s-update-manager-1.0.0-dev.27.tgz',
-          availableSNPSuffix: ['-default.md', '-custom.md', '-extend.md'],
-          availableSNPKeySuffix: ['defaultFile', 'customFile', 'extendFile'],
+          availableSUMSuffix: ['-default.md', '-custom.md', '-extend.md'],
+          availableSUMKeySuffix: ['defaultFile', 'customFile', 'extendFile'],
           templateVersion: '1.0.0',
           REPOSITORY_MAP_FILE_NAME: 'repositoryMap.json',
-          snpFileMapConfig: './mock/mockProject/.snp/repositoryMap.json',
+          sumFileMapConfig: './mock/mockProject/.sum/repositoryMap.json',
           projectCatalog: './mock/mockProject/',
-          temporaryFolder: './mock/mockProject/.snp/temporary/',
-          snpConfigFileName: 'snp.config.json',
-          snpConfigFile: './mock/mockProject/.snp/snp.config.json',
+          temporaryFolder: './mock/mockProject/.sum/temporary/',
+          sumConfigFileName: 'sum.config.json',
+          sumConfigFile: './mock/mockProject/.sum/sum.config.json',
           remoteFileMapURL:
             'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/dev/mock/mockTemplateToUpdate/templateCatalog/repositoryMap.json',
           remoteRepository:
@@ -194,9 +194,9 @@ describe('downloadConfig', () => {
           isDebug: true,
           _: [],
         },
-        snpFileMapConfig: {
+        sumFileMapConfig: {
           createdFileMap: [],
-          snpFileMap: {},
+          sumFileMap: {},
           projectCatalog: './',
           templateCatalogName: 'templateCatalog',
           templateCatalogPath: './templateCatalog',
@@ -275,9 +275,9 @@ describe('downloadConfig', () => {
         },
         allFiles: [
           './mock/mockProject/.gitignore',
-          './mock/mockProject/.snp/repositoryMap.json',
-          './mock/mockProject/.snp/snp.config.json',
-          './mock/mockProject/.snp/temporary/repositoryMap.json',
+          './mock/mockProject/.sum/repositoryMap.json',
+          './mock/mockProject/.sum/sum.config.json',
+          './mock/mockProject/.sum/temporary/repositoryMap.json',
           './mock/mockProject/README.md',
           './mock/mockProject/package.json',
           './mock/mockProject/tools/addDependency.js',
@@ -288,18 +288,18 @@ describe('downloadConfig', () => {
           './mock/mockProject/tsconfig.json',
           './mock/mockProject/yarn.lock',
         ],
-        snpConfigFileContent: {
+        sumConfigFileContent: {
           templateCatalogName: 'templateCatalog',
-          snpCatalog: './mock/mockProject/.snp/',
+          sumCatalog: './mock/mockProject/.sum/',
           sUpdaterVersion: '../../dist/s-update-manager-1.0.0-dev.27.tgz',
-          availableSNPSuffix: ['-default.md', '-custom.md', '-extend.md'],
-          availableSNPKeySuffix: ['defaultFile', 'customFile', 'extendFile'],
+          availableSUMSuffix: ['-default.md', '-custom.md', '-extend.md'],
+          availableSUMKeySuffix: ['defaultFile', 'customFile', 'extendFile'],
           REPOSITORY_MAP_FILE_NAME: 'repositoryMap.json',
-          snpFileMapConfig: './mock/mockProject/.snp/repositoryMap.json',
+          sumFileMapConfig: './mock/mockProject/.sum/repositoryMap.json',
           projectCatalog: './mock/mockProject/',
-          temporaryFolder: './mock/mockProject/.snp/temporary/',
-          snpConfigFileName: 'snp.config.json',
-          snpConfigFile: './mock/mockProject/.snp/snp.config.json',
+          temporaryFolder: './mock/mockProject/.sum/temporary/',
+          sumConfigFileName: 'sum.config.json',
+          sumConfigFile: './mock/mockProject/.sum/sum.config.json',
           remoteFileMapURL:
             'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/dev/mock/mockTemplateToUpdate/templateCatalog/repositoryMap.json',
           remoteRepository:
@@ -309,9 +309,9 @@ describe('downloadConfig', () => {
           isDebug: true,
           _: [],
         },
-        snpFileMapConfigContent: {
+        sumFileMapConfigContent: {
           projectCatalog: './',
-          snpFileMap: {},
+          sumFileMap: {},
           templateCatalogName: 'templateCatalog',
           templateCatalogPath: './templateCatalog',
           repositoryMapFileName: 'repositoryMap.json',
@@ -355,7 +355,7 @@ describe('downloadConfig', () => {
     it('should return mock file when repositoryMap exist', async () => {
       const FileToCreate: FileToCreateType[] = [
         {
-          filePath: config.snpFileMapConfig,
+          filePath: config.sumFileMapConfig,
           content: JSON.stringify({
             templateVersion: '1.0.0',
             fileMap: [
@@ -385,7 +385,7 @@ describe('downloadConfig', () => {
               './mock/mockProject/yarn.lock',
             ],
             createdFileMap: [],
-            snpFileMap: {},
+            sumFileMap: {},
           }),
         },
       ];
@@ -396,17 +396,17 @@ describe('downloadConfig', () => {
       expect({ ...dataToTest }).toStrictEqual({
         config: {
           templateCatalogName: 'templateCatalog',
-          snpCatalog: './mock/mockProject/.snp/',
+          sumCatalog: './mock/mockProject/.sum/',
           sUpdaterVersion: '../../dist/s-update-manager-1.0.0-dev.27.tgz',
-          availableSNPSuffix: ['-default.md', '-custom.md', '-extend.md'],
-          availableSNPKeySuffix: ['defaultFile', 'customFile', 'extendFile'],
+          availableSUMSuffix: ['-default.md', '-custom.md', '-extend.md'],
+          availableSUMKeySuffix: ['defaultFile', 'customFile', 'extendFile'],
           templateVersion: '1.0.0',
           REPOSITORY_MAP_FILE_NAME: 'repositoryMap.json',
-          snpFileMapConfig: './mock/mockProject/.snp/repositoryMap.json',
+          sumFileMapConfig: './mock/mockProject/.sum/repositoryMap.json',
           projectCatalog: './mock/mockProject/',
-          temporaryFolder: './mock/mockProject/.snp/temporary/',
-          snpConfigFileName: 'snp.config.json',
-          snpConfigFile: './mock/mockProject/.snp/snp.config.json',
+          temporaryFolder: './mock/mockProject/.sum/temporary/',
+          sumConfigFileName: 'sum.config.json',
+          sumConfigFile: './mock/mockProject/.sum/sum.config.json',
           remoteFileMapURL:
             'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/dev/mock/mockTemplateToUpdate/templateCatalog/repositoryMap.json',
           remoteRepository:
@@ -416,9 +416,9 @@ describe('downloadConfig', () => {
           isDebug: true,
           _: [],
         },
-        snpFileMapConfig: {
+        sumFileMapConfig: {
           createdFileMap: [],
-          snpFileMap: {},
+          sumFileMap: {},
           projectCatalog: './',
           templateCatalogName: 'templateCatalog',
           templateCatalogPath: './templateCatalog',
@@ -497,9 +497,9 @@ describe('downloadConfig', () => {
         },
         allFiles: [
           './mock/mockProject/.gitignore',
-          './mock/mockProject/.snp/repositoryMap.json',
-          './mock/mockProject/.snp/snp.config.json',
-          './mock/mockProject/.snp/temporary/repositoryMap.json',
+          './mock/mockProject/.sum/repositoryMap.json',
+          './mock/mockProject/.sum/sum.config.json',
+          './mock/mockProject/.sum/temporary/repositoryMap.json',
           './mock/mockProject/README.md',
           './mock/mockProject/package.json',
           './mock/mockProject/tools/addDependency.js',
@@ -510,18 +510,18 @@ describe('downloadConfig', () => {
           './mock/mockProject/tsconfig.json',
           './mock/mockProject/yarn.lock',
         ],
-        snpConfigFileContent: {
+        sumConfigFileContent: {
           templateCatalogName: 'templateCatalog',
-          snpCatalog: './mock/mockProject/.snp/',
+          sumCatalog: './mock/mockProject/.sum/',
           sUpdaterVersion: '../../dist/s-update-manager-1.0.0-dev.27.tgz',
-          availableSNPSuffix: ['-default.md', '-custom.md', '-extend.md'],
-          availableSNPKeySuffix: ['defaultFile', 'customFile', 'extendFile'],
+          availableSUMSuffix: ['-default.md', '-custom.md', '-extend.md'],
+          availableSUMKeySuffix: ['defaultFile', 'customFile', 'extendFile'],
           REPOSITORY_MAP_FILE_NAME: 'repositoryMap.json',
-          snpFileMapConfig: './mock/mockProject/.snp/repositoryMap.json',
+          sumFileMapConfig: './mock/mockProject/.sum/repositoryMap.json',
           projectCatalog: './mock/mockProject/',
-          temporaryFolder: './mock/mockProject/.snp/temporary/',
-          snpConfigFileName: 'snp.config.json',
-          snpConfigFile: './mock/mockProject/.snp/snp.config.json',
+          temporaryFolder: './mock/mockProject/.sum/temporary/',
+          sumConfigFileName: 'sum.config.json',
+          sumConfigFile: './mock/mockProject/.sum/sum.config.json',
           remoteFileMapURL:
             'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/dev/mock/mockTemplateToUpdate/templateCatalog/repositoryMap.json',
           remoteRepository:
@@ -531,9 +531,9 @@ describe('downloadConfig', () => {
           isDebug: true,
           _: [],
         },
-        snpFileMapConfigContent: {
+        sumFileMapConfigContent: {
           projectCatalog: './',
-          snpFileMap: {},
+          sumFileMap: {},
           templateCatalogName: 'templateCatalog',
           templateCatalogPath: './templateCatalog',
           repositoryMapFileName: 'repositoryMap.json',
@@ -577,14 +577,14 @@ describe('downloadConfig', () => {
 
   describe('context test', () => {
     let config: ConfigType;
-    let snpFileMapConfig: FileMapConfig;
+    let sumFileMapConfig: FileMapConfig;
 
     beforeEach(async () => {
       config = { ...mockConfig.step.createConfigFile };
-      snpFileMapConfig = { ...mockSnpFileMapConfig.step.createConfigFile };
+      sumFileMapConfig = { ...mockSumFileMapConfig.step.createConfigFile };
 
       await cleanUpFiles({
-        snpCatalog: config.snpCatalog,
+        sumCatalog: config.sumCatalog,
         directoryPath: config.projectCatalog,
         isDebug: config.isDebug,
       });
@@ -592,15 +592,15 @@ describe('downloadConfig', () => {
 
     afterEach(async () => {
       await cleanUpFiles({
-        snpCatalog: config.snpCatalog,
+        sumCatalog: config.sumCatalog,
         directoryPath: config.projectCatalog,
         isDebug: config.isDebug,
       });
     });
 
-    it('should return correct empty proje content with only snpConfigFile', async () => {
+    it('should return correct empty proje content with only sumConfigFile', async () => {
       await createFile({
-        filePath: config.snpConfigFile,
+        filePath: config.sumConfigFile,
         content: JSON.stringify(config),
       });
 
@@ -617,27 +617,27 @@ describe('downloadConfig', () => {
           templateVersion: undefined,
         },
         downloadContent: {},
-        snpFileMapConfig: {
+        sumFileMapConfig: {
           createdFileMap: [],
-          snpFileMap: {},
+          sumFileMap: {},
         },
         allFiles: [
-          './test/mockProject/.snp/repositoryMap.json',
-          './test/mockProject/.snp/snp.config.json',
-          './test/mockProject/.snp/temporary/repositoryMap.json',
+          './test/mockProject/.sum/repositoryMap.json',
+          './test/mockProject/.sum/sum.config.json',
+          './test/mockProject/.sum/temporary/repositoryMap.json',
         ],
       });
     });
 
     it('should return correct content with both configs file', async () => {
       await createFile({
-        filePath: config.snpConfigFile,
+        filePath: config.sumConfigFile,
         content: JSON.stringify(config),
       });
 
       await createFile({
-        filePath: config.snpFileMapConfig,
-        content: JSON.stringify(snpFileMapConfig),
+        filePath: config.sumFileMapConfig,
+        content: JSON.stringify(sumFileMapConfig),
       });
 
       const result = await downloadConfig(config);
@@ -651,11 +651,11 @@ describe('downloadConfig', () => {
           ...mockConfig.step.downloadConfigFile.forInit,
         },
         downloadContent: {},
-        snpFileMapConfig: mockSnpFileMapConfig.step.downloadConfigFile.forInit,
+        sumFileMapConfig: mockSumFileMapConfig.step.downloadConfigFile.forInit,
         allFiles: [
-          './test/mockProject/.snp/repositoryMap.json',
-          './test/mockProject/.snp/snp.config.json',
-          './test/mockProject/.snp/temporary/repositoryMap.json',
+          './test/mockProject/.sum/repositoryMap.json',
+          './test/mockProject/.sum/sum.config.json',
+          './test/mockProject/.sum/temporary/repositoryMap.json',
         ],
       });
     });
@@ -672,12 +672,12 @@ describe('downloadConfig', () => {
 
       const FileToCreate: FileToCreateType[] = [
         {
-          filePath: config.snpConfigFile,
+          filePath: config.sumConfigFile,
           content: JSON.stringify(config),
         },
         {
-          filePath: config.snpFileMapConfig,
-          content: JSON.stringify(snpFileMapConfig),
+          filePath: config.sumFileMapConfig,
+          content: JSON.stringify(sumFileMapConfig),
         },
       ];
       await setupTestFiles(FileToCreate, config.isDebug);
@@ -688,8 +688,8 @@ describe('downloadConfig', () => {
         config: {
           REPOSITORY_MAP_FILE_NAME: 'repositoryMap.json',
           _: [],
-          availableSNPKeySuffix: ['defaultFile', 'customFile', 'extendFile'],
-          availableSNPSuffix: ['-default.md', '-custom.md', '-extend.md'],
+          availableSUMKeySuffix: ['defaultFile', 'customFile', 'extendFile'],
+          availableSUMSuffix: ['-default.md', '-custom.md', '-extend.md'],
           isDebug: false,
           projectCatalog: './test/mockProject',
           remoteFileMapURL:
@@ -699,14 +699,14 @@ describe('downloadConfig', () => {
           remoteRootRepositoryUrl:
             'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/tree/dev/mock/mockTemplateToUpdate',
           templateVersion: '1.0.0',
-          snpCatalog: './test/mockProject/.snp/',
-          snpConfigFile: './test/mockProject/.snp/snp.config.json',
-          snpConfigFileName: 'snp.config.json',
-          snpFileMapConfig: './test/mockProject/.snp/repositoryMap.json',
+          sumCatalog: './test/mockProject/.sum/',
+          sumConfigFile: './test/mockProject/.sum/sum.config.json',
+          sumConfigFileName: 'sum.config.json',
+          sumFileMapConfig: './test/mockProject/.sum/repositoryMap.json',
           templateCatalogName: 'templateCatalog',
-          temporaryFolder: './test/mockProject/.snp/temporary/',
+          temporaryFolder: './test/mockProject/.sum/temporary/',
         },
-        snpFileMapConfig: {
+        sumFileMapConfig: {
           fileMap: [
             'templateCatalog/.gitignore-default.md',
             'templateCatalog/package.json-default.md',
@@ -735,7 +735,7 @@ describe('downloadConfig', () => {
             './yarn.lock',
           ],
           templateVersion: '1.0.0',
-          snpFileMap: {},
+          sumFileMap: {},
           createdFileMap: [],
           projectCatalog: './',
           templateCatalogName: 'templateCatalog',
@@ -785,15 +785,15 @@ describe('downloadConfig', () => {
           ],
         },
         allFiles: [
-          './test/mockProject/.snp/repositoryMap.json',
-          './test/mockProject/.snp/snp.config.json',
-          './test/mockProject/.snp/temporary/repositoryMap.json',
+          './test/mockProject/.sum/repositoryMap.json',
+          './test/mockProject/.sum/sum.config.json',
+          './test/mockProject/.sum/temporary/repositoryMap.json',
         ],
-        snpConfigFileContent: {
+        sumConfigFileContent: {
           REPOSITORY_MAP_FILE_NAME: 'repositoryMap.json',
           _: [],
-          availableSNPKeySuffix: ['defaultFile', 'customFile', 'extendFile'],
-          availableSNPSuffix: ['-default.md', '-custom.md', '-extend.md'],
+          availableSUMKeySuffix: ['defaultFile', 'customFile', 'extendFile'],
+          availableSUMSuffix: ['-default.md', '-custom.md', '-extend.md'],
           isDebug: false,
           projectCatalog: './test/mockProject',
           remoteFileMapURL:
@@ -803,14 +803,14 @@ describe('downloadConfig', () => {
           remoteRootRepositoryUrl:
             'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/tree/dev/mock/mockTemplateToUpdate',
           templateVersion: '1.0.0',
-          snpCatalog: './test/mockProject/.snp/',
-          snpConfigFile: './test/mockProject/.snp/snp.config.json',
-          snpConfigFileName: 'snp.config.json',
-          snpFileMapConfig: './test/mockProject/.snp/repositoryMap.json',
+          sumCatalog: './test/mockProject/.sum/',
+          sumConfigFile: './test/mockProject/.sum/sum.config.json',
+          sumConfigFileName: 'sum.config.json',
+          sumFileMapConfig: './test/mockProject/.sum/repositoryMap.json',
           templateCatalogName: 'templateCatalog',
-          temporaryFolder: './test/mockProject/.snp/temporary/',
+          temporaryFolder: './test/mockProject/.sum/temporary/',
         },
-        snpFileMapConfigContent: {
+        sumFileMapConfigContent: {
           fileMap: [
             'templateCatalog/.gitignore-default.md',
             'templateCatalog/package.json-default.md',
@@ -839,7 +839,7 @@ describe('downloadConfig', () => {
             './yarn.lock',
           ],
           templateVersion: '1.0.0',
-          snpFileMap: {},
+          sumFileMap: {},
           createdFileMap: [],
           projectCatalog: './',
           templateCatalogName: 'templateCatalog',

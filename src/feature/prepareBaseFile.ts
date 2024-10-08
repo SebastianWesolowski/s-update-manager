@@ -1,79 +1,79 @@
 import path from 'path';
-import { AvailableSNPKeySuffixTypes, ConfigType } from '@/feature/config/types';
+import { AvailableSUMKeySuffixTypes, ConfigType } from '@/feature/config/types';
 import { FileMapConfig, updateDetailsFileMapConfig2 } from '@/feature/updateFileMapConfig';
 import { createPath } from '@/util/createPath';
 import { debugFunction } from '@/util/debugFunction';
-import { formatSnp } from '@/util/formatSnp';
+import { formatSum } from '@/util/formatSum';
 import { getRealFileName } from '@/util/getRealFileName';
 import { getRealFilePath } from '@/util/getRealFilePath';
 import { parseJSON } from '@/util/parseJSON';
 import { readFile } from '@/util/readFile';
 
-export async function prepareBaseSnpFileMap(
+export async function prepareBaseSumFileMap(
   config: ConfigType
-): Promise<{ config: ConfigType; snpFileMapConfig: FileMapConfig }> {
-  debugFunction(config.isDebug, 'start', '[INIT] prepareBaseSnpFileMap');
-  let snpFileMapConfig: FileMapConfig = await readFile(config.snpFileMapConfig).then(async (bufferData) =>
+): Promise<{ config: ConfigType; sumFileMapConfig: FileMapConfig }> {
+  debugFunction(config.isDebug, 'start', '[INIT] prepareBaseSumFileMap');
+  let sumFileMapConfig: FileMapConfig = await readFile(config.sumFileMapConfig).then(async (bufferData) =>
     parseJSON(bufferData.toString())
   );
 
   try {
-    if (snpFileMapConfig.snpFileMap && snpFileMapConfig.fileMap) {
-      for (const SNPSuffixFileName of snpFileMapConfig.fileMap) {
-        const realFileName = getRealFileName({ config, contentToCheck: [SNPSuffixFileName] })[0];
-        const realFilePath = getRealFilePath({ config, SNPSuffixFileName });
+    if (sumFileMapConfig.sumFileMap && sumFileMapConfig.fileMap) {
+      for (const SUMSuffixFileName of sumFileMapConfig.fileMap) {
+        const realFileName = getRealFileName({ config, contentToCheck: [SUMSuffixFileName] })[0];
+        const realFilePath = getRealFilePath({ config, SUMSuffixFileName });
 
-        const SNPKeySuffix = formatSnp(SNPSuffixFileName, 'key') as AvailableSNPKeySuffixTypes;
+        const SUMKeySuffix = formatSum(SUMSuffixFileName, 'key') as AvailableSUMKeySuffixTypes;
 
-        if (snpFileMapConfig.snpFileMap) {
-          if (!snpFileMapConfig.snpFileMap[realFilePath]) {
-            snpFileMapConfig = await updateDetailsFileMapConfig2({
-              snpFileMapConfig,
+        if (sumFileMapConfig.sumFileMap) {
+          if (!sumFileMapConfig.sumFileMap[realFilePath]) {
+            sumFileMapConfig = await updateDetailsFileMapConfig2({
+              sumFileMapConfig,
               config,
               operation: 'createRealFileName',
               realFilePath,
             });
           }
 
-          if (snpFileMapConfig.snpFileMap && !snpFileMapConfig.snpFileMap[realFilePath]['_']) {
+          if (sumFileMapConfig.sumFileMap && !sumFileMapConfig.sumFileMap[realFilePath]['_']) {
             const filePath = createPath([
               config.projectCatalog,
-              SNPSuffixFileName.replace(config.templateCatalogName, ''),
+              SUMSuffixFileName.replace(config.templateCatalogName, ''),
             ]);
             const directoryPath = path.dirname(filePath);
             const originalFilePath = createPath([directoryPath, realFileName]);
 
-            snpFileMapConfig = await updateDetailsFileMapConfig2({
-              snpFileMapConfig,
+            sumFileMapConfig = await updateDetailsFileMapConfig2({
+              sumFileMapConfig,
               config,
               operation: 'addConfigSuffixFile',
-              SNPKeySuffix: '_',
+              SUMKeySuffix: '_',
               isCreated: false,
               path: originalFilePath,
               realFilePath,
               realPath: createPath([config.projectCatalog, realFileName]),
-              templateVersion: snpFileMapConfig.templateVersion,
+              templateVersion: sumFileMapConfig.templateVersion,
             });
           }
 
-          snpFileMapConfig = await updateDetailsFileMapConfig2({
-            snpFileMapConfig,
+          sumFileMapConfig = await updateDetailsFileMapConfig2({
+            sumFileMapConfig,
             config,
             operation: 'addConfigSuffixFile',
-            SNPKeySuffix,
-            SNPSuffixFileName,
+            SUMKeySuffix,
+            SUMSuffixFileName,
             isCreated: false,
-            path: createPath([config.snpCatalog, SNPSuffixFileName]),
+            path: createPath([config.sumCatalog, SUMSuffixFileName]),
             realFilePath,
             realPath: createPath([config.projectCatalog, realFilePath]),
-            templateVersion: snpFileMapConfig.templateVersion,
+            templateVersion: sumFileMapConfig.templateVersion,
           });
         }
       }
     }
 
-    debugFunction(config.isDebug, config, '[INIT] prepareBaseSnpFileMap');
-    return { config, snpFileMapConfig };
+    debugFunction(config.isDebug, config, '[INIT] prepareBaseSumFileMap');
+    return { config, sumFileMapConfig };
   } catch (err) {
     console.error('Error while downloading config from github', err);
     throw err;

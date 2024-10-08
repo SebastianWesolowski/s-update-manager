@@ -5,7 +5,7 @@ lib/*
 dist/*
 mock/*
 tools/*
-snp/*
+sum/*
 template/*
 .husky
 package.json

@@ -1,65 +1,65 @@
-import { AvailableSNPKeySuffixTypes, ConfigType } from '@/feature/config/types';
-import { FileMapConfig, snpFile, updateDetailsFileMapConfig2 } from '@/feature/updateFileMapConfig';
+import { AvailableSUMKeySuffixTypes, ConfigType } from '@/feature/config/types';
+import { FileMapConfig, sumFile, updateDetailsFileMapConfig2 } from '@/feature/updateFileMapConfig';
 import { createPath } from '@/util/createPath';
 import { deletePath } from '@/util/deletePath';
-import { formatSnp } from '@/util/formatSnp';
+import { formatSum } from '@/util/formatSum';
 import { getRealFilePath } from '@/util/getRealFilePath';
 import { parseJSON } from '@/util/parseJSON';
 import { readFile } from '@/util/readFile';
 
 export const cleanUpBeforeUpdate = async (
   config: ConfigType
-): Promise<{ config: ConfigType; deletedPath: string[]; snpFileMapConfig: FileMapConfig }> => {
-  let snpFileMapConfig: FileMapConfig = await readFile(config.snpFileMapConfig).then(async (bufferData) =>
+): Promise<{ config: ConfigType; deletedPath: string[]; sumFileMapConfig: FileMapConfig }> => {
+  let sumFileMapConfig: FileMapConfig = await readFile(config.sumFileMapConfig).then(async (bufferData) =>
     parseJSON(bufferData.toString())
   );
 
-  const fileToClean: snpFile[] = [];
+  const fileToClean: sumFile[] = [];
   const deletedPath: string[] = [];
 
   try {
-    if (snpFileMapConfig.snpFileMap && snpFileMapConfig.fileMap) {
+    if (sumFileMapConfig.sumFileMap && sumFileMapConfig.fileMap) {
       const createdFileRealName: [string, string][] = [];
-      for (const SNPSuffixFileName of snpFileMapConfig.fileMap) {
-        const realFilePath = getRealFilePath({ config, SNPSuffixFileName });
-        const SNPKeySuffix = formatSnp(SNPSuffixFileName, 'key') as AvailableSNPKeySuffixTypes;
-        if (!createdFileRealName.includes([realFilePath, SNPKeySuffix])) {
-          createdFileRealName.push([realFilePath, SNPKeySuffix]);
+      for (const SUMSuffixFileName of sumFileMapConfig.fileMap) {
+        const realFilePath = getRealFilePath({ config, SUMSuffixFileName });
+        const SUMKeySuffix = formatSum(SUMSuffixFileName, 'key') as AvailableSUMKeySuffixTypes;
+        if (!createdFileRealName.includes([realFilePath, SUMKeySuffix])) {
+          createdFileRealName.push([realFilePath, SUMKeySuffix]);
         }
       }
-      for (const [realFilePath, SNPKeySuffix] of createdFileRealName) {
-        fileToClean.push(snpFileMapConfig.snpFileMap[realFilePath][SNPKeySuffix]);
-        if (!fileToClean.includes(snpFileMapConfig.snpFileMap[realFilePath]['_'])) {
-          fileToClean.push(snpFileMapConfig.snpFileMap[realFilePath]['_']);
+      for (const [realFilePath, SUMKeySuffix] of createdFileRealName) {
+        fileToClean.push(sumFileMapConfig.sumFileMap[realFilePath][SUMKeySuffix]);
+        if (!fileToClean.includes(sumFileMapConfig.sumFileMap[realFilePath]['_'])) {
+          fileToClean.push(sumFileMapConfig.sumFileMap[realFilePath]['_']);
         }
       }
     }
 
-    for (const snpFile of fileToClean) {
-      await deletePath(createPath(snpFile.path), config.isDebug)
+    for (const sumFile of fileToClean) {
+      await deletePath(createPath(sumFile.path), config.isDebug)
         .then(async () => {
-          snpFileMapConfig = await updateDetailsFileMapConfig2({
-            snpFileMapConfig,
+          sumFileMapConfig = await updateDetailsFileMapConfig2({
+            sumFileMapConfig,
             config,
             operation: 'deleteFile',
-            SNPKeySuffix: snpFile.SNPKeySuffix as AvailableSNPKeySuffixTypes | '_',
-            // realFileName: snpFile.realFileName,
-            realFilePath: snpFile.realFilePath,
+            SUMKeySuffix: sumFile.SUMKeySuffix as AvailableSUMKeySuffixTypes | '_',
+            // realFileName: sumFile.realFileName,
+            realFilePath: sumFile.realFilePath,
           });
-          return snpFile.path;
+          return sumFile.path;
         })
         .then((path) => {
           deletedPath.push(path);
         });
     }
 
-    snpFileMapConfig = await updateDetailsFileMapConfig2({
-      snpFileMapConfig,
+    sumFileMapConfig = await updateDetailsFileMapConfig2({
+      sumFileMapConfig,
       config,
       operation: 'removeFileMap',
     });
 
-    return { config, deletedPath, snpFileMapConfig };
+    return { config, deletedPath, sumFileMapConfig };
   } catch (err) {
     console.error('Error while downloading config from github', err);
     throw err;

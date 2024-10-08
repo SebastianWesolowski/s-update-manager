@@ -1,10 +1,10 @@
-import { ConfigType, SNPKeySuffixTypes } from '@/feature/config/types';
+import { ConfigType, SUMKeySuffixTypes } from '@/feature/config/types';
 import { getContentToBuild } from '@/feature/getContnetToBuild';
 import { getRemoteContentToBuild } from '@/feature/getRemoteContentToBuild';
 import {
   FileMapConfig,
-  snpArrayPathFileSet,
-  snpFile,
+  sumArrayPathFileSet,
+  sumFile,
   updateDetailsFileMapConfig2,
 } from '@/feature/updateFileMapConfig';
 import { createFile } from '@/util/createFile';
@@ -16,22 +16,22 @@ import { readFile } from '@/util/readFile';
 
 export const buildFromConfig = async (
   config: ConfigType
-): Promise<{ config: ConfigType; snpFileMapConfig: FileMapConfig }> => {
+): Promise<{ config: ConfigType; sumFileMapConfig: FileMapConfig }> => {
   debugFunction(config.isDebug, 'start', '[INIT] buildFromConfig');
 
-  let snpFileMapConfig: FileMapConfig = await readFile(config.snpFileMapConfig).then(async (bufferData) =>
+  let sumFileMapConfig: FileMapConfig = await readFile(config.sumFileMapConfig).then(async (bufferData) =>
     parseJSON(bufferData.toString())
   );
 
-  for (const realFilePath in snpFileMapConfig.snpFileMap) {
+  for (const realFilePath in sumFileMapConfig.sumFileMap) {
     // bo sprawdzamy tylko po default reszta powinn być wygenewoana ręcznie lub korzysta tylko z getContent
-    // const SNPKeySuffix = "defaulFile"
-    for (const SNPKeySuffix in snpFileMapConfig.snpFileMap[realFilePath]) {
-      if (SNPKeySuffix === '_') {
+    // const SUMKeySuffix = "defaulFile"
+    for (const SUMKeySuffix in sumFileMapConfig.sumFileMap[realFilePath]) {
+      if (SUMKeySuffix === '_') {
         continue;
       }
 
-      const currentFileObject: snpFile = snpFileMapConfig.snpFileMap[realFilePath][SNPKeySuffix];
+      const currentFileObject: sumFile = sumFileMapConfig.sumFileMap[realFilePath][SUMKeySuffix];
       if (!(await isFileOrFolderExists({ isDebug: config.isDebug, filePath: currentFileObject.path }))) {
         await createFile({
           filePath: createPath(currentFileObject.path),
@@ -41,19 +41,19 @@ export const buildFromConfig = async (
             overwriteFile: true,
           },
         }).then(async () => {
-          snpFileMapConfig = await updateDetailsFileMapConfig2({
+          sumFileMapConfig = await updateDetailsFileMapConfig2({
             config,
             operation: 'createSuffixFile',
             realFilePath,
-            SNPKeySuffix: SNPKeySuffix as SNPKeySuffixTypes,
+            SUMKeySuffix: SUMKeySuffix as SUMKeySuffixTypes,
           });
         });
       }
       // Tutaj nie ma potrzeby występowania innych niż default
-      if (snpFileMapConfig.fileMap.includes(currentFileObject.SNPSuffixFileName)) {
+      if (sumFileMapConfig.fileMap.includes(currentFileObject.SUMSuffixFileName)) {
         const content = await getRemoteContentToBuild({
           config,
-          snpObject: currentFileObject,
+          sumObject: currentFileObject,
         });
         if (content) {
           await createFile({
@@ -67,15 +67,15 @@ export const buildFromConfig = async (
       }
     }
 
-    // const updatedSnpFileMapConfig: FileMapConfig = await readFile(config.snpFileMapConfig).then(async (bufferData) =>
+    // const updatedSumFileMapConfig: FileMapConfig = await readFile(config.sumFileMapConfig).then(async (bufferData) =>
     //   parseJSON(bufferData.toString())
     // );
 
-    const realFileObject = snpFileMapConfig.snpFileMap[realFilePath]['_'];
+    const realFileObject = sumFileMapConfig.sumFileMap[realFilePath]['_'];
 
-    if (snpFileMapConfig.snpFileMap) {
-      const snpSetObject = snpFileMapConfig.snpFileMap[realFilePath] as snpArrayPathFileSet;
-      const content = await getContentToBuild(snpSetObject);
+    if (sumFileMapConfig.sumFileMap) {
+      const sumSetObject = sumFileMapConfig.sumFileMap[realFilePath] as sumArrayPathFileSet;
+      const content = await getContentToBuild(sumSetObject);
 
       if (content) {
         await createFile({
@@ -83,9 +83,9 @@ export const buildFromConfig = async (
           content,
           isDebug: config.isDebug,
         }).then(async () => {
-          snpFileMapConfig = await updateDetailsFileMapConfig2({
+          sumFileMapConfig = await updateDetailsFileMapConfig2({
             config,
-            operation: 'createSNPRealFile',
+            operation: 'createSUMRealFile',
             realFilePath,
           });
         });
@@ -93,6 +93,6 @@ export const buildFromConfig = async (
     }
   }
 
-  debugFunction(config.isDebug, { snpFileMapConfig }, '[INIT] buildFromConfig');
-  return { config, snpFileMapConfig };
+  debugFunction(config.isDebug, { sumFileMapConfig }, '[INIT] buildFromConfig');
+  return { config, sumFileMapConfig };
 };

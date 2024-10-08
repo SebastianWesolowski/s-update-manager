@@ -98,7 +98,7 @@ export const cleanUpProjectCatalog = async (
   let path = getCleanupPath(type, folderCase, step);
 
   if (folderCase === 'mockProject') {
-    path = createPath([path, '.snp']);
+    path = createPath([path, '.sum']);
   }
 
   await cleanUpSinglePath({

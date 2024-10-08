@@ -1,11 +1,11 @@
-import { AvailableSNPKeySuffixTypes, ConfigType } from '@/feature/config/types';
+import { AvailableSUMKeySuffixTypes, ConfigType } from '@/feature/config/types';
 import { parseJSON } from '@/util/parseJSON';
 import { readFile } from '@/util/readFile';
 import { updateJsonFile } from '@/util/updateJsonFile';
 
-export interface snpFile {
-  SNPSuffixFileName: string;
-  SNPKeySuffix: string;
+export interface sumFile {
+  SUMSuffixFileName: string;
+  SUMKeySuffix: string;
   isCreated: boolean;
   path: string;
   realFilePath: string;
@@ -13,11 +13,11 @@ export interface snpFile {
   templateVersion: string;
 }
 
-export type snpArrayPathFileSet<T extends string = AvailableSNPKeySuffixTypes & '_'> = {
-  [K in T]?: snpFile;
-} & { defaultFile: snpFile };
+export type sumArrayPathFileSet<T extends string = AvailableSUMKeySuffixTypes & '_'> = {
+  [K in T]?: sumFile;
+} & { defaultFile: sumFile };
 
-export type snpFileMapObjectType = Record<string, snpArrayPathFileSet> | Record<string, NonNullable<unknown>>;
+export type sumFileMapObjectType = Record<string, sumArrayPathFileSet> | Record<string, NonNullable<unknown>>;
 export interface FileMapConfig {
   createdFileMap: string[];
   manualCreatedFileMap?: string[];
@@ -25,33 +25,33 @@ export interface FileMapConfig {
   templateVersion: string;
   fileMap: string[];
   templateFileList?: string[];
-  snpFileMap?: snpFileMapObjectType;
+  sumFileMap?: sumFileMapObjectType;
 }
 
 export const updateDetailsFileMapConfig2 = async ({
   realFilePath,
   operation,
   config,
-  snpFileMapConfig,
-  SNPKeySuffix,
-  SNPSuffixFileName,
+  sumFileMapConfig,
+  SUMKeySuffix,
+  SUMSuffixFileName,
   isCreated,
   path,
   realPath,
   templateVersion,
 }: {
-  SNPKeySuffix?: AvailableSNPKeySuffixTypes | '_';
+  SUMKeySuffix?: AvailableSUMKeySuffixTypes | '_';
   realFilePath?: string;
   operation:
     | 'addConfigSuffixFile'
     | 'createSuffixFile'
-    | 'createSNPRealFile'
+    | 'createSUMRealFile'
     | 'deleteFile'
     | 'removeFileMap'
     | 'createRealFileName';
   config: ConfigType;
-  snpFileMapConfig?: FileMapConfig;
-  SNPSuffixFileName?: string;
+  sumFileMapConfig?: FileMapConfig;
+  SUMSuffixFileName?: string;
   isCreated?: boolean;
   path?: string;
   realPath?: string;
@@ -65,21 +65,21 @@ export const updateDetailsFileMapConfig2 = async ({
   // 'addConfigSuffixFile' - dodanie nowego pliku do configu
   // 'createSuffixFile' - stworzeni pliku
 
-  let newFileMapConfig = snpFileMapConfig;
+  let newFileMapConfig = sumFileMapConfig;
   if (!newFileMapConfig) {
-    newFileMapConfig = await readFile(config.snpFileMapConfig).then(async (bufferData) => {
+    newFileMapConfig = await readFile(config.sumFileMapConfig).then(async (bufferData) => {
       return parseJSON(bufferData.toString());
     });
   }
 
-  if (newFileMapConfig === undefined || newFileMapConfig.snpFileMap === undefined) {
+  if (newFileMapConfig === undefined || newFileMapConfig.sumFileMap === undefined) {
     //TODO: create FileMapConfig
     return defaultConfig;
   }
 
   const details = {
-    SNPKeySuffix: SNPKeySuffix || '',
-    SNPSuffixFileName: SNPSuffixFileName || '',
+    SUMKeySuffix: SUMKeySuffix || '',
+    SUMSuffixFileName: SUMSuffixFileName || '',
     isCreated: isCreated || false,
     options: {
       replaceFile: false,
@@ -92,7 +92,7 @@ export const updateDetailsFileMapConfig2 = async ({
 
   if (
     operation === 'addConfigSuffixFile' &&
-    details.SNPKeySuffix &&
+    details.SUMKeySuffix &&
     details.path &&
     details.realFilePath &&
     details.realPath &&
@@ -100,15 +100,15 @@ export const updateDetailsFileMapConfig2 = async ({
   ) {
     details.options.replaceFile = true;
 
-    if (!newFileMapConfig.snpFileMap[details.realFilePath]) {
-      newFileMapConfig.snpFileMap[details.realFilePath] = {};
+    if (!newFileMapConfig.sumFileMap[details.realFilePath]) {
+      newFileMapConfig.sumFileMap[details.realFilePath] = {};
     }
-    if (!newFileMapConfig.snpFileMap[details.realFilePath][details.SNPKeySuffix]) {
-      newFileMapConfig.snpFileMap[details.realFilePath][details.SNPKeySuffix] = {};
+    if (!newFileMapConfig.sumFileMap[details.realFilePath][details.SUMKeySuffix]) {
+      newFileMapConfig.sumFileMap[details.realFilePath][details.SUMKeySuffix] = {};
     }
 
-    newFileMapConfig.snpFileMap[details.realFilePath][details.SNPKeySuffix] = {
-      SNPKeySuffix: details.SNPKeySuffix,
+    newFileMapConfig.sumFileMap[details.realFilePath][details.SUMKeySuffix] = {
+      SUMKeySuffix: details.SUMKeySuffix,
       isCreated: details.isCreated,
       path: details.path,
       realFilePath: details.realFilePath,
@@ -116,11 +116,11 @@ export const updateDetailsFileMapConfig2 = async ({
       templateVersion: details.templateVersion,
     };
 
-    if (details.SNPSuffixFileName) {
-      newFileMapConfig.snpFileMap[details.realFilePath][details.SNPKeySuffix].SNPSuffixFileName =
-        details.SNPSuffixFileName;
+    if (details.SUMSuffixFileName) {
+      newFileMapConfig.sumFileMap[details.realFilePath][details.SUMKeySuffix].SUMSuffixFileName =
+        details.SUMSuffixFileName;
     }
-    if (details.SNPKeySuffix !== 'defaultFile' && details.SNPKeySuffix !== '_') {
+    if (details.SUMKeySuffix !== 'defaultFile' && details.SUMKeySuffix !== '_') {
       if (newFileMapConfig.manualCreatedFileMap === undefined) {
         newFileMapConfig.manualCreatedFileMap = [];
       }
@@ -132,9 +132,9 @@ export const updateDetailsFileMapConfig2 = async ({
 
   if (operation === 'createRealFileName' && details.realFilePath) {
     details.options.replaceFile = true;
-    if (!newFileMapConfig.snpFileMap[details.realFilePath]) {
-      newFileMapConfig.snpFileMap = {
-        ...newFileMapConfig.snpFileMap,
+    if (!newFileMapConfig.sumFileMap[details.realFilePath]) {
+      newFileMapConfig.sumFileMap = {
+        ...newFileMapConfig.sumFileMap,
         [details.realFilePath]: {},
       };
     }
@@ -145,59 +145,59 @@ export const updateDetailsFileMapConfig2 = async ({
     newFileMapConfig.fileMap = [];
   }
 
-  if (operation === 'deleteFile' && details.realFilePath && details.SNPKeySuffix) {
+  if (operation === 'deleteFile' && details.realFilePath && details.SUMKeySuffix) {
     details.options.replaceFile = true;
     if (
-      newFileMapConfig.snpFileMap[details.realFilePath][details.SNPKeySuffix].isCreated === false ||
-      !newFileMapConfig.snpFileMap[details.realFilePath][details.SNPKeySuffix]
+      newFileMapConfig.sumFileMap[details.realFilePath][details.SUMKeySuffix].isCreated === false ||
+      !newFileMapConfig.sumFileMap[details.realFilePath][details.SUMKeySuffix]
     ) {
       console.log('plik nie istnieje nie można go ponownie usunac');
     }
 
-    const path = newFileMapConfig.snpFileMap[details.realFilePath][details.SNPKeySuffix].path;
+    const path = newFileMapConfig.sumFileMap[details.realFilePath][details.SUMKeySuffix].path;
 
     if (path) {
       newFileMapConfig.createdFileMap = newFileMapConfig.createdFileMap.filter((file) => file !== path);
     }
-    delete newFileMapConfig.snpFileMap[details.realFilePath][details.SNPKeySuffix];
+    delete newFileMapConfig.sumFileMap[details.realFilePath][details.SUMKeySuffix];
 
-    if (Object.keys(newFileMapConfig.snpFileMap[details.realFilePath]).length === 0) {
-      delete newFileMapConfig.snpFileMap[details.realFilePath];
+    if (Object.keys(newFileMapConfig.sumFileMap[details.realFilePath]).length === 0) {
+      delete newFileMapConfig.sumFileMap[details.realFilePath];
     }
   }
 
-  if (operation === 'createSNPRealFile' && details.realFilePath) {
+  if (operation === 'createSUMRealFile' && details.realFilePath) {
     details.options.replaceFile = true;
-    if (newFileMapConfig.snpFileMap[details.realFilePath]['_'].isCreated === true) {
+    if (newFileMapConfig.sumFileMap[details.realFilePath]['_'].isCreated === true) {
       console.log('plik już byl dodany ! sprawdzic czy istnieje i podjać odpowiednia akcje');
     }
-    const filePath = newFileMapConfig.snpFileMap[details.realFilePath]['_'].path;
+    const filePath = newFileMapConfig.sumFileMap[details.realFilePath]['_'].path;
 
     if (!newFileMapConfig.createdFileMap.includes(filePath)) {
       newFileMapConfig.createdFileMap.push(filePath);
     }
 
-    newFileMapConfig.snpFileMap[details.realFilePath]['_'].isCreated = true;
+    newFileMapConfig.sumFileMap[details.realFilePath]['_'].isCreated = true;
   }
 
-  if (operation === 'createSuffixFile' && details.realFilePath && details.SNPKeySuffix) {
+  if (operation === 'createSuffixFile' && details.realFilePath && details.SUMKeySuffix) {
     details.options.replaceFile = true;
-    if (newFileMapConfig.snpFileMap[details.realFilePath][details.SNPKeySuffix].isCreated === true) {
+    if (newFileMapConfig.sumFileMap[details.realFilePath][details.SUMKeySuffix].isCreated === true) {
       console.log('plik już byż dodany ! sprawdzic czy istnieje i podjać odpowiednia akcje');
     }
 
-    const filePath = newFileMapConfig.snpFileMap[details.realFilePath][details.SNPKeySuffix].path;
+    const filePath = newFileMapConfig.sumFileMap[details.realFilePath][details.SUMKeySuffix].path;
 
     if (!newFileMapConfig.createdFileMap.includes(filePath)) {
       newFileMapConfig.createdFileMap.push(filePath);
     }
 
-    newFileMapConfig.snpFileMap[details.realFilePath][details.SNPKeySuffix].isCreated = true;
+    newFileMapConfig.sumFileMap[details.realFilePath][details.SUMKeySuffix].isCreated = true;
   }
 
   return (
     ((await updateJsonFile({
-      filePath: config.snpFileMapConfig,
+      filePath: config.sumFileMapConfig,
       config,
       newContent: newFileMapConfig,
       replaceFile: details.options.replaceFile,

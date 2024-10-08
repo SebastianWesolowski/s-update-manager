@@ -11,7 +11,7 @@ describe('createConfigFile', () => {
     config = { ...mockConfig.step.init };
 
     await cleanUpFiles({
-      snpCatalog: config.snpCatalog,
+      sumCatalog: config.sumCatalog,
       directoryPath: config.projectCatalog,
       isDebug: config.isDebug,
     });
@@ -19,7 +19,7 @@ describe('createConfigFile', () => {
 
   afterEach(async () => {
     await cleanUpFiles({
-      snpCatalog: config.snpCatalog,
+      sumCatalog: config.sumCatalog,
       directoryPath: config.projectCatalog,
       isDebug: config.isDebug,
     });
@@ -35,8 +35,8 @@ describe('createConfigFile', () => {
 
     expect({ ...result, allFiles }).toStrictEqual({
       config: mockConfig.step.createConfigFile,
-      configFilePath: mockConfig.step.createConfigFile.snpConfigFile,
-      allFiles: ['./test/mockProject/.snp/snp.config.json'],
+      configFilePath: mockConfig.step.createConfigFile.sumConfigFile,
+      allFiles: ['./test/mockProject/.sum/sum.config.json'],
     });
   });
 });

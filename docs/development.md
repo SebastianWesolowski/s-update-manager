@@ -20,7 +20,7 @@ Gdy zmienna środowiskowa `SDEBUG` jest ustawiona na `true`, projekt pobiera dom
 - `isDebug`: ustawione na 'true'
 - `projectCatalog`: ścieżka do katalogu projektu (domyślnie './mock/mockProject')
 - `remoteRepository`: URL do repozytorium zdalnego z mapą szablonów
-- `snpCatalog`: ścieżka do katalogu .snp (domyślnie './mock/mockProject/.snp')
+- `sumCatalog`: ścieżka do katalogu .sum (domyślnie './mock/mockProject/.sum')
 
 Dla szablonów:
 

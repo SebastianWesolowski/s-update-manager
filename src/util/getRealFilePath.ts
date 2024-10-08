@@ -5,15 +5,15 @@ import { getRealFileName } from '@/util/getRealFileName';
 
 export const getRealFilePath = ({
   config,
-  SNPSuffixFileName,
+  SUMSuffixFileName,
 }: {
   config: ConfigType;
-  SNPSuffixFileName: string;
+  SUMSuffixFileName: string;
 }): string => {
-  const realFileName = getRealFileName({ config, contentToCheck: [SNPSuffixFileName] })[0];
+  const realFileName = getRealFileName({ config, contentToCheck: [SUMSuffixFileName] })[0];
 
-  const snpPath = SNPSuffixFileName.replace(config.templateCatalogName, '');
-  const directoryPath = path.dirname(snpPath);
+  const sumPath = SUMSuffixFileName.replace(config.templateCatalogName, '');
+  const directoryPath = path.dirname(sumPath);
   let realFilePath = createPath([directoryPath, realFileName]);
 
   if (realFilePath.startsWith('/')) {
