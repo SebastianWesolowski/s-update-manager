@@ -9,42 +9,77 @@
 - [Author page](PLACEHOLDER_PAGE_AUTHOR)
 
 <br>
+<br>
 
-**Remove before final release**
+- [why](docs/why.md)
+- [Instalations](docs/instalations.md)
+  - [How to use](docs/howToUse.md)
+  - [default list repo](docs/default-list-repo.md)
+  - [create your own repo](docs/create-your-own-repo.md)
+  - [template structure](docs/template-structure.md)
+  - [Adjust configuration](docs/adjust-configuration.md)
+  - [CLI parameters](docs/cli-parameters.md)
+- [How to use](docs/howToUse.md)
+- [Known Problems](docs/knowProblems.md)
 
-- [Set up your repository](docs/HowToAutoDeploy.md)
-- [Way to work](docs/WayToWrok.md)
-- [Known issues](docs/knowProblems.md)
+- [Development process](docs/development.md)
 
 ---
 
 <br/>
 
-s-update-manager is a npm package for updating a template dependent project
+## Whai is s-update-manager
+
+s-update-manager is designed to maintain project configurations based on an external repository.
+
+Continue reading [Why](docs/why.md)
 
 ## Install
 
-```bash
-npm install s-update-manager
-```
-
-## Usage
-
-use s-init script in your package json file
+use your favorite package manager to install update-manager.
 
 ```bash
-"init": "s-init --sumConfig ./.sum --template node --project ./ --remoteRepository https://raw.githubusercontent.com/SebastianWesolowski/testTemplate/main/template/"
+yarn add s-update-manager
 ```
 
-use CLI parameters:
+### Choose template repository
 
-`sumConfig: './.sum'`
-`template: 'node'`
-`project: './mock/mockProject'`
-`remoteRepository: 'https://raw.githubusercontent.com/SebastianWesolowski/testTemplate/main/template/'`
-`debug: true`
+before use you have to chose repository with templates.
 
-You can see example project in `test/realProject/`
+You have 2 way
+
+- default repos [default-list-repo](default-list-repo.md)
+- create your own repo [create-your-own-repo](create-your-own-repo.md)
+
+In this example we will use [node template](https://github.com/SebastianWesolowski/s-update-manager/tree/dev/template/node/templateCatalog)
+
+### Setup scripts
+
+In package.json add script to your project
+
+```json
+"scripts": {
+  "update": "s-update --remoteRepository='https://github.com/SebastianWesolowski/s-update-manager/tree/dev/template/node/templateCatalog'",
+  "build": "s-build --remoteRepository='https://github.com/SebastianWesolowski/s-update-manager/tree/dev/template/node/templateCatalog'",
+  "init": "s-init --remoteRepository='https://github.com/SebastianWesolowski/s-update-manager/tree/dev/template/node/templateCatalog'"
+}
+```
+
+Ypu can add aditional cli parameters to script.
+
+[CLI parameters](docs/cli-parameters.md)
+
+### Run script
+
+depends on your needs
+
+- `init` - initialize project with template
+- `build` - build project after [adjust configuration](adjust-configuration.md) files
+- `update` - update project if new version of template is avaliable
+
+## Example project
+
+You can see example project in `example/realProject/`
 
 ## Badges
 
@@ -65,5 +100,3 @@ You can see example project in `test/realProject/`
 [semantic-release-url]: https://github.com/semantic-release/semantic-release
 [commitizen-img]: https://img.shields.io/badge/commitizen-friendly-brightgreen.svg
 [commitizen-url]: http://commitizen.github.io/cz-cli/
-
-repository react
