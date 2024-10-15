@@ -15,12 +15,12 @@ export async function formatJsonWithPrettier(inputPath: string, outputPath?: str
         const finalOutputPath = outputPath || inputPath;
         fs.writeFileSync(finalOutputPath, json, 'utf8');
         if (isDebug) {
-          console.log('JSON został sformatowany i zapisany do', finalOutputPath);
+          console.log('JSON has been formatted and saved to', finalOutputPath);
         }
       });
   } catch (error) {
     if (isDebug) {
-      console.error('Wystąpił błąd podczas formatowania JSON:', error);
+      console.error('An error occurred while formatting JSON:', error);
     }
   }
 }

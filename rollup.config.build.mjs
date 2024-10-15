@@ -1,36 +1,32 @@
-import typescript from 'rollup-plugin-typescript2';
-import {nodeResolve} from '@rollup/plugin-node-resolve';
+import babel from '@rollup/plugin-babel';
 import commonjs from '@rollup/plugin-commonjs';
-import {glob} from 'glob';
-import json from "@rollup/plugin-json";
-import babel from "@rollup/plugin-babel";
+import json from '@rollup/plugin-json';
+import { nodeResolve } from '@rollup/plugin-node-resolve';
+import { glob } from 'glob';
+import typescript from 'rollup-plugin-typescript2';
 
 const files = glob.sync('src/**/*.ts', { nodir: true });
 
 export default {
-    input: files,
-    output: {
-        format: 'esm',
-        dir: 'lib',
-        preserveModules: true,
-        entryFileNames: '[name].mjs', // Nazwa pliku głównego
-        chunkFileNames: '[name]-[hash].mjs', // Nazwa pliku chunka
-    },
-    plugins: [
-        json(),
-        nodeResolve(),
-        babel({ // Konwersja składni
-            babelHelpers: 'bundled',
-            exclude: 'node_modules/**', // Wyłączanie konwersji dla plików w node_modules
-        }),
-        commonjs(),
-        typescript({
-            tsconfig: 'tsconfig.json',
-        }),
-
-    ],
-
-
+  input: files,
+  output: {
+    format: 'esm',
+    dir: 'lib',
+    preserveModules: true,
+    entryFileNames: '[name].mjs', // Main file name
+    chunkFileNames: '[name]-[hash].mjs', // Chunk file name
+  },
+  plugins: [
+    json(),
+    nodeResolve(),
+    babel({
+      // Syntax conversion
+      babelHelpers: 'bundled',
+      exclude: 'node_modules/**', // Excluding conversion for files in node_modules
+    }),
+    commonjs(),
+    typescript({
+      tsconfig: 'tsconfig.json',
+    }),
+  ],
 };
-
-

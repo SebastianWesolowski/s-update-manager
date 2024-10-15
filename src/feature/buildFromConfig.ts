@@ -24,8 +24,8 @@ export const buildFromConfig = async (
   );
 
   for (const realFilePath in sumFileMapConfig.sumFileMap) {
-    // bo sprawdzamy tylko po default reszta powinn być wygenewoana ręcznie lub korzysta tylko z getContent
-    // const SUMKeySuffix = "defaulFile"
+    // because we only check for default, the rest should be generated manually or only use getContent
+    // const SUMKeySuffix = "defaultFile"
     for (const SUMKeySuffix in sumFileMapConfig.sumFileMap[realFilePath]) {
       if (SUMKeySuffix === '_') {
         continue;
@@ -49,7 +49,7 @@ export const buildFromConfig = async (
           });
         });
       }
-      // Tutaj nie ma potrzeby występowania innych niż default
+      // There's no need for others than default to appear here
       if (sumFileMapConfig.fileMap.includes(currentFileObject.SUMSuffixFileName)) {
         const content = await getRemoteContentToBuild({
           config,

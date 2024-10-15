@@ -17,17 +17,17 @@ export const formatSum = (
   };
 
   if (returnValue === 'key') {
-    // Sprawdź, czy input kończy się jednym z sufiksów
+    // Check if the input ends with one of the suffixes
     for (const suffix in suffixMapping) {
       if (input.endsWith(suffix)) {
         return suffixMapping[suffix as AvailableSUMKeySuffixTypes];
       }
     }
   } else {
-    // Sprawdź, czy input jest jednym z kluczy w odwrotnej mapie
+    // Check if the input is one of the keys in the reverse map
     return reverseSuffixMapping[input as AvailableSUMSuffixTypes] || null;
   }
 
-  // Gdy nie pasuje żaden z podanych kluczy ani sufiksów
+  // When none of the given keys or suffixes match
   return null;
 };

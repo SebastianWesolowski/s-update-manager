@@ -1,50 +1,50 @@
-# Skrypty deweloperskie
+# Development Scripts
 
-W pliku `package.json` znajdują się różne skrypty, które można wykorzystać podczas pracy nad projektem. Poniżej przedstawiamy najważniejsze z nich:
+The `package.json` file contains various scripts that can be used during project development. Below are the most important ones:
 
-## Uruchamianie w trybie deweloperskim
+## Running in Development Mode
 
-Aby uruchomić projekt w trybie deweloperskim, możesz użyć następujących komend:
+To run the project in development mode, you can use the following commands:
 
-- `npm run start:init` lub `yarn start:init` - uruchamia skrypt inicjalizacyjny w trybie watch
-- `npm run start:update` lub `yarn start:update` - uruchamia skrypt aktualizacyjny w trybie watch
-- `npm run start:build` lub `yarn start:build` - uruchamia skrypt budowania w trybie watch
-- `npm run start:template` lub `yarn start:template` - uruchamia skrypt przygotowania szablonu w trybie watch
+- `npm run start:init` or `yarn start:init` - runs the initialization script in watch mode
+- `npm run start:update` or `yarn start:update` - runs the update script in watch mode
+- `npm run start:build` or `yarn start:build` - runs the build script in watch mode
+- `npm run start:template` or `yarn start:template` - runs the template preparation script in watch mode
 
-Wszystkie powyższe komendy używają `cross-env` do ustawienia zmiennej środowiskowej `SDEBUG=true` oraz `tsx watch` do uruchomienia skryptów TypeScript w trybie watch.
+All of the above commands use `cross-env` to set the `SDEBUG=true` environment variable and `tsx watch` to run TypeScript scripts in watch mode.
 
-### Tryb debugowania (SDEBUG)
+### Debug Mode (SDEBUG)
 
-Gdy zmienna środowiskowa `SDEBUG` jest ustawiona na `true`, projekt pobiera domyślne wartości argumentów z pliku `src/feature/args/const.ts`. Oto dane, które można edytować w trybie debugowania:
+When the `SDEBUG` environment variable is set to `true`, the project fetches default argument values from the `src/feature/args/const.ts` file. Here's the data that can be edited in debug mode:
 
-- `isDebug`: ustawione na 'true'
-- `projectCatalog`: ścieżka do katalogu projektu (domyślnie './mock/mockProject')
-- `remoteRepository`: URL do repozytorium zdalnego z mapą szablonów
-- `sumCatalog`: ścieżka do katalogu .sum (domyślnie './mock/mockProject/.sum')
+- `isDebug`: set to 'true'
+- `projectCatalog`: path to the project directory (default './mock/mockProject')
+- `remoteRepository`: URL to the remote repository with the template map
+- `sumCatalog`: path to the .sum directory (default './mock/mockProject/.sum')
 
-Dla szablonów:
+For templates:
 
-- `projectCatalog`: ścieżka do katalogu szablonu (domyślnie './template/node')
+- `projectCatalog`: path to the template directory (default './template/node')
 
-Możesz dostosować te wartości w pliku `const.ts`, aby ułatwić testowanie i debugowanie.
+You can adjust these values in the `const.ts` file to facilitate testing and debugging.
 
-## Kompilacja TypeScript
+## TypeScript Compilation
 
-- `npm run prestart:dev` lub `yarn prestart:dev` - uruchamia kompilator TypeScript w trybie watch
+- `npm run prestart:dev` or `yarn prestart:dev` - runs the TypeScript compiler in watch mode
 
-## Budowanie projektu
+## Building the Project
 
-- `npm run build` lub `yarn build` - czyści katalog `lib/` i buduje projekt używając Rollup
-- `npm run build:prod` lub `yarn build:prod` - czyści katalog `lib/` i buduje projekt w wersji produkcyjnej
+- `npm run build` or `yarn build` - cleans the `lib/` directory and builds the project using Rollup
+- `npm run build:prod` or `yarn build:prod` - cleans the `lib/` directory and builds the project in production version
 
-## Lintowanie i formatowanie kodu
+## Linting and Formatting Code
 
-- `npm run lint` lub `yarn lint` - uruchamia linter i formatter dla całego projektu
-- `npm run lint:fix` lub `yarn lint:fix` - automatycznie naprawia problemy z formatowaniem i lintowaniem
+- `npm run lint` or `yarn lint` - runs the linter and formatter for the entire project
+- `npm run lint:fix` or `yarn lint:fix` - automatically fixes formatting and linting issues
 
-## Testowanie
+## Testing
 
-- `npm run test:check` lub `yarn test:check` - uruchamia testy z pokryciem kodu
-- `npm run test:watch` lub `yarn test:watch` - uruchamia testy w trybie watch
+- `npm run test:check` or `yarn test:check` - runs tests with code coverage
+- `npm run test:watch` or `yarn test:watch` - runs tests in watch mode
 
-Pamiętaj, że przed uruchomieniem skryptów deweloperskich powinieneś zainstalować wszystkie zależności projektu, używając komendy `npm install` lub `yarn install`.
+Remember that before running development scripts, you should install all project dependencies using the `npm install` or `yarn install` command.

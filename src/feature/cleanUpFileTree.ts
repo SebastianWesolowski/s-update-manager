@@ -54,7 +54,7 @@ export const cleanUpFileTree = async (config: ConfigType): Promise<ConfigType> =
           });
         }
       } else {
-        console.log('żaden plik nie został wyczyszczony');
+        console.log('no file has been cleaned');
       }
     }
 
