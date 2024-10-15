@@ -5,9 +5,9 @@ export async function readFile(filePath: string, isDebug = false): Promise<strin
     const errorMessage = `File ${filePath} does not exist.`;
     if (isDebug) {
       console.error(errorMessage);
-      console.error(new Error().stack); // Wyświetl stos wywołań dla debugowania
+      console.error(new Error().stack); // Display call stack for debugging
     }
-    return ''; // Zwróć pustą zawartość, gdy plik nie istnieje
+    return ''; // Return empty content when file does not exist
   }
 
   try {
@@ -15,8 +15,8 @@ export async function readFile(filePath: string, isDebug = false): Promise<strin
   } catch (err) {
     if (isDebug) {
       console.error(`Error while reading file ${filePath}`, err);
-      console.error(new Error().stack); // Wyświetl stos wywołań dla debugowania
+      console.error(new Error().stack); // Display call stack for debugging
     }
-    throw err; // Przekaż błąd dalej, aby był obsłużony przez wywołującą funkcję
+    throw err; // Pass the error further to be handled by the calling function
   }
 }

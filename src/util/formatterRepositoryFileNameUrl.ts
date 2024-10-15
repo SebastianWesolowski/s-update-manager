@@ -22,24 +22,24 @@ export const buildURL = ({
   queryParams?: Record<string, string>;
   hash?: string;
 }): string => {
-  // Tworzenie obiektu URL z bazowego adresu
+  // Create a URL object from the base address
   const url = new URL(baseURL);
 
-  // Łączenie ścieżki bazowej z relatywnymi częściami, usuwanie zbędnych ukośników
+  // Combine the base path with relative parts, removing unnecessary slashes
   const fullPath = relativePaths.map((path) => path.replace(/^\//, '').replace(/\/$/, '')).join('/');
 
   url.pathname = `${url.pathname.replace(/\/$/, '')}/${fullPath}`;
 
-  // Dodanie parametrów zapytania (jeśli istnieją)
+  // Add query parameters (if they exist)
   Object.keys(queryParams).forEach((key) => {
     url.searchParams.append(key, queryParams[key]);
   });
 
-  // Dodanie fragmentu (hash) (jeśli istnieje)
+  // Add the fragment (hash) (if it exists)
   if (hash) {
     url.hash = hash;
   }
 
-  // Zwrócenie pełnego URL jako string
+  // Return the full URL as a string
   return url.toString();
 };

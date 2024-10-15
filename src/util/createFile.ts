@@ -7,7 +7,7 @@ interface CreateFileParams {
   filePath?: string;
   folderPath?: string;
   fileName?: string;
-  content: string | Buffer; // czy to napewno potrzebne, com podczas tworzenia folderu ?
+  content: string | Buffer; // TODO [SC-84] is this really necessary, what about during folder creation?
   options?: {
     createFolder?: boolean;
     overwriteFile?: boolean;

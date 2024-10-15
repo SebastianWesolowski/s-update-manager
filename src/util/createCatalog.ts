@@ -5,7 +5,7 @@ export async function createCatalog(filePath: string) {
     await fs.promises.mkdir(filePath, { recursive: true });
     return filePath;
   } catch (error) {
-    console.error('Błąd podczas tworzenia katalogu:', error);
+    console.error('Error while creating directory:', error);
     throw error;
   }
 }

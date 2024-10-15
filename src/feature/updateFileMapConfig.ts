@@ -62,8 +62,8 @@ export const updateDetailsFileMapConfig2 = async ({
     createdFileMap: [],
     fileMap: [],
   };
-  // 'addConfigSuffixFile' - dodanie nowego pliku do configu
-  // 'createSuffixFile' - stworzeni pliku
+  // 'addConfigSuffixFile' - adding a new file to the config
+  // 'createSuffixFile' - creating a file
 
   let newFileMapConfig = sumFileMapConfig;
   if (!newFileMapConfig) {
@@ -151,7 +151,7 @@ export const updateDetailsFileMapConfig2 = async ({
       newFileMapConfig.sumFileMap[details.realFilePath][details.SUMKeySuffix].isCreated === false ||
       !newFileMapConfig.sumFileMap[details.realFilePath][details.SUMKeySuffix]
     ) {
-      console.log('plik nie istnieje nie można go ponownie usunac');
+      console.log('The file does not exist, it cannot be deleted again');
     }
 
     const path = newFileMapConfig.sumFileMap[details.realFilePath][details.SUMKeySuffix].path;
@@ -169,7 +169,7 @@ export const updateDetailsFileMapConfig2 = async ({
   if (operation === 'createSUMRealFile' && details.realFilePath) {
     details.options.replaceFile = true;
     if (newFileMapConfig.sumFileMap[details.realFilePath]['_'].isCreated === true) {
-      console.log('plik już byl dodany ! sprawdzic czy istnieje i podjać odpowiednia akcje');
+      console.log('The file has already been added! Check if it exists and take appropriate action');
     }
     const filePath = newFileMapConfig.sumFileMap[details.realFilePath]['_'].path;
 
@@ -183,7 +183,7 @@ export const updateDetailsFileMapConfig2 = async ({
   if (operation === 'createSuffixFile' && details.realFilePath && details.SUMKeySuffix) {
     details.options.replaceFile = true;
     if (newFileMapConfig.sumFileMap[details.realFilePath][details.SUMKeySuffix].isCreated === true) {
-      console.log('plik już byż dodany ! sprawdzic czy istnieje i podjać odpowiednia akcje');
+      console.log('The file has already been added! Check if it exists and take appropriate action');
     }
 
     const filePath = newFileMapConfig.sumFileMap[details.realFilePath][details.SUMKeySuffix].path;

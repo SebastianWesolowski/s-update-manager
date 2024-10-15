@@ -7,7 +7,7 @@ export const defaultConfig: ConfigType = {
   availableSUMSuffix: ['-default.md', '-custom.md', '-extend.md'],
   availableSUMKeySuffix: ['defaultFile', 'customFile', 'extendFile'],
   templateVersion: undefined,
-  REPOSITORY_MAP_FILE_NAME: 'repositoryMap.json', // TODO zmienic nazwę na sumFileMapConfig
+  REPOSITORY_MAP_FILE_NAME: 'repositoryMap.json', // TODO [SC-83] change name to sumFileMapConfig
   sumFileMapConfig: './.sum/repositoryMap.json',
   projectCatalog: './',
   temporaryFolder: './.sum/temporary/',

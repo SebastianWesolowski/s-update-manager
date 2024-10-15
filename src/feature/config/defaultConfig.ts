@@ -56,7 +56,7 @@ export const regenerateConfig = async (config: ConfigType): Promise<ConfigType> 
           .replace('/blob/', '/')
           .replace('/tree/', '/');
       } else {
-        // Jeśli już jest to raw URL, pozostaw bez zmian
+        // If it's already a raw URL, leave it unchanged
         regeneratedConfig.remoteRootRepositoryUrl = repositoryURL.replace(/\/$/, '');
       }
     }

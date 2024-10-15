@@ -2,12 +2,12 @@ import { readdir, rmdir, stat, unlink } from 'fs/promises';
 import { join } from 'path';
 
 /**
- * Usuwa wszystkie pliki i podkatalogi z danego katalogu.
+ * Removes all files and subdirectories from a given directory.
  *
- * @param directory - Ścieżka do katalogu, z którego mają zostać usunięte wszystkie pliki i podkatalogi.
- * @returns Promise<void> - Zwraca obietnicę, która jest spełniona po usunięciu wszystkich plików i podkatalogów.
+ * @param directory - Path to the directory from which all files and subdirectories should be removed.
+ * @returns Promise<void> - Returns a promise that is fulfilled after all files and subdirectories are removed.
  *
- * @throws Error - Jeśli nie można odczytać katalogu lub usunąć pliku/katalogu.
+ * @throws Error - If the directory cannot be read or a file/directory cannot be deleted.
  */
 export async function clearDirectory(directory: string): Promise<void> {
   try {
@@ -18,19 +18,19 @@ export async function clearDirectory(directory: string): Promise<void> {
       const fileStat = await stat(filePath);
 
       if (fileStat.isDirectory()) {
-        // Jeśli to katalog, wywołujemy funkcję rekurencyjnie
+        // If it's a directory, call the function recursively
         await clearDirectory(filePath);
-        // Po wyczyszczeniu katalogu usuwamy go
+        // After clearing the directory, remove it
         await rmdir(filePath);
       } else {
-        // Jeśli to plik, usuwamy go
+        // If it's a file, delete it
         await unlink(filePath);
       }
     });
 
     await Promise.all(deletionPromises);
-    console.log(`Wszystkie pliki i podkatalogi w katalogu "${directory}" zostały usunięte.`);
+    console.log(`All files and subdirectories in the directory "${directory}" have been deleted.`);
   } catch (error: any) {
-    throw new Error(`Nie udało się usunąć plików z katalogu: ${error?.message || error}`);
+    throw new Error(`Failed to delete files from the directory: ${error?.message || error}`);
   }
 }

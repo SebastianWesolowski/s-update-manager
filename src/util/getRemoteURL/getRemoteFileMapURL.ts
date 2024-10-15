@@ -6,7 +6,7 @@ export function getRemoteFileMapURL(config: ConfigType): string {
   const fileName = config.REPOSITORY_MAP_FILE_NAME;
   const templateCatalogName = config.templateCatalogName;
 
-  // Sprawdzenie, czy templateCatalogName jest w URL; jeśli nie, dodanie go
+  // Check if templateCatalogName is in the URL; if not, add it
   if (!repositoryURL.includes(templateCatalogName)) {
     repositoryURL = buildURL({
       baseURL: repositoryURL,
@@ -14,7 +14,7 @@ export function getRemoteFileMapURL(config: ConfigType): string {
     });
   }
 
-  // Dodanie nazwy pliku do URL, jeśli go brakuje
+  // Add the file name to the URL if it's missing
   if (!repositoryURL.endsWith(fileName)) {
     repositoryURL = buildURL({
       baseURL: repositoryURL,
@@ -22,9 +22,9 @@ export function getRemoteFileMapURL(config: ConfigType): string {
     });
   }
 
-  // Aktualizacja URL do formatu surowego URL-a GitHub, jeśli dotyczy
+  // Update URL to raw GitHub URL format, if applicable
   const isGitHubURL = repositoryURL.includes('github.com');
   return isGitHubURL
     ? repositoryURL.replace('github.com', 'raw.githubusercontent.com').replace('/blob/', '/').replace('/tree/', '/')
-    : repositoryURL.replace(/\/$/, ''); // Usuwanie ewentualnego ukośnika na końcu
+    : repositoryURL.replace(/\/$/, ''); // Remove trailing slash if present
 }

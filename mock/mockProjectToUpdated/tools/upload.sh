@@ -9,28 +9,28 @@
 first_commit=66096206 # 1.0.2
 second_commit=067b86de # current
 
-# Pobierz tagi dla pierwszego i drugiego commita
+# Get tags for the first and second commit
 tag_first_commit=$(git describe --tags --abbrev=0 $first_commit) # 1.0.2
 tag_second_commit=$(git describe --tags --abbrev=0 $second_commit) # current
 
-# Sprawdź, czy tag drugiego commita jest taki sam jak tag pierwszego
+# Check if the tag of the second commit is the same as the first one
 if [ "$tag_first_commit" = "$tag_second_commit" ]; then
     tag_second_commit='current'
 fi
 
-# Sprawdź istnienie katalogu "upload"
+# Check if the "upload" directory exists
 if [ ! -d "upload" ]; then
-    echo "Tworzenie katalogu 'upload'"
+    echo "Creating 'upload' directory"
     mkdir "upload"
 fi
 
-# Wykonaj diff i skopiuj pliki
+# Perform diff and copy files
 git diff --name-only $first_commit^..$second_commit | while read file; do
-    # Utwórz archiwum ZIP i dodaj pliki do niego
+    # Create ZIP archive and add files to it
     zip -r "upload/SUM-$tag_first_commit-$tag_second_commit.zip" "$file"
 
 done
 
-echo "Zakończono kopiowanie plików do katalogu 'upload'"
-echo "Tag pierwszego commita: $tag_first_commit"
-echo "Tag drugiego commita: $tag_second_commit"
+echo "Finished copying files to 'upload' directory"
+echo "Tag of the first commit: $tag_first_commit"
+echo "Tag of the second commit: $tag_second_commit"
