@@ -14,5 +14,5 @@ use CLI parameters:
 `sumConfig: './.sum'`
 `template: 'node'`
 `project: './mock/mockProject'`
-`remoteRepository: 'https://raw.githubusercontent.com/SebastianWesolowski/testTemplate/main/template/'`
+`remoteRepository: 'https://github.com/SebastianWesolowski/s-template/tree/main/templates/node'`
 `debug: true`

@@ -1,10 +1,19 @@
 # Default list repo
 
-Package `s-update-manager` have some default template repository.
+Official list of template repositories for [s-update-manager](https://github.com/SebastianWesolowski/s-update-manager)
 
-## List repo
+If you want to use these templates with s-update-manager, you must use the repository address as an argument in the [CLI](https://github.com/SebastianWesolowski/s-update-manager/docs/cli-parameters.md) or [configuration file](https://github.com/SebastianWesolowski/s-update-manager/docs/config-file.md)
 
-| Template | Repository URL                                                                                                                                     |
-| -------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
-| node     | [https://github.com/SebastianWesolowski/s-update-manager-template/node](https://github.com/SebastianWesolowski/s-update-manager-template/node)     |
-| nextjs   | [https://github.com/SebastianWesolowski/s-update-manager-template/nextjs](https://github.com/SebastianWesolowski/s-update-manager-template/nextjs) |
+| Template          | Repository URL                                                                                                       |
+| ----------------- | -------------------------------------------------------------------------------------------------------------------- |
+| [node](#node)     | [https://github.com/SebastianWesolowski/s-template/templates/node](https://github.com/SebastianWesolowski/s-template/templates/node)     |
+| [NextJs](#NextJs) | [https://github.com/SebastianWesolowski/s-template/templates/nextjs](https://github.com/SebastianWesolowski/s-template/templates/nextjs) |
+
+## node
+
+Simple template for node
+
+## NextJs
+
+Next.js TypeScript template
+
