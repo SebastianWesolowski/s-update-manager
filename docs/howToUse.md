@@ -12,5 +12,5 @@ You have 2 options:
 use s-init script in your package json file
 
 ```bash
-"init": "s-init --sumConfig ./.sum --template node --project ./ --remoteRepository https://raw.githubusercontent.com/SebastianWesolowski/testTemplate/main/template/"
+"init": "s-init --sumConfig ./.sum --template node --project ./ --remoteRepository https://github.com/SebastianWesolowski/s-template/tree/main/templates/node"
 ```

@@ -24,7 +24,7 @@ When the `SDEBUG` environment variable is set to `true`, the project fetches def
 
 For templates:
 
-- `projectCatalog`: path to the template directory (default './template/node')
+- `projectCatalog`: path to the template directory (default './')
 
 You can adjust these values in the `const.ts` file to facilitate testing and debugging.
 

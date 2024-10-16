@@ -4,9 +4,9 @@
   "description": "lorem ipsum dolor sit amet, consectetur adipis",
   "main": "index.js",
   "scripts": {
-    "update": "s-update --remoteRepository='https://github.com/SebastianWesolowski/s-update-manager/tree/dev/template/node/templateCatalog'",
-    "build": "s-build --remoteRepository='https://github.com/SebastianWesolowski/s-update-manager/tree/dev/template/node/templateCatalog'",
-    "init": "s-init --remoteRepository='https://github.com/SebastianWesolowski/s-update-manager/tree/dev/template/node/templateCatalog'"
+    "update": "s-update --remoteRepository='https://github.com/SebastianWesolowski/s-template/tree/main/templates/node'",
+    "build": "s-build --remoteRepository='https://github.com/SebastianWesolowski/s-template/tree/main/templates/node'",
+    "init": "s-init --remoteRepository='https://github.com/SebastianWesolowski/s-template/tree/main/templates/node'"
   },
   "author": "",
   "license": "ISC",

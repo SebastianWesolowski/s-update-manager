@@ -30,26 +30,29 @@ module.exports = {
         preset: 'conventionalcommits',
         presetConfig: {
           types: [
-            {
-              type: 'feat',
-              section: 'Features',
-            },
-            {
-              type: 'fix',
-              section: 'Bug Fixes',
-            },
-            {
-              type: 'build',
-              section: 'Dependencies and Other Build Updates',
-              hidden: false,
-            },
+            { type: 'feat', section: 'Features' },
+            { type: 'fix', section: 'Bug Fixes' },
+            { type: 'build', section: 'Dependencies and Other Build Updates', hidden: false },
+            { type: 'chore', section: 'Other tasks', hidden: false },
           ],
         },
         writerOpts: {
           groupBy: 'scIssue',
           commitsSort: ['scIssue', 'type'],
           helpers,
-          commitGroupsSort: 'title',
+          commitGroupsSort: (a, b) => {
+            if (a.title === 'Other tasks') return 1;
+            if (b.title === 'Other tasks') return -1;
+
+            const aMatch = a.title && a.title.match(/SC-(\d+)/);
+            const bMatch = b.title && b.title.match(/SC-(\d+)/);
+
+            if (aMatch && bMatch) {
+              return parseInt(aMatch[1]) - parseInt(bMatch[1]);
+            }
+
+            return (a.title || '').localeCompare(b.title || '');
+          },
           transform: (commit, context) => {
             if (commit.type === 'feat') {
               commit.type = 'Features';
@@ -57,17 +60,24 @@ module.exports = {
               commit.type = 'Bug Fixes';
             } else if (commit.type === 'build') {
               commit.type = 'Dependencies and Other Build Updates';
+            } else if (commit.type === null || !commit.type || commit.type === 'chore') {
+              commit.type = 'Other tasks';
             }
 
             if (typeof commit.hash === 'string') {
               commit.shortHash = commit.hash.substring(0, 7);
             }
 
-            if (typeof commit.subject === 'string') {
+            if (typeof commit.subject === 'string' || commit.subject === null) {
               let url = context.repository ? `${context.host}/${context.owner}/${context.repository}` : context.repoUrl;
 
               // Extract SC issue number
-              const scMatch = commit.subject.match(/\[?(SC-\d+)\]?/);
+
+              if (commit.message && commit.subject === null) {
+                commit.subject = commit.message;
+              }
+
+              const scMatch = commit.subject ? commit.subject.match(/\[?(SC-\d+)\]?/) : null;
               if (scMatch) {
                 const scIssue = scMatch[1];
                 commit.scIssue = scIssue;
@@ -77,7 +87,7 @@ module.exports = {
                   `[[${scIssue}](https://linear.app/wesolowskidev/issue/${scIssue})]`
                 );
               } else {
-                commit.scIssue = 'Other tasks'; // Assign to "Other tasks" if no SC- issue is found
+                commit.scIssue = 'Other tasks';
               }
 
               if (url) {
@@ -88,20 +98,6 @@ module.exports = {
             return commit;
           },
           commitPartial: '- {{subject}} ([{{shortHash}}]({{commitUrl}}))\n',
-          commitGroupsSort: (a, b) => {
-            const aMatch = typeof a.title === 'string' && a.title.match(/SC-(\d+)/);
-            const bMatch = typeof b.title === 'string' && b.title.match(/SC-(\d+)/);
-
-            if (aMatch && bMatch) {
-              return parseInt(aMatch[1]) - parseInt(bMatch[1]);
-            }
-
-            // Ensure "Other tasks" comes last
-            if (a.title === 'Other tasks') return 1;
-            if (b.title === 'Other tasks') return -1;
-
-            return a.title.localeCompare(b.title);
-          },
           mainTemplate: `{{> header}}
 
 {{#each commitGroups}}
@@ -123,7 +119,6 @@ module.exports = {
         changelogFile: 'CHANGELOG.md',
       },
     ],
-    '@semantic-release/npm',
     [
       '@semantic-release/github',
       {

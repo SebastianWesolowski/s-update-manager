@@ -6,7 +6,7 @@
 
 - [![npm package][npm-img]][npm-url]
 - [![Build Status][build-img]][build-url]
-- [Author page](PLACEHOLDER_PAGE_AUTHOR)
+- [Author page](https://wesolowski.dev)
 
 <br>
 <br>
@@ -17,8 +17,9 @@
   - [default list repo](docs/default-list-repo.md)
   - [create your own repo](docs/create-your-own-repo.md)
   - [template structure](docs/template-structure.md)
-  - [Adjust configuration](docs/adjust-configuration.md)
   - [CLI parameters](docs/cli-parameters.md)
+  - [config File](docs/config-file.md)
+  - [Adjust configuration](docs/adjust-configuration.md)
 - [How to use](docs/howToUse.md)
 - [Known Problems](docs/knowProblems.md)
 
@@ -51,7 +52,7 @@ You have 2 way
 - default repos [default-list-repo](default-list-repo.md)
 - create your own repo [create-your-own-repo](create-your-own-repo.md)
 
-In this example we will use [node template](https://github.com/SebastianWesolowski/s-update-manager/tree/dev/template/node/templateCatalog)
+In this example we will use [node template](https://github.com/SebastianWesolowski/s-template/tree/main/templates/node)
 
 ### Setup scripts
 
@@ -59,9 +60,9 @@ In package.json add script to your project
 
 ```json
 "scripts": {
-  "update": "s-update --remoteRepository='https://github.com/SebastianWesolowski/s-update-manager/tree/dev/template/node/templateCatalog'",
-  "build": "s-build --remoteRepository='https://github.com/SebastianWesolowski/s-update-manager/tree/dev/template/node/templateCatalog'",
-  "init": "s-init --remoteRepository='https://github.com/SebastianWesolowski/s-update-manager/tree/dev/template/node/templateCatalog'"
+  "update": "s-update --remoteRepository='https://github.com/SebastianWesolowski/s-template/tree/main/templates/node'",
+  "build": "s-build --remoteRepository='https://github.com/SebastianWesolowski/s-template/tree/main/templates/node'",
+  "init": "s-init --remoteRepository='https://github.com/SebastianWesolowski/s-template/tree/main/templates/node'"
 }
 ```
 

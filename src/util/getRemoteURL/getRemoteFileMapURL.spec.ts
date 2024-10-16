@@ -32,7 +32,7 @@ describe('getRemoteFileMapURL', () => {
 
   it('should return correct URL for GitHub root folder', () => {
     const mockConfig = {
-      remoteRepository: 'https://github.com/SebastianWesolowski/s-update-manager/tree/dev/template/node',
+      remoteRepository: 'https://github.com/SebastianWesolowski/s-template/tree/main/templates/node',
       templateCatalogName: 'templateCatalog',
     };
     config = { ...config, ...mockConfig };
@@ -40,14 +40,13 @@ describe('getRemoteFileMapURL', () => {
     const result = getRemoteFileMapURL(config);
 
     expect(result).toBe(
-      'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/dev/template/node/templateCatalog/repositoryMap.json'
+      'https://raw.githubusercontent.com/SebastianWesolowski/s-template/main/templates/node/templateCatalog/repositoryMap.json'
     );
   });
 
   it('should return correct URL for GitHub nested folder', () => {
     const mockConfig = {
-      remoteRepository:
-        'https://github.com/SebastianWesolowski/s-update-manager/tree/dev/template/node/templateCatalog',
+      remoteRepository: 'https://github.com/SebastianWesolowski/s-template/tree/main/templates/node/templateCatalog',
       templateCatalogName: 'templateCatalog',
     };
     config = { ...config, ...mockConfig };
@@ -55,13 +54,13 @@ describe('getRemoteFileMapURL', () => {
     const result = getRemoteFileMapURL(config);
 
     expect(result).toBe(
-      'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/dev/template/node/templateCatalog/repositoryMap.json'
+      'https://raw.githubusercontent.com/SebastianWesolowski/s-template/main/templates/node/templateCatalog/repositoryMap.json'
     );
   });
 
   it('should return correct URL for GitHub nested folder', () => {
     const mockConfig = {
-      remoteRepository: 'https://github.com/SebastianWesolowski/s-update-manager/tree/dev/test/testTemplate',
+      remoteRepository: 'https://raw.githubusercontent.com/SebastianWesolowski/s-template/main/templates/node/',
       templateCatalogName: 'templateCatalog',
     };
     config = { ...config, ...mockConfig };
@@ -69,14 +68,14 @@ describe('getRemoteFileMapURL', () => {
     const result = getRemoteFileMapURL(config);
 
     expect(result).toBe(
-      'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/dev/test/testTemplate/templateCatalog/repositoryMap.json'
+      'https://raw.githubusercontent.com/SebastianWesolowski/s-template/main/templates/node/templateCatalog/repositoryMap.json'
     );
   });
 
   it('should return correct URL for GitHub file path', () => {
     const mockConfig = {
       remoteRepository:
-        'https://github.com/SebastianWesolowski/s-update-manager/tree/dev/template/node/templateCatalog/repositoryMap.json',
+        'https://github.com/SebastianWesolowski/s-template/tree/main/templates/node/templateCatalog/repositoryMap.json',
       templateCatalogName: 'templateCatalog',
     };
     config = { ...config, ...mockConfig };
@@ -84,14 +83,14 @@ describe('getRemoteFileMapURL', () => {
     const result = getRemoteFileMapURL(config);
 
     expect(result).toBe(
-      'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/dev/template/node/templateCatalog/repositoryMap.json'
+      'https://raw.githubusercontent.com/SebastianWesolowski/s-template/main/templates/node/templateCatalog/repositoryMap.json'
     );
   });
 
   it('should return correct URL for raw data', () => {
     const mockConfig = {
       remoteRepository:
-        'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/dev/template/node/templateCatalog/repositoryMap.json',
+        'https://raw.githubusercontent.com/SebastianWesolowski/s-template/main/templates/node/templateCatalog/repositoryMap.json',
       templateCatalogName: 'templateCatalog',
     };
     config = { ...config, ...mockConfig };
@@ -99,7 +98,7 @@ describe('getRemoteFileMapURL', () => {
     const result = getRemoteFileMapURL(config);
 
     expect(result).toBe(
-      'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/dev/template/node/templateCatalog/repositoryMap.json'
+      'https://raw.githubusercontent.com/SebastianWesolowski/s-template/main/templates/node/templateCatalog/repositoryMap.json'
     );
   });
 });
