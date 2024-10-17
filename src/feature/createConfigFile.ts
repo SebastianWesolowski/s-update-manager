@@ -4,7 +4,6 @@ import { debugFunction } from '@/util/debugFunction';
 import { isFolderExist } from '@/util/isFolderExist';
 
 export const createConfigFile = async (config: ConfigType): Promise<{ config: ConfigType; configFilePath: string }> => {
-  // TODO [SC-26] create config in root directory
   debugFunction(config.isDebug, { config }, '[INIT] debugFunction');
   const { sumCatalog, sUpdaterVersion, remoteRepository } = config;
 
@@ -14,7 +13,7 @@ export const createConfigFile = async (config: ConfigType): Promise<{ config: Co
   });
 
   const configFilePath = await createFile({
-    filePath: config.sumConfigFile,
+    filePath: config.sumConfigFilePath,
     content: JSON.stringify(config),
     isDebug: config.isDebug,
   });

@@ -11,8 +11,8 @@ export const defaultConfig: ConfigType = {
   sumFileMapConfig: './.sum/repositoryMap.json',
   projectCatalog: './',
   temporaryFolder: './.sum/temporary/',
-  sumConfigFileName: 'sum.config.json',
-  sumConfigFile: './.sum/sum.config.json',
+  sumConfigFileName: '.sum.config.json',
+  sumConfigFilePath: './.sum.config.json',
   remoteRootRepositoryUrl:
     'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/dev/mock/mockTemplateToUpdate/templateCatalog/repositoryMap.json',
   remoteRepository: 'https://github.com/SebastianWesolowski/s-update-manager/tree/dev/mock/mockTemplateToUpdate',

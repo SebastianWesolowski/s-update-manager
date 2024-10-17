@@ -46,7 +46,7 @@ describe('cleanUp', () => {
     config = { ...mockConfig.step.buildFromConfig.empty };
     sumFileMapConfig = { ...mockSumFileMapConfig.step.buildFromConfig.empty };
     await createFile({
-      filePath: config.sumConfigFile,
+      filePath: config.sumConfigFilePath,
       content: JSON.stringify(config),
     });
     await createFile({
@@ -77,13 +77,13 @@ describe('cleanUp', () => {
       allFiles: [
         './test/mockProject/.gitignore',
         './test/mockProject/.sum/repositoryMap.json',
-        './test/mockProject/.sum/sum.config.json',
         './test/mockProject/.sum/templateCatalog/.gitignore-default.md',
         './test/mockProject/.sum/templateCatalog/README.md-default.md',
         './test/mockProject/.sum/templateCatalog/package.json-default.md',
         './test/mockProject/.sum/templateCatalog/tools/test.sh-default.md',
         './test/mockProject/.sum/templateCatalog/tsconfig.json-default.md',
         './test/mockProject/.sum/templateCatalog/yarn.lock-default.md',
+        './test/mockProject/.sum.config.json',
         './test/mockProject/README.md',
         './test/mockProject/package.json',
         './test/mockProject/tools/test.sh',

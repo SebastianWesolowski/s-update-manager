@@ -22,7 +22,10 @@ export const regenerateConfig = async (config: ConfigType): Promise<ConfigType> 
       regeneratedConfig.REPOSITORY_MAP_FILE_NAME,
     ]);
     if (regeneratedConfig.sumConfigFileName) {
-      regeneratedConfig.sumConfigFile = createPath([regeneratedConfig.sumCatalog, regeneratedConfig.sumConfigFileName]);
+      regeneratedConfig.sumConfigFilePath = createPath([
+        regeneratedConfig.projectCatalog,
+        regeneratedConfig.sumConfigFileName,
+      ]);
     }
 
     if (regeneratedConfig.remoteRepository) {
@@ -75,7 +78,7 @@ export const updateDefaultConfig = async (
 ): Promise<ConfigType> => {
   const keyName = Object.keys(keyToUpdate)[0];
   const folderKey = ['sumCatalog', 'projectCatalog', 'temporaryFolder'];
-  const fileKey = ['sumConfigFileName', 'sumConfigFile'];
+  const fileKey = ['sumConfigFileName', 'sumConfigFilePath'];
   const isFolder = folderKey.includes(keyName);
   const isFile = fileKey.includes(keyName);
   let value = keyToUpdate[keyName];
@@ -100,12 +103,14 @@ export const getConfig = async (args: Args): Promise<ConfigType> => {
   config = await updateDefaultConfig(config, { isDebug: argsObject.isDebug || config.isDebug });
   config = await updateDefaultConfig(config, { projectCatalog: argsObject.projectCatalog || config.projectCatalog });
   config = await updateDefaultConfig(config, { sumCatalog: argsObject.sumCatalog || config.sumCatalog });
-  config = await updateDefaultConfig(config, { sumConfigFile: argsObject.sumConfigFile || config.sumConfigFile });
+  config = await updateDefaultConfig(config, {
+    sumConfigFilePath: argsObject.sumConfigFilePath || config.sumConfigFilePath,
+  });
   config = await updateDefaultConfig(config, {
     sumConfigFileName: argsObject.sumConfigFileName || config.sumConfigFileName,
   });
 
-  const dataLocalConfigFile: string | ConfigType | object = parseJSON(await readFile(config.sumConfigFile));
+  const dataLocalConfigFile: string | ConfigType | object = parseJSON(await readFile(config.sumConfigFilePath));
 
   if (dataLocalConfigFile !== '' && typeof dataLocalConfigFile === 'object') {
     localConfigFile = dataLocalConfigFile;
@@ -122,7 +127,7 @@ export const getConfig = async (args: Args): Promise<ConfigType> => {
     sumCatalog: argsObject.sumCatalog || localConfigFile.sumCatalog || config.sumCatalog,
   });
   config = await updateDefaultConfig(config, {
-    sumConfigFile: argsObject.sumConfigFile || localConfigFile.sumConfigFile || config.sumConfigFile,
+    sumConfigFilePath: argsObject.sumConfigFilePath || localConfigFile.sumConfigFilePath || config.sumConfigFilePath,
   });
   config = await updateDefaultConfig(config, {
     sumConfigFileName: argsObject.sumConfigFileName || localConfigFile.sumConfigFileName || config.sumConfigFileName,

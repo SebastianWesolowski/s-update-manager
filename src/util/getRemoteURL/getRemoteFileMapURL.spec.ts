@@ -17,7 +17,7 @@ describe('getRemoteFileMapURL', () => {
     });
 
     await createFile({
-      filePath: config.sumConfigFile,
+      filePath: config.sumConfigFilePath,
       content: JSON.stringify(config),
     });
   });

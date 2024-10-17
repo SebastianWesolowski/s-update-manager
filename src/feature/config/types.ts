@@ -15,7 +15,7 @@ export interface GeneratedConfig {
   sUpdaterVersion?: string;
   templateVersion?: string;
   temporaryFolder: string;
-  sumConfigFile: string;
+  sumConfigFilePath: string;
   sumFileMapConfig: string;
   remoteFileMapURL: string;
   remoteRootRepositoryUrl: string;

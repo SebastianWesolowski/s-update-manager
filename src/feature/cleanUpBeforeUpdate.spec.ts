@@ -48,7 +48,7 @@ describe('cleanUpBeforeUpdate', () => {
 
     // Set up mock files for testing
     await createFile({
-      filePath: config.sumConfigFile,
+      filePath: config.sumConfigFilePath,
       content: JSON.stringify(config),
     });
     await createFile({
@@ -78,7 +78,7 @@ describe('cleanUpBeforeUpdate', () => {
     expect({ ...result, allFiles }).toStrictEqual({
       config: mockConfig.step.cleanUpBeforeUpdate.empty,
       sumFileMapConfig: mockSumFileMapConfig.step.cleanUpBeforeUpdate.empty,
-      allFiles: ['./test/mockProject/.sum/repositoryMap.json', './test/mockProject/.sum/sum.config.json'],
+      allFiles: ['./test/mockProject/.sum/repositoryMap.json', './test/mockProject/.sum.config.json'],
       deletedPath: [
         './test/mockProject/.sum/templateCatalog/.gitignore-default.md',
         './test/mockProject/.gitignore',
@@ -102,7 +102,7 @@ describe('cleanUpBeforeUpdate', () => {
 
     // Set up mock files for testing
     await createFile({
-      filePath: config.sumConfigFile,
+      filePath: config.sumConfigFilePath,
       content: JSON.stringify(config),
     });
     await createFile({
@@ -147,13 +147,13 @@ describe('cleanUpBeforeUpdate', () => {
       sumFileMapConfig: mockSumFileMapConfig.step.cleanUpBeforeUpdate.fullFiled,
       allFiles: [
         './test/mockProject/.sum/repositoryMap.json',
-        './test/mockProject/.sum/sum.config.json',
         './test/mockProject/.sum/templateCatalog/.gitignore-custom.md',
         './test/mockProject/.sum/templateCatalog/.gitignore-extend.md',
         './test/mockProject/.sum/templateCatalog/README.md-custom.md',
         './test/mockProject/.sum/templateCatalog/README.md-extend.md',
         './test/mockProject/.sum/templateCatalog/package.json-custom.md',
         './test/mockProject/.sum/templateCatalog/package.json-extend.md',
+        './test/mockProject/.sum.config.json',
       ],
       deletedPath: [
         './test/mockProject/.sum/templateCatalog/.gitignore-default.md',

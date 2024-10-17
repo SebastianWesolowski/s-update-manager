@@ -17,10 +17,10 @@ export const build = async (args: Args): Promise<ConfigType> => {
 
   if (
     !(await isFileOrFolderExists({ isDebug: config.isDebug, filePath: config.sumFileMapConfig })) &&
-    !(await isFileOrFolderExists({ isDebug: config.isDebug, filePath: config.sumConfigFile }))
+    !(await isFileOrFolderExists({ isDebug: config.isDebug, filePath: config.sumConfigFilePath }))
   ) {
     if (process.env.SDEBUG !== 'true') {
-      throw new Error('Config files (sumFileMapConfig or sumConfigFile)  not exists, use init script');
+      throw new Error('Config files (sumFileMapConfig or sumConfigFilePath)  not exists, use init script');
     }
   }
 

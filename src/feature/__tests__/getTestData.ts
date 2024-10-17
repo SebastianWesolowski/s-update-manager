@@ -67,9 +67,9 @@ export async function getProjectTestData<T extends object>(
   let sumConfigFileContent: ConfigType | null = null;
   let sumFileMapConfigContent: FileMapConfig | null = null;
 
-  if (await isFileOrFolderExists({ isDebug: config.isDebug, filePath: config.sumConfigFile })) {
+  if (await isFileOrFolderExists({ isDebug: config.isDebug, filePath: config.sumConfigFilePath })) {
     try {
-      const bufferData = await readFile(config.sumConfigFile);
+      const bufferData = await readFile(config.sumConfigFilePath);
       sumConfigFileContent = await parseJSON(bufferData.toString());
     } catch (error) {
       console.error('Error reading or parsing repository map file:', error);

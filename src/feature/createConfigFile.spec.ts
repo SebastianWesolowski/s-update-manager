@@ -35,8 +35,8 @@ describe('createConfigFile', () => {
 
     expect({ ...result, allFiles }).toStrictEqual({
       config: mockConfig.step.createConfigFile,
-      configFilePath: mockConfig.step.createConfigFile.sumConfigFile,
-      allFiles: ['./test/mockProject/.sum/sum.config.json'],
+      configFilePath: mockConfig.step.createConfigFile.sumConfigFilePath,
+      allFiles: ['./test/mockProject/.sum.config.json'],
     });
   });
 });

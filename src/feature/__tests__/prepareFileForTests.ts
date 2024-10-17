@@ -1,6 +1,7 @@
 import { cleanUpSinglePath } from './cleanForTests';
 import { createFile } from '@/util/createFile';
 import { createPath } from '@/util/createPath';
+import { deletePath } from '@/util/deletePath';
 
 export interface FileToCreateType {
   filePath: string;
@@ -95,14 +96,16 @@ export const cleanUpProjectCatalog = async (
     | 'formatJsonWithPrettier',
   folderCase: 'mockProject' | 'mockProjectToBuild' | 'mockProjectToUpdate' = 'mockProject'
 ) => {
-  let path = getCleanupPath(type, folderCase, step);
-
+  const rootPath = getCleanupPath(type, folderCase, step);
+  let sumPath = '';
   if (folderCase === 'mockProject') {
-    path = createPath([path, '.sum']);
+    sumPath = createPath([rootPath, '.sum']);
   }
 
+  await deletePath(createPath([rootPath, '.sum.config.json']), true);
+
   await cleanUpSinglePath({
-    path,
+    path: sumPath !== '' ? sumPath : rootPath,
     isDebug: true,
   });
 };

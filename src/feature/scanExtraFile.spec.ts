@@ -32,7 +32,7 @@ describe('scanExtraFile', () => {
 
   it('should return correct content without extra file', async () => {
     await createFile({
-      filePath: config.sumConfigFile,
+      filePath: config.sumConfigFilePath,
       content: JSON.stringify(config),
     });
     await createFile({
@@ -50,13 +50,13 @@ describe('scanExtraFile', () => {
     expect({ ...result, allFiles }).toStrictEqual({
       config: mockConfig.step.scanExtraFile.empty,
       sumFileMapConfig: mockSumFileMapConfig.step.scanExtraFile.empty,
-      allFiles: ['./test/mockProject/.sum/repositoryMap.json', './test/mockProject/.sum/sum.config.json'],
+      allFiles: ['./test/mockProject/.sum/repositoryMap.json', './test/mockProject/.sum.config.json'],
     });
   });
 
   it('should return correct content with extra file', async () => {
     await createFile({
-      filePath: config.sumConfigFile,
+      filePath: config.sumConfigFilePath,
       content: JSON.stringify(config),
     });
     await createFile({
@@ -96,13 +96,13 @@ describe('scanExtraFile', () => {
       sumFileMapConfig: mockSumFileMapConfig.step.scanExtraFile.fullFiled,
       allFiles: [
         './test/mockProject/.sum/repositoryMap.json',
-        './test/mockProject/.sum/sum.config.json',
         './test/mockProject/.sum/templateCatalog/.gitignore-custom.md',
         './test/mockProject/.sum/templateCatalog/.gitignore-extend.md',
         './test/mockProject/.sum/templateCatalog/README.md-custom.md',
         './test/mockProject/.sum/templateCatalog/README.md-extend.md',
         './test/mockProject/.sum/templateCatalog/package.json-custom.md',
         './test/mockProject/.sum/templateCatalog/package.json-extend.md',
+        './test/mockProject/.sum.config.json',
       ],
     });
   });
