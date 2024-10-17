@@ -17,7 +17,7 @@ module.exports = {
       type: "Select the type of change that you're committing:",
       subject: 'Write a short, imperative mood description of the change:\n',
       breaking: 'List any breaking changes:\n',
-      footer: 'List any ISSUES by this change. E.g.: SC-31, SC-34:\n',
+      footer: 'Write issue number, SC prefix will be added automatically:\n',
       confirmCommit: 'Are you sure you want to proceed with the commit above?',
     },
     types: [
@@ -62,7 +62,6 @@ module.exports = {
     breaklineNumber: 100,
     breaklineChar: '|',
     skipQuestions: ['scope', 'customScope', 'body', 'breaking', 'footerPrefix'],
-    issuePrefixes: [],
     customIssuePrefixAlign: 'bottom',
     emptyIssuePrefixAlias: 'skip',
     customIssuePrefixAlias: 'custom',
@@ -74,5 +73,14 @@ module.exports = {
     defaultIssues: '',
     defaultScope: '',
     defaultSubject: '',
+    formatMessageCB: ({ defaultMessage, footer }) => {
+      if (!footer) {
+        return defaultMessage;
+      } else {
+        const lines = defaultMessage.split('\n');
+        lines.pop();
+        return lines.join('\n') + '\nSC-' + footer.replace(/\s/g, '');
+      }
+    },
   },
 };
