@@ -5,12 +5,12 @@ import { isFileOrFolderExists } from '@/util/isFileOrFolderExists';
 import { parseJSON } from '@/util/parseJSON';
 import { readFile } from '@/util/readFile';
 
-interface TestDataResult<T> {
+interface TestDataResult {
   allFiles: string[];
   repositoryMapFileConfigContent: ConfigTemplateType | null;
 }
 
-interface ProjectTestDataResult<T> {
+interface ProjectTestDataResult {
   allFiles: string[];
   sumConfigFileContent: ConfigType | null;
   sumFileMapConfigContent: FileMapConfig | null;
@@ -19,7 +19,7 @@ interface ProjectTestDataResult<T> {
 export async function getTestData<T extends object>(
   templateConfig: ConfigTemplateType,
   testFunction: ((config: ConfigTemplateType) => Promise<T>) | (() => Promise<T>)
-): Promise<T & TestDataResult<T>> {
+): Promise<T & TestDataResult> {
   const result =
     testFunction.length === 0
       ? await (testFunction as () => Promise<T>)()
@@ -51,7 +51,7 @@ export async function getTestData<T extends object>(
 export async function getProjectTestData<T extends object>(
   config: ConfigType,
   testFunction: ((config: ConfigType) => Promise<T>) | (() => Promise<T>)
-): Promise<T & ProjectTestDataResult<T>> {
+): Promise<T & ProjectTestDataResult> {
   const result =
     testFunction.length === 0
       ? await (testFunction as () => Promise<T>)()

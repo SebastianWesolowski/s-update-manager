@@ -1,5 +1,4 @@
 import { prepareFileList } from './prepareFileList';
-import { cleanUpSinglePath } from '../__tests__/cleanForTests';
 import { getTestData } from '../__tests__/getTestData';
 import {
   cleanUpProjectCatalog,

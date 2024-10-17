@@ -1,5 +1,4 @@
 import { updateTemplateConfig } from './updateTemplateConfig';
-import { cleanUpSinglePath } from '../__tests__/cleanForTests';
 import { getTestData } from '../__tests__/getTestData';
 import {
   cleanUpProjectCatalog,
@@ -166,10 +165,8 @@ describe('updateTemplateConfig', () => {
 
   describe('context test', () => {
     let templateConfig: ConfigTemplateType;
-    let repositoryMapFileConfig: RepositoryMapFileConfigType;
     beforeEach(async () => {
       templateConfig = { ...mockTemplateConfig.scanProjectFolder };
-      repositoryMapFileConfig = { ...mockTemplateConfig.init.repositoryMapFileConfig };
 
       await cleanUpTemplateCatalog('test');
       await cleanUpProjectCatalog('test');

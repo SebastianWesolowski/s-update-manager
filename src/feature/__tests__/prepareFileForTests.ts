@@ -15,6 +15,7 @@ export const setupTestFiles = async (filesToCreate: FileToCreateType[], isDebug:
       filePath: file.filePath,
       content: file.content ?? `{path: ${file.filePath}}`,
       options: file.options,
+      isDebug,
     });
   }
 };
