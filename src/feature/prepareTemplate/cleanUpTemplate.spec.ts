@@ -1,5 +1,4 @@
 import { cleanUpTemplate } from './cleanUpTemplate';
-import { cleanUpSinglePath } from '../__tests__/cleanForTests';
 import { getTestData } from '../__tests__/getTestData';
 import {
   cleanUpProjectCatalog,
