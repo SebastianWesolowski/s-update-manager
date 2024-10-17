@@ -19,7 +19,7 @@ export const regenerateConfig = async (config: ConfigType): Promise<ConfigType> 
     );
     regeneratedConfig.sumFileMapConfig = createPath([
       regeneratedConfig.sumCatalog,
-      regeneratedConfig.REPOSITORY_MAP_FILE_NAME,
+      regeneratedConfig.sumFileMapConfigFileName,
     ]);
     if (regeneratedConfig.sumConfigFileName) {
       regeneratedConfig.sumConfigFilePath = createPath([
@@ -32,9 +32,9 @@ export const regenerateConfig = async (config: ConfigType): Promise<ConfigType> 
       regeneratedConfig.remoteRepository = regeneratedConfig.remoteRepository.replace(/\/$/, '');
     }
 
-    if (regeneratedConfig.remoteRepository && regeneratedConfig.REPOSITORY_MAP_FILE_NAME) {
+    if (regeneratedConfig.remoteRepository && regeneratedConfig.sumFileMapConfigFileName) {
       let repositoryURL = regeneratedConfig.remoteRepository;
-      const fileName = regeneratedConfig.REPOSITORY_MAP_FILE_NAME;
+      const fileName = regeneratedConfig.sumFileMapConfigFileName;
       const templateCatalogName = regeneratedConfig.templateCatalogName;
 
       if (repositoryURL.endsWith(fileName)) {
@@ -64,7 +64,7 @@ export const regenerateConfig = async (config: ConfigType): Promise<ConfigType> 
       }
     }
 
-    if (regeneratedConfig.remoteRepository && regeneratedConfig.REPOSITORY_MAP_FILE_NAME) {
+    if (regeneratedConfig.remoteRepository && regeneratedConfig.sumFileMapConfigFileName) {
       regeneratedConfig.remoteFileMapURL = getRemoteFileMapURL(regeneratedConfig);
     }
   }
