@@ -1,6 +1,12 @@
+import { createPath } from './createPath';
+import { deletePath } from './deletePath';
 import { createFile } from '@/util/createFile';
 
 describe('createFile', () => {
+  afterEach(async () => {
+    await deletePath(createPath(['test', 'testFiles']), true);
+  });
+
   it('should create a file when given filePath and content', async () => {
     const filePath = 'test/testFiles/file.txt';
     const content = 'Hello, this is the content.';
