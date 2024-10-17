@@ -32,7 +32,7 @@ export interface StableConfig {
   projectCatalog: string;
   availableSUMSuffix: AvailableSUMSuffixTypes[];
   availableSUMKeySuffix: AvailableSUMKeySuffixTypes[];
-  REPOSITORY_MAP_FILE_NAME: string;
+  sumFileMapConfigFileName: string;
   sumConfigFileName: string;
   remoteRepository: string;
   isDebug: boolean;

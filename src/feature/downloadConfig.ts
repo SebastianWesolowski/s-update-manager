@@ -24,7 +24,7 @@ export async function downloadConfig(config: ConfigType): Promise<{
       {
         remoteRootRepositoryUrl: config.remoteRootRepositoryUrl,
         remoteRepository: config.remoteRepository,
-        fileName: config.REPOSITORY_MAP_FILE_NAME,
+        fileName: config.sumFileMapConfigFileName,
         remoteFileMapURL: config.remoteFileMapURL,
       },
       '[INIT - downloadConfig]'

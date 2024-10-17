@@ -15,7 +15,7 @@ const testCases: { description: string; mockConfig: Partial<ConfigType>; expecte
     description: 'full config',
     mockConfig: defaultConfig,
     expectedConfig: {
-      REPOSITORY_MAP_FILE_NAME: 'repositoryMap.json',
+      sumFileMapConfigFileName: 'repositoryMap.json',
       _: [],
       availableSUMKeySuffix: ['defaultFile', 'customFile', 'extendFile'],
       availableSUMSuffix: ['-default.md', '-custom.md', '-extend.md'],
@@ -40,7 +40,7 @@ const testCases: { description: string; mockConfig: Partial<ConfigType>; expecte
     description: 'empty config',
     mockConfig: {},
     expectedConfig: {
-      REPOSITORY_MAP_FILE_NAME: 'repositoryMap.json',
+      sumFileMapConfigFileName: 'repositoryMap.json',
       _: [],
       availableSUMKeySuffix: ['defaultFile', 'customFile', 'extendFile'],
       availableSUMSuffix: ['-default.md', '-custom.md', '-extend.md'],
@@ -64,7 +64,7 @@ const testCases: { description: string; mockConfig: Partial<ConfigType>; expecte
   {
     description: 'custom config from args',
     mockConfig: {
-      REPOSITORY_MAP_FILE_NAME: 'custom.json',
+      sumFileMapConfigFileName: 'custom.json',
       _: [],
       availableSUMKeySuffix: ['superCustomFileName'],
       availableSUMSuffix: ['-superCustomFileName.md'],
@@ -84,7 +84,7 @@ const testCases: { description: string; mockConfig: Partial<ConfigType>; expecte
       temporaryFolder: './.sum/temporary/',
     },
     expectedConfig: {
-      REPOSITORY_MAP_FILE_NAME: 'custom.json',
+      sumFileMapConfigFileName: 'custom.json',
       _: [],
       availableSUMKeySuffix: ['superCustomFileName'],
       availableSUMSuffix: ['-superCustomFileName.md'],
@@ -112,7 +112,7 @@ const testCases: { description: string; mockConfig: Partial<ConfigType>; expecte
         'https://github.com/SebastianWesolowski/testTemplate/blob/main/template/node/templateCatalogCustom',
     },
     expectedConfig: {
-      REPOSITORY_MAP_FILE_NAME: 'repositoryMap.json',
+      sumFileMapConfigFileName: 'repositoryMap.json',
       _: [],
       availableSUMKeySuffix: ['defaultFile', 'customFile', 'extendFile'],
       availableSUMSuffix: ['-default.md', '-custom.md', '-extend.md'],
@@ -205,7 +205,7 @@ describe('configuration functions', () => {
   });
   it('getConfig - should return the expected file configuration', async () => {
     const expectedConfig = {
-      REPOSITORY_MAP_FILE_NAME: 'repositoryMap.json',
+      sumFileMapConfigFileName: 'repositoryMap.json',
       _: [],
       availableSUMKeySuffix: ['defaultFile', 'customFile', 'extendFile'],
       availableSUMSuffix: ['-default.md', '-custom.md', '-extend.md'],

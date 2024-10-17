@@ -12,7 +12,7 @@
     "customFile",
     "extendFile"
   ],
-  "REPOSITORY_MAP_FILE_NAME": "repositoryMap.json",
+  "sumFileMapConfigFileName": "repositoryMap.json",
   "sumFileMapConfig": "./mock/mockProjectToBuild/.sum/repositoryMap.json",
   "projectCatalog": "./mock/mockProjectToBuild/",
   "temporaryFolder": "./mock/mockProjectToBuild/.sum/temporary/",

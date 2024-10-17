@@ -3,7 +3,7 @@ import { buildURL } from '@/util/formatterRepositoryFileNameUrl';
 
 export function getRemoteFileMapURL(config: ConfigType): string {
   let repositoryURL = config.remoteRepository;
-  const fileName = config.REPOSITORY_MAP_FILE_NAME;
+  const fileName = config.sumFileMapConfigFileName;
   const templateCatalogName = config.templateCatalogName;
 
   // Check if templateCatalogName is in the URL; if not, add it
