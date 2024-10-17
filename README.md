@@ -11,7 +11,9 @@
 <br>
 <br>
 
-- [why](docs/why.md)
+## Table of Contents
+
+- [What is s-update-manager?](docs/why.md)
 - [Instalations](docs/instalations.md)
   - [How to use](docs/howToUse.md)
   - [default list repo](docs/default-list-repo.md)
@@ -25,69 +27,65 @@
 
 - [Development process](docs/development.md)
 
----
+## What is s-update-manager?
 
-<br/>
+s-update-manager is a tool designed to maintain project configurations based on an external repository. It allows you to maintain a single repository with a default configuration that can be propagated to all your projects while still allowing for customization.
 
-## Whai is s-update-manager
+For more details on why this tool was created and how it works, check out our [Why document](docs/why.md).
 
-s-update-manager is designed to maintain project configurations based on an external repository.
+## Installation
 
-Continue reading [Why](docs/why.md)
-
-## Install
-
-use your favorite package manager to install update-manager.
+To install s-update-manager, use your favorite package manager:
 
 ```bash
+npm install s-update-manager
+# or
 yarn add s-update-manager
 ```
 
-### Choose template repository
+For detailed installation instructions, see our [Installation Guide](docs/instalations.md).
 
-before use you have to chose repository with templates.
+## Usage
 
-You have 2 way
-
-- default repos [default-list-repo](default-list-repo.md)
-- create your own repo [create-your-own-repo](create-your-own-repo.md)
-
-In this example we will use [node template](https://github.com/SebastianWesolowski/s-template/tree/main/templates/node)
-
-### Setup scripts
-
-In package.json add script to your project
+After installation, you can use s-update-manager by setting up scripts in your `package.json`:
 
 ```json
 "scripts": {
-  "update": "s-update --remoteRepository='https://github.com/SebastianWesolowski/s-template/tree/main/templates/node'",
-  "build": "s-build --remoteRepository='https://github.com/SebastianWesolowski/s-template/tree/main/templates/node'",
-  "init": "s-init --remoteRepository='https://github.com/SebastianWesolowski/s-template/tree/main/templates/node'"
+  "update": "s-update --remoteRepository='https://github.com/User/your-project-name/tree/dev/node/templateCatalog'",
+  "build": "s-build --remoteRepository='https://github.com/User/your-project-name/tree/dev/node/templateCatalog'",
+  "init": "s-init --remoteRepository='https://github.com/User/your-project-name/tree/dev/node/templateCatalog'"
 }
 ```
 
-Ypu can add aditional cli parameters to script.
+For more detailed usage instructions, check out our [How to Use guide](docs/howToUse.md).
 
-[CLI parameters](docs/cli-parameters.md)
+## Documentation
 
-### Run script
+- [Why use s-update-manager?](docs/why.md)
+- [Installation Guide](docs/instalations.md)
+- [How to Use](docs/howToUse.md)
+- [CLI Parameters](docs/cli-parameters.md)
+- [Create Your Own Repo](docs/create-your-own-repo.md)
+- [Prepare Template](docs/prepare-template.md)
+- [Template Structure](docs/template-structure.md)
+- [Adjust Configuration](docs/adjust-configuration.md)
+- [Default List of Repos](docs/default-list-repo.md)
 
-depends on your needs
+## Development
 
-- `init` - initialize project with template
-- `build` - build project after [adjust configuration](adjust-configuration.md) files
-- `update` - update project if new version of template is avaliable
+For information on the development process and available scripts, see our [Development guide](docs/development.md).
 
-## Example project
+## Known Issues
 
-You can see example project in `example/realProject/`
+For a list of known issues and their workarounds, please refer to our [Known Problems document](docs/knowProblems.md).
 
-## Badges
+## Contributing
 
-[![Downloads][downloads-img]][downloads-url]
-[![Issues][issues-img]][issues-url]
-[![Commitizen Friendly][commitizen-img]][commitizen-url]
-[![Semantic Release][semantic-release-img]][semantic-release-url]
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+This project is licensed under the MIT License.
 
 [build-img]: https://github.com/SebastianWesolowski/s-update-manager/actions/workflows/release.yml/badge.svg
 [build-url]: https://github.com/SebastianWesolowski/s-update-manager/actions/workflows/release.yml
