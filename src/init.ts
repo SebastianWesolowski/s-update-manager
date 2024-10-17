@@ -2,6 +2,7 @@
 
 import minimist from 'minimist';
 import { cleanUpSinglePath } from './feature/__tests__/cleanForTests';
+import { deletePath } from './util/deletePath';
 import { Args } from '@/feature/args/args';
 import { buildFromConfig } from '@/feature/buildFromConfig';
 import { cleanUp } from '@/feature/cleanUp';
@@ -19,7 +20,7 @@ export const init = async (args: Args): Promise<ConfigType> => {
 
   if (
     (await isFileOrFolderExists({ isDebug: config.isDebug, filePath: config.sumFileMapConfig })) &&
-    (await isFileOrFolderExists({ isDebug: config.isDebug, filePath: config.sumConfigFile }))
+    (await isFileOrFolderExists({ isDebug: config.isDebug, filePath: config.sumConfigFilePath }))
   ) {
     if (process.env.SDEBUG !== 'true') {
       throw new Error('Config file exists, use build script or update');
@@ -27,6 +28,8 @@ export const init = async (args: Args): Promise<ConfigType> => {
   }
 
   if (process.env.SDEBUG === 'true') {
+    await deletePath(config.sumConfigFilePath, true);
+
     await cleanUpSinglePath({
       path: config.sumCatalog,
       isDebug: config.isDebug,

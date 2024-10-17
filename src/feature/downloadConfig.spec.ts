@@ -10,7 +10,7 @@ import { createFile } from '@/util/createFile';
 describe('downloadConfig', () => {
   describe('context mock', () => {
     let config: ConfigType;
-    let sumConfigFile: ConfigType;
+    let sumConfigFilePath: ConfigType;
 
     beforeEach(async () => {
       config = {
@@ -24,8 +24,8 @@ describe('downloadConfig', () => {
         sumFileMapConfig: './mock/mockProject/.sum/repositoryMap.json',
         projectCatalog: './mock/mockProject/',
         temporaryFolder: './mock/mockProject/.sum/temporary/',
-        sumConfigFileName: 'sum.config.json',
-        sumConfigFile: './mock/mockProject/.sum/sum.config.json',
+        sumConfigFileName: '.sum.config.json',
+        sumConfigFilePath: './mock/mockProject/.sum.config.json',
         remoteFileMapURL:
           'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/dev/mock/mockTemplateToUpdate/templateCatalog/repositoryMap.json',
         remoteRepository: 'https://github.com/SebastianWesolowski/s-update-manager/tree/dev/mock/mockTemplateToUpdate',
@@ -35,7 +35,7 @@ describe('downloadConfig', () => {
         _: [],
       };
 
-      sumConfigFile = {
+      sumConfigFilePath = {
         templateCatalogName: 'templateCatalog',
         sumCatalog: './mock/mockProject/.sum/',
         sUpdaterVersion: '../../dist/s-update-manager-1.0.0-dev.27.tgz',
@@ -45,8 +45,8 @@ describe('downloadConfig', () => {
         sumFileMapConfig: './mock/mockProject/.sum/repositoryMap.json',
         projectCatalog: './mock/mockProject/',
         temporaryFolder: './mock/mockProject/.sum/temporary/',
-        sumConfigFileName: 'sum.config.json',
-        sumConfigFile: './mock/mockProject/.sum/sum.config.json',
+        sumConfigFileName: '.sum.config.json',
+        sumConfigFilePath: './mock/mockProject/.sum.config.json',
         remoteFileMapURL:
           'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/dev/mock/mockTemplateToUpdate/templateCatalog/repositoryMap.json',
         remoteRepository: 'https://github.com/SebastianWesolowski/s-update-manager/tree/dev/mock/mockTemplateToUpdate',
@@ -60,8 +60,8 @@ describe('downloadConfig', () => {
 
       const FileToCreate: FileToCreateType[] = [
         {
-          filePath: config.sumConfigFile,
-          content: JSON.stringify(sumConfigFile),
+          filePath: config.sumConfigFilePath,
+          content: JSON.stringify(sumConfigFilePath),
         },
       ];
       await setupTestFiles(FileToCreate, config.isDebug);
@@ -81,7 +81,7 @@ describe('downloadConfig', () => {
           'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/dev/mock/mockTemplate',
       };
 
-      sumConfigFile = {
+      sumConfigFilePath = {
         ...config,
         remoteFileMapURL:
           'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/dev/mock/mockTemplate/templateCatalog/repositoryMap.json',
@@ -92,8 +92,8 @@ describe('downloadConfig', () => {
 
       const FileToCreate: FileToCreateType[] = [
         {
-          filePath: config.sumConfigFile,
-          content: JSON.stringify(sumConfigFile),
+          filePath: config.sumConfigFilePath,
+          content: JSON.stringify(sumConfigFilePath),
         },
       ];
       await setupTestFiles(FileToCreate, config.isDebug);
@@ -112,8 +112,8 @@ describe('downloadConfig', () => {
           sumFileMapConfig: './mock/mockProject/.sum/repositoryMap.json',
           projectCatalog: './mock/mockProject/',
           temporaryFolder: './mock/mockProject/.sum/temporary/',
-          sumConfigFileName: 'sum.config.json',
-          sumConfigFile: './mock/mockProject/.sum/sum.config.json',
+          sumConfigFileName: '.sum.config.json',
+          sumConfigFilePath: './mock/mockProject/.sum.config.json',
           remoteFileMapURL:
             'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/dev/mock/mockTemplate/templateCatalog/repositoryMap.json',
           remoteRepository: 'https://github.com/SebastianWesolowski/s-update-manager/tree/dev/mock/mockTemplate',
@@ -130,8 +130,8 @@ describe('downloadConfig', () => {
         allFiles: [
           './mock/mockProject/.gitignore',
           './mock/mockProject/.sum/repositoryMap.json',
-          './mock/mockProject/.sum/sum.config.json',
           './mock/mockProject/.sum/temporary/repositoryMap.json',
+          './mock/mockProject/.sum.config.json',
           './mock/mockProject/README.md',
           './mock/mockProject/package.json',
           './mock/mockProject/tools/addDependency.js',
@@ -152,8 +152,8 @@ describe('downloadConfig', () => {
           sumFileMapConfig: './mock/mockProject/.sum/repositoryMap.json',
           projectCatalog: './mock/mockProject/',
           temporaryFolder: './mock/mockProject/.sum/temporary/',
-          sumConfigFileName: 'sum.config.json',
-          sumConfigFile: './mock/mockProject/.sum/sum.config.json',
+          sumConfigFileName: '.sum.config.json',
+          sumConfigFilePath: './mock/mockProject/.sum.config.json',
           remoteFileMapURL:
             'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/dev/mock/mockTemplate/templateCatalog/repositoryMap.json',
           remoteRepository: 'https://github.com/SebastianWesolowski/s-update-manager/tree/dev/mock/mockTemplate',
@@ -183,8 +183,8 @@ describe('downloadConfig', () => {
           sumFileMapConfig: './mock/mockProject/.sum/repositoryMap.json',
           projectCatalog: './mock/mockProject/',
           temporaryFolder: './mock/mockProject/.sum/temporary/',
-          sumConfigFileName: 'sum.config.json',
-          sumConfigFile: './mock/mockProject/.sum/sum.config.json',
+          sumConfigFileName: '.sum.config.json',
+          sumConfigFilePath: './mock/mockProject/.sum.config.json',
           remoteFileMapURL:
             'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/dev/mock/mockTemplateToUpdate/templateCatalog/repositoryMap.json',
           remoteRepository:
@@ -276,8 +276,8 @@ describe('downloadConfig', () => {
         allFiles: [
           './mock/mockProject/.gitignore',
           './mock/mockProject/.sum/repositoryMap.json',
-          './mock/mockProject/.sum/sum.config.json',
           './mock/mockProject/.sum/temporary/repositoryMap.json',
+          './mock/mockProject/.sum.config.json',
           './mock/mockProject/README.md',
           './mock/mockProject/package.json',
           './mock/mockProject/tools/addDependency.js',
@@ -298,8 +298,8 @@ describe('downloadConfig', () => {
           sumFileMapConfig: './mock/mockProject/.sum/repositoryMap.json',
           projectCatalog: './mock/mockProject/',
           temporaryFolder: './mock/mockProject/.sum/temporary/',
-          sumConfigFileName: 'sum.config.json',
-          sumConfigFile: './mock/mockProject/.sum/sum.config.json',
+          sumConfigFileName: '.sum.config.json',
+          sumConfigFilePath: './mock/mockProject/.sum.config.json',
           remoteFileMapURL:
             'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/dev/mock/mockTemplateToUpdate/templateCatalog/repositoryMap.json',
           remoteRepository:
@@ -405,8 +405,8 @@ describe('downloadConfig', () => {
           sumFileMapConfig: './mock/mockProject/.sum/repositoryMap.json',
           projectCatalog: './mock/mockProject/',
           temporaryFolder: './mock/mockProject/.sum/temporary/',
-          sumConfigFileName: 'sum.config.json',
-          sumConfigFile: './mock/mockProject/.sum/sum.config.json',
+          sumConfigFileName: '.sum.config.json',
+          sumConfigFilePath: './mock/mockProject/.sum.config.json',
           remoteFileMapURL:
             'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/dev/mock/mockTemplateToUpdate/templateCatalog/repositoryMap.json',
           remoteRepository:
@@ -498,8 +498,8 @@ describe('downloadConfig', () => {
         allFiles: [
           './mock/mockProject/.gitignore',
           './mock/mockProject/.sum/repositoryMap.json',
-          './mock/mockProject/.sum/sum.config.json',
           './mock/mockProject/.sum/temporary/repositoryMap.json',
+          './mock/mockProject/.sum.config.json',
           './mock/mockProject/README.md',
           './mock/mockProject/package.json',
           './mock/mockProject/tools/addDependency.js',
@@ -520,8 +520,8 @@ describe('downloadConfig', () => {
           sumFileMapConfig: './mock/mockProject/.sum/repositoryMap.json',
           projectCatalog: './mock/mockProject/',
           temporaryFolder: './mock/mockProject/.sum/temporary/',
-          sumConfigFileName: 'sum.config.json',
-          sumConfigFile: './mock/mockProject/.sum/sum.config.json',
+          sumConfigFileName: '.sum.config.json',
+          sumConfigFilePath: './mock/mockProject/.sum.config.json',
           remoteFileMapURL:
             'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/dev/mock/mockTemplateToUpdate/templateCatalog/repositoryMap.json',
           remoteRepository:
@@ -598,9 +598,9 @@ describe('downloadConfig', () => {
       });
     });
 
-    it('should return correct empty proje content with only sumConfigFile', async () => {
+    it('should return correct empty proje content with only sumConfigFilePath', async () => {
       await createFile({
-        filePath: config.sumConfigFile,
+        filePath: config.sumConfigFilePath,
         content: JSON.stringify(config),
       });
 
@@ -623,15 +623,15 @@ describe('downloadConfig', () => {
         },
         allFiles: [
           './test/mockProject/.sum/repositoryMap.json',
-          './test/mockProject/.sum/sum.config.json',
           './test/mockProject/.sum/temporary/repositoryMap.json',
+          './test/mockProject/.sum.config.json',
         ],
       });
     });
 
     it('should return correct content with both configs file', async () => {
       await createFile({
-        filePath: config.sumConfigFile,
+        filePath: config.sumConfigFilePath,
         content: JSON.stringify(config),
       });
 
@@ -654,8 +654,8 @@ describe('downloadConfig', () => {
         sumFileMapConfig: mockSumFileMapConfig.step.downloadConfigFile.forInit,
         allFiles: [
           './test/mockProject/.sum/repositoryMap.json',
-          './test/mockProject/.sum/sum.config.json',
           './test/mockProject/.sum/temporary/repositoryMap.json',
+          './test/mockProject/.sum.config.json',
         ],
       });
     });
@@ -672,7 +672,7 @@ describe('downloadConfig', () => {
 
       const FileToCreate: FileToCreateType[] = [
         {
-          filePath: config.sumConfigFile,
+          filePath: config.sumConfigFilePath,
           content: JSON.stringify(config),
         },
         {
@@ -700,8 +700,8 @@ describe('downloadConfig', () => {
             'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/tree/dev/mock/mockTemplateToUpdate',
           templateVersion: '1.0.0',
           sumCatalog: './test/mockProject/.sum/',
-          sumConfigFile: './test/mockProject/.sum/sum.config.json',
-          sumConfigFileName: 'sum.config.json',
+          sumConfigFilePath: './test/mockProject/.sum.config.json',
+          sumConfigFileName: '.sum.config.json',
           sumFileMapConfig: './test/mockProject/.sum/repositoryMap.json',
           templateCatalogName: 'templateCatalog',
           temporaryFolder: './test/mockProject/.sum/temporary/',
@@ -786,8 +786,8 @@ describe('downloadConfig', () => {
         },
         allFiles: [
           './test/mockProject/.sum/repositoryMap.json',
-          './test/mockProject/.sum/sum.config.json',
           './test/mockProject/.sum/temporary/repositoryMap.json',
+          './test/mockProject/.sum.config.json',
         ],
         sumConfigFileContent: {
           REPOSITORY_MAP_FILE_NAME: 'repositoryMap.json',
@@ -804,8 +804,8 @@ describe('downloadConfig', () => {
             'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/tree/dev/mock/mockTemplateToUpdate',
           templateVersion: '1.0.0',
           sumCatalog: './test/mockProject/.sum/',
-          sumConfigFile: './test/mockProject/.sum/sum.config.json',
-          sumConfigFileName: 'sum.config.json',
+          sumConfigFilePath: './test/mockProject/.sum.config.json',
+          sumConfigFileName: '.sum.config.json',
           sumFileMapConfig: './test/mockProject/.sum/repositoryMap.json',
           templateCatalogName: 'templateCatalog',
           temporaryFolder: './test/mockProject/.sum/temporary/',

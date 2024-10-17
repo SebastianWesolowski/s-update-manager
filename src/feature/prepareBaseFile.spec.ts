@@ -31,7 +31,7 @@ describe('prepareBaseSumFileMap', () => {
 
   it('should return correct content', async () => {
     await createFile({
-      filePath: config.sumConfigFile,
+      filePath: config.sumConfigFilePath,
       content: JSON.stringify(config),
     });
     await createFile({
@@ -48,7 +48,7 @@ describe('prepareBaseSumFileMap', () => {
     expect({ ...result, allFiles }).toStrictEqual({
       config: mockConfig.step.createConfigFile,
       sumFileMapConfig: mockSumFileMapConfig.step.prepareBaseSumFileMap,
-      allFiles: ['./test/mockProject/.sum/repositoryMap.json', './test/mockProject/.sum/sum.config.json'],
+      allFiles: ['./test/mockProject/.sum/repositoryMap.json', './test/mockProject/.sum.config.json'],
     });
   });
 });

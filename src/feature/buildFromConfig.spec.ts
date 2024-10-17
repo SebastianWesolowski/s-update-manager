@@ -49,7 +49,7 @@ describe('buildFromConfig', () => {
 
     const FileToCreate: FileToCreateType[] = [
       {
-        filePath: config.sumConfigFile,
+        filePath: config.sumConfigFilePath,
         content: JSON.stringify(config),
       },
       {
@@ -125,7 +125,6 @@ describe('buildFromConfig', () => {
       },
       allFiles: [
         './test/mockProject/.sum/repositoryMap.json',
-        './test/mockProject/.sum/sum.config.json',
         './test/mockProject/.sum/templateCatalog/.gitignore-default.md',
         './test/mockProject/.sum/templateCatalog/README.md-default.md',
         './test/mockProject/.sum/templateCatalog/package.json-default.md',
@@ -138,6 +137,7 @@ describe('buildFromConfig', () => {
         './test/mockProject/.sum/temporary/test.sh-default.md',
         './test/mockProject/.sum/temporary/tsconfig.json-default.md',
         './test/mockProject/.sum/temporary/yarn.lock-default.md',
+        './test/mockProject/.sum.config.json',
       ],
     });
   });
@@ -157,7 +157,7 @@ describe('buildFromConfig', () => {
 
     const FileToCreate: FileToCreateType[] = [
       {
-        filePath: config.sumConfigFile,
+        filePath: config.sumConfigFilePath,
         content: JSON.stringify(config),
       },
       {
@@ -186,7 +186,6 @@ describe('buildFromConfig', () => {
       allFiles: [
         './test/mockProject/.gitignore',
         './test/mockProject/.sum/repositoryMap.json',
-        './test/mockProject/.sum/sum.config.json',
         './test/mockProject/.sum/templateCatalog/.gitignore-default.md',
         './test/mockProject/.sum/templateCatalog/README.md-default.md',
         './test/mockProject/.sum/templateCatalog/package.json-default.md',
@@ -199,6 +198,7 @@ describe('buildFromConfig', () => {
         './test/mockProject/.sum/temporary/test.sh-default.md',
         './test/mockProject/.sum/temporary/tsconfig.json-default.md',
         './test/mockProject/.sum/temporary/yarn.lock-default.md',
+        './test/mockProject/.sum.config.json',
         './test/mockProject/README.md',
         './test/mockProject/package.json',
         './test/mockProject/tools/test.sh',
@@ -220,7 +220,7 @@ describe('buildFromConfig', () => {
     };
     sumFileMapConfig = { ...mockSumFileMapConfig.step.scanExtraFile.fullFiled };
     await createFile({
-      filePath: config.sumConfigFile,
+      filePath: config.sumConfigFilePath,
       content: JSON.stringify(config),
     });
     await createFile({
@@ -268,7 +268,6 @@ describe('buildFromConfig', () => {
       allFiles: [
         './test/mockProject/.gitignore',
         './test/mockProject/.sum/repositoryMap.json',
-        './test/mockProject/.sum/sum.config.json',
         './test/mockProject/.sum/templateCatalog/.gitignore-custom.md',
         './test/mockProject/.sum/templateCatalog/.gitignore-default.md',
         './test/mockProject/.sum/templateCatalog/.gitignore-extend.md',
@@ -287,6 +286,7 @@ describe('buildFromConfig', () => {
         './test/mockProject/.sum/temporary/test.sh-default.md',
         './test/mockProject/.sum/temporary/tsconfig.json-default.md',
         './test/mockProject/.sum/temporary/yarn.lock-default.md',
+        './test/mockProject/.sum.config.json',
         './test/mockProject/README.md',
         './test/mockProject/package.json',
         './test/mockProject/tools/test.sh',
