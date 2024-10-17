@@ -1,60 +1,48 @@
-# instalations
+# Installation Guide for s-update-manager
 
 ## Install
 
-if you want to use update-manager in your project, you need to install it first.
-
-use your favorite package manager to install update-manager.
+To use `s-update-manager `in your project, you need to install it first. Use your favorite package manager to install s-update-manager:
 
 ```bash
 npm install s-update-manager
+# or
 yarn add s-update-manager
+# or
 pnpm add s-update-manager
-bun add s-update-manager
 ```
 
-etc.
+## Choose a Template Repository
 
-## Choose template repository
+Before using s-update-manager, you need to choose a repository with templates. You have two options:
 
-before use you have to chose repository with templates.
+1. Use default repositories: [Default List of Repos](default-list-repo.md)
+2. Create your own repo: [Create Your Own Repo](create-your-own-repo.md)
 
-You have 2 way
+## Set Up Scripts
 
-- default repos [default-list-repo](default-list-repo.md)
-- create your own repo [create-your-own-repo](create-your-own-repo.md)
-
-## setup script
-
-in package.json add script to your project
-
-Assumptions:
-
-- project name on github: your-project-name
-- username on github: User
-- template name: node
+Add the following scripts to your `package.json` file:
 
 ```json
 "scripts": {
-  "update": "s-update --remoteRepository='https://github.com/User/your-project-name/tree/dev/node/templateCatalog'",
-  "build": "s-build --remoteRepository='https://github.com/User/your-project-name/tree/dev/node/templateCatalog'",
-  "init": "s-init --remoteRepository='https://github.com/User/your-project-name/tree/dev/node/templateCatalog'"
+  "update": "s-update --remoteRepository='https://github.com/User/your-project-name/tree/main/templateCatalog'",
+  "build": "s-build --remoteRepository='https://github.com/User/your-project-name/tree/main/templateCatalog'",
+  "init": "s-init --remoteRepository='https://github.com/User/your-project-name/tree/main/templateCatalog'"
 }
 ```
 
-Run script depends on your needs
+Replace `User/your-project-name` with the actual GitHub username and repository name where your template is stored.
 
-- `init` - initialize project with template
-- `build` - build project after [adjust configuration](adjust-configuration.md) files
-- `update` - update project if new version of template is avaliable
+## Usage
 
-## CLI parameters
+After setting up the scripts, you can use them as follows:
 
-- `-remoteRepository` - remote repository with template
-- `-template` - template name
-- `-project` - project path
-- `-sumConfig` - config configuration path
-- `-isDebug` - debug mode
-- `-sumCatalog` - config catalog
-- `-projectCatalog` - project catalog
-- `-sumConfigFileName` - config file name
+- `npm run init` or `yarn init`: Initialize your project with the template
+- `npm run build` or `yarn build`: Build your project after [adjusting configuration](adjust-configuration.md) files
+- `npm run update` or `yarn update`: Update your project if a new version of the template is available
+
+## Next Steps
+
+- For more information on available CLI parameters, see the [CLI Parameters](cli-parameters.md) documentation.
+- To learn how to use s-update-manager in your workflow, check out the [How to Use](howToUse.md) guide.
+- If you want to customize the template for your project, refer to the [Adjust Configuration](adjust-configuration.md) guide.
