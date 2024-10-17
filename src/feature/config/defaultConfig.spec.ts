@@ -3,7 +3,6 @@ import { defaultArgs } from '@/feature/args/const';
 import { defaultConfig } from '@/feature/config/const';
 import { getConfig, regenerateConfig, updateDefaultConfig } from '@/feature/config/defaultConfig';
 import { ConfigType } from '@/feature/config/types';
-import { getRemoteFileMapURL } from '@/util/getRemoteURL/getRemoteFileMapURL';
 import { readPackageVersion } from '@/util/readVersionPackage';
 
 const updateSUpdaterVersion = async (projectCatalog: string): Promise<Partial<{ sUpdaterVersion: string }>> => {
