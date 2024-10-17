@@ -72,7 +72,10 @@ export const init = async (args: ArgsTemplate): Promise<{ templateConfig: Config
 
     await createFile({
       filePath: repositoryMapFilePath,
-      content: JSON.stringify(defaultRepositoryMapFileConfig),
+      content: JSON.stringify({
+        ...defaultRepositoryMapFileConfig,
+        ...templateConfig,
+      }),
       isDebug,
       options: {
         overwriteFile: true,
