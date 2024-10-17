@@ -73,7 +73,6 @@ export const updateDetailsFileMapConfig2 = async ({
   }
 
   if (newFileMapConfig === undefined || newFileMapConfig.sumFileMap === undefined) {
-    //TODO: create FileMapConfig
     return defaultConfig;
   }
 

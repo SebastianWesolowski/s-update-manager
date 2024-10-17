@@ -20,7 +20,6 @@ export interface ProcessedArgs {
 }
 
 export const setArgs = (args: Args): ProcessedArgs => {
-  // TODO: Prepare separate data for different scripts using process.env.STYPE
   // This should handle different argument sets for init, update, build, and template scripts
   if (process.env.SDEBUG === 'true') {
     args = defaultArgs;
