@@ -1,4 +1,4 @@
-# Adjust configuration
+# Adjust configuration and prefix files
 
 `s-update-manager` manages file generation based on 3 types of files:
 
