@@ -86,7 +86,10 @@ temporary/
 /mock/mockTemplate/templateCatalog/**/*
 /mock/mockTemplate/templateCatalog/*
 /mock/mockTemplate/tools/**
-/mock/mockTemplate/tools/*
+/mock/mockTemplateWithImage/tools/*
+/mock/mockTemplateWithImage/templateCatalog/**/*
+/mock/mockTemplateWithImage/templateCatalog/*
+/mock/mockTemplateWithImage/tools/**
 /mock/mockTemplateToUpdate/tools/**
 /mock/mockTemplateToUpdate/tools/**
 !/mock/mockProjectToBuild/.sum

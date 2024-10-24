@@ -1,4 +1,5 @@
 import { prepareFileList } from './prepareFileList';
+import { createImage } from '../__tests__/createImage';
 import { getTestData } from '../__tests__/getTestData';
 import {
   cleanUpProjectCatalog,
@@ -101,6 +102,7 @@ describe('prepareFileList', () => {
           templateFileList: [],
           templateVersion: '1.0.0',
         },
+        redOnlyFileList: [],
         fileList: [
           'templateCatalog/.gitignore-default.md',
           'templateCatalog/package.json-default.md',
@@ -121,6 +123,104 @@ describe('prepareFileList', () => {
         },
       });
     });
+
+    it('should return mock file with Image', async () => {
+      templateConfig = {
+        ...templateConfig,
+        projectCatalog: './mock/mockTemplateWithImage',
+        templateCatalogPath: './mock/mockTemplateWithImage/templateCatalog',
+        repositoryMapFilePath: './mock/mockTemplateWithImage/templateCatalog/repositoryMap.json',
+      };
+
+      await createCatalog(templateConfig.templateCatalogPath);
+
+      await cleanUpTemplateCatalog('mock', 'prepareFileList', 'templateCatalogWithImage');
+
+      const FileToCreate: FileToCreateType[] = [
+        {
+          filePath: templateConfig.repositoryMapFilePath,
+          content: JSON.stringify(repositoryMapFileConfig),
+        },
+        {
+          filePath: createPath([templateConfig.projectCatalog, 'tools', 'test.sh']),
+          options: { createFolder: true },
+        },
+      ];
+
+      await setupTestFiles(FileToCreate, templateConfig.isDebug);
+
+      const dataToTest = await getTestData(templateConfig, () =>
+        prepareFileList({
+          templateConfig,
+          templateFileList: [
+            './.gitignore',
+            './package.json',
+            './tools/test.sh',
+            './tsconfig.json',
+            './yarn.lock',
+            './srcReadme/heroImageReposytory.png',
+          ],
+        })
+      );
+
+      expect({ ...dataToTest }).toStrictEqual({
+        allFiles: [
+          './mock/mockTemplateWithImage/.gitignore',
+          './mock/mockTemplateWithImage/package.json',
+          './mock/mockTemplateWithImage/srcReadme/heroImageReposytory.png',
+          './mock/mockTemplateWithImage/templateCatalog/.gitignore-default.md',
+          './mock/mockTemplateWithImage/templateCatalog/package.json-default.md',
+          './mock/mockTemplateWithImage/templateCatalog/repositoryMap.json',
+          './mock/mockTemplateWithImage/templateCatalog/tools/test.sh-default.md',
+          './mock/mockTemplateWithImage/templateCatalog/tsconfig.json-default.md',
+          './mock/mockTemplateWithImage/templateCatalog/yarn.lock-default.md',
+          './mock/mockTemplateWithImage/tools/test.sh',
+          './mock/mockTemplateWithImage/tsconfig.json',
+          './mock/mockTemplateWithImage/yarn.lock',
+        ],
+        repositoryMapFileConfigContent: {
+          _: [],
+          bumpVersion: true,
+          fileMap: [],
+          isDebug: false,
+          projectCatalog: './',
+          repositoryMapFileName: 'repositoryMap.json',
+          repositoryMapFilePath: './templateCatalog/repositoryMap.json',
+          rootPathFileList: [],
+          templateCatalogName: 'templateCatalog',
+          templateCatalogPath: './templateCatalog',
+          templateFileList: [],
+          templateVersion: '1.0.0',
+        },
+        redOnlyFileList: ['./srcReadme/heroImageReposytory.png'],
+        fileList: [
+          'templateCatalog/.gitignore-default.md',
+          'templateCatalog/package.json-default.md',
+          'templateCatalog/tools/test.sh-default.md',
+          'templateCatalog/tsconfig.json-default.md',
+          'templateCatalog/yarn.lock-default.md',
+        ],
+        rootPathFileList: [
+          './mock/mockTemplateWithImage/.gitignore',
+          './mock/mockTemplateWithImage/package.json',
+          './mock/mockTemplateWithImage/tools/test.sh',
+          './mock/mockTemplateWithImage/tsconfig.json',
+          './mock/mockTemplateWithImage/yarn.lock',
+        ],
+        templateFileList: [
+          './.gitignore',
+          './package.json',
+          './tools/test.sh',
+          './tsconfig.json',
+          './yarn.lock',
+          './srcReadme/heroImageReposytory.png',
+        ],
+        templateConfig: {
+          ...templateConfig,
+        },
+      });
+      await cleanUpTemplateCatalog('mock', 'prepareFileList', 'templateCatalogWithImage');
+    });
   });
 
   describe('context test', () => {
@@ -132,7 +232,6 @@ describe('prepareFileList', () => {
       repositoryMapFileConfig = { ...mockTemplateConfig.init.repositoryMapFileConfig };
 
       await cleanUpTemplateCatalog('test');
-      await cleanUpProjectCatalog('test');
       await createCatalog(templateConfig.templateCatalogPath);
 
       await createFile({
@@ -164,12 +263,13 @@ describe('prepareFileList', () => {
         templateFileList: [],
         allFiles: ['./test/mockTemplate/dummy.md', './test/mockTemplate/templateCatalog/repositoryMap.json'],
         fileList: [],
+        redOnlyFileList: [],
         rootPathFileList: [],
       });
     });
 
     it('should return non empty arrays', async () => {
-      const result = await prepareFileList({ templateConfig, templateFileList: ['test/mockTemplate/dummy.md'] });
+      const result = await prepareFileList({ templateConfig, templateFileList: ['./dummy.md'] });
 
       const allFiles = await searchFilesInDirectory({
         directoryPath: templateConfig.projectCatalog,
@@ -179,14 +279,41 @@ describe('prepareFileList', () => {
 
       expect({ ...result, allFiles }).toEqual({
         templateConfig: mockTemplateConfig.prepareFileList,
-        templateFileList: ['test/mockTemplate/dummy.md'],
+        templateFileList: ['./dummy.md'],
         allFiles: [
           './test/mockTemplate/dummy.md',
+          './test/mockTemplate/templateCatalog/dummy.md-default.md',
           './test/mockTemplate/templateCatalog/repositoryMap.json',
-          './test/mockTemplate/templateCatalog/test/mockTemplate/dummy.md-default.md',
         ],
-        fileList: ['templateCatalog/test/mockTemplate/dummy.md-default.md'],
-        rootPathFileList: ['./test/mockTemplate/test/mockTemplate/dummy.md'],
+        fileList: ['templateCatalog/dummy.md-default.md'],
+        redOnlyFileList: [],
+        rootPathFileList: ['./test/mockTemplate/dummy.md'],
+      });
+    });
+
+    it('should return non empty arrays and binary file', async () => {
+      await createImage(createPath([templateConfig.projectCatalog, 'image.png']));
+
+      const result = await prepareFileList({ templateConfig, templateFileList: ['./dummy.md', './image.png'] });
+
+      const allFiles = await searchFilesInDirectory({
+        directoryPath: templateConfig.projectCatalog,
+        excludedFileNames: ['.DS_Store'],
+        excludedPhrases: ['.backup'],
+      });
+
+      expect({ ...result, allFiles }).toEqual({
+        templateConfig: mockTemplateConfig.prepareFileList,
+        templateFileList: ['./dummy.md', './image.png'],
+        allFiles: [
+          './test/mockTemplate/dummy.md',
+          './test/mockTemplate/image.png',
+          './test/mockTemplate/templateCatalog/dummy.md-default.md',
+          './test/mockTemplate/templateCatalog/repositoryMap.json',
+        ],
+        fileList: ['templateCatalog/dummy.md-default.md'],
+        redOnlyFileList: ['./image.png'],
+        rootPathFileList: ['./test/mockTemplate/dummy.md'],
       });
     });
 
@@ -244,6 +371,7 @@ describe('prepareFileList', () => {
           './test/mockTemplate/templateCatalog/repositoryMap.json',
           './test/mockTemplate/test/index.spec.ts',
         ],
+        redOnlyFileList: [],
         fileList: [
           'templateCatalog/.gitignore-default.md',
           'templateCatalog/abc/index.ts-default.md',

@@ -39,7 +39,6 @@ const getCleanupPath = (type: 'test' | 'mock', folder: string, step?: string): s
 
   return path;
 };
-
 export const cleanUpTemplateCatalog = async (
   type: 'test' | 'mock',
   step?:
@@ -49,10 +48,17 @@ export const cleanUpTemplateCatalog = async (
     | 'prepareFileList'
     | 'updateTemplateConfig'
     | 'formatJsonWithPrettier',
-  templateCase: 'templateCatalog' | 'templateCatalogUpdate' = 'templateCatalog'
+  templateCase: 'templateCatalog' | 'templateCatalogUpdate' | 'templateCatalogWithImage' = 'templateCatalog'
 ) => {
-  let folder =
-    templateCase === 'templateCatalog' ? 'mockTemplate/templateCatalog' : 'mockTemplateUpdate/templateCatalog';
+  let projectCatalog;
+  if (templateCase === 'templateCatalog') {
+    projectCatalog = 'mockTemplate';
+  } else if (templateCase === 'templateCatalogWithImage') {
+    projectCatalog = 'mockTemplateWithImage';
+  } else {
+    projectCatalog = 'mockTemplateUpdate';
+  }
+  let folder = `${projectCatalog}/templateCatalog`;
 
   if (type === 'test') {
     folder = folder.replace('/templateCatalog', '');
@@ -63,9 +69,8 @@ export const cleanUpTemplateCatalog = async (
     return;
   }
 
-  const folderNodeModule =
-    templateCase === 'templateCatalog' ? 'mockTemplate/node_modules' : 'mockTemplateUpdate/node_modules';
-  const folderTools = templateCase === 'templateCatalog' ? 'mockTemplate/tools' : 'mockTemplateUpdate/tools';
+  const folderNodeModule = `${projectCatalog}/node_modules`;
+  const folderTools = `${projectCatalog}/tools`;
   const path = getCleanupPath(type, folder, step);
   const pathNodeModules = getCleanupPath(type, folderNodeModule, step);
   const pathTools = getCleanupPath(type, folderTools, step);
