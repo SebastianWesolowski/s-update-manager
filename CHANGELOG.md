@@ -1,3 +1,10 @@
+## [1.0.0-dev.41](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.40...v1.0.0-dev.41) (October 26, 2024)
+
+
+### [SC-87](https://linear.app/wesolowskidev/issue/SC-87)
+
+- 🐛 [[SC-87](https://linear.app/wesolowskidev/issue/SC-87)] add red only key to repositoryMap ([ae41b6c](https://github.com/SebastianWesolowski/s-update-manager/commit/ae41b6c3fe5f0857ee1c0e555d3f2a3f5fe7bdaf))
+
 ## [1.0.0-dev.40](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.39...v1.0.0-dev.40) (October 26, 2024)
 
 
