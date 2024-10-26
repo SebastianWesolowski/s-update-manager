@@ -49,6 +49,7 @@ describe('bumpVersion', () => {
         fileMap: [],
         templateFileList: [],
         rootPathFileList: [],
+        redOnlyFileList: [],
       };
       await cleanUpTemplateCatalog('mock');
 
@@ -102,6 +103,7 @@ describe('bumpVersion', () => {
           repositoryMapFileName: 'repositoryMap.json',
           repositoryMapFilePath: './templateCatalog/repositoryMap.json',
           rootPathFileList: [],
+          redOnlyFileList: [],
           templateCatalogName: 'templateCatalog',
           templateCatalogPath: './templateCatalog',
           templateFileList: [],
@@ -134,6 +136,7 @@ describe('bumpVersion', () => {
         fileMap: [],
         templateFileList: [],
         rootPathFileList: [],
+        redOnlyFileList: [],
       };
 
       const dataToTest = await getTestData(templateConfig, bumpVersion);
@@ -145,6 +148,7 @@ describe('bumpVersion', () => {
           projectCatalog: './',
           repositoryMapFilePath: './mock/mockTemplate/templateCatalog/repositoryMap.json',
           rootPathFileList: [],
+          redOnlyFileList: [],
           templateCatalogPath: './templateCatalog',
           templateFileList: [],
           bumpVersion: true,
@@ -168,6 +172,7 @@ describe('bumpVersion', () => {
           repositoryMapFileName: 'repositoryMap.json',
           repositoryMapFilePath: './templateCatalog/repositoryMap.json',
           rootPathFileList: [],
+          redOnlyFileList: [],
           templateCatalogName: 'templateCatalog',
           templateCatalogPath: './templateCatalog',
           templateFileList: [],
@@ -260,6 +265,7 @@ describe('bumpVersion', () => {
           repositoryMapFileName: 'repositoryMap.json',
           repositoryMapFilePath: './test/mockTemplate/templateCatalog/repositoryMap.json',
           rootPathFileList: [],
+          redOnlyFileList: [],
           templateCatalogName: 'templateCatalog',
           templateCatalogPath: './templateCatalog',
           templateFileList: [],

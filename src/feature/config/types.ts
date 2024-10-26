@@ -51,4 +51,5 @@ export interface RepositoryMapFileConfigType extends ConfigTemplateType {
   fileMap: string[];
   templateFileList: string[];
   rootPathFileList: string[];
+  redOnlyFileList: string[];
 }

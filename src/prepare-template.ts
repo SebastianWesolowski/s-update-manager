@@ -111,9 +111,15 @@ init(args)
     finalConfig = templateConfig;
     return prepareFileList({ templateConfig, templateFileList });
   })
-  .then(({ templateConfig, templateFileList, fileList, rootPathFileList }) => {
+  .then(({ redOnlyFileList, templateConfig, templateFileList, fileList, rootPathFileList }) => {
     finalConfig = templateConfig;
-    return updateTemplateConfig({ templateConfig, fileList, templateFileList, rootPathFileList });
+    return updateTemplateConfig({
+      templateConfig,
+      fileList,
+      templateFileList,
+      rootPathFileList,
+      redOnlyFileList,
+    });
   })
   .then(async ({ templateConfig }) => {
     await formatJsonWithPrettier(templateConfig.repositoryMapFilePath);

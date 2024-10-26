@@ -41,6 +41,7 @@ describe('scanProjectFolder', () => {
         fileMap: [],
         templateFileList: [],
         rootPathFileList: [],
+        redOnlyFileList: [],
       };
 
       await cleanUpTemplateCatalog('mock');
@@ -89,6 +90,7 @@ describe('scanProjectFolder', () => {
           fileMap: [],
           templateFileList: [],
           rootPathFileList: [],
+          redOnlyFileList: [],
         },
         templateConfig: {
           ...templateConfig,
@@ -142,6 +144,7 @@ describe('scanProjectFolder', () => {
           fileMap: [],
           templateFileList: [],
           rootPathFileList: [],
+          redOnlyFileList: [],
         },
         templateConfig: {
           ...templateConfig,
@@ -208,6 +211,7 @@ describe('scanProjectFolder', () => {
           fileMap: [],
           templateFileList: [],
           rootPathFileList: [],
+          redOnlyFileList: [],
         },
         templateConfig: {
           ...templateConfig,

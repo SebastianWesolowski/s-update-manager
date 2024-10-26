@@ -46,6 +46,7 @@ describe('updateTemplateConfig', () => {
         fileMap: [],
         templateFileList: [],
         rootPathFileList: [],
+        redOnlyFileList: [],
       };
 
       await cleanUpTemplateCatalog('mock');
@@ -102,10 +103,12 @@ describe('updateTemplateConfig', () => {
         './mock/mockTemplate/tsconfig.json',
         './mock/mockTemplate/yarn.lock',
       ];
+      const redOnlyFileList = [];
+
       const templateFileList = ['./.gitignore', './package.json', './tools/test.sh', './tsconfig.json', './yarn.lock'];
 
       const dataToTest = await getTestData(templateConfig, () =>
-        updateTemplateConfig({ templateConfig, fileList, templateFileList, rootPathFileList })
+        updateTemplateConfig({ templateConfig, fileList, templateFileList, rootPathFileList, redOnlyFileList })
       );
 
       expect({ ...dataToTest }).toStrictEqual({
@@ -117,6 +120,7 @@ describe('updateTemplateConfig', () => {
             'templateCatalog/tsconfig.json-default.md',
             'templateCatalog/yarn.lock-default.md',
           ],
+          redOnlyFileList: [],
           rootPathFileList: [
             './mock/mockTemplate/.gitignore',
             './mock/mockTemplate/package.json',
@@ -150,6 +154,7 @@ describe('updateTemplateConfig', () => {
             'templateCatalog/tsconfig.json-default.md',
             'templateCatalog/yarn.lock-default.md',
           ],
+          redOnlyFileList: [],
           rootPathFileList: [
             './mock/mockTemplate/.gitignore',
             './mock/mockTemplate/package.json',
@@ -225,7 +230,15 @@ describe('updateTemplateConfig', () => {
         'templateCatalog/readme.md-default.md',
       ];
 
-      const result = await updateTemplateConfig({ templateConfig, fileList, templateFileList, rootPathFileList });
+      const redOnlyFileList = [];
+
+      const result = await updateTemplateConfig({
+        templateConfig,
+        fileList,
+        templateFileList,
+        rootPathFileList,
+        redOnlyFileList,
+      });
 
       const allFiles = await searchFilesInDirectory({
         directoryPath: templateConfig.projectCatalog,

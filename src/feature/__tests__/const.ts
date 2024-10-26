@@ -590,6 +590,7 @@ const repositoryMapFileConfig_step_init: RepositoryMapFileConfigType = {
   fileMap: [],
   templateFileList: [],
   rootPathFileList: [],
+  redOnlyFileList: [],
 };
 
 const repositoryMapFileConfig_step_bumpVersion: RepositoryMapFileConfigType = {
@@ -627,6 +628,7 @@ const mockTemplateConfig_step_updateTemplateConfig: ConfigTemplateType = {
 
 const repositoryMapFileConfigType_step_updateTemplateConfig: RepositoryMapFileConfigType = {
   ...mockTemplateConfig_step_scanProjectFolder,
+  redOnlyFileList: [],
   templateVersion: '1.0.0',
   fileMap: [
     'templateCatalog/.gitignore-default.md',

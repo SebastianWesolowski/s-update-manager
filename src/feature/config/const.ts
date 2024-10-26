@@ -39,4 +39,5 @@ export const defaultRepositoryMapFileConfig: RepositoryMapFileConfigType = {
   fileMap: [],
   templateFileList: [],
   rootPathFileList: [],
+  redOnlyFileList: [],
 };

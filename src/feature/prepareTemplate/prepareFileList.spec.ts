@@ -45,6 +45,7 @@ describe('prepareFileList', () => {
         fileMap: [],
         templateFileList: [],
         rootPathFileList: [],
+        redOnlyFileList: [],
       };
 
       await cleanUpTemplateCatalog('mock');
@@ -97,6 +98,7 @@ describe('prepareFileList', () => {
           repositoryMapFileName: 'repositoryMap.json',
           repositoryMapFilePath: './templateCatalog/repositoryMap.json',
           rootPathFileList: [],
+          redOnlyFileList: [],
           templateCatalogName: 'templateCatalog',
           templateCatalogPath: './templateCatalog',
           templateFileList: [],
@@ -187,6 +189,7 @@ describe('prepareFileList', () => {
           repositoryMapFileName: 'repositoryMap.json',
           repositoryMapFilePath: './templateCatalog/repositoryMap.json',
           rootPathFileList: [],
+          redOnlyFileList: [],
           templateCatalogName: 'templateCatalog',
           templateCatalogPath: './templateCatalog',
           templateFileList: [],
