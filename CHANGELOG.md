@@ -1,3 +1,15 @@
+## [1.0.0-dev.39](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.38...v1.0.0-dev.39) (October 26, 2024)
+
+
+### [SC-5](https://linear.app/wesolowskidev/issue/SC-5)
+
+- 📚 [[SC-5](https://linear.app/wesolowskidev/issue/SC-5)] ️ more information about config ([c981932](https://github.com/SebastianWesolowski/s-update-manager/commit/c9819323abd7c7aa239b8d604c61570895530c9a))
+
+
+### [SC-87](https://linear.app/wesolowskidev/issue/SC-87)
+
+- ✨ [[SC-87](https://linear.app/wesolowskidev/issue/SC-87)] taking care about binary file ([6430f4d](https://github.com/SebastianWesolowski/s-update-manager/commit/6430f4d83337a986cfc8232136e5e671840522ff))
+
 ## [1.0.0-dev.38](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.37...v1.0.0-dev.38) (October 17, 2024)
 
 
