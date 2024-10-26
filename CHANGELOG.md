@@ -1,3 +1,10 @@
+## [1.0.0-dev.40](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.39...v1.0.0-dev.40) (October 26, 2024)
+
+
+### Other tasks
+
+- 🐛 [] releasenpmprocess ([f0bfc8e](https://github.com/SebastianWesolowski/s-update-manager/commit/f0bfc8e347f9385625a65529af1e2fd482d5ab95))
+
 ## [1.0.0-dev.39](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.38...v1.0.0-dev.39) (October 26, 2024)
 
 
