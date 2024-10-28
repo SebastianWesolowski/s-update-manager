@@ -1,3 +1,11 @@
+## [1.0.0-dev.42](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.41...v1.0.0-dev.42) (October 28, 2024)
+
+
+### [SC-87](https://linear.app/wesolowskidev/issue/SC-87)
+
+- 🐛 [[SC-87](https://linear.app/wesolowskidev/issue/SC-87)] read only files ([f8942cd](https://github.com/SebastianWesolowski/s-update-manager/commit/f8942cdc02e6d78895b92dc02837ba18e8eeb9ca))
+- 🚨 [[SC-87](https://linear.app/wesolowskidev/issue/SC-87)] read only files ([5cc993b](https://github.com/SebastianWesolowski/s-update-manager/commit/5cc993b3582a76e2e636405511c9fb03e9890dc5))
+
 ## [1.0.0-dev.41](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.40...v1.0.0-dev.41) (October 26, 2024)
 
 
