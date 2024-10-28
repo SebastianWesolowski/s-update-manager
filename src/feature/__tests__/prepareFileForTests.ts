@@ -48,13 +48,20 @@ export const cleanUpTemplateCatalog = async (
     | 'prepareFileList'
     | 'updateTemplateConfig'
     | 'formatJsonWithPrettier',
-  templateCase: 'templateCatalog' | 'templateCatalogUpdate' | 'templateCatalogWithImage' = 'templateCatalog'
+  templateCase:
+    | 'templateCatalog'
+    | 'mockTemplateWithImage'
+    | 'mockTemplateWithImageWithConfig'
+    | 'templateCatalogUpdate'
+    | 'templateCatalogWithImage' = 'templateCatalog'
 ) => {
   let projectCatalog;
   if (templateCase === 'templateCatalog') {
     projectCatalog = 'mockTemplate';
-  } else if (templateCase === 'templateCatalogWithImage') {
+  } else if (templateCase === 'mockTemplateWithImage') {
     projectCatalog = 'mockTemplateWithImage';
+  } else if (templateCase === 'mockTemplateWithImageWithConfig') {
+    projectCatalog = 'mockTemplateWithImageWithConfig';
   } else {
     projectCatalog = 'mockTemplateUpdate';
   }
@@ -71,12 +78,12 @@ export const cleanUpTemplateCatalog = async (
 
   const folderNodeModule = `${projectCatalog}/node_modules`;
   const folderTools = `${projectCatalog}/tools`;
-  const path = getCleanupPath(type, folder, step);
+  const pathTemplateCatalog = getCleanupPath(type, folder, step);
   const pathNodeModules = getCleanupPath(type, folderNodeModule, step);
   const pathTools = getCleanupPath(type, folderTools, step);
 
   await cleanUpSinglePath({
-    path,
+    path: pathTemplateCatalog,
     isDebug: true,
   });
 

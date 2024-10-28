@@ -88,6 +88,125 @@ describe('updateTemplateConfig', () => {
       await cleanUpTemplateCatalog('mock');
     });
 
+    it('should return mock file with binary files', async () => {
+      templateConfig = {
+        ...templateConfig,
+        projectCatalog: './mock/mockTemplateWithImageWithConfig',
+        templateCatalogPath: './mock/mockTemplateWithImageWithConfig/templateCatalog',
+        repositoryMapFilePath: './mock/mockTemplateWithImageWithConfig/templateCatalog/repositoryMap.json',
+      };
+
+      await createCatalog(templateConfig.templateCatalogPath);
+
+      await cleanUpTemplateCatalog('mock', 'updateTemplateConfig');
+
+      const fileList = [
+        'templateCatalog/.gitignore-default.md',
+        'templateCatalog/package.json-default.md',
+        'templateCatalog/tsconfig.json-default.md',
+        'templateCatalog/yarn.lock-default.md',
+      ];
+      const rootPathFileList = [
+        './mock/mockTemplateWithImageWithConfig/.gitignore',
+        './mock/mockTemplateWithImageWithConfig/package.json',
+        './mock/mockTemplateWithImageWithConfig/tsconfig.json',
+        './mock/mockTemplateWithImageWithConfig/yarn.lock',
+      ];
+      const redOnlyFileList = ['./srcReadme/heroImageReposytory.png'];
+
+      const templateFileList = [
+        './.gitignore',
+        './package.json',
+        './srcReadme/heroImageReposytory.png',
+        './tsconfig.json',
+        './yarn.lock',
+      ];
+
+      const dataToTest = await getTestData(templateConfig, () =>
+        updateTemplateConfig({ templateConfig, fileList, templateFileList, rootPathFileList, redOnlyFileList })
+      );
+
+      expect({ ...dataToTest }).toStrictEqual({
+        newContent: {
+          _: [],
+          bumpVersion: true,
+          fileMap: [
+            'templateCatalog/.gitignore-default.md',
+            'templateCatalog/package.json-default.md',
+            'templateCatalog/tsconfig.json-default.md',
+            'templateCatalog/yarn.lock-default.md',
+          ],
+          isDebug: false,
+          projectCatalog: './mock/mockTemplateWithImageWithConfig',
+          redOnlyFileList: ['./srcReadme/heroImageReposytory.png'],
+          repositoryMapFileName: 'repositoryMap.json',
+          repositoryMapFilePath: './mock/mockTemplateWithImageWithConfig/templateCatalog/repositoryMap.json',
+          rootPathFileList: [
+            './mock/mockTemplateWithImageWithConfig/.gitignore',
+            './mock/mockTemplateWithImageWithConfig/package.json',
+            './mock/mockTemplateWithImageWithConfig/tsconfig.json',
+            './mock/mockTemplateWithImageWithConfig/yarn.lock',
+          ],
+          templateCatalogName: 'templateCatalog',
+          templateCatalogPath: './mock/mockTemplateWithImageWithConfig/templateCatalog',
+          templateFileList: [
+            './.gitignore',
+            './package.json',
+            './srcReadme/heroImageReposytory.png',
+            './tsconfig.json',
+            './yarn.lock',
+          ],
+          templateVersion: '1.0.0',
+        },
+        allFiles: [
+          './mock/mockTemplateWithImageWithConfig/.gitignore',
+          './mock/mockTemplateWithImageWithConfig/package.json',
+          './mock/mockTemplateWithImageWithConfig/srcReadme/heroImageReposytory.png',
+          './mock/mockTemplateWithImageWithConfig/templateCatalog/.gitignore-default.md',
+          './mock/mockTemplateWithImageWithConfig/templateCatalog/package.json-default.md',
+          './mock/mockTemplateWithImageWithConfig/templateCatalog/repositoryMap.json',
+          './mock/mockTemplateWithImageWithConfig/templateCatalog/tsconfig.json-default.md',
+          './mock/mockTemplateWithImageWithConfig/templateCatalog/yarn.lock-default.md',
+          './mock/mockTemplateWithImageWithConfig/tsconfig.json',
+          './mock/mockTemplateWithImageWithConfig/yarn.lock',
+        ],
+        templateConfig: {
+          ...templateConfig,
+        },
+        repositoryMapFileConfigContent: {
+          _: [],
+          bumpVersion: true,
+          fileMap: [
+            'templateCatalog/.gitignore-default.md',
+            'templateCatalog/package.json-default.md',
+            'templateCatalog/tsconfig.json-default.md',
+            'templateCatalog/yarn.lock-default.md',
+          ],
+          isDebug: false,
+          projectCatalog: './mock/mockTemplateWithImageWithConfig',
+          redOnlyFileList: ['./srcReadme/heroImageReposytory.png'],
+          repositoryMapFileName: 'repositoryMap.json',
+          repositoryMapFilePath: './mock/mockTemplateWithImageWithConfig/templateCatalog/repositoryMap.json',
+          rootPathFileList: [
+            './mock/mockTemplateWithImageWithConfig/.gitignore',
+            './mock/mockTemplateWithImageWithConfig/package.json',
+            './mock/mockTemplateWithImageWithConfig/tsconfig.json',
+            './mock/mockTemplateWithImageWithConfig/yarn.lock',
+          ],
+          templateCatalogName: 'templateCatalog',
+          templateCatalogPath: './mock/mockTemplateWithImageWithConfig/templateCatalog',
+          templateFileList: [
+            './.gitignore',
+            './package.json',
+            './srcReadme/heroImageReposytory.png',
+            './tsconfig.json',
+            './yarn.lock',
+          ],
+          templateVersion: '1.0.0',
+        },
+      });
+    });
+
     it('should return mock file', async () => {
       const fileList = [
         'templateCatalog/.gitignore-default.md',
