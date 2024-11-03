@@ -49,7 +49,8 @@ export const updateDetailsFileMapConfig2 = async ({
     | 'createSUMRealFile'
     | 'deleteFile'
     | 'removeFileMap'
-    | 'createRealFileName';
+    | 'createRealFileName'
+    | 'createRedOnlyFileList';
   config: ConfigType;
   sumFileMapConfig?: FileMapConfig;
   SUMSuffixFileName?: string;
@@ -128,6 +129,33 @@ export const updateDetailsFileMapConfig2 = async ({
         newFileMapConfig.manualCreatedFileMap.push(details.path);
       }
     }
+  }
+
+  if (
+    operation === 'createRedOnlyFileList' &&
+    details.SUMKeySuffix &&
+    details.path &&
+    details.realFilePath &&
+    details.realPath &&
+    details.templateVersion
+  ) {
+    details.options.replaceFile = true;
+    if (!newFileMapConfig.sumFileMap[details.realFilePath]) {
+      newFileMapConfig.sumFileMap = {
+        ...newFileMapConfig.sumFileMap,
+        [details.realFilePath]: {},
+      };
+    }
+
+    newFileMapConfig.sumFileMap[details.realFilePath]['_'] = {
+      SUMKeySuffix: '_',
+      isCreated,
+      path: details.path,
+      realFilePath: details.realFilePath,
+      realPath: details.realPath,
+      templateVersion: details.templateVersion,
+      isRedOnly: true,
+    };
   }
 
   if (operation === 'createRealFileName' && details.realFilePath) {

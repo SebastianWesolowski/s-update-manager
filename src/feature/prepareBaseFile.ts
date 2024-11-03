@@ -71,6 +71,30 @@ export async function prepareBaseSumFileMap(
         }
       }
     }
+    if (sumFileMapConfig.sumFileMap && sumFileMapConfig.redOnlyFileList) {
+      for (const readOnlyFile of sumFileMapConfig.redOnlyFileList) {
+        const realFileName = getRealFileName({ config, contentToCheck: [readOnlyFile] })[0];
+        const realFilePath = getRealFilePath({ config, SUMSuffixFileName: readOnlyFile });
+
+        const filePath = createPath([config.projectCatalog, readOnlyFile.replace(config.templateCatalogName, '')]);
+        const directoryPath = path.dirname(filePath);
+        const originalFilePath = createPath([directoryPath, realFileName]);
+
+        if (sumFileMapConfig.sumFileMap && !sumFileMapConfig.sumFileMap[realFilePath]) {
+          sumFileMapConfig = await updateDetailsFileMapConfig2({
+            sumFileMapConfig,
+            config,
+            operation: 'createRedOnlyFileList',
+            SUMKeySuffix: '_',
+            isCreated: false,
+            path: originalFilePath,
+            realFilePath,
+            realPath: createPath([config.projectCatalog, realFileName]),
+            templateVersion: sumFileMapConfig.templateVersion,
+          });
+        }
+      }
+    }
 
     debugFunction(config.isDebug, config, '[INIT] prepareBaseSumFileMap');
     return { config, sumFileMapConfig };

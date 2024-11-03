@@ -398,7 +398,7 @@ describe('prepareBaseSumFileMap', () => {
         ],
         isDebug: true,
         projectCatalog: './mock/mockProjectWithImage/',
-        redOnlyFileList: ['./srcReadme/heroImageReposytory.png'],
+        redOnlyFileList: ['srcReadme/heroImageReposytory.png'],
         remoteFileMapURL:
           'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/dev/mock/mockTemplateWithImageWithConfig/templateCatalog/repositoryMap.json',
         remoteRepository:
@@ -462,7 +462,7 @@ describe('prepareBaseSumFileMap', () => {
           './mock/mockTemplateWithImageWithConfig/tsconfig.json',
           './mock/mockTemplateWithImageWithConfig/yarn.lock',
         ],
-        redOnlyFileList: ['./srcReadme/heroImageReposytory.png'],
+        redOnlyFileList: ['srcReadme/heroImageReposytory.png'],
         createdFileMap: [],
         sumFileMap: {},
       } as FileMapConfig;
@@ -530,7 +530,7 @@ describe('prepareBaseSumFileMap', () => {
             './mock/mockTemplateWithImageWithConfig/tsconfig.json',
             './mock/mockTemplateWithImageWithConfig/yarn.lock',
           ],
-          redOnlyFileList: ['./srcReadme/heroImageReposytory.png'],
+          redOnlyFileList: ['srcReadme/heroImageReposytory.png'],
           createdFileMap: [],
           sumFileMap: {},
         },
@@ -563,7 +563,7 @@ describe('prepareBaseSumFileMap', () => {
             './mock/mockTemplateWithImageWithConfig/tsconfig.json',
             './mock/mockTemplateWithImageWithConfig/yarn.lock',
           ],
-          redOnlyFileList: ['./srcReadme/heroImageReposytory.png'],
+          redOnlyFileList: ['srcReadme/heroImageReposytory.png'],
           createdFileMap: [],
           sumFileMap: {
             '.gitignore': {
@@ -602,6 +602,17 @@ describe('prepareBaseSumFileMap', () => {
                 realPath: './mock/mockProjectWithImage/package.json',
                 templateVersion: '1.0.0',
                 SUMSuffixFileName: 'templateCatalog/package.json-default.md',
+              },
+            },
+            'srcReadme/heroImageReposytory.png': {
+              _: {
+                SUMKeySuffix: '_',
+                isCreated: false,
+                isRedOnly: true,
+                path: './mock/mockProjectWithImage/srcReadme/heroImageReposytory.png',
+                realFilePath: 'srcReadme/heroImageReposytory.png',
+                realPath: './mock/mockProjectWithImage/heroImageReposytory.png',
+                templateVersion: '1.0.0',
               },
             },
             'tsconfig.json': {
@@ -702,7 +713,7 @@ describe('prepareBaseSumFileMap', () => {
             './mock/mockTemplateWithImageWithConfig/tsconfig.json',
             './mock/mockTemplateWithImageWithConfig/yarn.lock',
           ],
-          redOnlyFileList: ['./srcReadme/heroImageReposytory.png'],
+          redOnlyFileList: ['srcReadme/heroImageReposytory.png'],
           createdFileMap: [],
           sumFileMap: {},
         },
@@ -735,7 +746,7 @@ describe('prepareBaseSumFileMap', () => {
             './mock/mockTemplateWithImageWithConfig/tsconfig.json',
             './mock/mockTemplateWithImageWithConfig/yarn.lock',
           ],
-          redOnlyFileList: ['./srcReadme/heroImageReposytory.png'],
+          redOnlyFileList: ['srcReadme/heroImageReposytory.png'],
           createdFileMap: [],
           sumFileMap: {
             '.gitignore': {
@@ -774,6 +785,17 @@ describe('prepareBaseSumFileMap', () => {
                 realPath: './mock/mockProjectWithImage/package.json',
                 templateVersion: '1.0.0',
                 SUMSuffixFileName: 'templateCatalog/package.json-default.md',
+              },
+            },
+            'srcReadme/heroImageReposytory.png': {
+              _: {
+                SUMKeySuffix: '_',
+                isCreated: false,
+                isRedOnly: true,
+                path: './mock/mockProjectWithImage/srcReadme/heroImageReposytory.png',
+                realFilePath: 'srcReadme/heroImageReposytory.png',
+                realPath: './mock/mockProjectWithImage/heroImageReposytory.png',
+                templateVersion: '1.0.0',
               },
             },
             'tsconfig.json': {
