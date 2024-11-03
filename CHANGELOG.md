@@ -1,3 +1,12 @@
+## [1.0.0-dev.43](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.42...v1.0.0-dev.43) (November 03, 2024)
+
+
+### [SC-87](https://linear.app/wesolowskidev/issue/SC-87)
+
+- 🐛 [[SC-87](https://linear.app/wesolowskidev/issue/SC-87)] prepare redOnlyFileList ([fd4932c](https://github.com/SebastianWesolowski/s-update-manager/commit/fd4932c9f6870d949ce9a2cfa99c0d48e83ca842))
+- 🚨 [[SC-87](https://linear.app/wesolowskidev/issue/SC-87)] improve prepareBaseFile ([4a5cb3c](https://github.com/SebastianWesolowski/s-update-manager/commit/4a5cb3c3d26bd8e295d6048b400926e82259251d))
+- 🚨 [[SC-87](https://linear.app/wesolowskidev/issue/SC-87)] read only files ([f18f341](https://github.com/SebastianWesolowski/s-update-manager/commit/f18f341ca38e4e18dc1bcde365fb522d4a7847a4))
+
 ## [1.0.0-dev.42](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.41...v1.0.0-dev.42) (October 28, 2024)
 
 
