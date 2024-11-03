@@ -158,7 +158,7 @@ describe('prepareFileList', () => {
           './mock/mockTemplateWithImageWithConfig/tsconfig.json',
           './mock/mockTemplateWithImageWithConfig/yarn.lock',
         ],
-        redOnlyFileList: ['./srcReadme/heroImageReposytory.png'],
+        redOnlyFileList: ['srcReadme/heroImageReposytory.png'],
       };
 
       await createCatalog(templateConfig.templateCatalogPath);
@@ -220,7 +220,7 @@ describe('prepareFileList', () => {
             './mock/mockTemplateWithImageWithConfig/tsconfig.json',
             './mock/mockTemplateWithImageWithConfig/yarn.lock',
           ],
-          redOnlyFileList: ['./srcReadme/heroImageReposytory.png'],
+          redOnlyFileList: ['srcReadme/heroImageReposytory.png'],
           templateCatalogName: 'templateCatalog',
           templateCatalogPath: './mock/mockTemplateWithImageWithConfig/templateCatalog',
           templateFileList: [
@@ -232,7 +232,7 @@ describe('prepareFileList', () => {
           ],
           templateVersion: '1.0.0',
         },
-        redOnlyFileList: ['./srcReadme/heroImageReposytory.png'],
+        redOnlyFileList: ['srcReadme/heroImageReposytory.png'],
         fileList: [
           'templateCatalog/.gitignore-default.md',
           'templateCatalog/package.json-default.md',
@@ -297,7 +297,7 @@ describe('prepareFileList', () => {
           './mock/mockTemplateWithImage/yarn.lock',
         ],
         repositoryMapFileConfigContent: {},
-        redOnlyFileList: ['./srcReadme/heroImageReposytory.png'],
+        redOnlyFileList: ['srcReadme/heroImageReposytory.png'],
         fileList: [
           'templateCatalog/.gitignore-default.md',
           'templateCatalog/package.json-default.md',
@@ -414,7 +414,7 @@ describe('prepareFileList', () => {
           './test/mockTemplate/templateCatalog/repositoryMap.json',
         ],
         fileList: ['templateCatalog/dummy.md-default.md'],
-        redOnlyFileList: ['./image.png'],
+        redOnlyFileList: ['image.png'],
         rootPathFileList: ['./test/mockTemplate/dummy.md'],
       });
     });

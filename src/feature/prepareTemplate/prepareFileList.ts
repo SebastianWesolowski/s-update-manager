@@ -27,7 +27,7 @@ export const prepareFileList = async ({
     const content = await readFile(templateFilePath);
 
     if (await isBinaryFile(templateFilePath, content.length)) {
-      redOnlyFileList.push(filePath);
+      redOnlyFileList.push(createPath([filePath]).replace('./', ''));
       continue;
     }
 

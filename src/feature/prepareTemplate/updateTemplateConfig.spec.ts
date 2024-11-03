@@ -112,7 +112,7 @@ describe('updateTemplateConfig', () => {
         './mock/mockTemplateWithImageWithConfig/tsconfig.json',
         './mock/mockTemplateWithImageWithConfig/yarn.lock',
       ];
-      const redOnlyFileList = ['./srcReadme/heroImageReposytory.png'];
+      const redOnlyFileList = ['srcReadme/heroImageReposytory.png'];
 
       const templateFileList = [
         './.gitignore',
@@ -138,7 +138,7 @@ describe('updateTemplateConfig', () => {
           ],
           isDebug: false,
           projectCatalog: './mock/mockTemplateWithImageWithConfig',
-          redOnlyFileList: ['./srcReadme/heroImageReposytory.png'],
+          redOnlyFileList: ['srcReadme/heroImageReposytory.png'],
           repositoryMapFileName: 'repositoryMap.json',
           repositoryMapFilePath: './mock/mockTemplateWithImageWithConfig/templateCatalog/repositoryMap.json',
           rootPathFileList: [
@@ -184,7 +184,7 @@ describe('updateTemplateConfig', () => {
           ],
           isDebug: false,
           projectCatalog: './mock/mockTemplateWithImageWithConfig',
-          redOnlyFileList: ['./srcReadme/heroImageReposytory.png'],
+          redOnlyFileList: ['srcReadme/heroImageReposytory.png'],
           repositoryMapFileName: 'repositoryMap.json',
           repositoryMapFilePath: './mock/mockTemplateWithImageWithConfig/templateCatalog/repositoryMap.json',
           rootPathFileList: [
