@@ -1,3 +1,10 @@
+## [1.0.0-dev.45](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.44...v1.0.0-dev.45) (November 03, 2024)
+
+
+### [SC-87](https://linear.app/wesolowskidev/issue/SC-87)
+
+- 🐛 [[SC-87](https://linear.app/wesolowskidev/issue/SC-87)] fix mocs for mocsProjectWithImage ([3a2d1e7](https://github.com/SebastianWesolowski/s-update-manager/commit/3a2d1e748d98829687033316c12fbd6f1f7ec535))
+
 ## [1.0.0-dev.44](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.43...v1.0.0-dev.44) (November 03, 2024)
 
 
