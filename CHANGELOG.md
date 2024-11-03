@@ -1,3 +1,10 @@
+## [1.0.0-dev.44](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.43...v1.0.0-dev.44) (November 03, 2024)
+
+
+### [SC-87](https://linear.app/wesolowskidev/issue/SC-87)
+
+- ✨ [[SC-87](https://linear.app/wesolowskidev/issue/SC-87)] prepare Base File for binary file ([925dd9f](https://github.com/SebastianWesolowski/s-update-manager/commit/925dd9f806c97b22da17d8099993eff2fed56e37))
+
 ## [1.0.0-dev.43](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.42...v1.0.0-dev.43) (November 03, 2024)
 
 
