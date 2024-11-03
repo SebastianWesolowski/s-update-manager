@@ -104,14 +104,16 @@ export const cleanUpProjectCatalog = async (
     | 'bumpVersion'
     | 'cleanUpTemplate'
     | 'scanProjectFolder'
+    | 'prepareBaseFile'
     | 'prepareFileList'
     | 'updateTemplateConfig'
     | 'formatJsonWithPrettier',
-  folderCase: 'mockProject' | 'mockProjectToBuild' | 'mockProjectToUpdate' = 'mockProject'
+  folderCase: 'mockProject' | 'mockProjectToBuild' | 'mockProjectToUpdate' | 'mockProjectWithImage' = 'mockProject'
 ) => {
   const rootPath = getCleanupPath(type, folderCase, step);
   let sumPath = '';
-  if (folderCase === 'mockProject') {
+
+  if (folderCase === 'mockProject' || 'mockProjectWithImage') {
     sumPath = createPath([rootPath, '.sum']);
   }
 

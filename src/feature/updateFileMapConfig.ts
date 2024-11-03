@@ -25,6 +25,7 @@ export interface FileMapConfig {
   templateVersion: string;
   fileMap: string[];
   templateFileList?: string[];
+  redOnlyFileList?: string[];
   sumFileMap?: sumFileMapObjectType;
 }
 
