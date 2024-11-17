@@ -76,7 +76,7 @@ describe('scanProjectFolder', () => {
           './mock/mockTemplate/tsconfig.json',
           './mock/mockTemplate/yarn.lock',
         ],
-        templateFileList: ['./.gitignore', './package.json', './tools/test.sh', './tsconfig.json', './yarn.lock'],
+        templateFileList: ['./.gitignore', './package.json', './tsconfig.json', './yarn.lock'],
         repositoryMapFileConfigContent: {
           projectCatalog: './',
           templateCatalogName: 'templateCatalog',
@@ -130,7 +130,7 @@ describe('scanProjectFolder', () => {
           './mock/mockTemplate/tsconfig.json',
           './mock/mockTemplate/yarn.lock',
         ],
-        templateFileList: ['./.gitignore', './package.json', './tools/test.sh', './tsconfig.json', './yarn.lock'],
+        templateFileList: ['./.gitignore', './package.json', './tsconfig.json', './yarn.lock'],
         repositoryMapFileConfigContent: {
           projectCatalog: './',
           templateCatalogName: 'templateCatalog',

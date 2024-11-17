@@ -142,6 +142,112 @@ describe('buildFromConfig', () => {
     });
   });
 
+  it('should return correct content without extra file and binary files - empty project templateCatalog ', async () => {
+    config = { ...mockConfig.step.scanExtraFile.empty_binary, ...partialConfig };
+    sumFileMapConfig = { ...mockSumFileMapConfig.step.scanExtraFile.empty };
+
+    const FileToCreate: FileToCreateType[] = [
+      {
+        filePath: config.sumConfigFilePath,
+        content: JSON.stringify(config),
+      },
+      {
+        filePath: config.sumFileMapConfig,
+        content: JSON.stringify(sumFileMapConfig),
+      },
+    ];
+    await setupTestFiles(FileToCreate, config.isDebug);
+
+    const result = await buildFromConfig(config);
+    const allFiles = await searchFilesInDirectory({
+      directoryPath: config.projectCatalog,
+      excludedFileNames: ['.DS_Store'],
+      excludedPhrases: ['.backup'],
+    });
+    expect({ ...result, allFiles }).toStrictEqual({
+      config: {
+        ...mockConfig.step.buildFromConfig.empty,
+        remoteFileMapURL:
+          'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/dev/mock/mockTemplateWithImage/templateCatalog/repositoryMap.json',
+        remoteRepository: 'https://github.com/SebastianWesolowski/s-update-manager/tree/dev/mock/mockTemplateWithImage',
+        remoteRootRepositoryUrl:
+          'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/tree/dev/mock/mockTemplateWithImage',
+      },
+      sumFileMapConfig: {
+        ...mockSumFileMapConfig.step.buildFromConfig.empty,
+        createdFileMap: [
+          './test/mockProject/.sum/templateCatalog/.gitignore-default.md',
+          './test/mockProject/.sum/templateCatalog/README.md-default.md',
+          './test/mockProject/.sum/templateCatalog/package.json-default.md',
+          './test/mockProject/.sum/templateCatalog/tools/test.sh-default.md',
+          './test/mockProject/.sum/templateCatalog/tsconfig.json-default.md',
+          './test/mockProject/.sum/templateCatalog/yarn.lock-default.md',
+        ],
+        sumFileMap: {
+          ...mockSumFileMapConfig.step.buildFromConfig.empty.sumFileMap,
+          '.gitignore': {
+            ...mockSumFileMapConfig.step.buildFromConfig.empty.sumFileMap['.gitignore'],
+            _: {
+              ...mockSumFileMapConfig.step.buildFromConfig.empty.sumFileMap['.gitignore']['_'],
+              isCreated: false,
+            },
+          },
+          'README.md': {
+            ...mockSumFileMapConfig.step.buildFromConfig.empty.sumFileMap['README.md'],
+            _: {
+              ...mockSumFileMapConfig.step.buildFromConfig.empty.sumFileMap['README.md']['_'],
+              isCreated: false,
+            },
+          },
+          'package.json': {
+            ...mockSumFileMapConfig.step.buildFromConfig.empty.sumFileMap['package.json'],
+            _: {
+              ...mockSumFileMapConfig.step.buildFromConfig.empty.sumFileMap['package.json']['_'],
+              isCreated: false,
+            },
+          },
+          'tools/test.sh': {
+            ...mockSumFileMapConfig.step.buildFromConfig.empty.sumFileMap['tools/test.sh'],
+            _: {
+              ...mockSumFileMapConfig.step.buildFromConfig.empty.sumFileMap['tools/test.sh']['_'],
+              isCreated: false,
+            },
+          },
+          'tsconfig.json': {
+            ...mockSumFileMapConfig.step.buildFromConfig.empty.sumFileMap['tsconfig.json'],
+            _: {
+              ...mockSumFileMapConfig.step.buildFromConfig.empty.sumFileMap['tsconfig.json']['_'],
+              isCreated: false,
+            },
+          },
+          'yarn.lock': {
+            ...mockSumFileMapConfig.step.buildFromConfig.empty.sumFileMap['yarn.lock'],
+            _: {
+              ...mockSumFileMapConfig.step.buildFromConfig.empty.sumFileMap['yarn.lock']['_'],
+              isCreated: false,
+            },
+          },
+        },
+      },
+      allFiles: [
+        './test/mockProject/.sum/repositoryMap.json',
+        './test/mockProject/.sum/templateCatalog/.gitignore-default.md',
+        './test/mockProject/.sum/templateCatalog/README.md-default.md',
+        './test/mockProject/.sum/templateCatalog/package.json-default.md',
+        './test/mockProject/.sum/templateCatalog/tools/test.sh-default.md',
+        './test/mockProject/.sum/templateCatalog/tsconfig.json-default.md',
+        './test/mockProject/.sum/templateCatalog/yarn.lock-default.md',
+        './test/mockProject/.sum/temporary/.gitignore-default.md',
+        './test/mockProject/.sum/temporary/README.md-default.md',
+        './test/mockProject/.sum/temporary/package.json-default.md',
+        './test/mockProject/.sum/temporary/test.sh-default.md',
+        './test/mockProject/.sum/temporary/tsconfig.json-default.md',
+        './test/mockProject/.sum/temporary/yarn.lock-default.md',
+        './test/mockProject/.sum.config.json',
+      ],
+    });
+  });
+
   it('should return correct content without extra file - project mockTemplateToUpdate ', async () => {
     config = { ...mockConfig.step.scanExtraFile.empty, ...partialConfig };
     sumFileMapConfig = { ...mockSumFileMapConfig.step.scanExtraFile.empty };

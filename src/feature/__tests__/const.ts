@@ -44,6 +44,14 @@ const mockConfig_step_prepareBaseSumFileMap = {
 const mockConfig_step_scanExtraFile_empty = {
   ...mockConfig_step_downloadConfigFileForInit,
 };
+const mockConfig_step_scanExtraFile_empty_binary = {
+  ...mockConfig_step_downloadConfigFileForInit,
+  remoteFileMapURL:
+    'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/dev/mock/mockTemplateWithImage/templateCatalog/repositoryMap.json',
+  remoteRepository: 'https://github.com/SebastianWesolowski/s-update-manager/tree/dev/mock/mockTemplateWithImage',
+  remoteRootRepositoryUrl:
+    'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/tree/dev/mock/mockTemplateWithImage',
+};
 
 const mockConfig_step_scanExtraFile_fullFiled = {
   ...mockConfig_step_downloadConfigFileForInit,
@@ -520,6 +528,7 @@ export const mockConfig = {
     prepareBaseSumFileMap: mockConfig_step_prepareBaseSumFileMap,
     scanExtraFile: {
       empty: mockConfig_step_scanExtraFile_empty,
+      empty_binary: mockConfig_step_scanExtraFile_empty_binary,
       fullFiled: mockConfig_step_scanExtraFile_fullFiled,
     },
     buildFromConfig: {

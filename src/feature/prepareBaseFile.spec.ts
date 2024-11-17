@@ -661,6 +661,7 @@ describe('prepareBaseSumFileMap', () => {
           './mock/mockProjectWithImage/.sum.config.json',
           './mock/mockProjectWithImage/README.md',
           './mock/mockProjectWithImage/package.json',
+          './mock/mockProjectWithImage/srcReadme/heroImageReposytory.png',
           './mock/mockProjectWithImage/tools/addDependency.js',
           './mock/mockProjectWithImage/tools/addModuleType.js',
           './mock/mockProjectWithImage/tools/test-new.sh',

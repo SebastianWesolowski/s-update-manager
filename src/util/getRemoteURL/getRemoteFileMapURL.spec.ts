@@ -46,7 +46,8 @@ describe('getRemoteFileMapURL', () => {
 
   it('should return correct URL for GitHub nested folder', () => {
     const mockConfig = {
-      remoteRepository: 'https://github.com/SebastianWesolowski/s-template/tree/main/templates/node/templateCatalog',
+      remoteRepository:
+        'https://raw.githubusercontent.com/SebastianWesolowski/s-template/refs/heads/refs/heads/main/templates/node/templateCatalog/repositoryMap.json',
       templateCatalogName: 'templateCatalog',
     };
     config = { ...config, ...mockConfig };
@@ -54,7 +55,7 @@ describe('getRemoteFileMapURL', () => {
     const result = getRemoteFileMapURL(config);
 
     expect(result).toBe(
-      'https://raw.githubusercontent.com/SebastianWesolowski/s-template/main/templates/node/templateCatalog/repositoryMap.json'
+      'https://raw.githubusercontent.com/SebastianWesolowski/s-template/refs/heads/refs/heads/main/templates/node/templateCatalog/repositoryMap.json'
     );
   });
 
@@ -68,7 +69,7 @@ describe('getRemoteFileMapURL', () => {
     const result = getRemoteFileMapURL(config);
 
     expect(result).toBe(
-      'https://raw.githubusercontent.com/SebastianWesolowski/s-template/main/templates/node/templateCatalog/repositoryMap.json'
+      'https://raw.githubusercontent.com/SebastianWesolowski/s-template/refs/heads/refs/heads/main/templates/node/templateCatalog/repositoryMap.json'
     );
   });
 

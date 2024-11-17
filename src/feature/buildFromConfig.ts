@@ -75,13 +75,25 @@ export const buildFromConfig = async (
 
     if (sumFileMapConfig.sumFileMap) {
       const sumSetObject = sumFileMapConfig.sumFileMap[realFilePath] as sumArrayPathFileSet;
-      const content = await getContentToBuild(sumSetObject);
+      let content: string | Buffer | undefined | null = null;
+      if (sumSetObject['_']?.isRedOnly === true) {
+        content = await getRemoteContentToBuild({
+          config,
+          relativePaths: [sumSetObject['_'].realFilePath],
+          type: 'buffer',
+        });
+      } else {
+        content = await getContentToBuild(sumSetObject);
+      }
 
       if (content) {
         await createFile({
           filePath: realFileObject.path,
           content,
           isDebug: config.isDebug,
+          options: {
+            overwriteFile: true,
+          },
         }).then(async () => {
           sumFileMapConfig = await updateDetailsFileMapConfig2({
             config,

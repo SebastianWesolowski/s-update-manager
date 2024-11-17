@@ -7,6 +7,7 @@ export interface sumFile {
   SUMSuffixFileName: string;
   SUMKeySuffix: string;
   isCreated: boolean;
+  isRedOnly?: boolean;
   path: string;
   realFilePath: string;
   realPath: string;

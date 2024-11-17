@@ -22,8 +22,18 @@ export const buildURL = ({
   queryParams?: Record<string, string>;
   hash?: string;
 }): string => {
-  // Create a URL object from the base address
   const url = new URL(baseURL);
+
+  // Add refs/heads/ before branch name for GitHub URLs
+  if (url.hostname === 'raw.githubusercontent.com') {
+    const pathParts = url.pathname.split('/');
+    // GitHub URLs follow pattern: /:owner/:repo/:branch/...
+    if (pathParts.length >= 4) {
+      // Insert 'refs/heads' before the branch name (index 3)
+      pathParts.splice(3, 0, 'refs', 'heads');
+      url.pathname = pathParts.join('/');
+    }
+  }
 
   // Combine the base path with relative parts, removing unnecessary slashes
   const fullPath = relativePaths.map((path) => path.replace(/^\//, '').replace(/\/$/, '')).join('/');
