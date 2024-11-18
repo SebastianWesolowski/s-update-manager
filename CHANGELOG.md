@@ -1,3 +1,10 @@
+## [1.0.0-dev.46](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.45...v1.0.0-dev.46) (November 18, 2024)
+
+
+### [SC-87](https://linear.app/wesolowskidev/issue/SC-87)
+
+- ✨ [[SC-87](https://linear.app/wesolowskidev/issue/SC-87)] cover binary file from remote repo ([75d6c11](https://github.com/SebastianWesolowski/s-update-manager/commit/75d6c11a39d44a86f24fea0f723f1ea0888d3059))
+
 ## [1.0.0-dev.45](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.44...v1.0.0-dev.45) (November 03, 2024)
 
 
