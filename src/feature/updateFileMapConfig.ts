@@ -1,4 +1,4 @@
-import { AvailableSUMKeySuffixTypes, ConfigType } from '@/feature/config/types';
+import { AvailableSUMKeySuffixTypes, ConfigTemplateType, ConfigType } from '@/feature/config/types';
 import { parseJSON } from '@/util/parseJSON';
 import { readFile } from '@/util/readFile';
 import { updateJsonFile } from '@/util/updateJsonFile';
@@ -8,6 +8,7 @@ export interface sumFile {
   SUMKeySuffix: string;
   isCreated: boolean;
   isRedOnly?: boolean;
+  isIgnore?: boolean;
   path: string;
   realFilePath: string;
   realPath: string;
@@ -19,7 +20,8 @@ export type sumArrayPathFileSet<T extends string = AvailableSUMKeySuffixTypes & 
 } & { defaultFile: sumFile };
 
 export type sumFileMapObjectType = Record<string, sumArrayPathFileSet> | Record<string, NonNullable<unknown>>;
-export interface FileMapConfig {
+export interface FileMapConfig extends Partial<ConfigTemplateType> {
+  // TODO [SC-96] check that extends
   createdFileMap: string[];
   manualCreatedFileMap?: string[];
   rootPathFileList?: string[];

@@ -21,6 +21,7 @@
   - [template structure](docs/template-structure.md)
   - [CLI parameters](docs/cli-parameters.md)
   - [config File](docs/config-file.md)
+  - [ignore File](docs/ignore-file.md)
   - [Adjust configuration](docs/adjust-configuration.md)
 - [How to use](docs/howToUse.md)
 - [Known Problems](docs/knowProblems.md)
@@ -56,6 +57,10 @@ After installation, you can use s-update-manager by setting up scripts in your `
   "init": "s-init --remoteRepository='https://github.com/User/your-project-name/tree/dev/node/templateCatalog'"
 }
 ```
+
+### Ignore file
+
+If you want to block download someone form remote reposytory, you can create `.sumignore` it works similarly to `.gitignore`. More detailed in [ignore file](docs/ignore-file.md)
 
 For more detailed usage instructions, check out our [How to Use guide](docs/howToUse.md).
 

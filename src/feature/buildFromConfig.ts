@@ -24,8 +24,6 @@ export const buildFromConfig = async (
   );
 
   for (const realFilePath in sumFileMapConfig.sumFileMap) {
-    // because we only check for default, the rest should be generated manually or only use getContent
-    // const SUMKeySuffix = "defaultFile"
     for (const SUMKeySuffix in sumFileMapConfig.sumFileMap[realFilePath]) {
       if (SUMKeySuffix === '_') {
         continue;
@@ -49,7 +47,6 @@ export const buildFromConfig = async (
           });
         });
       }
-      // There's no need for others than default to appear here
       if (sumFileMapConfig.fileMap.includes(currentFileObject.SUMSuffixFileName)) {
         const content = await getRemoteContentToBuild({
           config,
@@ -67,15 +64,14 @@ export const buildFromConfig = async (
       }
     }
 
-    // const updatedSumFileMapConfig: FileMapConfig = await readFile(config.sumFileMapConfig).then(async (bufferData) =>
-    //   parseJSON(bufferData.toString())
-    // );
-
     const realFileObject = sumFileMapConfig.sumFileMap[realFilePath]['_'];
 
     if (sumFileMapConfig.sumFileMap) {
       const sumSetObject = sumFileMapConfig.sumFileMap[realFilePath] as sumArrayPathFileSet;
       let content: string | Buffer | undefined | null = null;
+      if (sumSetObject['_']?.isIgnore === true) {
+        continue;
+      }
       if (sumSetObject['_']?.isRedOnly === true) {
         content = await getRemoteContentToBuild({
           config,

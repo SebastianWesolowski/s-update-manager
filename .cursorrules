@@ -10,7 +10,6 @@ When answering, streitly follow these rules:
 
 <CODE ORGANIZATION>
 - One export per file
-- Use modular architecture (especially in NestJS)
 - Organize code by domain/feature
 - Keep files, functions, and classes focused and small
 - Use kebab-case for files and directories
@@ -27,18 +26,18 @@ When answering, streitly follow these rules:
 </NAMING CONVENTIONS>
 
 <FUNCTIONS AND METHODS>
-- Maximum 20 lines per function
+- Preferably maximum 20 lines per function
 - Single responsibility and abstraction level
 - Early returns over nested conditions
 - Use arrow functions for simple operations (≤3 lines)
 - Prefer named functions for complex logic
 - Use object parameters for multiple inputs (RO-RO pattern)
+- Document functions with JSDoc
 - Document public APIs with JSDoc
 </FUNCTIONS AND METHODS>
 
 <DATA HANDLING>
-- Use TypeScript interfaces for data contracts
-- Validate inputs with class-validator in DTOs
+- Use TypeScript types and interfaces for data contracts
 - Make data immutable (readonly, as const)
 - Encapsulate validation in classes
 - Use composite types over primitives
@@ -50,16 +49,6 @@ When answering, streitly follow these rules:
 - Add context to caught exceptions
 - Use proper error hierarchies
 </ERROR HANDLING>
-
-<NESTJS SPECIFIC>
-- One module per domain
-- One controller per primary route
-- Separate DTOs and entities
-- Use dependency injection
-- Implement proper module separation
-- Use guards for authorization
-- Implement interceptors for cross-cutting concerns
-</NESTJS SPECIFIC>
 
 <TESTING>
 - Write tests first (TDD when possible)

@@ -28,10 +28,6 @@ For templates:
 
 You can adjust these values in the `const.ts` file to facilitate testing and debugging.
 
-## TypeScript Compilation
-
-- `npm run prestart:dev` or `yarn prestart:dev` - runs the TypeScript compiler in watch mode
-
 ## Building the Project
 
 - `npm run build` or `yarn build` - cleans the `lib/` directory and builds the project using Rollup

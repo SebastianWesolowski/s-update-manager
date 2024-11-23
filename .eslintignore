@@ -1,9 +1,8 @@
 node_modules
-distTS
 lib/*
-*.scss
 dist/*
 mock/*
+__tests__/*
 tools/*
 sum/*
 template/*
@@ -12,5 +11,4 @@ package.json
 tsconfig.json
 prettier.config.js
 .eslintrc.js
-.replacerc.js
 clean-package.config.json
