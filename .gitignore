@@ -82,7 +82,7 @@ sum/
 temporary/
 .sum/
 
-# Mock files
+# Pliki mock
 /mock/mockTemplate/templateCatalog/**/*
 /mock/mockTemplate/templateCatalog/*
 /mock/mockTemplate/tools/**
@@ -97,7 +97,7 @@ temporary/
 !/mock/mockProjectToBuild/.sum/**
 !/mock/mockProjectToBuild/.sum/**/*
 
-# Test files
+# Pliki testowe
 /test/*
 
 

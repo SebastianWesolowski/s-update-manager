@@ -1,27 +1,45 @@
-# Dependencies
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
 /node_modules
 /.pnp
 .pnp.js
 
-# Testing and Coverage
+# testing
 /coverage
-/__mocks__/**/*
 
-# Build and Production
-/out/
+# production
 /build
 
-# Configuration Files
-prettier.config.js
-.eslintrc.js
+# misc
+.DS_Store
 
-# Environment and Local Files
-.env.*
-
-# Logs and Debug
+# debug
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# Reports
+# local env files
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# vercel
+.vercel
+
+
+# reports
 /reports
+
+/__mocks__/**/*
+
+cypress.config.js
+cypress/**/*
+prettier.config.js
+.eslintrc.js
+.replacerc.js
+tools/*
+sum/*
+template/*
+mock/*

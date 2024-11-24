@@ -3,22 +3,18 @@ const fs = require('fs');
 
 module.exports = {
   plugins: ['@typescript-eslint', 'node', 'prettier', 'import'],
-  overrides: [
+  "overrides": [
     {
-      files: ['**/*.json'],
-      rules: {
+      "files": ["**/*.json"],
+      "rules": {
         quotes: ['warn', 'double', { avoidEscape: true }],
-      },
-    },
+      }
+    }
   ],
   extends: [
     'prettier',
-    'react-app',
-    'react-app/jest',
     'plugin:node/recommended',
     'plugin:@typescript-eslint/recommended',
-    'plugin:storybook/recommended',
-    'plugin:tailwindcss/recommended',
   ],
   rules: {
     'node/no-missing-import': 'off',
@@ -43,13 +39,12 @@ module.exports = {
       },
     ],
     'sort-imports': [
-      'warn',
+      'error',
       {
         ignoreCase: true,
         ignoreDeclarationSort: true,
       },
     ],
-    'tailwindcss/classnames-order': 'off',
     'import/order': [
       'warn',
       {
@@ -84,7 +79,8 @@ module.exports = {
 };
 
 function getDirectoriesToSort() {
-  return getDirectories(process.cwd()).filter(f => f !== 'node_modules');
+  const ignoredSortingDirectories = ['.git', '.vscode', 'node_modules'];
+  return getDirectories(process.cwd()).filter((f) => !ignoredSortingDirectories.includes(f));
 }
 
 function getDirectories(path) {
