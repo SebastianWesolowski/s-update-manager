@@ -1,0 +1,27 @@
+{
+  "projectCatalog": "./templates/mocks/microTemplate",
+  "templateCatalogName": "templateCatalog",
+  "templateCatalogPath": "./templates/mocks/microTemplate/templateCatalog",
+  "repositoryMapFileName": "repositoryMap.json",
+  "repositoryMapFilePath": "./templates/mocks/microTemplate/templateCatalog/repositoryMap.json",
+  "bumpVersion": true,
+  "isDebug": false,
+  "_": [],
+  "templateVersion": "1.0.0",
+  "fileMap": [
+    "templateCatalog/.gitignore-default.md",
+    "templateCatalog/package.json-default.md",
+    "templateCatalog/tsconfig.json-default.md"
+  ],
+  "templateFileList": [
+    "./.gitignore",
+    "./package.json",
+    "./tsconfig.json"
+  ],
+  "rootPathFileList": [
+    "./templates/mocks/microTemplate/.gitignore",
+    "./templates/mocks/microTemplate/package.json",
+    "./templates/mocks/microTemplate/tsconfig.json"
+  ],
+  "redOnlyFileList": []
+}
