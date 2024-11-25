@@ -53,6 +53,7 @@ export const updateDetailsFileMapConfig2 = async ({
     | 'deleteFile'
     | 'removeFileMap'
     | 'createRealFileName'
+    | 'setIgnoreFile'
     | 'createRedOnlyFileList';
   config: ConfigType;
   sumFileMapConfig?: FileMapConfig;
@@ -67,8 +68,6 @@ export const updateDetailsFileMapConfig2 = async ({
     createdFileMap: [],
     fileMap: [],
   };
-  // 'addConfigSuffixFile' - adding a new file to the config
-  // 'createSuffixFile' - creating a file
 
   let newFileMapConfig = sumFileMapConfig;
   if (!newFileMapConfig) {
@@ -132,6 +131,18 @@ export const updateDetailsFileMapConfig2 = async ({
         newFileMapConfig.manualCreatedFileMap.push(details.path);
       }
     }
+  }
+
+  if (operation === 'setIgnoreFile' && details.realFilePath) {
+    details.options.replaceFile = true;
+    if (!newFileMapConfig.sumFileMap[details.realFilePath]) {
+      console.log(`The file (${details.realFilePath}) does not exist, it cannot be set as ignore file`);
+    }
+
+    newFileMapConfig.sumFileMap[details.realFilePath]['_'] = {
+      ...newFileMapConfig.sumFileMap[details.realFilePath]['_'],
+      isIgnore: true,
+    };
   }
 
   if (

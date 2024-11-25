@@ -181,7 +181,6 @@ describe('buildFromConfig', () => {
           './mock/microProject/.sum.config.json',
           './mock/microProject/package.json',
           './mock/microProject/tsconfig.json',
-          './mock/microProject/yarn.lock',
         ],
         sumConfigFileContent: config,
         sumFileMapConfigContent: {
@@ -196,7 +195,7 @@ describe('buildFromConfig', () => {
       });
     });
 
-    it.only('should return ignore tsConfig', async () => {
+    it('should return ignore tsConfig', async () => {
       sumFileMapConfig = {
         ...sumFileMapConfig,
         sumFileMap: {

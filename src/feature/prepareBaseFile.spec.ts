@@ -7,6 +7,7 @@ import { ConfigType } from '@/feature/config/types';
 import { prepareBaseSumFileMap } from '@/feature/prepareBaseFile';
 import { FileMapConfig } from '@/feature/updateFileMapConfig';
 import { createFile } from '@/util/createFile';
+import { createPath } from '@/util/createPath';
 
 describe('prepareBaseSumFileMap', () => {
   describe('context mock', () => {
@@ -67,17 +68,17 @@ describe('prepareBaseSumFileMap', () => {
             _: {
               SUMKeySuffix: '_',
               isCreated: false,
-              path: './test/mockProject/.gitignore',
+              path: './mock/mockProject/.gitignore',
               realFilePath: '.gitignore',
-              realPath: './test/mockProject/.gitignore',
+              realPath: './mock/mockProject/.gitignore',
               templateVersion: '1.0.0',
             },
             defaultFile: {
               SUMKeySuffix: 'defaultFile',
               isCreated: false,
-              path: './test/mockProject/.sum/templateCatalog/.gitignore-default.md',
+              path: './mock/mockProject/.sum/templateCatalog/.gitignore-default.md',
               realFilePath: '.gitignore',
-              realPath: './test/mockProject/.gitignore',
+              realPath: './mock/mockProject/.gitignore',
               templateVersion: '1.0.0',
               SUMSuffixFileName: 'templateCatalog/.gitignore-default.md',
             },
@@ -86,17 +87,17 @@ describe('prepareBaseSumFileMap', () => {
             _: {
               SUMKeySuffix: '_',
               isCreated: false,
-              path: './test/mockProject/README.md',
+              path: './mock/mockProject/README.md',
               realFilePath: 'README.md',
-              realPath: './test/mockProject/README.md',
+              realPath: './mock/mockProject/README.md',
               templateVersion: '1.0.0',
             },
             defaultFile: {
               SUMKeySuffix: 'defaultFile',
               isCreated: false,
-              path: './test/mockProject/.sum/templateCatalog/README.md-default.md',
+              path: './mock/mockProject/.sum/templateCatalog/README.md-default.md',
               realFilePath: 'README.md',
-              realPath: './test/mockProject/README.md',
+              realPath: './mock/mockProject/README.md',
               templateVersion: '1.0.0',
               SUMSuffixFileName: 'templateCatalog/README.md-default.md',
             },
@@ -105,17 +106,17 @@ describe('prepareBaseSumFileMap', () => {
             _: {
               SUMKeySuffix: '_',
               isCreated: false,
-              path: './test/mockProject/package.json',
+              path: './mock/mockProject/package.json',
               realFilePath: 'package.json',
-              realPath: './test/mockProject/package.json',
+              realPath: './mock/mockProject/package.json',
               templateVersion: '1.0.0',
             },
             defaultFile: {
               SUMKeySuffix: 'defaultFile',
               isCreated: false,
-              path: './test/mockProject/.sum/templateCatalog/package.json-default.md',
+              path: './mock/mockProject/.sum/templateCatalog/package.json-default.md',
               realFilePath: 'package.json',
-              realPath: './test/mockProject/package.json',
+              realPath: './mock/mockProject/package.json',
               templateVersion: '1.0.0',
               SUMSuffixFileName: 'templateCatalog/package.json-default.md',
             },
@@ -124,17 +125,17 @@ describe('prepareBaseSumFileMap', () => {
             _: {
               SUMKeySuffix: '_',
               isCreated: false,
-              path: './test/mockProject/tools/test.sh',
+              path: './mock/mockProject/tools/test.sh',
               realFilePath: 'tools/test.sh',
-              realPath: './test/mockProject/test.sh',
+              realPath: './mock/mockProject/test.sh',
               templateVersion: '1.0.0',
             },
             defaultFile: {
               SUMKeySuffix: 'defaultFile',
               isCreated: false,
-              path: './test/mockProject/.sum/templateCatalog/tools/test.sh-default.md',
+              path: './mock/mockProject/.sum/templateCatalog/tools/test.sh-default.md',
               realFilePath: 'tools/test.sh',
-              realPath: './test/mockProject/tools/test.sh',
+              realPath: './mock/mockProject/tools/test.sh',
               templateVersion: '1.0.0',
               SUMSuffixFileName: 'templateCatalog/tools/test.sh-default.md',
             },
@@ -143,17 +144,17 @@ describe('prepareBaseSumFileMap', () => {
             _: {
               SUMKeySuffix: '_',
               isCreated: false,
-              path: './test/mockProject/tsconfig.json',
+              path: './mock/mockProject/tsconfig.json',
               realFilePath: 'tsconfig.json',
-              realPath: './test/mockProject/tsconfig.json',
+              realPath: './mock/mockProject/tsconfig.json',
               templateVersion: '1.0.0',
             },
             defaultFile: {
               SUMKeySuffix: 'defaultFile',
               isCreated: false,
-              path: './test/mockProject/.sum/templateCatalog/tsconfig.json-default.md',
+              path: './mock/mockProject/.sum/templateCatalog/tsconfig.json-default.md',
               realFilePath: 'tsconfig.json',
-              realPath: './test/mockProject/tsconfig.json',
+              realPath: './mock/mockProject/tsconfig.json',
               templateVersion: '1.0.0',
               SUMSuffixFileName: 'templateCatalog/tsconfig.json-default.md',
             },
@@ -162,17 +163,17 @@ describe('prepareBaseSumFileMap', () => {
             _: {
               SUMKeySuffix: '_',
               isCreated: false,
-              path: './test/mockProject/yarn.lock',
+              path: './mock/mockProject/yarn.lock',
               realFilePath: 'yarn.lock',
-              realPath: './test/mockProject/yarn.lock',
+              realPath: './mock/mockProject/yarn.lock',
               templateVersion: '1.0.0',
             },
             defaultFile: {
               SUMKeySuffix: 'defaultFile',
               isCreated: false,
-              path: './test/mockProject/.sum/templateCatalog/yarn.lock-default.md',
+              path: './mock/mockProject/.sum/templateCatalog/yarn.lock-default.md',
               realFilePath: 'yarn.lock',
-              realPath: './test/mockProject/yarn.lock',
+              realPath: './mock/mockProject/yarn.lock',
               templateVersion: '1.0.0',
               SUMSuffixFileName: 'templateCatalog/yarn.lock-default.md',
             },
@@ -196,31 +197,276 @@ describe('prepareBaseSumFileMap', () => {
       await cleanUpProjectCatalog('mock');
     });
 
-    it('should return correct content', async () => {
+    it('should return correct content with .sumignore', async () => {
+      const FileToCreate: FileToCreateType[] = [
+        {
+          filePath: createPath([config.projectCatalog, '.sumignore']),
+          content: 'tsconfig.json\n' + 'yarn.lock',
+        },
+        {
+          filePath: config.sumFileMapConfig,
+          content: JSON.stringify(sumFileMapConfig),
+          options: { createFolder: true },
+        },
+      ];
+      await setupTestFiles(FileToCreate, config.isDebug);
+
       const dataToTest = await getProjectTestData(config, () => prepareBaseSumFileMap(config));
 
       expect({ ...dataToTest }).toStrictEqual({
-        config: {
-          templateCatalogName: 'templateCatalog',
-          sumCatalog: './mock/mockProject/.sum/',
-          sUpdaterVersion: '../../dist/s-update-manager-1.0.0-dev.27.tgz',
-          availableSUMSuffix: ['-default.md', '-custom.md', '-extend.md'],
-          availableSUMKeySuffix: ['defaultFile', 'customFile', 'extendFile'],
-          templateVersion: undefined,
-          sumFileMapConfigFileName: 'repositoryMap.json',
-          sumFileMapConfig: './mock/mockProject/.sum/repositoryMap.json',
-          projectCatalog: './mock/mockProject/',
-          temporaryFolder: './mock/mockProject/.sum/temporary/',
-          sumConfigFileName: '.sum.config.json',
-          sumConfigFilePath: './mock/mockProject/.sum.config.json',
-          remoteFileMapURL:
-            'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/dev/mock/mockTemplate/templateCatalog/repositoryMap.json',
-          remoteRepository: 'https://github.com/SebastianWesolowski/s-update-manager/tree/dev/mock/mockTemplate',
-          remoteRootRepositoryUrl:
-            'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/tree/dev/mock/mockTemplate',
-          isDebug: true,
-          _: [],
+        config,
+        sumConfigFileContent: {
+          ...sumFileMapConfig,
         },
+        sumFileMapConfig: {
+          ...sumFileMapConfig,
+          sumFileMap: {
+            ...sumFileMapConfig.sumFileMap,
+            'tsconfig.json': {
+              ...sumFileMapConfig.sumFileMap?.['tsconfig.json'],
+              _: {
+                ...sumFileMapConfig.sumFileMap?.['tsconfig.json']?.['_'],
+                isIgnore: true,
+              },
+            },
+            'yarn.lock': {
+              ...sumFileMapConfig.sumFileMap?.['yarn.lock'],
+              _: {
+                ...sumFileMapConfig.sumFileMap?.['yarn.lock']?.['_'],
+                isIgnore: true,
+              },
+            },
+          },
+        },
+        allFiles: [
+          './mock/mockProject/.gitignore',
+          './mock/mockProject/.sum/repositoryMap.json',
+          './mock/mockProject/.sum.config.json',
+          './mock/mockProject/.sumignore',
+          './mock/mockProject/README.md',
+          './mock/mockProject/package.json',
+          './mock/mockProject/tools/addDependency.js',
+          './mock/mockProject/tools/addModuleType.js',
+          './mock/mockProject/tools/test-new.sh',
+          './mock/mockProject/tools/test.sh',
+          './mock/mockProject/tools/upload.sh',
+          './mock/mockProject/tsconfig.json',
+          './mock/mockProject/yarn.lock',
+        ],
+        sumFileMapConfigContent: {
+          ...sumFileMapConfig,
+          sumFileMap: {
+            ...sumFileMapConfig.sumFileMap,
+            'tsconfig.json': {
+              ...sumFileMapConfig.sumFileMap?.['tsconfig.json'],
+              _: {
+                ...sumFileMapConfig.sumFileMap?.['tsconfig.json']?.['_'],
+                isIgnore: true,
+              },
+            },
+            'yarn.lock': {
+              ...sumFileMapConfig.sumFileMap?.['yarn.lock'],
+              _: {
+                ...sumFileMapConfig.sumFileMap?.['yarn.lock']?.['_'],
+                isIgnore: true,
+              },
+            },
+          },
+        },
+      });
+    });
+
+    it('should return correct content with .sumignore with folder path', async () => {
+      const FileToCreate: FileToCreateType[] = [
+        {
+          filePath: createPath([config.projectCatalog, '.sumignore']),
+          content: 'tsconfig.json\n' + 'yarn.lock\n' + 'tools/',
+        },
+        {
+          filePath: config.sumFileMapConfig,
+          content: JSON.stringify(sumFileMapConfig),
+          options: { createFolder: true },
+        },
+      ];
+      await setupTestFiles(FileToCreate, config.isDebug);
+
+      const dataToTest = await getProjectTestData(config, () => prepareBaseSumFileMap(config));
+
+      expect({ ...dataToTest }).toStrictEqual({
+        config,
+        sumConfigFileContent: {
+          ...sumFileMapConfig,
+        },
+        sumFileMapConfig: {
+          ...sumFileMapConfig,
+          sumFileMap: {
+            ...sumFileMapConfig.sumFileMap,
+            'tsconfig.json': {
+              ...sumFileMapConfig.sumFileMap?.['tsconfig.json'],
+              _: {
+                ...sumFileMapConfig.sumFileMap?.['tsconfig.json']?.['_'],
+                isIgnore: true,
+              },
+            },
+            'yarn.lock': {
+              ...sumFileMapConfig.sumFileMap?.['yarn.lock'],
+              _: {
+                ...sumFileMapConfig.sumFileMap?.['yarn.lock']?.['_'],
+                isIgnore: true,
+              },
+            },
+            'tools/test.sh': {
+              ...sumFileMapConfig.sumFileMap?.['tools/test.sh'],
+              _: {
+                ...sumFileMapConfig.sumFileMap?.['tools/test.sh']?.['_'],
+                isIgnore: true,
+              },
+            },
+          },
+        },
+        allFiles: [
+          './mock/mockProject/.gitignore',
+          './mock/mockProject/.sum/repositoryMap.json',
+          './mock/mockProject/.sum.config.json',
+          './mock/mockProject/.sumignore',
+          './mock/mockProject/README.md',
+          './mock/mockProject/package.json',
+          './mock/mockProject/tools/addDependency.js',
+          './mock/mockProject/tools/addModuleType.js',
+          './mock/mockProject/tools/test-new.sh',
+          './mock/mockProject/tools/test.sh',
+          './mock/mockProject/tools/upload.sh',
+          './mock/mockProject/tsconfig.json',
+          './mock/mockProject/yarn.lock',
+        ],
+        sumFileMapConfigContent: {
+          ...sumFileMapConfig,
+          sumFileMap: {
+            ...sumFileMapConfig.sumFileMap,
+            'tsconfig.json': {
+              ...sumFileMapConfig.sumFileMap?.['tsconfig.json'],
+              _: {
+                ...sumFileMapConfig.sumFileMap?.['tsconfig.json']?.['_'],
+                isIgnore: true,
+              },
+            },
+            'yarn.lock': {
+              ...sumFileMapConfig.sumFileMap?.['yarn.lock'],
+              _: {
+                ...sumFileMapConfig.sumFileMap?.['yarn.lock']?.['_'],
+                isIgnore: true,
+              },
+            },
+            'tools/test.sh': {
+              ...sumFileMapConfig.sumFileMap?.['tools/test.sh'],
+              _: {
+                ...sumFileMapConfig.sumFileMap?.['tools/test.sh']?.['_'],
+                isIgnore: true,
+              },
+            },
+          },
+        },
+      });
+    });
+
+    it('should return correct content with .sumignore with folder path and special character *', async () => {
+      const FileToCreate: FileToCreateType[] = [
+        {
+          filePath: createPath([config.projectCatalog, '.sumignore']),
+          content: 'tsconfig.json\n' + 'yarn.lock\n' + 'tools/*',
+        },
+        {
+          filePath: config.sumFileMapConfig,
+          content: JSON.stringify(sumFileMapConfig),
+          options: { createFolder: true },
+        },
+      ];
+      await setupTestFiles(FileToCreate, config.isDebug);
+
+      const dataToTest = await getProjectTestData(config, () => prepareBaseSumFileMap(config));
+
+      expect({ ...dataToTest }).toStrictEqual({
+        config,
+        sumConfigFileContent: {
+          ...sumFileMapConfig,
+        },
+        sumFileMapConfig: {
+          ...sumFileMapConfig,
+          sumFileMap: {
+            ...sumFileMapConfig.sumFileMap,
+            'tsconfig.json': {
+              ...sumFileMapConfig.sumFileMap?.['tsconfig.json'],
+              _: {
+                ...sumFileMapConfig.sumFileMap?.['tsconfig.json']?.['_'],
+                isIgnore: true,
+              },
+            },
+            'yarn.lock': {
+              ...sumFileMapConfig.sumFileMap?.['yarn.lock'],
+              _: {
+                ...sumFileMapConfig.sumFileMap?.['yarn.lock']?.['_'],
+                isIgnore: true,
+              },
+            },
+            'tools/test.sh': {
+              ...sumFileMapConfig.sumFileMap?.['tools/test.sh'],
+              _: {
+                ...sumFileMapConfig.sumFileMap?.['tools/test.sh']?.['_'],
+                isIgnore: true,
+              },
+            },
+          },
+        },
+        allFiles: [
+          './mock/mockProject/.gitignore',
+          './mock/mockProject/.sum/repositoryMap.json',
+          './mock/mockProject/.sum.config.json',
+          './mock/mockProject/.sumignore',
+          './mock/mockProject/README.md',
+          './mock/mockProject/package.json',
+          './mock/mockProject/tools/addDependency.js',
+          './mock/mockProject/tools/addModuleType.js',
+          './mock/mockProject/tools/test-new.sh',
+          './mock/mockProject/tools/test.sh',
+          './mock/mockProject/tools/upload.sh',
+          './mock/mockProject/tsconfig.json',
+          './mock/mockProject/yarn.lock',
+        ],
+        sumFileMapConfigContent: {
+          ...sumFileMapConfig,
+          sumFileMap: {
+            ...sumFileMapConfig.sumFileMap,
+            'tsconfig.json': {
+              ...sumFileMapConfig.sumFileMap?.['tsconfig.json'],
+              _: {
+                ...sumFileMapConfig.sumFileMap?.['tsconfig.json']?.['_'],
+                isIgnore: true,
+              },
+            },
+            'yarn.lock': {
+              ...sumFileMapConfig.sumFileMap?.['yarn.lock'],
+              _: {
+                ...sumFileMapConfig.sumFileMap?.['yarn.lock']?.['_'],
+                isIgnore: true,
+              },
+            },
+            'tools/test.sh': {
+              ...sumFileMapConfig.sumFileMap?.['tools/test.sh'],
+              _: {
+                ...sumFileMapConfig.sumFileMap?.['tools/test.sh']?.['_'],
+                isIgnore: true,
+              },
+            },
+          },
+        },
+      });
+    });
+
+    it('should return correct content without repositoryMap.json', async () => {
+      const dataToTest = await getProjectTestData(config, () => prepareBaseSumFileMap(config));
+
+      expect({ ...dataToTest }).toStrictEqual({
+        config,
         sumFileMapConfig: {},
         allFiles: [
           './mock/mockProject/.gitignore',
@@ -266,17 +512,17 @@ describe('prepareBaseSumFileMap', () => {
               _: {
                 SUMKeySuffix: '_',
                 isCreated: false,
-                path: './test/mockProject/.gitignore',
+                path: './mock/mockProject/.gitignore',
                 realFilePath: '.gitignore',
-                realPath: './test/mockProject/.gitignore',
+                realPath: './mock/mockProject/.gitignore',
                 templateVersion: '1.0.0',
               },
               defaultFile: {
                 SUMKeySuffix: 'defaultFile',
                 isCreated: false,
-                path: './test/mockProject/.sum/templateCatalog/.gitignore-default.md',
+                path: './mock/mockProject/.sum/templateCatalog/.gitignore-default.md',
                 realFilePath: '.gitignore',
-                realPath: './test/mockProject/.gitignore',
+                realPath: './mock/mockProject/.gitignore',
                 templateVersion: '1.0.0',
                 SUMSuffixFileName: 'templateCatalog/.gitignore-default.md',
               },
@@ -285,17 +531,17 @@ describe('prepareBaseSumFileMap', () => {
               _: {
                 SUMKeySuffix: '_',
                 isCreated: false,
-                path: './test/mockProject/README.md',
+                path: './mock/mockProject/README.md',
                 realFilePath: 'README.md',
-                realPath: './test/mockProject/README.md',
+                realPath: './mock/mockProject/README.md',
                 templateVersion: '1.0.0',
               },
               defaultFile: {
                 SUMKeySuffix: 'defaultFile',
                 isCreated: false,
-                path: './test/mockProject/.sum/templateCatalog/README.md-default.md',
+                path: './mock/mockProject/.sum/templateCatalog/README.md-default.md',
                 realFilePath: 'README.md',
-                realPath: './test/mockProject/README.md',
+                realPath: './mock/mockProject/README.md',
                 templateVersion: '1.0.0',
                 SUMSuffixFileName: 'templateCatalog/README.md-default.md',
               },
@@ -304,17 +550,17 @@ describe('prepareBaseSumFileMap', () => {
               _: {
                 SUMKeySuffix: '_',
                 isCreated: false,
-                path: './test/mockProject/package.json',
+                path: './mock/mockProject/package.json',
                 realFilePath: 'package.json',
-                realPath: './test/mockProject/package.json',
+                realPath: './mock/mockProject/package.json',
                 templateVersion: '1.0.0',
               },
               defaultFile: {
                 SUMKeySuffix: 'defaultFile',
                 isCreated: false,
-                path: './test/mockProject/.sum/templateCatalog/package.json-default.md',
+                path: './mock/mockProject/.sum/templateCatalog/package.json-default.md',
                 realFilePath: 'package.json',
-                realPath: './test/mockProject/package.json',
+                realPath: './mock/mockProject/package.json',
                 templateVersion: '1.0.0',
                 SUMSuffixFileName: 'templateCatalog/package.json-default.md',
               },
@@ -323,17 +569,17 @@ describe('prepareBaseSumFileMap', () => {
               _: {
                 SUMKeySuffix: '_',
                 isCreated: false,
-                path: './test/mockProject/tools/test.sh',
+                path: './mock/mockProject/tools/test.sh',
                 realFilePath: 'tools/test.sh',
-                realPath: './test/mockProject/test.sh',
+                realPath: './mock/mockProject/test.sh',
                 templateVersion: '1.0.0',
               },
               defaultFile: {
                 SUMKeySuffix: 'defaultFile',
                 isCreated: false,
-                path: './test/mockProject/.sum/templateCatalog/tools/test.sh-default.md',
+                path: './mock/mockProject/.sum/templateCatalog/tools/test.sh-default.md',
                 realFilePath: 'tools/test.sh',
-                realPath: './test/mockProject/tools/test.sh',
+                realPath: './mock/mockProject/tools/test.sh',
                 templateVersion: '1.0.0',
                 SUMSuffixFileName: 'templateCatalog/tools/test.sh-default.md',
               },
@@ -342,17 +588,17 @@ describe('prepareBaseSumFileMap', () => {
               _: {
                 SUMKeySuffix: '_',
                 isCreated: false,
-                path: './test/mockProject/tsconfig.json',
+                path: './mock/mockProject/tsconfig.json',
                 realFilePath: 'tsconfig.json',
-                realPath: './test/mockProject/tsconfig.json',
+                realPath: './mock/mockProject/tsconfig.json',
                 templateVersion: '1.0.0',
               },
               defaultFile: {
                 SUMKeySuffix: 'defaultFile',
                 isCreated: false,
-                path: './test/mockProject/.sum/templateCatalog/tsconfig.json-default.md',
+                path: './mock/mockProject/.sum/templateCatalog/tsconfig.json-default.md',
                 realFilePath: 'tsconfig.json',
-                realPath: './test/mockProject/tsconfig.json',
+                realPath: './mock/mockProject/tsconfig.json',
                 templateVersion: '1.0.0',
                 SUMSuffixFileName: 'templateCatalog/tsconfig.json-default.md',
               },
@@ -361,17 +607,17 @@ describe('prepareBaseSumFileMap', () => {
               _: {
                 SUMKeySuffix: '_',
                 isCreated: false,
-                path: './test/mockProject/yarn.lock',
+                path: './mock/mockProject/yarn.lock',
                 realFilePath: 'yarn.lock',
-                realPath: './test/mockProject/yarn.lock',
+                realPath: './mock/mockProject/yarn.lock',
                 templateVersion: '1.0.0',
               },
               defaultFile: {
                 SUMKeySuffix: 'defaultFile',
                 isCreated: false,
-                path: './test/mockProject/.sum/templateCatalog/yarn.lock-default.md',
+                path: './mock/mockProject/.sum/templateCatalog/yarn.lock-default.md',
                 realFilePath: 'yarn.lock',
-                realPath: './test/mockProject/yarn.lock',
+                realPath: './mock/mockProject/yarn.lock',
                 templateVersion: '1.0.0',
                 SUMSuffixFileName: 'templateCatalog/yarn.lock-default.md',
               },
@@ -486,54 +732,7 @@ describe('prepareBaseSumFileMap', () => {
       const dataToTest = await getProjectTestData(config, () => prepareBaseSumFileMap(config));
 
       expect({ ...dataToTest }).toStrictEqual({
-        config: {
-          templateCatalogName: 'templateCatalog',
-          sumCatalog: './mock/mockProjectWithImage/.sum/',
-          sUpdaterVersion: '^1.0.0-dev.28',
-          availableSUMSuffix: ['-default.md', '-custom.md', '-extend.md'],
-          availableSUMKeySuffix: ['defaultFile', 'customFile', 'extendFile'],
-          templateVersion: '1.0.0',
-          sumFileMapConfigFileName: 'repositoryMap.json',
-          sumFileMapConfig: './mock/mockProjectWithImage/.sum/repositoryMap.json',
-          projectCatalog: './mock/mockProjectWithImage/',
-          temporaryFolder: './mock/mockProjectWithImage/.sum/temporary/',
-          sumConfigFileName: '.sum.config.json',
-          sumConfigFilePath: './mock/mockProjectWithImage/.sum.config.json',
-          remoteRootRepositoryUrl:
-            'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/dev/mock/mockTemplateWithImageWithConfig',
-          remoteRepository:
-            'https://github.com/SebastianWesolowski/s-update-manager/tree/dev/mock/mockTemplateWithImageWithConfig',
-          remoteFileMapURL:
-            'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/dev/mock/mockTemplateWithImageWithConfig/templateCatalog/repositoryMap.json',
-          isDebug: true,
-          _: [],
-          templateCatalogPath: './mock/mockTemplateWithImageWithConfig/templateCatalog',
-          repositoryMapFileName: 'repositoryMap.json',
-          repositoryMapFilePath: './mock/mockTemplateWithImageWithConfig/templateCatalog/repositoryMap.json',
-          bumpVersion: true,
-          fileMap: [
-            'templateCatalog/.gitignore-default.md',
-            'templateCatalog/package.json-default.md',
-            'templateCatalog/tsconfig.json-default.md',
-            'templateCatalog/yarn.lock-default.md',
-          ],
-          templateFileList: [
-            './.gitignore',
-            './package.json',
-            './srcReadme/heroImageReposytory.png',
-            './tsconfig.json',
-            './yarn.lock',
-          ],
-          rootPathFileList: [
-            './mock/mockTemplateWithImageWithConfig/.gitignore',
-            './mock/mockTemplateWithImageWithConfig/package.json',
-            './mock/mockTemplateWithImageWithConfig/tsconfig.json',
-            './mock/mockTemplateWithImageWithConfig/yarn.lock',
-          ],
-          redOnlyFileList: ['srcReadme/heroImageReposytory.png'],
-          createdFileMap: [],
-          sumFileMap: {},
-        },
+        config,
         sumFileMapConfig: {
           projectCatalog: './mock/mockTemplateWithImageWithConfig',
           templateCatalogName: 'templateCatalog',
@@ -670,54 +869,7 @@ describe('prepareBaseSumFileMap', () => {
           './mock/mockProjectWithImage/tsconfig.json',
           './mock/mockProjectWithImage/yarn.lock',
         ],
-        sumConfigFileContent: {
-          templateCatalogName: 'templateCatalog',
-          sumCatalog: './mock/mockProjectWithImage/.sum/',
-          sUpdaterVersion: '^1.0.0-dev.28',
-          availableSUMSuffix: ['-default.md', '-custom.md', '-extend.md'],
-          availableSUMKeySuffix: ['defaultFile', 'customFile', 'extendFile'],
-          templateVersion: '1.0.0',
-          sumFileMapConfigFileName: 'repositoryMap.json',
-          sumFileMapConfig: './mock/mockProjectWithImage/.sum/repositoryMap.json',
-          projectCatalog: './mock/mockProjectWithImage/',
-          temporaryFolder: './mock/mockProjectWithImage/.sum/temporary/',
-          sumConfigFileName: '.sum.config.json',
-          sumConfigFilePath: './mock/mockProjectWithImage/.sum.config.json',
-          remoteRootRepositoryUrl:
-            'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/dev/mock/mockTemplateWithImageWithConfig',
-          remoteRepository:
-            'https://github.com/SebastianWesolowski/s-update-manager/tree/dev/mock/mockTemplateWithImageWithConfig',
-          remoteFileMapURL:
-            'https://raw.githubusercontent.com/SebastianWesolowski/s-update-manager/dev/mock/mockTemplateWithImageWithConfig/templateCatalog/repositoryMap.json',
-          isDebug: true,
-          _: [],
-          templateCatalogPath: './mock/mockTemplateWithImageWithConfig/templateCatalog',
-          repositoryMapFileName: 'repositoryMap.json',
-          repositoryMapFilePath: './mock/mockTemplateWithImageWithConfig/templateCatalog/repositoryMap.json',
-          bumpVersion: true,
-          fileMap: [
-            'templateCatalog/.gitignore-default.md',
-            'templateCatalog/package.json-default.md',
-            'templateCatalog/tsconfig.json-default.md',
-            'templateCatalog/yarn.lock-default.md',
-          ],
-          templateFileList: [
-            './.gitignore',
-            './package.json',
-            './srcReadme/heroImageReposytory.png',
-            './tsconfig.json',
-            './yarn.lock',
-          ],
-          rootPathFileList: [
-            './mock/mockTemplateWithImageWithConfig/.gitignore',
-            './mock/mockTemplateWithImageWithConfig/package.json',
-            './mock/mockTemplateWithImageWithConfig/tsconfig.json',
-            './mock/mockTemplateWithImageWithConfig/yarn.lock',
-          ],
-          redOnlyFileList: ['srcReadme/heroImageReposytory.png'],
-          createdFileMap: [],
-          sumFileMap: {},
-        },
+        sumConfigFileContent: config,
         sumFileMapConfigContent: {
           projectCatalog: './mock/mockTemplateWithImageWithConfig',
           templateCatalogName: 'templateCatalog',

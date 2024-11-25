@@ -4,6 +4,7 @@ import { FileMapConfig, updateDetailsFileMapConfig2 } from '@/feature/updateFile
 import { createPath } from '@/util/createPath';
 import { debugFunction } from '@/util/debugFunction';
 import { formatSum } from '@/util/formatSum';
+import { getIgnoredFilesFromConfig } from '@/util/getIgnoredFilesFromConfig';
 import { getRealFileName } from '@/util/getRealFileName';
 import { getRealFilePath } from '@/util/getRealFilePath';
 import { parseJSON } from '@/util/parseJSON';
@@ -91,6 +92,23 @@ export async function prepareBaseSumFileMap(
             realFilePath,
             realPath: createPath([config.projectCatalog, realFileName]),
             templateVersion: sumFileMapConfig.templateVersion,
+          });
+        }
+      }
+    }
+
+    const ignoredFiles = await getIgnoredFilesFromConfig({ config, sumFileMapConfig });
+
+    if (ignoredFiles) {
+      for (const ignoreFile of ignoredFiles) {
+        const realFilePath = getRealFilePath({ config, SUMSuffixFileName: ignoreFile });
+
+        if (sumFileMapConfig.sumFileMap && sumFileMapConfig.sumFileMap[realFilePath]) {
+          sumFileMapConfig = await updateDetailsFileMapConfig2({
+            sumFileMapConfig,
+            config,
+            operation: 'setIgnoreFile',
+            realFilePath,
           });
         }
       }
