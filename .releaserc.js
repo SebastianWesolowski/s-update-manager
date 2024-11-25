@@ -32,7 +32,11 @@ module.exports = {
           types: [
             { type: 'feat', section: 'Features' },
             { type: 'fix', section: 'Bug Fixes' },
-            { type: 'build', section: 'Dependencies and Other Build Updates', hidden: false },
+            {
+              type: 'build',
+              section: 'Dependencies and Other Build Updates',
+              hidden: false,
+            },
             { type: 'chore', section: 'Other tasks', hidden: false },
           ],
         },

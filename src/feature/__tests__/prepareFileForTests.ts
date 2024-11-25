@@ -35,6 +35,8 @@ const getCleanupPath = (type: 'test' | 'mock', folder: string, step?: string): s
     path = type === 'test' ? `./test/${folder}` : `./mock/${folder}`;
   } else if (step === 'formatJsonWithPrettier') {
     path = type === 'test' ? `./test/${folder}` : `./mock/${folder}`;
+  } else if (step === 'buildFromConfig') {
+    path = type === 'test' ? `./test/${folder}` : `./mock/${folder}`;
   }
 
   return path;
@@ -107,17 +109,28 @@ export const cleanUpProjectCatalog = async (
     | 'prepareBaseFile'
     | 'prepareFileList'
     | 'updateTemplateConfig'
+    | 'buildFromConfig'
     | 'formatJsonWithPrettier',
-  folderCase: 'mockProject' | 'mockProjectToBuild' | 'mockProjectToUpdate' | 'mockProjectWithImage' = 'mockProject'
+  folderCase:
+    | 'mockProject'
+    | 'mockProjectToBuild'
+    | 'mockProjectToUpdate'
+    | 'mockProjectWithImage'
+    | 'microProject' = 'mockProject'
 ) => {
   const rootPath = getCleanupPath(type, folderCase, step);
   let sumPath = '';
 
-  if (folderCase === 'mockProject' || 'mockProjectWithImage') {
+  if (folderCase === 'mockProject' || folderCase === 'mockProjectWithImage') {
     sumPath = createPath([rootPath, '.sum']);
   }
 
+  if (folderCase === 'microProject') {
+    sumPath = createPath([rootPath]);
+  }
+
   await deletePath(createPath([rootPath, '.sum.config.json']), true);
+  await deletePath(createPath([rootPath, '.sumignore']), true);
 
   await cleanUpSinglePath({
     path: sumPath !== '' ? sumPath : rootPath,

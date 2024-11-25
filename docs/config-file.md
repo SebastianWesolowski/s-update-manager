@@ -206,9 +206,6 @@ List of files that were manually created by user and added to `.sum` catalog, it
   }
  },
 "manualCreatedFileMap": [
-  "./mock/mockProjectToBuildToBuild/.sum/templateCatalog/README.md-custom.md",
-  "./mock/mockProjectToBuildToBuild/.sum/templateCatalog/tsconfig.json-custom.md",
-  "./mock/mockProjectToBuildToBuild/.sum/templateCatalog/yarn.lock-custom.md",
   "./mock/mockProjectToBuild/.sum/templateCatalog/README.md-custom.md",
   "./mock/mockProjectToBuild/.sum/templateCatalog/tsconfig.json-custom.md",
   "./mock/mockProjectToBuild/.sum/templateCatalog/yarn.lock-custom.md"

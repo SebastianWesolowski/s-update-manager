@@ -5,24 +5,33 @@ echo \[🐶 Husky] Running pre-commit hook...\
 
 # # Check if we're not on main branch
 # if [ "$current_branch" != "main" ]; then
-#     echo "🔍 Checking for main branch updates..."
+#     echo "🔍 Checking for branch updates..."
 
-#     # Fetch latest changes from remote
-#     git fetch origin main
+#     # Fetch all latest changes
+#     git fetch origin
 
-#     # Check if there are any differences between local and remote main
-#     changes=$(git rev-list HEAD...origin/main --count)
-
-#     if [ "$changes" -gt 0 ]; then
-#         echo "⚠️ New changes detected on main branch! Update your branch before committing."
-#         echo "Run: git merge origin/main"
+#     # Check if main has commits that dev doesn't have
+#     behind_commits=$(git rev-list --count $current_branch..origin/main)
+#     if [ "$behind_commits" -gt 0 ]; then
+#         echo "ℹ️  Main branch has $behind_commits new commits that are not in your branch! Update your branch before committing."
+#         echo "ℹ️  Run: git stash && git merge origin/main && git stash pop"
 #         exit 1
 #     else
 #         echo "✅ Your branch is up to date with main"
+#     fi
+
+#     # Check if remote branch has new commits
+#     remote_commits=$(git rev-list --count $current_branch..origin/$current_branch 2>/dev/null)
+#     if [ "$remote_commits" -gt 0 ]; then
+#         echo "⚠️ Remote branch has $remote_commits new commits! Pull changes before committing."
+#         echo "Run: git pull origin $current_branch"
+#         exit 1
+#     else
+#         echo "✅ Your branch is up to date with remote"
         yarn husky:pre-commit
 #     fi
 # fi
 
-# exit 0
-
 echo \[🐶 Husky] Done ✅ pre-commit hook...\
+
+exit 0

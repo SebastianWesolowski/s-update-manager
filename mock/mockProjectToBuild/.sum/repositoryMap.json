@@ -214,9 +214,6 @@
     }
   },
   "manualCreatedFileMap": [
-    "./mock/mockProjectToBuildToBuild/.sum/templateCatalog/README.md-custom.md",
-    "./mock/mockProjectToBuildToBuild/.sum/templateCatalog/tsconfig.json-custom.md",
-    "./mock/mockProjectToBuildToBuild/.sum/templateCatalog/yarn.lock-custom.md",
     "./mock/mockProjectToBuild/.sum/templateCatalog/README.md-custom.md",
     "./mock/mockProjectToBuild/.sum/templateCatalog/tsconfig.json-custom.md",
     "./mock/mockProjectToBuild/.sum/templateCatalog/yarn.lock-custom.md"
