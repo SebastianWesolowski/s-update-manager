@@ -8,6 +8,8 @@ export const defaultConfig: ConfigType = {
   availableSUMKeySuffix: ['defaultFile', 'customFile', 'extendFile'],
   templateVersion: undefined,
   sumFileMapConfigFileName: 'repositoryMap.json', // TODO [SC-83] change name to sumFileMapConfig
+  sumIgnoreFilePath: './.sumignore',
+  sumIgnoreFileName: '.sumignore',
   sumFileMapConfig: './.sum/repositoryMap.json',
   projectCatalog: './',
   temporaryFolder: './.sum/temporary/',

@@ -42,8 +42,7 @@ export async function getIgnoredFilesFromConfig({
     return [];
   }
 
-  //TODO create config
-  const sumIgnoreConfig = await readFile(createPath([config.projectCatalog, '.sumignore'])).then(async (bufferData) => {
+  const sumIgnoreConfig = await readFile(createPath([config.sumIgnoreFilePath])).then(async (bufferData) => {
     const content = bufferData.toString();
     if (content === '') return null;
     return content.split('\n');

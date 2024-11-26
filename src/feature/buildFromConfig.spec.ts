@@ -19,6 +19,8 @@ describe('buildFromConfig', () => {
 
     beforeEach(async () => {
       config = {
+        sumIgnoreFilePath: './.sumignore',
+        sumIgnoreFileName: '.sumignore',
         templateCatalogName: 'templateCatalog',
         sumCatalog: './.sum/',
         sUpdaterVersion: '1.0.0-dev.46',

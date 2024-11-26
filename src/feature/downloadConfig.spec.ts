@@ -14,6 +14,8 @@ describe('downloadConfig', () => {
 
     beforeEach(async () => {
       config = {
+        sumIgnoreFilePath: './mock/mockProject/.sumignore',
+        sumIgnoreFileName: '.sumignore',
         templateCatalogName: 'templateCatalog',
         sumCatalog: './mock/mockProject/.sum/',
         sUpdaterVersion: '../../dist/s-update-manager-1.0.0-dev.27.tgz',
@@ -36,6 +38,8 @@ describe('downloadConfig', () => {
       };
 
       sumConfigFilePath = {
+        sumIgnoreFilePath: './mock/mockProject/.sumignore',
+        sumIgnoreFileName: '.sumignore',
         templateCatalogName: 'templateCatalog',
         sumCatalog: './mock/mockProject/.sum/',
         sUpdaterVersion: '../../dist/s-update-manager-1.0.0-dev.27.tgz',
@@ -102,6 +106,8 @@ describe('downloadConfig', () => {
 
       expect({ ...dataToTest }).toStrictEqual({
         config: {
+          sumIgnoreFilePath: './mock/mockProject/.sumignore',
+          sumIgnoreFileName: '.sumignore',
           templateCatalogName: 'templateCatalog',
           sumCatalog: './mock/mockProject/.sum/',
           sUpdaterVersion: '../../dist/s-update-manager-1.0.0-dev.27.tgz',
@@ -143,6 +149,8 @@ describe('downloadConfig', () => {
           './mock/mockProject/yarn.lock',
         ],
         sumConfigFileContent: {
+          sumIgnoreFilePath: './mock/mockProject/.sumignore',
+          sumIgnoreFileName: '.sumignore',
           templateCatalogName: 'templateCatalog',
           sumCatalog: './mock/mockProject/.sum/',
           sUpdaterVersion: '../../dist/s-update-manager-1.0.0-dev.27.tgz',
@@ -173,6 +181,8 @@ describe('downloadConfig', () => {
 
       expect({ ...dataToTest }).toStrictEqual({
         config: {
+          sumIgnoreFilePath: './mock/mockProject/.sumignore',
+          sumIgnoreFileName: '.sumignore',
           templateCatalogName: 'templateCatalog',
           sumCatalog: './mock/mockProject/.sum/',
           sUpdaterVersion: '../../dist/s-update-manager-1.0.0-dev.27.tgz',
@@ -289,6 +299,8 @@ describe('downloadConfig', () => {
           './mock/mockProject/yarn.lock',
         ],
         sumConfigFileContent: {
+          sumIgnoreFilePath: './mock/mockProject/.sumignore',
+          sumIgnoreFileName: '.sumignore',
           templateCatalogName: 'templateCatalog',
           sumCatalog: './mock/mockProject/.sum/',
           sUpdaterVersion: '../../dist/s-update-manager-1.0.0-dev.27.tgz',
@@ -395,6 +407,8 @@ describe('downloadConfig', () => {
 
       expect({ ...dataToTest }).toStrictEqual({
         config: {
+          sumIgnoreFilePath: './mock/mockProject/.sumignore',
+          sumIgnoreFileName: '.sumignore',
           templateCatalogName: 'templateCatalog',
           sumCatalog: './mock/mockProject/.sum/',
           sUpdaterVersion: '../../dist/s-update-manager-1.0.0-dev.27.tgz',
@@ -511,6 +525,8 @@ describe('downloadConfig', () => {
           './mock/mockProject/yarn.lock',
         ],
         sumConfigFileContent: {
+          sumIgnoreFilePath: './mock/mockProject/.sumignore',
+          sumIgnoreFileName: '.sumignore',
           templateCatalogName: 'templateCatalog',
           sumCatalog: './mock/mockProject/.sum/',
           sUpdaterVersion: '../../dist/s-update-manager-1.0.0-dev.27.tgz',
@@ -686,6 +702,8 @@ describe('downloadConfig', () => {
 
       expect({ ...dataToTest }).toStrictEqual({
         config: {
+          sumIgnoreFilePath: './test/mockProject/.sumignore',
+          sumIgnoreFileName: '.sumignore',
           sumFileMapConfigFileName: 'repositoryMap.json',
           _: [],
           availableSUMKeySuffix: ['defaultFile', 'customFile', 'extendFile'],
@@ -790,6 +808,8 @@ describe('downloadConfig', () => {
           './test/mockProject/.sum.config.json',
         ],
         sumConfigFileContent: {
+          sumIgnoreFilePath: './test/mockProject/.sumignore',
+          sumIgnoreFileName: '.sumignore',
           sumFileMapConfigFileName: 'repositoryMap.json',
           _: [],
           availableSUMKeySuffix: ['defaultFile', 'customFile', 'extendFile'],

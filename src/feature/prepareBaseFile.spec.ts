@@ -18,6 +18,8 @@ describe('prepareBaseSumFileMap', () => {
       config = {
         templateCatalogName: 'templateCatalog',
         sumCatalog: './mock/mockProject/.sum/',
+        sumIgnoreFilePath: './mock/mockProject/.sumignore',
+        sumIgnoreFileName: '.sumignore',
         sUpdaterVersion: '../../dist/s-update-manager-1.0.0-dev.27.tgz',
         availableSUMSuffix: ['-default.md', '-custom.md', '-extend.md'],
         availableSUMKeySuffix: ['defaultFile', 'customFile', 'extendFile'],
@@ -632,6 +634,8 @@ describe('prepareBaseSumFileMap', () => {
     it('should return correct content with binaryfiles', async () => {
       config = {
         _: [],
+        sumIgnoreFilePath: './mock/mockProjectWithImage/.sumignore',
+        sumIgnoreFileName: '.sumignore',
         availableSUMKeySuffix: ['defaultFile', 'customFile', 'extendFile'],
         availableSUMSuffix: ['-default.md', '-custom.md', '-extend.md'],
         bumpVersion: true,

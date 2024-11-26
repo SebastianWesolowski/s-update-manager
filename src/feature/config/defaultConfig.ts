@@ -26,6 +26,10 @@ export const regenerateConfig = async (config: ConfigType): Promise<ConfigType> 
         regeneratedConfig.projectCatalog,
         regeneratedConfig.sumConfigFileName,
       ]);
+      regeneratedConfig.sumIgnoreFilePath = createPath([
+        regeneratedConfig.projectCatalog,
+        regeneratedConfig.sumIgnoreFileName,
+      ]);
     }
 
     if (regeneratedConfig.remoteRepository) {

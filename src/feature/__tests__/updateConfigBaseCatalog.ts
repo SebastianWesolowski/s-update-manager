@@ -12,6 +12,7 @@ export const updateConfigBaseCatalog = (config: ConfigType, catalogPath: string)
     ...config,
     sumCatalog: `${catalogPath}.sum/`,
     sumFileMapConfig: `${catalogPath}.sum/repositoryMap.json`,
+    sumIgnoreFilePath: `${catalogPath}.sumignore`,
     projectCatalog: `${catalogPath}`,
     temporaryFolder: `${catalogPath}.sum/temporary/`,
     sumConfigFilePath: `${catalogPath}.sum.config.json`,

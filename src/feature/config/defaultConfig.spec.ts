@@ -15,6 +15,8 @@ const testCases: { description: string; mockConfig: Partial<ConfigType>; expecte
     description: 'full config',
     mockConfig: defaultConfig,
     expectedConfig: {
+      sumIgnoreFilePath: './.sumignore',
+      sumIgnoreFileName: '.sumignore',
       sumFileMapConfigFileName: 'repositoryMap.json',
       _: [],
       availableSUMKeySuffix: ['defaultFile', 'customFile', 'extendFile'],
@@ -40,6 +42,8 @@ const testCases: { description: string; mockConfig: Partial<ConfigType>; expecte
     description: 'empty config',
     mockConfig: {},
     expectedConfig: {
+      sumIgnoreFilePath: './.sumignore',
+      sumIgnoreFileName: '.sumignore',
       sumFileMapConfigFileName: 'repositoryMap.json',
       _: [],
       availableSUMKeySuffix: ['defaultFile', 'customFile', 'extendFile'],
@@ -64,6 +68,8 @@ const testCases: { description: string; mockConfig: Partial<ConfigType>; expecte
   {
     description: 'custom config from args',
     mockConfig: {
+      sumIgnoreFilePath: './.sumignore',
+      sumIgnoreFileName: '.sumignore',
       sumFileMapConfigFileName: 'custom.json',
       _: [],
       availableSUMKeySuffix: ['superCustomFileName'],
@@ -84,6 +90,8 @@ const testCases: { description: string; mockConfig: Partial<ConfigType>; expecte
       temporaryFolder: './.sum/temporary/',
     },
     expectedConfig: {
+      sumIgnoreFilePath: './.sumignore',
+      sumIgnoreFileName: '.sumignore',
       sumFileMapConfigFileName: 'custom.json',
       _: [],
       availableSUMKeySuffix: ['superCustomFileName'],
@@ -112,6 +120,8 @@ const testCases: { description: string; mockConfig: Partial<ConfigType>; expecte
         'https://github.com/SebastianWesolowski/testTemplate/blob/main/template/node/templateCatalogCustom',
     },
     expectedConfig: {
+      sumIgnoreFilePath: './.sumignore',
+      sumIgnoreFileName: '.sumignore',
       sumFileMapConfigFileName: 'repositoryMap.json',
       _: [],
       availableSUMKeySuffix: ['defaultFile', 'customFile', 'extendFile'],
@@ -205,6 +215,8 @@ describe('configuration functions', () => {
   });
   it('getConfig - should return the expected file configuration', async () => {
     const expectedConfig = {
+      sumIgnoreFilePath: './mock/mockProject/.sumignore',
+      sumIgnoreFileName: '.sumignore',
       sumFileMapConfigFileName: 'repositoryMap.json',
       _: [],
       availableSUMKeySuffix: ['defaultFile', 'customFile', 'extendFile'],

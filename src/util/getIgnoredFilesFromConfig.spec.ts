@@ -10,6 +10,8 @@ let sumFileMapConfig: FileMapConfig;
 
 describe('getIgnoredFilesFromConfig', () => {
   config = {
+    sumIgnoreFilePath: './mock/mockProject/.sumignore',
+    sumIgnoreFileName: '.sumignore',
     templateCatalogName: 'templateCatalog',
     sumCatalog: './mock/mockProject/.sum/',
     sUpdaterVersion: '../../dist/s-update-manager-1.0.0-dev.27.tgz',

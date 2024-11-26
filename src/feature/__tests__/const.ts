@@ -2,6 +2,8 @@ import { ConfigTemplateType, RepositoryMapFileConfigType } from '../config/types
 
 // TODO [SC-28] after release change all dev repolinks to master
 const mockConfig_step_init = {
+  sumIgnoreFileName: '.sumignore',
+  sumIgnoreFilePath: './test/mockProject/.sumignore',
   sumFileMapConfigFileName: 'repositoryMap.json',
   _: [],
   availableSUMKeySuffix: ['defaultFile', 'customFile', 'extendFile'],
