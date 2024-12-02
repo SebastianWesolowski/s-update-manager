@@ -15,6 +15,9 @@ module.exports = {
       '@semantic-release/commit-analyzer',
       {
         preset: 'conventionalcommits',
+        parserOpts: {
+          noteKeywords: ['BREAKING CHANGE', 'BREAKING CHANGES', 'BREAKING'],
+        },
         releaseRules: [
           {
             type: 'build',
@@ -28,15 +31,14 @@ module.exports = {
       '@semantic-release/release-notes-generator',
       {
         preset: 'conventionalcommits',
+        parserOpts: {
+          noteKeywords: ['BREAKING CHANGE', 'BREAKING CHANGES', 'BREAKING'],
+        },
         presetConfig: {
           types: [
             { type: 'feat', section: 'Features' },
             { type: 'fix', section: 'Bug Fixes' },
-            {
-              type: 'build',
-              section: 'Dependencies and Other Build Updates',
-              hidden: false,
-            },
+            { type: 'build', section: 'Dependencies and Other Build Updates', hidden: false },
             { type: 'chore', section: 'Other tasks', hidden: false },
           ],
         },

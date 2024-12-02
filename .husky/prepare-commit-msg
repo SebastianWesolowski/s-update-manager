@@ -46,7 +46,7 @@ update_commit_message() {
     if [ "$issue_number" = "NO-TICKET" ]; then
         echo "$commit_type: $emoji $commit_content" > "$commit_msg_file"
     else
-        echo "$commit_type: $emoji [$issue_number] $commit_content" > "$commit_msg_file"
+    echo "$commit_type: $emoji [$issue_number] $commit_content" > "$commit_msg_file"
     fi
     sed -i.bak '/^$/d' "$commit_msg_file" && rm "${commit_msg_file}.bak"
 }

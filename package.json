@@ -1,6 +1,6 @@
 {
   "name": "s-update-manager",
-  "version": "1.0.0-dev.47",
+  "version": "0.0.0-development",
   "description": "s-update-manager is an npm package for updating a template dependent project",
   "bin": {
     "s-init": "./lib/src/init.mjs",
@@ -88,7 +88,7 @@
   },
   "devDependencies": {
     "@commitlint/cli": "^19.5.0",
-    "@commitlint/config-conventional": "^19.5.0",
+    "@commitlint/config-conventional": "^19.1.0",
     "@ef-carbon/tspm": "^2.2.5",
     "@rollup/plugin-babel": "^6.0.4",
     "@rollup/plugin-commonjs": "^25.0.7",
@@ -134,7 +134,7 @@
     "rollup-plugin-copy": "^3.5.0",
     "rollup-plugin-typescript2": "^0.36.0",
     "s-prettier": "^1.1.0",
-    "semantic-release": "^24.2.0",
+    "semantic-release": "^23.0.3",
     "semver": "^7.6.3",
     "sharp": "^0.33.5",
     "ts-jest": "29.2.5",
