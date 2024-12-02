@@ -10,7 +10,9 @@ get_emoji() {
 
 # Extract issue number from commit message
 get_issue_number() {
-    echo "$1" | grep -oE "SC-[0-9]+" | head -n1
+    local issue=$(echo "$1" | grep -oE "SC-[0-9]+" | head -n1)
+    # Return "NO-TICKET" if no issue number found
+    echo "${issue:-NO-TICKET}"
 }
 
 # Extract commit message content
@@ -40,7 +42,12 @@ update_commit_message() {
     local commit_content="$4"
     local commit_msg_file="$5"
 
-    echo "$commit_type: $emoji [$issue_number] $commit_content" > "$commit_msg_file"
+    # Only include brackets if there's a real issue number
+    if [ "$issue_number" = "NO-TICKET" ]; then
+        echo "$commit_type: $emoji $commit_content" > "$commit_msg_file"
+    else
+        echo "$commit_type: $emoji [$issue_number] $commit_content" > "$commit_msg_file"
+    fi
     sed -i.bak '/^$/d' "$commit_msg_file" && rm "${commit_msg_file}.bak"
 }
 

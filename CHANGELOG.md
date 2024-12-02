@@ -1,12 +1,10 @@
 ## [1.0.0-dev.46](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.45...v1.0.0-dev.46) (November 18, 2024)
 
-
 ### [SC-87](https://linear.app/wesolowskidev/issue/SC-87)
 
 - ✨ [[SC-87](https://linear.app/wesolowskidev/issue/SC-87)] cover binary file from remote repo ([75d6c11](https://github.com/SebastianWesolowski/s-update-manager/commit/75d6c11a39d44a86f24fea0f723f1ea0888d3059))
 
 ## [1.0.0-dev.45](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.44...v1.0.0-dev.45) (November 03, 2024)
-
 
 ### [SC-87](https://linear.app/wesolowskidev/issue/SC-87)
 
@@ -14,13 +12,11 @@
 
 ## [1.0.0-dev.44](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.43...v1.0.0-dev.44) (November 03, 2024)
 
-
 ### [SC-87](https://linear.app/wesolowskidev/issue/SC-87)
 
 - ✨ [[SC-87](https://linear.app/wesolowskidev/issue/SC-87)] prepare Base File for binary file ([925dd9f](https://github.com/SebastianWesolowski/s-update-manager/commit/925dd9f806c97b22da17d8099993eff2fed56e37))
 
 ## [1.0.0-dev.43](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.42...v1.0.0-dev.43) (November 03, 2024)
-
 
 ### [SC-87](https://linear.app/wesolowskidev/issue/SC-87)
 
@@ -30,7 +26,6 @@
 
 ## [1.0.0-dev.42](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.41...v1.0.0-dev.42) (October 28, 2024)
 
-
 ### [SC-87](https://linear.app/wesolowskidev/issue/SC-87)
 
 - 🐛 [[SC-87](https://linear.app/wesolowskidev/issue/SC-87)] read only files ([f8942cd](https://github.com/SebastianWesolowski/s-update-manager/commit/f8942cdc02e6d78895b92dc02837ba18e8eeb9ca))
@@ -38,13 +33,11 @@
 
 ## [1.0.0-dev.41](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.40...v1.0.0-dev.41) (October 26, 2024)
 
-
 ### [SC-87](https://linear.app/wesolowskidev/issue/SC-87)
 
 - 🐛 [[SC-87](https://linear.app/wesolowskidev/issue/SC-87)] add red only key to repositoryMap ([ae41b6c](https://github.com/SebastianWesolowski/s-update-manager/commit/ae41b6c3fe5f0857ee1c0e555d3f2a3f5fe7bdaf))
 
 ## [1.0.0-dev.40](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.39...v1.0.0-dev.40) (October 26, 2024)
-
 
 ### Other tasks
 
@@ -52,11 +45,9 @@
 
 ## [1.0.0-dev.39](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.38...v1.0.0-dev.39) (October 26, 2024)
 
-
 ### [SC-5](https://linear.app/wesolowskidev/issue/SC-5)
 
 - 📚 [[SC-5](https://linear.app/wesolowskidev/issue/SC-5)] ️ more information about config ([c981932](https://github.com/SebastianWesolowski/s-update-manager/commit/c9819323abd7c7aa239b8d604c61570895530c9a))
-
 
 ### [SC-87](https://linear.app/wesolowskidev/issue/SC-87)
 
@@ -64,77 +55,62 @@
 
 ## [1.0.0-dev.38](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.37...v1.0.0-dev.38) (October 17, 2024)
 
-
 ### [SC-3](https://linear.app/wesolowskidev/issue/SC-3)
 
 - 📚 [[SC-3](https://linear.app/wesolowskidev/issue/SC-3)] ️ translate to English ([fd17b66](https://github.com/SebastianWesolowski/s-update-manager/commit/fd17b6622377825deb485b87d0e3c42c091a3942))
-
 
 ### [SC-4](https://linear.app/wesolowskidev/issue/SC-4)
 
 - 📚 [[SC-4](https://linear.app/wesolowskidev/issue/SC-4)] ️ add readme and instructions ([cfe420f](https://github.com/SebastianWesolowski/s-update-manager/commit/cfe420f7fdfe89c0e67e9bb52f349a94781a7fc5))
 
-
 ### [SC-5](https://linear.app/wesolowskidev/issue/SC-5)
 
 - 📚 [[SC-5](https://linear.app/wesolowskidev/issue/SC-5)] ️ describe configuration ([5432f88](https://github.com/SebastianWesolowski/s-update-manager/commit/5432f889b815d77ba1332a454daded6e9f992fc4))
-
 
 ### [SC-6](https://linear.app/wesolowskidev/issue/SC-6)
 
 - ♻ [[SC-6](https://linear.app/wesolowskidev/issue/SC-6)] ️ remove snp keyword into sum ([867ef32](https://github.com/SebastianWesolowski/s-update-manager/commit/867ef32038fa7df2e63c4d39ec1d83cac91caf2e))
 
-
 ### [SC-9](https://linear.app/wesolowskidev/issue/SC-9)
 
 - 🔧 [[SC-9](https://linear.app/wesolowskidev/issue/SC-9)] descripbe todos ([4f5bab6](https://github.com/SebastianWesolowski/s-update-manager/commit/4f5bab633e2f72b77f7aca03412969bd915a4ab6))
 
-
 ### [SC-11](https://linear.app/wesolowskidev/issue/SC-11)
 
 - 🔧 [[SC-11](https://linear.app/wesolowskidev/issue/SC-11)] add mock mockProjectToBuild ([64525bc](https://github.com/SebastianWesolowski/s-update-manager/commit/64525bca7582b9d13f0b578cc6a7b0697ba2a92b))
-
 
 ### [SC-12](https://linear.app/wesolowskidev/issue/SC-12)
 
 - 🔧 [[SC-12](https://linear.app/wesolowskidev/issue/SC-12)] preapre mocks for all scripts ([f546ff6](https://github.com/SebastianWesolowski/s-update-manager/commit/f546ff693c70984aa758685806e3c18793928169))
 - 🚨 [[SC-12](https://linear.app/wesolowskidev/issue/SC-12)] conect downloadConfig test with mocks ([b4cc4a9](https://github.com/SebastianWesolowski/s-update-manager/commit/b4cc4a9a3f36e27c40ec5c338cbd91c53cc62206))
 
-
 ### [SC-26](https://linear.app/wesolowskidev/issue/SC-26)
 
 - ✨ [[SC-26](https://linear.app/wesolowskidev/issue/SC-26)] sum config created in root catalog ([c78c65e](https://github.com/SebastianWesolowski/s-update-manager/commit/c78c65e5406573bfa18daf0de34994a05cd08b5d))
-
 
 ### [SC-78](https://linear.app/wesolowskidev/issue/SC-78)
 
 - 🔧 [[SC-78](https://linear.app/wesolowskidev/issue/SC-78)] improve cz-git config ([be91571](https://github.com/SebastianWesolowski/s-update-manager/commit/be91571fef94ee1ac4c77b64c03c06fff1ba6062))
 
-
 ### [SC-79](https://linear.app/wesolowskidev/issue/SC-79)
 
 - 📚 [[SC-79](https://linear.app/wesolowskidev/issue/SC-79)] ️ add offisial templates ([b20896f](https://github.com/SebastianWesolowski/s-update-manager/commit/b20896fc6a48ab1d9a69cf1837bf6f2df1f9c7c3))
-
 
 ### [SC-82](https://linear.app/wesolowskidev/issue/SC-82)
 
 - 📚 [[SC-82](https://linear.app/wesolowskidev/issue/SC-82)] ️ describe create template scripts and improve docs ([8300bba](https://github.com/SebastianWesolowski/s-update-manager/commit/8300bba6808a760ab7a5209cb507cbc25b9bbf67))
 
-
 ### [SC-83](https://linear.app/wesolowskidev/issue/SC-83)
 
 - ♻ [[SC-83](https://linear.app/wesolowskidev/issue/SC-83)] ️ rename REPOSITORY_MAP_FILE_NAME int sumFileMapConfigFileName ([915d33e](https://github.com/SebastianWesolowski/s-update-manager/commit/915d33e4ea07a837360d518140e25b5dbeec12ec))
-
 
 ### [SC-85](https://linear.app/wesolowskidev/issue/SC-85)
 
 - 🐛 [[SC-85](https://linear.app/wesolowskidev/issue/SC-85)] use cli arg in prepareTemplate ([c2424ae](https://github.com/SebastianWesolowski/s-update-manager/commit/c2424ae09d1ad107255fe3de4358acc6216b1d9b))
 
-
 ### [SC-86](https://linear.app/wesolowskidev/issue/SC-86)
 
 - 🔧 [[SC-86](https://linear.app/wesolowskidev/issue/SC-86)] remove unused vars ([3897e2f](https://github.com/SebastianWesolowski/s-update-manager/commit/3897e2f763c231a7d4621ae8a4872309cf6d96e1))
-
 
 ### Other tasks
 
@@ -145,11 +121,9 @@
 
 ## [1.0.0-dev.37](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.36...v1.0.0-dev.37) (October 06, 2024)
 
-
 ### [SC-2](https://linear.app/wesolowskidev/issue/SC-2)
 
 - 🚨 [[SC-2](https://linear.app/wesolowskidev/issue/SC-2)] improve template test ([f6a6034](https://github.com/SebastianWesolowski/s-update-manager/commit/f6a60343d5389207f2fc4207b74723ecf442400a))
-
 
 ### [SC-11](https://linear.app/wesolowskidev/issue/SC-11)
 
@@ -157,18 +131,15 @@
 - 🚨 [[SC-11](https://linear.app/wesolowskidev/issue/SC-11)] fix buildFromConfig ([0330354](https://github.com/SebastianWesolowski/s-update-manager/commit/033035431f9b4d5c165ad1c695d3942620788398))
 - 🚨 [[SC-11](https://linear.app/wesolowskidev/issue/SC-11)] downloadConfig ([d861937](https://github.com/SebastianWesolowski/s-update-manager/commit/d861937b47dde9ede48ef1ad55e6aada4dcfbc3b))
 
-
 ### [SC-21](https://linear.app/wesolowskidev/issue/SC-21)
 
 - ✨ [[SC-21](https://linear.app/wesolowskidev/issue/SC-21)] gitignore rule for template ([ec8a2f2](https://github.com/SebastianWesolowski/s-update-manager/commit/ec8a2f2c1886a410938c76cf98ac9fd755679529))
-
 
 ### Other tasks
 
 - 🔧 [] cleangitcache ([53c10da](https://github.com/SebastianWesolowski/s-update-manager/commit/53c10dab02f0f5f3a4fe4207c52fb368c54bcad7))
 
 ## [1.0.0-dev.36](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.35...v1.0.0-dev.36) (September 26, 2024)
-
 
 ### [SC-11](https://linear.app/wesolowskidev/issue/SC-11)
 
@@ -183,13 +154,11 @@
 
 ## [1.0.0-dev.35](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.34...v1.0.0-dev.35) (September 15, 2024)
 
-
 ### [SC-24](https://linear.app/wesolowskidev/issue/SC-24)
 
 - 🐛 [[SC-24](https://linear.app/wesolowskidev/issue/SC-24)] improve commit format ([2524bc6](https://github.com/SebastianWesolowski/s-update-manager/commit/2524bc6921232214974131551cc0c0a563df744f))
 
 ## [1.0.0-dev.34](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.33...v1.0.0-dev.34) (September 13, 2024)
-
 
 ### [SC-21](https://linear.app/wesolowskidev/issue/SC-21)
 
@@ -197,13 +166,11 @@
 
 ## [1.0.0-dev.33](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.32...v1.0.0-dev.33) (September 13, 2024)
 
-
 ### Other tasks
 
 - 🐛 release processprocess ([bb8f7a4](https://github.com/SebastianWesolowski/s-update-manager/commit/bb8f7a40e3c3226970aea62ac9876b36d3bbc02c))
 
 ## [1.0.0-dev.32](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.31...v1.0.0-dev.32) (September 13, 2024)
-
 
 ### [SC-21](https://linear.app/wesolowskidev/issue/SC-21)
 
@@ -211,12 +178,10 @@
 - [[SC-21](https://linear.app/wesolowskidev/issue/SC-21)] ✨ improve commit message ([dbc1d7a](https://github.com/SebastianWesolowski/s-update-manager/commit/dbc1d7aa2ed11d719c738f3d7e801a25c3fdd212))
 - ✨ [[SC-21](https://linear.app/wesolowskidev/issue/SC-21)] improve comitizen ([d2f783e](https://github.com/SebastianWesolowski/s-update-manager/commit/d2f783e2646413e302a26970b93fa04c4a184932))
 
-
 ### [SC-24](https://linear.app/wesolowskidev/issue/SC-24)
 
 - 🐛 [[SC-24](https://linear.app/wesolowskidev/issue/SC-24)] release config ([e7625ae](https://github.com/SebastianWesolowski/s-update-manager/commit/e7625aecf9a32525639bf761e2407c5c8e2dc315))
 - ✨ [[SC-24](https://linear.app/wesolowskidev/issue/SC-24)] new url for prefix ([a3c35d8](https://github.com/SebastianWesolowski/s-update-manager/commit/a3c35d891cf83b957f3d7a1a1ad4108f915aa00f))
-
 
 ### Other tasks
 
@@ -232,12 +197,10 @@
 
 ## [1.0.0-dev.34](https://github.com/SebastianWesolowski/s-update-manager/compare/v1.0.0-dev.33...v1.0.0-dev.34) (September 12, 2024)
 
-
 ### [SC-21](https://linear.app/wesolowskidev/issue/SC-21)
 
 - [[SC-21](https://linear.app/wesolowskidev/issue/SC-21)] ✨ improve commit message ([dbc1d7a](https://github.com/SebastianWesolowski/s-update-manager/commit/dbc1d7aa2ed11d719c738f3d7e801a25c3fdd212))
 - ✨ [[SC-21](https://linear.app/wesolowskidev/issue/SC-21)] improve comitizen ([d2f783e](https://github.com/SebastianWesolowski/s-update-manager/commit/d2f783e2646413e302a26970b93fa04c4a184932))
-
 
 ### Other tasks
 
