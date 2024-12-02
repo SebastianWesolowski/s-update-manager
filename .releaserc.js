@@ -8,6 +8,8 @@ module.exports = {
     {
       name: 'dev',
       prerelease: true,
+      channel: 'dev',
+      baselineVersion: '1.0.0-dev.47',
     },
   ],
   plugins: [
@@ -32,11 +34,7 @@ module.exports = {
           types: [
             { type: 'feat', section: 'Features' },
             { type: 'fix', section: 'Bug Fixes' },
-            {
-              type: 'build',
-              section: 'Dependencies and Other Build Updates',
-              hidden: false,
-            },
+            { type: 'build', section: 'Dependencies and Other Build Updates', hidden: false },
             { type: 'chore', section: 'Other tasks', hidden: false },
           ],
         },
@@ -58,24 +56,23 @@ module.exports = {
             return (a.title || '').localeCompare(b.title || '');
           },
           transform: (commit, context) => {
+            const transformedCommit = { ...commit };
             if (commit.type === 'feat') {
-              commit.type = 'Features';
+              transformedCommit.type = 'Features';
             } else if (commit.type === 'fix') {
-              commit.type = 'Bug Fixes';
+              transformedCommit.type = 'Bug Fixes';
             } else if (commit.type === 'build') {
-              commit.type = 'Dependencies and Other Build Updates';
+              transformedCommit.type = 'Dependencies and Other Build Updates';
             } else if (commit.type === null || !commit.type || commit.type === 'chore') {
-              commit.type = 'Other tasks';
+              transformedCommit.type = 'Other tasks';
             }
 
             if (typeof commit.hash === 'string') {
-              commit.shortHash = commit.hash.substring(0, 7);
+              transformedCommit.shortHash = commit.hash.substring(0, 7);
             }
 
             if (typeof commit.subject === 'string' || commit.subject === null) {
               let url = context.repository ? `${context.host}/${context.owner}/${context.repository}` : context.repoUrl;
-
-              // Extract SC issue number
 
               if (commit.message && commit.subject === null) {
                 commit.subject = commit.message;
@@ -84,22 +81,21 @@ module.exports = {
               const scMatch = commit.subject ? commit.subject.match(/\[?(SC-\d+)\]?/) : null;
               if (scMatch) {
                 const scIssue = scMatch[1];
-                commit.scIssue = scIssue;
-                // Replace SC issue with linked version
-                commit.subject = commit.subject.replace(
+                transformedCommit.scIssue = scIssue;
+                transformedCommit.subject = transformedCommit.subject.replace(
                   /\[?(SC-\d+)\]?/,
                   `[[${scIssue}](https://linear.app/wesolowskidev/issue/${scIssue})]`
                 );
               } else {
-                commit.scIssue = 'Other tasks';
+                transformedCommit.scIssue = 'Other tasks';
               }
 
               if (url) {
-                commit.commitUrl = `${url}/commit/${commit.hash}`;
+                transformedCommit.commitUrl = `${url}/commit/${commit.hash}`;
               }
             }
 
-            return commit;
+            return transformedCommit;
           },
           commitPartial: '- {{subject}} ([{{shortHash}}]({{commitUrl}}))\n',
           mainTemplate: `{{> header}}
@@ -143,5 +139,12 @@ module.exports = {
       },
     ],
     '@semantic-release/npm',
+  ],
+  tagFormat: 'v${version}',
+  verifyConditions: [
+    '@semantic-release/changelog',
+    '@semantic-release/npm',
+    '@semantic-release/git',
+    '@semantic-release/github',
   ],
 };
