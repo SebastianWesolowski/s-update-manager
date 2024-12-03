@@ -21,10 +21,10 @@ jobs:
           cache: 'yarn'
 
       - name: '📂 Install dependencies'
-        run: yarn install --frozen-lockfile --ignore-scripts  --omit=dev
+        run: yarn install --frozen-lockfile --ignore-scripts --omit=dev
 
       - name: '🚀 PreRelease'
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npx semantic-release
+        run: yarn build:release
