@@ -1,3 +1,10 @@
+## 1.0.0-dev.48 (December 20, 2024)
+
+
+### Other tasks
+
+- ✨ fix process ([ecfd180](https://github.com/SebastianWesolowski/s-update-manager/commit/ecfd1802d27fea609a3abc9f57091374f5185a32))
+
 ## 1.0.0-dev.47 (December 20, 2024)
 
 
