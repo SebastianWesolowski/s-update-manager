@@ -3,6 +3,7 @@ import { FileMapConfig, sumFile, updateDetailsFileMapConfig2 } from '@/feature/u
 import { createPath } from '@/util/createPath';
 import { deletePath } from '@/util/deletePath';
 import { formatSum } from '@/util/formatSum';
+import { getIgnoredFilesFromConfig } from '@/util/getIgnoredFilesFromConfig';
 import { getRealFilePath } from '@/util/getRealFilePath';
 import { parseJSON } from '@/util/parseJSON';
 import { readFile } from '@/util/readFile';
@@ -17,13 +18,15 @@ export const cleanUpBeforeUpdate = async (
   const fileToClean: sumFile[] = [];
   const deletedPath: string[] = [];
 
+  const ignoredFiles = await getIgnoredFilesFromConfig({ config, sumFileMapConfig });
+
   try {
     if (sumFileMapConfig.sumFileMap && sumFileMapConfig.fileMap) {
       const createdFileRealName: [string, string][] = [];
       for (const SUMSuffixFileName of sumFileMapConfig.fileMap) {
         const realFilePath = getRealFilePath({ config, SUMSuffixFileName });
         const SUMKeySuffix = formatSum(SUMSuffixFileName, 'key') as AvailableSUMKeySuffixTypes;
-        if (!createdFileRealName.includes([realFilePath, SUMKeySuffix])) {
+        if (!createdFileRealName.includes([realFilePath, SUMKeySuffix]) && !ignoredFiles.includes(realFilePath)) {
           createdFileRealName.push([realFilePath, SUMKeySuffix]);
         }
       }
