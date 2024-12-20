@@ -1,10 +1,7 @@
 const helpers = require('handlebars-helpers')();
 module.exports = {
   branches: [
-    {
-      name: 'main',
-      prerelease: false,
-    },
+    'main',
     {
       name: 'dev',
       prerelease: true,
